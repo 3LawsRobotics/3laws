@@ -21,19 +21,12 @@ extensions = [
     'sphinxcontrib.spelling',
     'sphinx_sitemap',
     'notfound.extension',
+    "sphinx_multiversion",
 ]
 
-version = "0.2"
-release = u'0.2.0'
+version = "0.1"
+release = u'0.1.0'
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-if not os.path.exists(os.path.join(dir_path, "versions.json")):
-    data = {"master": version}
-else:
-    with open("versions.json") as f:
-        json_data = f.read()
-        data = json.loads(json_data)
-versions_dict = data
 
 html_baseurl = "https://3lawsrobotics.github.io/3laws/"
 
@@ -44,8 +37,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 html_context = {
-    "versions": versions_dict,
-    "current_version": version,
     "display_github": True,  # Integrate GitHub
     "github_user": "3LawsRobotics",  # Username
     "github_repo": "3laws",  # Repo name
@@ -54,3 +45,8 @@ html_context = {
 }
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+
+smv_branch_whitelist = None
+smv_outputdir_format = 'en/{config.version}'
+smv_latest_version = 'dev'
+smv_rename_latest_version = 'latest'
