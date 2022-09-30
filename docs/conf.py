@@ -10,7 +10,7 @@ import json
 import os
 
 project = '3Laws'
-copyright = '2022, 3Laws Robotics Inc'
+copyright = '2022, 3Laws Robotics Inc 2'
 author = '3Laws Robotics Inc'
 
 # -- General configuration ---------------------------------------------------
