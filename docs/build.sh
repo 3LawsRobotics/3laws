@@ -3,7 +3,7 @@
 declare -A versions=()
 versions["refs/tags/v0.1.0"]="0.1.0"
 versions["refs/tags/v0.2.0"]="0.2.0"
-versions["test"]="latest"
+versions["dev"]="latest"
 
 git clone --single-branch --bare --branch master git@github.com:3LawsRobotics/3laws.git src
 mkdir -p gh-pages

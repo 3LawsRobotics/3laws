@@ -23,7 +23,9 @@ extensions = [
     'notfound.extension',
 ]
 
-version = "0.2.0"
+version = "0.2"
+release = u'0.2.0'
+
 dir_path = os.path.dirname(os.path.realpath(__file__))
 if not os.path.exists(os.path.join(dir_path, "versions.json")):
     data = {"master": version}
