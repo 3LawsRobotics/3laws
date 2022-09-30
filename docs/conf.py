@@ -24,8 +24,8 @@ extensions = [
     "sphinx_multiversion",
 ]
 
-version = "0.1"
-release = u'0.1.0'
+version = "0.2"
+release = u'0.2.0'
 
 
 html_baseurl = "https://3lawsrobotics.github.io/3laws/"
