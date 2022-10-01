@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = '3Laws'
-copyright = '2022, 3Laws Robotics Inc 2'
+copyright = '2022, 3Laws Robotics Inc.'
 author = '3Laws Robotics Inc'
 
 # -- General configuration ---------------------------------------------------
@@ -18,9 +18,12 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
     'sphinx.ext.viewcode',
+    'sphinx.ext.githubpages',
     'sphinxcontrib.spelling',
     'sphinx_sitemap',
 ]
+
+html_show_sourcelink = False
 
 version = "0.2"
 
@@ -37,11 +40,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_context = {
     "version": version,
     "current_version": version,
-    "display_github": True,  # Integrate GitHub
-    "github_user": "3LawsRobotics",  # Username
-    "github_repo": "3laws",  # Repo name
-    "github_version": "master",  # Version
-    "conf_py_path": "/docs/",  # Path in the checkout to the docs root
     "display_lower_left": True,
 }
 html_theme = 'sphinx_rtd_theme'
@@ -57,8 +55,16 @@ REPO_NAME = '3laws'
 
 # POPULATE LINKS TO OTHER VERSIONS
 html_context['versions'] = list()
-html_context['versions'].append(("0.1", "/en/0.1/"))
+html_context['versions'].append(("0.10", "/en/0.10/"))
+html_context['versions'].append(("0.9", "/en/0.9/"))
+html_context['versions'].append(("0.8", "/en/0.8/"))
+html_context['versions'].append(("0.7", "/en/0.7/"))
+html_context['versions'].append(("0.6", "/en/0.6/"))
+html_context['versions'].append(("0.5", "/en/0.5/"))
+html_context['versions'].append(("0.4", "/en/0.4/"))
+html_context['versions'].append(("0.3", "/en/0.3/"))
 html_context['versions'].append(("0.2", "/en/0.2/"))
+html_context['versions'].append(("0.1", "/en/0.1/"))
 
 # settings for creating PDF with rinoh
 rinoh_documents = [

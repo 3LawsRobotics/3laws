@@ -8,9 +8,16 @@ Welcome to 3Laws's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Section 1
 
+   introduction
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Section 2
+
+   introduction2
+   introduction3
 
 Indices and tables
 ==================
