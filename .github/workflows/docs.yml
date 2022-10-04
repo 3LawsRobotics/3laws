@@ -14,8 +14,12 @@ on:
 
 jobs:
   docs:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-22.04
+    container:
+      image: ghcr.io/3lawsrobotics/ci-base:latest
+      credentials:
+        username: token
+        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -24,9 +28,7 @@ jobs:
       - name: Build doc
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          sudo apt-get install -y jq sed
-          current_repo/docs/build.sh
+        run: current_repo/docs/build.sh
         shell: bash
 
       - name: Upload documetation to gh-pages
