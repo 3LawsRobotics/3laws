@@ -22,6 +22,8 @@ jobs:
           path: current_repo
 
       - name: Build doc
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           sudo apt-get install -y jq sed
           current_repo/docs/build.sh
