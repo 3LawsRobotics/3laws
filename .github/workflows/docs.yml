@@ -1,0 +1,41 @@
+name: Documentation
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+  workflow_dispatch: ~
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: current_repo
+
+      - name: Build doc
+        run: |
+          sudo apt-get install -y jq sed
+          current_repo/docs/build.sh
+        shell: bash
+
+      - name: Upload documetation to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./gh-pages
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: DocumentationHTML
+          path: gh-pages

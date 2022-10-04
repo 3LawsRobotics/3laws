@@ -1,0 +1,29 @@
+{% if READTHEDOCS or display_lower_left %}
+{# Add rst-badge after rst-versions for small badge style. #}
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: {{ current_version }}
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>{{ _('Versions') }}</dt>
+      {% for slug, the_version in versions_dict.items() %}
+      {% if the_version == current_version %} <strong> {% endif %}
+        <dd><a href="/en/{{ the_version }}/index.html">{{ the_version }}</a></dd>
+        {% if the_version == current_version %}
+      </strong> {% endif %}
+      {% endfor %}
+    </dl>
+    <dl>
+      <dt>Downloads</dt>
+      <dd><a href="/en/{{ current_version }}/3laws_manual.pdf">PDF</a></dd>
+    </dl>
+    <hr />
+    {% trans %}Continuous documentation hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.{%
+    endtrans %}
+
+  </div>
+</div>
+{% endif %}
