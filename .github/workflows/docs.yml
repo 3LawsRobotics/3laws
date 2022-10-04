@@ -23,7 +23,7 @@ jobs:
 
       - name: Build doc
         run: |
-          sudo apt-get install -y jq
+          sudo apt-get install -y jq sed
           current_repo/docs/build.sh
         shell: bash
 
@@ -32,10 +32,10 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: gh-pages
+          publish_dir: ./gh-pages
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: DocumentationHTML
-          path: docs/_build/html/
+          path: gh-pages

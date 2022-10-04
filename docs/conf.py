@@ -18,7 +18,7 @@ if not os.path.exists(versionPath):
 with open(versionPath) as f:
     json_data = f.read()
     data = json.loads(json_data)
-versions_dict = data
+versions_dict = data['list']
 
 if 'DOC_VERSION' in os.environ:
     current_version = os.environ['DOC_VERSION']

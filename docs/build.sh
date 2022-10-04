@@ -26,18 +26,25 @@ git clone --single-branch --bare --branch master git@github.com:3LawsRobotics/3l
 cd src
 
 # Load versions
-versionsRaw=$(cat $versionsJson)
+versionLatestDef="versionLatest=$(cat $versionsJson | jq '.latest')"
+eval "$versionLatestDef"
+
+versionsRaw=$(cat $versionsJson | jq '.list')
 declare -A versions
 versionsContent=$(jq -r '. | to_entries | .[] | "[\"" + .key + "\"]=" + (.value | @sh)' <<< "$versionsRaw")
 versionsDef="versions=($versionsContent)"
 eval "$versionsDef"
 
+echo "Versions: $versionsContent"
+echo "Version latest: $versionLatest"
+echo ""
+
+# Create doc for each version
 for branch in "${!versions[@]}"
 do
   version="${versions[$branch]}"
 
-  echo "Branch: $branch"
-  echo "Version: $version"
+  echo -e "Processing branch: $branch, version: $version \n"
 
   export DOC_VERSION=$version
 
@@ -53,5 +60,9 @@ do
   cp $workDir/_build/latex/3laws.pdf $outDir/en/$version/3laws_manual.pdf
 done
 
+# Copy and update main index.html
 cp $srcDir/index.html $outDir
+sed -i s/@LATEST_VERSION@/$versionLatest/g $outDir/index.html
+
+# Create .nojekyll file so that github pages doesn't complain about folders starting with '_'
 touch $outDir/.nojekyll
