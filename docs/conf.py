@@ -65,13 +65,3 @@ html_context['versions'].append(("0.4", "/en/0.4/"))
 html_context['versions'].append(("0.3", "/en/0.3/"))
 html_context['versions'].append(("0.2", "/en/0.2/"))
 html_context['versions'].append(("0.1", "/en/0.1/"))
-
-# settings for creating PDF with rinoh
-rinoh_documents = [
-    (
-        master_doc,
-        'target',
-        project + ' Documentation',
-        '© ' + copyright,
-    )
-]
