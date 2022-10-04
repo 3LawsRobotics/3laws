@@ -1,15 +1,6 @@
 name: Documentation
 
 on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - ready_for_review
   workflow_dispatch: ~
 
 jobs:
