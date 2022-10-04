@@ -1,6 +1,4 @@
-.. _introduction2:
-
-Introduction
+Introduction2
 ============
 
 Conan is a dependency and package manager for C and C++ languages.

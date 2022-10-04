@@ -10,14 +10,14 @@ Welcome to 3Laws's documentation!
    :maxdepth: 2
    :caption: Section 1
 
-   introduction
+   sources/introduction
 
 .. toctree::
    :maxdepth: 2
    :caption: Section 2
 
-   introduction2
-   introduction3
+   sources/introduction2
+   sources/introduction3
 
 Indices and tables
 ==================
