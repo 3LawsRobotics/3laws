@@ -15,12 +15,17 @@ on:
 jobs:
   docs:
     runs-on: ubuntu-22.04
-    container:
-      image: ghcr.io/3lawsrobotics/ci-base:latest
-      credentials:
-        username: token
-        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - name: Setup Python
+        uses: actions/setup-python@v4.2.0
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y sed jq git
+          pip install --upgrade sphinx_rtd_theme sphinx docutils sphinx-sitemap sphinxcontrib-spelling pygments breathe rinohtype
+
       - uses: actions/checkout@v3
         with:
           path: current_repo
