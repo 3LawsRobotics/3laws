@@ -1,4 +1,9 @@
 #!/bin/bash
+
+# Exit on error
+set -e
+
+# Prepare paths
 srcDir="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 mkdir -p gh-pages
 outDir="$PWD/gh-pages"
@@ -22,7 +27,7 @@ if [ -d "src" ]
 then
     rm -rf src
 fi
-git clone --single-branch --bare --branch master git@github.com:3LawsRobotics/3laws.git src
+git clone --single-branch --bare --branch master https://token:${GITHUB_TOKEN}@github.com:3LawsRobotics/3laws.git src
 cd src
 
 # Load versions
