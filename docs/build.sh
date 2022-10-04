@@ -1,4 +1,9 @@
 #!/bin/bash
+
+# Exit on error
+set -e
+
+# Prepare paths
 srcDir="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 mkdir -p gh-pages
 outDir="$PWD/gh-pages"
@@ -22,7 +27,7 @@ if [ -d "src" ]
 then
     rm -rf src
 fi
-git clone --single-branch --bare --branch master git@github.com:3LawsRobotics/3laws.git src
+git clone --single-branch --bare --branch master https://token:${GITHUB_TOKEN}@github.com/3LawsRobotics/3laws.git src
 cd src
 
 # Load versions
@@ -54,10 +59,9 @@ do
   install -D $versionsJson $buildDir/$version/docs/metadata/versions.json
   install -D $versionsHtml $buildDir/$version/docs/_templates/versions.html
   workDir=$buildDir/$version/docs
-  sphinx-build -W -b html -d $workDir/_build $workDir $outDir/en/$version
-  sphinx-build -W -b latex -d $workDir/_build/ $workDir $workDir/_build/latex
-  make -C $workDir/_build/latex all-pdf
-  cp $workDir/_build/latex/3laws.pdf $outDir/en/$version/3laws_manual.pdf
+  sphinx-build -b html -d $workDir/_build $workDir $outDir/en/$version
+  sphinx-build -b rinoh -d $workDir/_build/ $workDir $workDir/_build/pdf
+  cp $workDir/_build/pdf/3laws.pdf $outDir/en/$version/3laws_manual.pdf
 done
 
 # Copy and update main index.html

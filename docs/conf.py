@@ -25,33 +25,30 @@ if 'DOC_VERSION' in os.environ:
 else:
     raise EnvironmentError("DOC_VERSION environment variable not found")
 
-project = '3Laws'
-copyright = '2022, 3Laws Robotics Inc.'
-author = '3Laws Robotics Inc'
-
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+project = '3Laws'
+copyright = '2022, 3Laws Robotics Inc.'
+author = 'Thomas Gurriet (tgurriet@3laws.io)'
+version = current_version
+release = current_version
+html_baseurl = "https://3lawsrobotics.github.io/3laws/"
+
 
 extensions = [
     'sphinx_rtd_theme',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
-    'sphinxcontrib.spelling',
     'sphinx_sitemap',
 ]
 
 html_show_sourcelink = False
 
-version = current_version
-
-html_baseurl = "https://3lawsrobotics.github.io/3laws/"
-
 templates_path = ['_templates']
 html_static_path = ['_static']
-
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
