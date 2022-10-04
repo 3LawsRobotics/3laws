@@ -11,14 +11,14 @@
       <dt>{{ _('Versions') }}</dt>
       {% for slug, the_version in versions_dict.items() %}
       {% if the_version == current_version %} <strong> {% endif %}
-        <dd><a href="/en/{{ the_version }}/index.html">{{ the_version }}</a></dd>
+        <dd><a href="3laws/en/{{ the_version }}/index.html">{{ the_version }}</a></dd>
         {% if the_version == current_version %}
       </strong> {% endif %}
       {% endfor %}
     </dl>
     <dl>
       <dt>Downloads</dt>
-      <dd><a href="/en/{{ current_version }}/3laws_manual.pdf">PDF</a></dd>
+      <dd><a href="3laws/en/{{ current_version }}/3laws_manual.pdf">PDF</a></dd>
     </dl>
     <hr />
     {% trans %}Continuous documentation hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.{%
