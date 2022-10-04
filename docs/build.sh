@@ -60,9 +60,8 @@ do
   install -D $versionsHtml $buildDir/$version/docs/_templates/versions.html
   workDir=$buildDir/$version/docs
   sphinx-build -W -b html -d $workDir/_build $workDir $outDir/en/$version
-  sphinx-build -W -b latex -d $workDir/_build/ $workDir $workDir/_build/latex
-  make -C $workDir/_build/latex all-pdf
-  cp $workDir/_build/latex/3laws.pdf $outDir/en/$version/3laws_manual.pdf
+  sphinx-build -W -b rinoh -d $workDir/_build/ $workDir $workDir/_build/pdf
+  cp $workDir/_build/pdf/3laws.pdf $outDir/en/$version/3laws_manual.pdf
 done
 
 # Copy and update main index.html
