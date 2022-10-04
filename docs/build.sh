@@ -59,8 +59,8 @@ do
   install -D $versionsJson $buildDir/$version/docs/metadata/versions.json
   install -D $versionsHtml $buildDir/$version/docs/_templates/versions.html
   workDir=$buildDir/$version/docs
-  sphinx-build -W -b html -d $workDir/_build $workDir $outDir/en/$version
-  sphinx-build -W -b rinoh -d $workDir/_build/ $workDir $workDir/_build/pdf
+  sphinx-build -b html -d $workDir/_build $workDir $outDir/en/$version
+  sphinx-build -b rinoh -d $workDir/_build/ $workDir $workDir/_build/pdf
   cp $workDir/_build/pdf/3laws.pdf $outDir/en/$version/3laws_manual.pdf
 done
 
