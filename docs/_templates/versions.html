@@ -9,12 +9,16 @@
   <div class="rst-other-versions">
     <dl>
       <dt>{{ _('Versions') }}</dt>
-      {% for slug, url in versions %}
-      {% if slug == current_version %} <strong> {% endif %}
-        <dd><a href="{{ url }}">{{ slug }}</a></dd>
-        {% if slug == current_version %}
+      {% for slug, the_version in versions_dict.items() %}
+      {% if the_version == current_version %} <strong> {% endif %}
+        <dd><a href="/en/{{ the_version }}/index.html">{{ the_version }}</a></dd>
+        {% if the_version == current_version %}
       </strong> {% endif %}
       {% endfor %}
+    </dl>
+    <dl>
+      <dt>Downloads</dt>
+      <dd><a href="/en/{{ current_version }}/3laws_manual.pdf">PDF</a></dd>
     </dl>
     <hr />
     {% trans %}Continuous documentation hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.{%
