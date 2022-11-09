@@ -39,6 +39,20 @@ struct InputConstraints
   std::vector<scalar_t> ub;  ///< Upper bounds
                              /**< In column major order, size: n_cstr. */
 
+  InputConstraints()                                     = default;
+  InputConstraints(const InputConstraints &)             = default;
+  InputConstraints(InputConstraints &&)                  = default;
+  InputConstraints & operator=(const InputConstraints &) = default;
+  InputConstraints & operator=(InputConstraints &&)      = default;
+  ~InputConstraints()                                    = default;
+
+  InputConstraints(const std::size_t nu_, const std::size_t n_cstr_)
+      : nu{nu_}, n_cstr{n_cstr_}, lb(n_cstr, scalar_t(-1.)), M(n_cstr * nu, scalar_t(0.)),
+        ub(n_cstr, scalar_t(1.))
+  {
+    for (std::size_t i = 0; i < std::min(nu, n_cstr); ++i) { M[(n_cstr + 1) * i] = scalar_t(1.); }
+  }
+
   /**
    * @brief Initialize input constraint data
    * @details Set nu and n_cstr to specified input values, resize lb, M, and ub accordingly, and set

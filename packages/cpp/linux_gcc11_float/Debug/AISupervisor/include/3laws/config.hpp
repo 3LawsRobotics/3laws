@@ -19,6 +19,8 @@ using scalar_t = float;
 
 // clang-format on
 
+using t_t = uint64_t;
+
 }  // namespace lll
 
 #endif  // THREELAWS_CONFIG_HPP

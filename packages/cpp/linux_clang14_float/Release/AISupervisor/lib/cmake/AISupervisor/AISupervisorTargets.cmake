@@ -16,7 +16,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_targetsDefined)
 set(_targetsNotDefined)
 set(_expectedTargets)
-foreach(_expectedTarget 3laws::AISupervisor 3laws::AISupervisor-private 3laws::AISupervisor-obj 3laws::AISupervisor-shared)
+foreach(_expectedTarget 3laws::AISupervisor 3laws::AISupervisor-obj 3laws::AISupervisor-shared)
   list(APPEND _expectedTargets ${_expectedTarget})
   if(NOT TARGET ${_expectedTarget})
     list(APPEND _targetsNotDefined ${_expectedTarget})
@@ -57,18 +57,11 @@ set_target_properties(3laws::AISupervisor PROPERTIES
   INTERFACE_LINK_LIBRARIES "3laws::AISupervisor-obj"
 )
 
-# Create imported target 3laws::AISupervisor-private
-add_library(3laws::AISupervisor-private INTERFACE IMPORTED)
-
-set_target_properties(3laws::AISupervisor-private PROPERTIES
-  INTERFACE_LINK_LIBRARIES "3laws::library;Boost::headers"
-)
-
 # Create imported target 3laws::AISupervisor-obj
 add_library(3laws::AISupervisor-obj INTERFACE IMPORTED)
 
 set_target_properties(3laws::AISupervisor-obj PROPERTIES
-  INTERFACE_LINK_LIBRARIES "3laws::library-public;\$<LINK_ONLY:3laws::AISupervisor-private>"
+  INTERFACE_LINK_LIBRARIES "3laws::library-public;\$<LINK_ONLY:>"
 )
 
 # Create imported target 3laws::AISupervisor-shared

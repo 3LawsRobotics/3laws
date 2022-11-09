@@ -37,6 +37,20 @@ struct SafetyMapProbingResult
   std::vector<scalar_t> dval_dx;  ///< Partial derivative of safety measurements w.r.t state
                                   /**< In column major order, size n_obstacles*nx,
                                        empty if not available. */
+
+  SafetyMapProbingResult()                                           = default;
+  SafetyMapProbingResult(const SafetyMapProbingResult &)             = default;
+  SafetyMapProbingResult(SafetyMapProbingResult &&)                  = default;
+  SafetyMapProbingResult & operator=(const SafetyMapProbingResult &) = default;
+  SafetyMapProbingResult & operator=(SafetyMapProbingResult &&)      = default;
+  ~SafetyMapProbingResult()                                          = default;
+
+  SafetyMapProbingResult(
+    const std::size_t nx_, const std::size_t n_obstacles_, const bool with_gradient = false)
+      : nx{nx_}, n_obstacles{n_obstacles_}, val(n_obstacles, scalar_t(0.))
+  {
+    if (with_gradient) { dval_dx.assign(n_obstacles * nx, scalar_t(0.)); }
+  }
 };
 
 /**
@@ -72,9 +86,10 @@ public:
    * @brief Probe safety map for a given state value x
    *
    * @param x State at which to probe the map (size must match result of nx())
+   * @param t_nsec Time at which to evaluate the map (in nanoseconds, default 0)
    */
   virtual std::shared_ptr<SafetyMapProbingResult> probe(
-    const span<const scalar_t, dynamic_extent> x) const = 0;
+    const span<const scalar_t, dynamic_extent> x, const t_t t_nsec = 0) const = 0;
 };
 
 }  // namespace lll

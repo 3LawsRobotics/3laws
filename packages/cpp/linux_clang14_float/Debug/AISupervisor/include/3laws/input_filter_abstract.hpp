@@ -9,7 +9,6 @@
 #ifndef THREELAWS_INPUT_FILTER_ABSTRACT_HPP
 #define THREELAWS_INPUT_FILTER_ABSTRACT_HPP
 
-#include <chrono>
 #include <memory>
 #include <vector>
 
@@ -33,7 +32,7 @@ namespace lll {
 struct InputFilteringResult
 {
   std::size_t nu      = 0;               ///< Number of inputs
-  int32_t return_code = 0;               ///< Filtering return code
+  int32_t return_code = RC_OK;           ///< Filtering return code
   std::vector<scalar_t> input_desired;   ///< Desired input
                                          /**< Size nu. */
   std::vector<scalar_t> input_filtered;  ///< Filtered input
@@ -42,7 +41,8 @@ struct InputFilteringResult
                                          /**< Size nu, empty if not available. */
 
   // Return code values
-  static constexpr int32_t RC_OK = 0;
+  static constexpr int32_t RC_OK    = 1;
+  static constexpr int32_t RC_ERROR = -1;
 };
 
 /**
@@ -65,20 +65,19 @@ public:
   /**
    * @brief Set the desired input
    *
-   * @param dt Duration since last call to set_input_desired()
+   * @param t_nsec Current time (in nanoseconds)
    * @param u Desired input
    */
   virtual void set_input_desired(
-    const std::chrono::duration<scalar_t> dt, const span<const scalar_t, dynamic_extent> u) = 0;
+    const t_t t_nsec, const span<const scalar_t, dynamic_extent> u) = 0;
 
   /**
    * @brief Set the regulation data
    *
-   * @param dt Duration since last call to set_regulation()
+   * @param t_nsec Current time (in nanoseconds)
    * @param regulationData Regulation data
    */
-  virtual void set_regulation(const std::chrono::duration<scalar_t> dt,
-    const std::shared_ptr<RegulationData> & regulationData) = 0;
+  virtual void set_regulation(const t_t t_nsec, const RegulationData & regulationData) = 0;
 
   /**
    * @brief Check if filter is ready to be used

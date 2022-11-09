@@ -5,8 +5,9 @@
  *
  * @copyright Copyright 2022 3Laws Robotics Inc.
  */
-#ifndef THREELAWS__CASSERT_HPP_
-#define THREELAWS__CASSERT_HPP_
+
+#ifndef THREELAWS_CASSERT_HPP
+#define THREELAWS_CASSERT_HPP
 
 #include <cassert>
 
@@ -57,4 +58,4 @@ __END_DECLS
 
 #endif  // NDEBUG_3LAWS
 
-#endif  // THREELAWS__CASSERT_HPP_
+#endif  // THREELAWS_CASSERT_HPP

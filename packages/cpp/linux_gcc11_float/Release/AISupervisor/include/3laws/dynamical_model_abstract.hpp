@@ -15,6 +15,7 @@
 #include <3laws/span.hpp>
 
 #include "3laws/common.hpp"
+#include "3laws/config.hpp"
 
 namespace lll {
 
@@ -43,6 +44,23 @@ struct DynamicalModelEvaluationResult
   std::vector<scalar_t> dval_du;  ///< Partial derivative w.r.t input
                                   /**< In column major order, size nx*nu,
                                         empty if not available. */
+
+  DynamicalModelEvaluationResult()                                                   = default;
+  DynamicalModelEvaluationResult(const DynamicalModelEvaluationResult &)             = default;
+  DynamicalModelEvaluationResult(DynamicalModelEvaluationResult &&)                  = default;
+  DynamicalModelEvaluationResult & operator=(const DynamicalModelEvaluationResult &) = default;
+  DynamicalModelEvaluationResult & operator=(DynamicalModelEvaluationResult &&)      = default;
+  ~DynamicalModelEvaluationResult()                                                  = default;
+
+  DynamicalModelEvaluationResult(
+    const std::size_t nx_, const std::size_t nu_, const bool with_gradient = false)
+      : nx{nx_}, nu{nu_}, val(nx, scalar_t(0.))
+  {
+    if (with_gradient) {
+      dval_dx.assign(nx, scalar_t(0.));
+      dval_du.assign(nx * nu, scalar_t(0.));
+    }
+  }
 };
 
 /**

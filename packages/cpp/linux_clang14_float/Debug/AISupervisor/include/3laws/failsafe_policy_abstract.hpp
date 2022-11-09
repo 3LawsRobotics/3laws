@@ -38,6 +38,20 @@ struct FailsafePolicyEvaluationResult
   std::vector<scalar_t> dval_dx;  ///< Partial derivative w.r.t state
                                   /**< In column major order, size nu*nx,
                                         empty if not available. */
+
+  FailsafePolicyEvaluationResult()                                                   = default;
+  FailsafePolicyEvaluationResult(const FailsafePolicyEvaluationResult &)             = default;
+  FailsafePolicyEvaluationResult(FailsafePolicyEvaluationResult &&)                  = default;
+  FailsafePolicyEvaluationResult & operator=(const FailsafePolicyEvaluationResult &) = default;
+  FailsafePolicyEvaluationResult & operator=(FailsafePolicyEvaluationResult &&)      = default;
+  ~FailsafePolicyEvaluationResult()                                                  = default;
+
+  FailsafePolicyEvaluationResult(
+    const std::size_t nx_, const std::size_t nu_, const bool with_gradient = false)
+      : nx{nx_}, nu{nu_}, val(nu, scalar_t(0.))
+  {
+    if (with_gradient) { dval_dx.assign(nu * nx, scalar_t(0.)); }
+  }
 };
 
 /**
@@ -73,10 +87,11 @@ public:
   /**
    * @brief Evaluate the failsafe policy for a given state value x
    *
-   * @param x State at which to evaluate the dynamics (size must match result of nx())
+   * @param x State at which to evaluate the policy (size must match result of nx())
+   * @param t_nsec Time at which to evaluate the policy (in nanoseconds, default 0)
    */
   virtual std::shared_ptr<FailsafePolicyEvaluationResult> evaluate(
-    const span<const scalar_t, dynamic_extent> x) const = 0;
+    const span<const scalar_t, dynamic_extent> x, const t_t t_nsec = 0) const = 0;
 };
 
 }  // namespace lll

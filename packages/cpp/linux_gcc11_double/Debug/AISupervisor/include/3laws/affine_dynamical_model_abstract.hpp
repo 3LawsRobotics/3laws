@@ -48,6 +48,25 @@ struct AffineDynamicalModelEvaluationResult
   std::vector<scalar_t> dg_dx;  ///< Partial derivative of actuation dynamics w.r.t state
                                 /**< In column major order, size nx*nu*nx,
                                      empty if not available. */
+
+  AffineDynamicalModelEvaluationResult()                                             = default;
+  AffineDynamicalModelEvaluationResult(const AffineDynamicalModelEvaluationResult &) = default;
+  AffineDynamicalModelEvaluationResult(AffineDynamicalModelEvaluationResult &&)      = default;
+  AffineDynamicalModelEvaluationResult & operator=(
+    const AffineDynamicalModelEvaluationResult &) = default;
+  AffineDynamicalModelEvaluationResult & operator=(
+    AffineDynamicalModelEvaluationResult &&) = default;
+  ~AffineDynamicalModelEvaluationResult()    = default;
+
+  AffineDynamicalModelEvaluationResult(
+    const std::size_t nx_, const std::size_t nu_, const bool with_gradient = false)
+      : nx{nx_}, nu{nu_}, f(nx, scalar_t(0.)), g(nx * nu, scalar_t(0.))
+  {
+    if (with_gradient) {
+      df_dx.assign(nx * nx, scalar_t(0.));
+      dg_dx.assign(nx * nu * nx, scalar_t(0.));
+    }
+  }
 };
 
 /**

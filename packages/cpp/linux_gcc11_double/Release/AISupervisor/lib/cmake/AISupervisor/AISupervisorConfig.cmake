@@ -26,7 +26,7 @@ endmacro()
 
 include(CMakeFindDependencyMacro)
 
-find_dependency(3laws_library 0.3.0 EXACT REQUIRED)
+find_dependency(3laws_library-public 0.3.0 EXACT REQUIRED)
 find_dependency(Boost 1.71 REQUIRED)
 
 include("${CMAKE_CURRENT_LIST_DIR}/AISupervisorTargets.cmake")
