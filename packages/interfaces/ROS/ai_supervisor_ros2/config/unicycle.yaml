@@ -1,0 +1,54 @@
+nu: &nu 2
+
+input_cstr: &input_cstr
+  nu: *nu
+  n_cstr: *nu
+  lb: [-1., -1.]
+  M: [1., 0., 0., 1.]
+  ub: [1., 1.]
+
+kernel_generator:
+  kernel_generator:
+    kernel_type: switching
+    explicit_params:
+      input_cstr: *input_cstr
+    implicit_params:
+      input_cstr: *input_cstr
+      T: 1.
+      dt: 0.01
+      K: 2
+    switching_params:
+      input_cstr: *input_cstr
+      T: 1.
+      dt: 0.01
+      K: 2
+  dynamics:
+    Cv: 1.
+    Cw: 1.
+  map:
+    n_obstacles: 2
+  failsafe:
+    Kv: 5.0
+    Kw: 1.0
+    max_v: 2.0
+    R: 1.0
+
+input_filter:
+  filter_type: switching
+  on_input_callback: true
+  on_regulation_data_callback: true
+  qp_params:
+    nu: *nu
+    n_safetyCstr: 4
+    n_failsafes: 1
+    n_inputCstr: *nu
+    alpha: 1.
+    relax_cost: 1.0e6
+  switching_params:
+    nu: *nu
+    n_safetyCstr: 4
+    n_failsafes: 1
+    n_inputCstr: *nu
+    gain_d: 0.
+    filter_tau: 0.
+    exp: 6.

@@ -1,0 +1,10 @@
+##################################
+###        Filter input        ###
+##################################
+
+std_msgs/Float64MultiArray input_desired
+
+---
+
+bool ready
+InputFilteringResult res

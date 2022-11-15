@@ -1,0 +1,18 @@
+[settings]
+os=Arduino
+os.board=Teensy4
+arch=armv7
+compiler=gcc
+compiler.version=6.2
+compiler.libcxx=libstdc++11
+compiler.cppstd=gnu14
+build_type=Debug
+
+[options]
+scalar_type=double
+fPIC=False
+
+[env]
+CC=arm-none-eabi-gcc
+CXX=arm-none-eabi-g++
+CXXFLAGS="-Wall -ffunction-sections -fdata-sections -nostdlib -MMD -fno-exceptions -fpermissive -fno-rtti -fno-threadsafe-statics -felide-constructors -Wno-error=narrowing -mthumb -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -D__IMXRT1062__ -DTEENSYDUINO=157 -DARDUINO=10819 -DARDUINO_TEENSY40 -DF_CPU=600000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH"

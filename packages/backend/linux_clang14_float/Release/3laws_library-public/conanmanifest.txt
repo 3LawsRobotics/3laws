@@ -1,0 +1,9 @@
+1668518150
+conaninfo.txt: 62d750325e210debbd63c48acb7bb805
+include/3laws/cassert.hpp: ffc5b10fd0b06836f8680c0026821522
+include/3laws/memory.hpp: 3e3c5bc2cf5a1ae1cbd8dd784bd9e1d8
+include/3laws/optional.hpp: ac5ba52a55b34f3c73592913760a140f
+include/3laws/span.hpp: fba227faad0c95449e000434eee9054e
+lib/cmake/3laws_library-public/3laws_library-publicConfig.cmake: ce6605219ba50c62a801b4b3c904532d
+lib/cmake/3laws_library-public/3laws_library-publicConfigVersion.cmake: aa316762768bae146793471162386601
+lib/cmake/3laws_library-public/3laws_library-publicTargets.cmake: 8d945503a4a0f0f7dfd98d628857cea3
