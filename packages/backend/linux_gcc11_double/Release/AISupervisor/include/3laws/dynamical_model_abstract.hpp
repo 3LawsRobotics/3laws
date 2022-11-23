@@ -31,8 +31,8 @@ namespace lll {
  */
 struct DynamicalModelEvaluationResult
 {
-  std::size_t nx = 0;  ///< Number of states
-  std::size_t nu = 0;  ///< Number of inputs
+  size_t nx = 0;  ///< Number of states
+  size_t nu = 0;  ///< Number of inputs
 
   std::vector<scalar_t> val;  ///< Value of dynamics evaluation
                               /**< In column major order, size nx.*/
@@ -53,7 +53,7 @@ struct DynamicalModelEvaluationResult
   ~DynamicalModelEvaluationResult()                                                  = default;
 
   DynamicalModelEvaluationResult(
-    const std::size_t nx_, const std::size_t nu_, const bool with_gradient = false)
+    const size_t nx_, const size_t nu_, const bool with_gradient = false)
       : nx{nx_}, nu{nu_}, val(nx, scalar_t(0.))
   {
     if (with_gradient) {
@@ -61,6 +61,8 @@ struct DynamicalModelEvaluationResult
       dval_du.assign(nx * nu, scalar_t(0.));
     }
   }
+
+  using SharedPtr = std::shared_ptr<DynamicalModelEvaluationResult>;
 };
 
 /**
@@ -87,12 +89,12 @@ public:
   /**
    * @brief Number of model states
    */
-  virtual std::size_t nx() const = 0;
+  virtual size_t nx() const = 0;
 
   /**
    * @brief Number of model inputs
    */
-  virtual std::size_t nu() const = 0;
+  virtual size_t nu() const = 0;
 
   /**
    * @brief Evaluate the model dynamics for a given state value x and input value u
@@ -103,6 +105,8 @@ public:
   virtual std::shared_ptr<DynamicalModelEvaluationResult> evaluate(
     const span<const scalar_t, dynamic_extent> x,
     const span<const scalar_t, dynamic_extent> u) const = 0;
+
+  using SharedPtr = std::shared_ptr<DynamicalModelAbstract>;
 };
 
 }  // namespace lll

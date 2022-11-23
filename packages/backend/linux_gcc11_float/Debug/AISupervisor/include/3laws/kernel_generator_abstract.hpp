@@ -73,6 +73,8 @@ public:
    */
   virtual std::shared_ptr<RegulationData> generate() = 0;
 
+  using SharedPtr = std::shared_ptr<KernelGeneratorAbstract>;
+
 protected:
   bool m_stateInit = false;       ///< State initialized flag
   std::vector<scalar_t> m_state;  ///< Current state holder

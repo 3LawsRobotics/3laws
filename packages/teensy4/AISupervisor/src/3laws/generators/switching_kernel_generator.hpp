@@ -24,10 +24,10 @@ namespace lll {
  */
 struct SwitchingKernelGeneratorParams
 {
-  scalar_t T    = scalar_t(1.);    ///< Time horizon
-  std::size_t K = 10;              ///< Number of uniformly distributed constraint instances
-  scalar_t dt   = scalar_t(0.01);  ///< Maximal integration time step
-  InputConstraints input_cstr;     ///< Input constraints
+  scalar_t T  = scalar_t(1.);    ///< Time horizon
+  size_t K    = 10;              ///< Number of uniformly distributed constraint instances
+  scalar_t dt = scalar_t(0.01);  ///< Maximal integration time step
+  InputConstraints input_cstr;   ///< Input constraints
 };
 
 /**

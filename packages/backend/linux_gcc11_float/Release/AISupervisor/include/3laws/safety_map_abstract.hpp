@@ -30,8 +30,8 @@ namespace lll {
  */
 struct SafetyMapProbingResult
 {
-  std::size_t nx          = 0;    ///< Number of system states
-  std::size_t n_obstacles = 0;    ///< Number of obstacles in the map
+  size_t nx          = 0;         ///< Number of system states
+  size_t n_obstacles = 0;         ///< Number of obstacles in the map
   std::vector<scalar_t> val;      ///< Safety measurements
                                   /**< In column major order, size n_obstacles*/
   std::vector<scalar_t> dval_dx;  ///< Partial derivative of safety measurements w.r.t state
@@ -46,11 +46,13 @@ struct SafetyMapProbingResult
   ~SafetyMapProbingResult()                                          = default;
 
   SafetyMapProbingResult(
-    const std::size_t nx_, const std::size_t n_obstacles_, const bool with_gradient = false)
+    const size_t nx_, const size_t n_obstacles_, const bool with_gradient = false)
       : nx{nx_}, n_obstacles{n_obstacles_}, val(n_obstacles, scalar_t(0.))
   {
     if (with_gradient) { dval_dx.assign(n_obstacles * nx, scalar_t(0.)); }
   }
+
+  using SharedPtr = std::shared_ptr<SafetyMapProbingResult>;
 };
 
 /**
@@ -75,12 +77,12 @@ public:
   /**
    * @brief Number of map obstacles
    */
-  virtual std::size_t n_obstacles() const = 0;
+  virtual size_t n_obstacles() const = 0;
 
   /**
    * @brief Number of system states
    */
-  virtual std::size_t nx() const = 0;
+  virtual size_t nx() const = 0;
 
   /**
    * @brief Probe safety map for a given state value x
@@ -90,6 +92,8 @@ public:
    */
   virtual std::shared_ptr<SafetyMapProbingResult> probe(
     const span<const scalar_t, dynamic_extent> x, const t_t t_nsec = 0) const = 0;
+
+  using SharedPtr = std::shared_ptr<SafetyMapAbstract>;
 };
 
 }  // namespace lll

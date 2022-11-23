@@ -145,7 +145,7 @@ template<typename, bool = false>
 struct is_std_array : std::false_type
 {};
 
-template<typename T, std::size_t S>
+template<typename T, size_t S>
 struct is_std_array<std::array<T, S>> : std::true_type
 {};
 /// @endcond

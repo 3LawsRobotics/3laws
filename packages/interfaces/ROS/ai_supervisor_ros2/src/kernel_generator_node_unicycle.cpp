@@ -14,8 +14,8 @@
 
 namespace lll {
 
-constexpr std::size_t NX = 5;
-constexpr std::size_t NU = 2;
+constexpr size_t NX = 5;
+constexpr size_t NU = 2;
 
 class UnicycleDynamics : public lll::AffineDynamicalModelAbstract
 {
@@ -32,8 +32,8 @@ public:
   ~UnicycleDynamics() override                           = default;
 
   bool has_gradient() const override { return true; }
-  std::size_t nx() const override { return NX; }
-  std::size_t nu() const override { return NU; }
+  size_t nx() const override { return NX; }
+  size_t nu() const override { return NU; }
   std::shared_ptr<AffineDynamicalModelEvaluationResult> evaluate_affine(
     const span<const scalar_t, dynamic_extent> x) const override
   {
@@ -81,8 +81,8 @@ public:
   ~UnicycleMap() override                      = default;
 
   bool has_gradient() const override { return false; }
-  std::size_t nx() const override { return NX; }
-  std::size_t n_obstacles() const override { return m_prm.n_obstacles; }
+  size_t nx() const override { return NX; }
+  size_t n_obstacles() const override { return m_prm.n_obstacles; }
 
   std::shared_ptr<SafetyMapProbingResult> probe(
     const span<const scalar_t, dynamic_extent>, const t_t = 0) const override
@@ -115,8 +115,8 @@ public:
   ~UnicycleFailsafe() override                           = default;
 
   bool has_gradient() const override { return false; }
-  std::size_t nx() const override { return NX; }
-  std::size_t nu() const override { return NU; }
+  size_t nx() const override { return NX; }
+  size_t nu() const override { return NU; }
 
   std::shared_ptr<FailsafePolicyEvaluationResult> evaluate(
     const span<const scalar_t, dynamic_extent>, const t_t = 0) const override

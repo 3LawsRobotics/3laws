@@ -24,13 +24,13 @@ namespace lll {
  */
 struct SwitchingInputFilterParams
 {
-  std::size_t nu           = 0;              ///< Number of inputs (must be > 0)
-  std::size_t n_safetyCstr = 0;              ///< Number of safety constraints
-  std::size_t n_failsafes  = 0;              ///< Number of failsafe policies
-  std::size_t n_inputCstr  = 0;              ///< Number of input constraints
-  scalar_t gain_d          = scalar_t(1.0);  ///< Derivative switching gain
-  scalar_t filter_tau      = scalar_t(1.0);  ///< Derivative filter time constant
-  scalar_t expo            = scalar_t(6.0);  ///< Exponent of switching function
+  size_t nu           = 0;              ///< Number of inputs (must be > 0)
+  size_t n_safetyCstr = 0;              ///< Number of safety constraints
+  size_t n_failsafes  = 0;              ///< Number of failsafe policies
+  size_t n_inputCstr  = 0;              ///< Number of input constraints
+  scalar_t gain_d     = scalar_t(1.0);  ///< Derivative switching gain
+  scalar_t filter_tau = scalar_t(1.0);  ///< Derivative filter time constant
+  scalar_t expo       = scalar_t(6.0);  ///< Exponent of switching function
 };
 
 /**

@@ -32,8 +32,8 @@ namespace lll {
  */
 struct AffineDynamicalModelEvaluationResult
 {
-  std::size_t nx = 0;  ///< Number of states
-  std::size_t nu = 0;  ///< Number of inputs
+  size_t nx = 0;  ///< Number of states
+  size_t nu = 0;  ///< Number of inputs
 
   std::vector<scalar_t> f;  ///< Value of natural dynamics evaluation
                             /**< In column major order, size nx. */
@@ -59,7 +59,7 @@ struct AffineDynamicalModelEvaluationResult
   ~AffineDynamicalModelEvaluationResult()    = default;
 
   AffineDynamicalModelEvaluationResult(
-    const std::size_t nx_, const std::size_t nu_, const bool with_gradient = false)
+    const size_t nx_, const size_t nu_, const bool with_gradient = false)
       : nx{nx_}, nu{nu_}, f(nx, scalar_t(0.)), g(nx * nu, scalar_t(0.))
   {
     if (with_gradient) {
@@ -67,6 +67,8 @@ struct AffineDynamicalModelEvaluationResult
       dg_dx.assign(nx * nu * nx, scalar_t(0.));
     }
   }
+
+  using SharedPtr = std::shared_ptr<AffineDynamicalModelEvaluationResult>;
 };
 
 /**
@@ -80,8 +82,8 @@ class AffineDynamicalModelAbstract : public DynamicalModelAbstract
 public:
   /**
    * @brief Deleted default constructor
-   * @details Use AffineDynamicalModelAbstract(const std::size_t, const
-   * std::size_t) to construct an AffineDynamicalModelAbstract. This is done to guarantee
+   * @details Use AffineDynamicalModelAbstract(const size_t, const
+   * size_t) to construct an AffineDynamicalModelAbstract. This is done to guarantee
    * allocation on construction of heap allocated data members.
    */
   AffineDynamicalModelAbstract()                                                     = delete;
@@ -97,7 +99,7 @@ public:
    * @param nx Number of states
    * @param nu Number of inputs
    */
-  AffineDynamicalModelAbstract(const std::size_t nx, const std::size_t nu);
+  AffineDynamicalModelAbstract(const size_t nx, const size_t nu);
 
   /**
    * @brief Evaluate the model dynamics for a given state value x and input value u.
@@ -120,8 +122,10 @@ public:
 
   // Functions of DynamicalModelAbstract left to implement:
   // virtual bool has_gradient() const { return false; }
-  // virtual std::size_t nx() const = 0;
-  // virtual std::size_t nu() const = 0;
+  // virtual size_t nx() const = 0;
+  // virtual size_t nu() const = 0;
+
+  using SharedPtr = std::shared_ptr<AffineDynamicalModelAbstract>;
 
 private:
   /**

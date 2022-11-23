@@ -29,8 +29,8 @@ namespace lll {
  */
 struct FailsafePolicyEvaluationResult
 {
-  std::size_t nx = 0;  ///< Number of states
-  std::size_t nu = 0;  ///< Number of inputs
+  size_t nx = 0;  ///< Number of states
+  size_t nu = 0;  ///< Number of inputs
 
   std::vector<scalar_t> val;  ///< Value of dynamics evaluation
                               /**< In column major order, size nu. */
@@ -47,11 +47,13 @@ struct FailsafePolicyEvaluationResult
   ~FailsafePolicyEvaluationResult()                                                  = default;
 
   FailsafePolicyEvaluationResult(
-    const std::size_t nx_, const std::size_t nu_, const bool with_gradient = false)
+    const size_t nx_, const size_t nu_, const bool with_gradient = false)
       : nx{nx_}, nu{nu_}, val(nu, scalar_t(0.))
   {
     if (with_gradient) { dval_dx.assign(nu * nx, scalar_t(0.)); }
   }
+
+  using SharedPtr = std::shared_ptr<FailsafePolicyEvaluationResult>;
 };
 
 /**
@@ -77,12 +79,12 @@ public:
   /**
    * @brief Number of control states
    */
-  virtual std::size_t nx() const = 0;
+  virtual size_t nx() const = 0;
 
   /**
    * @brief Number of control inputs
    */
-  virtual std::size_t nu() const = 0;
+  virtual size_t nu() const = 0;
 
   /**
    * @brief Evaluate the failsafe policy for a given state value x
@@ -92,6 +94,8 @@ public:
    */
   virtual std::shared_ptr<FailsafePolicyEvaluationResult> evaluate(
     const span<const scalar_t, dynamic_extent> x, const t_t t_nsec = 0) const = 0;
+
+  using SharedPtr = std::shared_ptr<FailsafePolicyAbstract>;
 };
 
 }  // namespace lll

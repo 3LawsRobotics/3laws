@@ -31,7 +31,7 @@ namespace lll {
  */
 struct InputFilteringResult
 {
-  std::size_t nu      = 0;               ///< Number of inputs
+  size_t nu           = 0;               ///< Number of inputs
   int32_t return_code = RC_OK;           ///< Filtering return code
   std::vector<scalar_t> input_desired;   ///< Desired input
                                          /**< Size nu. */
@@ -43,6 +43,8 @@ struct InputFilteringResult
   // Return code values
   static constexpr int32_t RC_OK    = 1;
   static constexpr int32_t RC_ERROR = -1;
+
+  using SharedPtr = std::shared_ptr<InputFilteringResult>;
 };
 
 /**
@@ -88,6 +90,8 @@ public:
    * @brief Filter desired input given regulation data
    */
   virtual std::shared_ptr<InputFilteringResult> filter() = 0;
+
+  using SharedPtr = std::shared_ptr<InputFilterAbstract>;
 };
 
 }  // namespace lll

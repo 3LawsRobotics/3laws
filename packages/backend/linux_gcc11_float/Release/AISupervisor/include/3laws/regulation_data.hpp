@@ -10,6 +10,7 @@
 #define THREELAWS_REGULATION_DATA_HPP
 
 #include <algorithm>
+#include <memory>
 #include <vector>
 
 #include "3laws/common.hpp"
@@ -24,11 +25,11 @@ namespace lll {
  */
 struct InputConstraints
 {
-  std::size_t nu = 0;  ///< Number of inputs
-                       /**< Must be strictly positive for object to be valid. */
+  size_t nu = 0;  ///< Number of inputs
+                  /**< Must be strictly positive for object to be valid. */
 
-  std::size_t n_cstr = 0;  ///< Number of input constraints
-                           /**< Can be 0. */
+  size_t n_cstr = 0;  ///< Number of input constraints
+                      /**< Can be 0. */
 
   std::vector<scalar_t> lb;  ///< Lower bounds
                              /**< In column major order, size: n_cstr. */
@@ -46,11 +47,11 @@ struct InputConstraints
   InputConstraints & operator=(InputConstraints &&)      = default;
   ~InputConstraints()                                    = default;
 
-  InputConstraints(const std::size_t nu_, const std::size_t n_cstr_)
+  InputConstraints(const size_t nu_, const size_t n_cstr_)
       : nu{nu_}, n_cstr{n_cstr_}, lb(n_cstr, scalar_t(-1.)), M(n_cstr * nu, scalar_t(0.)),
         ub(n_cstr, scalar_t(1.))
   {
-    for (std::size_t i = 0; i < std::min(nu, n_cstr); ++i) { M[(n_cstr + 1) * i] = scalar_t(1.); }
+    for (size_t i = 0; i < std::min(nu, n_cstr); ++i) { M[(n_cstr + 1) * i] = scalar_t(1.); }
   }
 
   /**
@@ -60,7 +61,7 @@ struct InputConstraints
    * @param nu Number of inputs (must be strictly positive)
    * @param nCstr Number of constraints
    */
-  void init(const std::size_t nu, const std::size_t nCstr);
+  void init(const size_t nu, const size_t nCstr);
 
   /**
    * @brief Initialize input constraint data
@@ -68,7 +69,7 @@ struct InputConstraints
    *
    * @param nu Number of inputs
    */
-  void init(const std::size_t nu);
+  void init(const size_t nu);
 
   /**
    * @brief Assert that constraint set data is consitent.
@@ -77,7 +78,7 @@ struct InputConstraints
   void assert_consistent() const;
 };
 
-inline void InputConstraints::init(const std::size_t nInputs, const std::size_t nCstr)
+inline void InputConstraints::init(const size_t nInputs, const size_t nCstr)
 {
   assert3_msg(nInputs > 0, "Number of inputs must be strictly positive");
 
@@ -86,17 +87,17 @@ inline void InputConstraints::init(const std::size_t nInputs, const std::size_t 
   lb.assign(n_cstr, scalar_t(-1.));
   ub.assign(n_cstr, scalar_t(1.));
   M.assign(n_cstr * nu, scalar_t(0.));
-  for (std::size_t i = 0; i < std::min(nu, nCstr); ++i) { M[(n_cstr + 1) * i] = scalar_t(1.); }
+  for (size_t i = 0; i < std::min(nu, nCstr); ++i) { M[(n_cstr + 1) * i] = scalar_t(1.); }
 }
 
-inline void InputConstraints::init(const std::size_t nInputs) { init(nInputs, nInputs); }
+inline void InputConstraints::init(const size_t nInputs) { init(nInputs, nInputs); }
 
 inline void InputConstraints::assert_consistent() const
 {
   assert3_msg(lb.size() == n_cstr, "lb must be of size n_cstr");
   assert3_msg(M.size() == n_cstr * nu, "M must be of size n_cstr * nu");
   assert3_msg(ub.size() == n_cstr, "ub must be of size n_cstr");
-  for (__attribute__((unused)) std::size_t i = 0; i < n_cstr; ++i) {
+  for (__attribute__((unused)) size_t i = 0; i < n_cstr; ++i) {
     assert3_msg(lb[i] <= ub[i], "lb[i] must be less or equal to ub[i] for all i<n_cstr");
   }
 }
@@ -107,10 +108,10 @@ inline void InputConstraints::assert_consistent() const
  */
 struct RegulationData
 {
-  std::size_t nu = 0;            ///< Number of inputs
-                                 /**< Must be strictly positive for regulation data to be valid. */
-  std::size_t n_safetyCstr = 0;  ///< Number of safety constraints
-  std::size_t n_failsafes  = 0;  ///< Number of failsafe policies
+  size_t nu = 0;            ///< Number of inputs
+                            /**< Must be strictly positive for regulation data to be valid. */
+  size_t n_safetyCstr = 0;  ///< Number of safety constraints
+  size_t n_failsafes  = 0;  ///< Number of failsafe policies
 
   InputConstraints input_cstr;  ///< Input constraints
 
@@ -144,6 +145,8 @@ struct RegulationData
    * @param r Regulation data to compare against
    */
   void assert_same_size_as(const RegulationData & r) const;
+
+  using SharedPtr = std::shared_ptr<RegulationData>;
 };
 
 inline void RegulationData::assert_consistent() const
@@ -151,7 +154,7 @@ inline void RegulationData::assert_consistent() const
   assert3_msg(nu != input_cstr.nu, "Sizes must be consistent");
   assert3_msg(!lfh.empty() && lfh.size() != n_safetyCstr, "Sizes must be consistent");
   assert3_msg(!lgh.empty() && lgh.size() != n_safetyCstr * nu, "Sizes must be consistent");
-  assert3_msg(safety_val.size() != n_safetyCstr * std::max(std::size_t(1), n_failsafes),
+  assert3_msg(safety_val.size() != n_safetyCstr * std::max(size_t(1), n_failsafes),
     "Sizes must be consistent");
   assert3_msg(!failsafe_input.empty() && failsafe_input.size() != nu * n_failsafes,
     "Sizes must be consistent");

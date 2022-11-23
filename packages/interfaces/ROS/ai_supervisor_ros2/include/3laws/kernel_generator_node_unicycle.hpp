@@ -19,7 +19,7 @@ struct UnicycleDynamicsParams
 
 struct UnicycleMapParams
 {
-  std::size_t n_obstacles = 100;
+  size_t n_obstacles = 100;
 };
 
 struct UnicycleFailsafeParams

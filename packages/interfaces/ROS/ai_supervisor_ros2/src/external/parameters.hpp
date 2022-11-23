@@ -68,7 +68,7 @@ template<typename T>
 struct is_std_array_or_tuple : std::false_type
 {};
 
-template<typename T, std::size_t N>
+template<typename T, size_t N>
 struct is_std_array_or_tuple<std::array<T, N>> : std::true_type
 {};
 
@@ -247,7 +247,7 @@ void getParams(const rclcpp::Node & n, const std::string & name, S & val)
     std::vector<std::reference_wrapper<VVal>> refs;
 
     // figure out size of output
-    std::size_t sz = std::numeric_limits<std::size_t>::max();
+    size_t sz = std::numeric_limits<size_t>::max();
     detail::reference_iterator(name,
       refs,
       [&](const auto & subname, auto pval)
@@ -336,7 +336,7 @@ bool updateParam(const rclcpp::Parameter & prm, const std::string & name, S & va
       std::vector<std::reference_wrapper<VVal>> refs;
 
       // resize as appropriate
-      std::size_t sz = val.size();
+      size_t sz = val.size();
       detail::reference_iterator(name,
         refs,
         [&](const auto & subname, auto pval)
