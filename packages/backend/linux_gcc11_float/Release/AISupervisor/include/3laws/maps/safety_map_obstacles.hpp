@@ -42,12 +42,12 @@ public:
    */
   struct Obstacle
   {
-    std::string name            = "obstacle";  ///< Name of obstacle
-    bool act                    = false;       ///< Obstacle is active
-    t_t t                       = 0;  ///< Time at which position and velocity have been measured
-    std::array<scalar_t, 3> pos = {0., 0., 0.};  ///< Obstacle position
-    std::array<scalar_t, 3> vel = {0., 0., 0.};  ///< Obstacle velocity
-    scalar_t rad                = 0.;            ///< Minimum safe distance to obstacle
+    std::string name = "obstacle";  ///< Name of obstacle
+    bool act         = false;       ///< Obstacle is active
+    t_t t            = 0;           ///< Time at which position and velocity have been measured
+    std::array<scalar_t, 3> pos{{0., 0., 0.}};  ///< Obstacle position
+    std::array<scalar_t, 3> vel{{0., 0., 0.}};  ///< Obstacle velocity
+    scalar_t rad = 0.;                          ///< Minimum safe distance to obstacle
   };
 
   SafetyMapObstacles()                                       = delete;
