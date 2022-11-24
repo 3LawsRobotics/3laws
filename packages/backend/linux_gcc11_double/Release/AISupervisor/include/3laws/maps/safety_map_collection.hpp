@@ -57,6 +57,9 @@ public:
   std::shared_ptr<SafetyMapProbingResult> probe(
     const span<const scalar_t, dynamic_extent> x, const t_t t_nsec = 0) const override;
 
+  static std::shared_ptr<SafetyMapCollection> make_shared(const size_t nx,
+    std::initializer_list<std::pair<SafetyMapAbstract::SharedPtr, std::vector<size_t>>> maps);
+
 private:
   std::unique_ptr<struct SafetyMapCollectionImpl> m_pImpl;  ///< Pointer to implementation
 };

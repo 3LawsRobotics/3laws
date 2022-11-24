@@ -76,6 +76,39 @@ public:
   void update_cluster(
     const size_t idx, const span<const span<const scalar_t, 3>, dynamic_extent> pts);
 
+  /**
+   * @brief Accessor to cluster point
+   *
+   * @param cluster_idx Index of cluster
+   * @param point_idx Index of point in cluster
+   * @return std::array<scalar_t, 3>&
+   */
+  std::array<scalar_t, 3> & cluster_point(const size_t cluster_idx, const size_t point_idx);
+
+  /**
+   * @brief Const accessor to cluster point
+   *
+   * @param cluster_idx Index of cluster
+   * @param point_idx Index of point in cluster
+   * @return const std::array<scalar_t, 3>&
+   */
+  const std::array<scalar_t, 3> & cluster_point(
+    const size_t cluster_idx, const size_t point_idx) const;
+
+  /**
+   * @brief Get size of cluster
+   *
+   * @param idx Index of the cluster
+   */
+  size_t get_cluster_size(const size_t idx);
+
+  /**
+   * @brief Return wether or not cluster has ever been updated
+   *
+   * @param idx Index of the cluster
+   */
+  bool cluster_has_been_updated(const size_t idx);
+
 private:
   std::unique_ptr<struct SafetyMapPointcloudImpl> m_pImpl;  ///< Pointer to implementation
 };

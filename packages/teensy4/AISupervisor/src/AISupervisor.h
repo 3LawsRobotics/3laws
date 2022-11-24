@@ -13,5 +13,8 @@
 #include "3laws/generators/explicit_kernel_generator.hpp"
 #include "3laws/generators/implicit_kernel_generator.hpp"
 #include "3laws/generators/switching_kernel_generator.hpp"
+#include "3laws/maps/safety_map_collection.hpp"
+#include "3laws/maps/safety_map_obstacles.hpp"
+#include "3laws/maps/safety_map_pointcloud.hpp"
 
 #endif  // THREELAWS_AISUPERVISOR_H_
