@@ -1,4 +1,4 @@
-1669311846
+1669316522
 conaninfo.txt: dcddbc9f3b823a77e3cef61f99a39396
 include/3laws/cassert.hpp: ffc5b10fd0b06836f8680c0026821522
 include/3laws/memory.hpp: 3e3c5bc2cf5a1ae1cbd8dd784bd9e1d8

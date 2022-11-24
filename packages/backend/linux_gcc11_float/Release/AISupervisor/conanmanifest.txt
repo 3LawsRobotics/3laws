@@ -1,4 +1,4 @@
-1669311871
+1669316584
 conaninfo.txt: f92095021764637a3d627f476f9fdd01
 include/3laws/affine_dynamical_model_abstract.hpp: 371b2bbc911f0ff4dfe3077f1443469f
 include/3laws/common.hpp: d0c9c44d4b7d0b71b60d37b582fe649d
@@ -13,7 +13,7 @@ include/3laws/generators/switching_kernel_generator.hpp: 0cce14c9a66be3aa0a12bdf
 include/3laws/input_filter_abstract.hpp: fbd9d7d8dd917e4aed53ae43a712b617
 include/3laws/kernel_generator_abstract.hpp: 34077d7c83f6db0871263c7d5a1becb0
 include/3laws/maps/safety_map_collection.hpp: 6a098052ebaed16fc26da7b2aa10973d
-include/3laws/maps/safety_map_obstacles.hpp: 62c0c8e1a4504b31533be04f4a23dc12
+include/3laws/maps/safety_map_obstacles.hpp: 40b60f8f07443cb683f1d5e9c84bf915
 include/3laws/maps/safety_map_pointcloud.hpp: 992cac9dcb8c6915bed6e19938a09146
 include/3laws/regulation_data.hpp: 2765af56db0cc6f0cd2694227fb4b02b
 include/3laws/safety_map_abstract.hpp: c70c3f658b0d69fc3aaf7565aec975f0
