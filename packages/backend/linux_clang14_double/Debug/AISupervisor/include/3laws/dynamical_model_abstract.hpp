@@ -35,7 +35,7 @@ struct DynamicalModelEvaluationResult
   size_t nu = 0;  ///< Number of inputs
 
   std::vector<scalar_t> val;  ///< Value of dynamics evaluation
-                              /**< In column major order, size nx.*/
+                              /**< In column major order, size nx*1.*/
 
   std::vector<scalar_t> dval_dx;  ///< Partial derivative w.r.t state
                                   /**< In column major order, size nx*nx,

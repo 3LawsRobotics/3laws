@@ -21,7 +21,8 @@ namespace lll {
 inline t_t from_msg(const builtin_interfaces::msg::Time & in)
 {
   return static_cast<t_t>(std::chrono::duration_cast<std::chrono::nanoseconds>(
-    std::chrono::seconds(in.sec) + std::chrono::nanoseconds(in.nanosec))
+    std::chrono::duration<decltype(in.sec)>(in.sec)
+    + std::chrono::duration<decltype(in.nanosec), std::nano>(in.nanosec))
                             .count());
 }
 
@@ -63,11 +64,11 @@ inline InputFilteringResult from_msg(const lll_msgs::msg::InputFilteringResult &
 
 inline builtin_interfaces::msg::Time to_msg(const t_t & in)
 {
+  const auto tIn = std::chrono::duration<t_t, std::nano>(in);
   builtin_interfaces::msg::Time out;
-  auto t_sec  = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::nanoseconds(in));
-  out.sec     = static_cast<int>(t_sec.count());
-  out.nanosec = static_cast<unsigned int>(
-    std::chrono::nanoseconds(std::chrono::nanoseconds(in) - t_sec).count());
+  auto t_sec  = std::chrono::duration_cast<std::chrono::duration<decltype(out.sec)>>(tIn);
+  out.sec     = t_sec.count();
+  out.nanosec = std::chrono::duration<decltype(out.nanosec), std::nano>(tIn - t_sec).count();
   return out;
 }
 

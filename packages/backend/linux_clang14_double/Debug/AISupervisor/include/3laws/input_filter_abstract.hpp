@@ -34,11 +34,11 @@ struct InputFilteringResult
   size_t nu           = 0;               ///< Number of inputs
   int32_t return_code = RC_OK;           ///< Filtering return code
   std::vector<scalar_t> input_desired;   ///< Desired input
-                                         /**< Size nu. */
+                                         /**< Size nu*1. */
   std::vector<scalar_t> input_filtered;  ///< Filtered input
-                                         /**< Size nu. */
+                                         /**< Size nu*1. */
   std::vector<scalar_t> input_failsafe;  ///< Failsafe input
-                                         /**< Size nu, empty if not available. */
+                                         /**< Size nu*1, empty if not available. */
 
   // Return code values
   static constexpr int32_t RC_OK    = 1;
@@ -67,19 +67,19 @@ public:
   /**
    * @brief Set the desired input
    *
-   * @param t_nsec Current time (in nanoseconds)
    * @param u Desired input
+   * @param t_nsec Current time (in nanoseconds)
    */
   virtual void set_input_desired(
-    const t_t t_nsec, const span<const scalar_t, dynamic_extent> u) = 0;
+    const span<const scalar_t, dynamic_extent> u, const t_t t_nsec = 0) = 0;
 
   /**
    * @brief Set the regulation data
    *
-   * @param t_nsec Current time (in nanoseconds)
    * @param regulationData Regulation data
+   * @param t_nsec Current time (in nanoseconds)
    */
-  virtual void set_regulation(const t_t t_nsec, const RegulationData & regulationData) = 0;
+  virtual void set_regulation(const RegulationData & regulationData, const t_t t_nsec = 0) = 0;
 
   /**
    * @brief Check if filter is ready to be used

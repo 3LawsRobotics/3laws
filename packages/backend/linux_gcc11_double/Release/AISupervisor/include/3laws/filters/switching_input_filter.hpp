@@ -59,8 +59,9 @@ public:
   explicit SwitchingInputFilter(const SwitchingInputFilterParams & params);
 
   bool ready_to_filter() const override;
-  void set_input_desired(const t_t t_nsec, const span<const scalar_t, dynamic_extent> u) override;
-  void set_regulation(const t_t t_nsec, const RegulationData & regulationData) override;
+  void set_input_desired(
+    const span<const scalar_t, dynamic_extent> u, const t_t t_nsec = 0) override;
+  void set_regulation(const RegulationData & regulationData, const t_t t_nsec = 0) override;
   std::shared_ptr<InputFilteringResult> filter() override;
 
 private:

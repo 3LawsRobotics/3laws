@@ -19,7 +19,7 @@ using scalar_t = float;
 
 // clang-format on
 
-using t_t = uint64_t;
+using t_t = int64_t;
 
 }  // namespace lll
 

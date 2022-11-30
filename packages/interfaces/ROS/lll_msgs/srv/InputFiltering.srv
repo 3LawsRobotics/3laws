@@ -2,7 +2,7 @@
 ###        Filter input        ###
 ##################################
 
-std_msgs/Float64MultiArray input_desired
+Float64VectorStamped input_desired
 
 ---
 

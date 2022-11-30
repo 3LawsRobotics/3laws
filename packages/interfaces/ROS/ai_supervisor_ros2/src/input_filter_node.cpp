@@ -98,20 +98,19 @@ void InputFilterNode::filter() const
 void InputFilterNode::sub_input_des(const lll_msgs::msg::Float64VectorStamped::SharedPtr & msg)
 {
   RCLCPP_INFO(get_logger(), "Receiving input...");
-  m_filter->set_input_desired(from_msg(msg->header.stamp), {msg->data.data(), msg->data.size()});
+  m_filter->set_input_desired(msg->data, from_msg(msg->header.stamp));
 }
 
 void InputFilterNode::sub_regulation_data(const lll_msgs::msg::RegulationData::SharedPtr & msg)
 {
   RCLCPP_INFO(get_logger(), "Receiving regulation data...");
-  m_filter->set_regulation(from_msg(msg->header.stamp), from_msg(*msg));
+  m_filter->set_regulation(from_msg(*msg), from_msg(msg->header.stamp));
 }
 void InputFilterNode::srv_filtering(const lll_msgs::srv::InputFiltering::Request::SharedPtr & req,
   const lll_msgs::srv::InputFiltering::Response::SharedPtr & resp)
 {
   RCLCPP_INFO(get_logger(), "Input filtering service called...");
-  m_filter->set_input_desired(from_msg(req->input_desired.header.stamp),
-    {req->input_desired.data.data(), req->input_desired.data.size()});
+  m_filter->set_input_desired(req->input_desired.data, from_msg(req->input_desired.header.stamp));
 
   if (!m_filter->ready_to_filter()) {
     RCLCPP_WARN(get_logger(), "Input filter not ready");

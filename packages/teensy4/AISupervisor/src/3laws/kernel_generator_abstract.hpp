@@ -54,8 +54,9 @@ public:
    * @brief Set the current state
    *
    * @param x Current state
+   * @param t_nsec Current time (in nanoseconds)
    */
-  virtual void set_state(const span<const scalar_t, dynamic_extent> x);
+  virtual void set_state(const span<const scalar_t, dynamic_extent> x, const t_t t_nsec = 0);
 
   /**
    * @brief Get the current state
@@ -78,6 +79,7 @@ public:
 protected:
   bool m_stateInit = false;       ///< State initialized flag
   std::vector<scalar_t> m_state;  ///< Current state holder
+  t_t m_t;                        ///< Current time holder
 };
 
 }  // namespace lll

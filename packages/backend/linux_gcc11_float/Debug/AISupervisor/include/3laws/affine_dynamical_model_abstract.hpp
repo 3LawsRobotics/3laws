@@ -36,7 +36,7 @@ struct AffineDynamicalModelEvaluationResult
   size_t nu = 0;  ///< Number of inputs
 
   std::vector<scalar_t> f;  ///< Value of natural dynamics evaluation
-                            /**< In column major order, size nx. */
+                            /**< In column major order, size nx*1. */
 
   std::vector<scalar_t> df_dx;  ///< Partial derivative of natural dynamics w.r.t state
                                 /**< In column major order, size nx*nx,

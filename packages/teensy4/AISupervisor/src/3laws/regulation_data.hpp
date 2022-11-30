@@ -32,13 +32,13 @@ struct InputConstraints
                       /**< Can be 0. */
 
   std::vector<scalar_t> lb;  ///< Lower bounds
-                             /**< In column major order, size: n_cstr. */
+                             /**< In column major order, size: n_cstr*1. */
 
   std::vector<scalar_t> M;  ///< Transfrom matrix
                             /**< In column major order, size: n_cstr*nu. */
 
   std::vector<scalar_t> ub;  ///< Upper bounds
-                             /**< In column major order, size: n_cstr. */
+                             /**< In column major order, size: n_cstr*1. */
 
   InputConstraints()                                     = default;
   InputConstraints(const InputConstraints &)             = default;
@@ -115,8 +115,12 @@ struct RegulationData
 
   InputConstraints input_cstr;  ///< Input constraints
 
+  std::vector<scalar_t> dh_dt;  ///< Partial derivative of safety values w.r.t time
+                                /**< In column major order, size n_safetyCstr*1,
+                                     empty if not available. */
+
   std::vector<scalar_t> lfh;  ///< Lie derivatives of map obstacles w.r.t natural dynamics
-                              /**< In column major order, size n_safetyCstr,
+                              /**< In column major order, size n_safetyCstr*1,
                                    empty if not available. */
 
   std::vector<scalar_t> lgh;  ///< Lie derivatives of map obstacles w.r.t actuation dynamics
@@ -153,6 +157,7 @@ inline void RegulationData::assert_consistent() const
 {
   assert3_msg(nu != input_cstr.nu, "Sizes must be consistent");
   assert3_msg(!lfh.empty() && lfh.size() != n_safetyCstr, "Sizes must be consistent");
+  assert3_msg(!dh_dt.empty() && dh_dt.size() != n_safetyCstr, "Sizes must be consistent");
   assert3_msg(!lgh.empty() && lgh.size() != n_safetyCstr * nu, "Sizes must be consistent");
   assert3_msg(safety_val.size() != n_safetyCstr * std::max(size_t(1), n_failsafes),
     "Sizes must be consistent");
@@ -174,6 +179,7 @@ inline void RegulationData::assert_same_size_as(
   assert3_msg(input_cstr.ub.size() == r.input_cstr.ub.size(), "Sizes must be consistent");
   assert3_msg(lfh.size() == r.lfh.size(), "Sizes must be consistent");
   assert3_msg(lgh.size() == r.lgh.size(), "Sizes must be consistent");
+  assert3_msg(dh_dt.size() == r.dh_dt.size(), "Sizes must be consistent");
   assert3_msg(safety_val.size() == r.safety_val.size(), "Sizes must be consistent");
   assert3_msg(failsafe_input.size() == r.failsafe_input.size(), "Sizes must be consistent");
 }

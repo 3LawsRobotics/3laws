@@ -33,7 +33,10 @@ struct SafetyMapProbingResult
   size_t nx          = 0;         ///< Number of system states
   size_t n_obstacles = 0;         ///< Number of obstacles in the map
   std::vector<scalar_t> val;      ///< Safety measurements
-                                  /**< In column major order, size n_obstacles*/
+                                  /**< In column major order, size n_obstacles*1. */
+  std::vector<scalar_t> dval_dt;  ///< Partial derivative of safety measurements w.r.t time
+                                  /**< In column major order, size n_obstacles*1,
+                                       empty if not available. */
   std::vector<scalar_t> dval_dx;  ///< Partial derivative of safety measurements w.r.t state
                                   /**< In column major order, size n_obstacles*nx,
                                        empty if not available. */
@@ -49,7 +52,10 @@ struct SafetyMapProbingResult
     const size_t nx_, const size_t n_obstacles_, const bool with_gradient = false)
       : nx{nx_}, n_obstacles{n_obstacles_}, val(n_obstacles, scalar_t(0.))
   {
-    if (with_gradient) { dval_dx.assign(n_obstacles * nx, scalar_t(0.)); }
+    if (with_gradient) {
+      dval_dt.assign(n_obstacles, scalar_t(0.));
+      dval_dx.assign(n_obstacles * nx, scalar_t(0.));
+    }
   }
 
   using SharedPtr = std::shared_ptr<SafetyMapProbingResult>;

@@ -111,7 +111,7 @@ bool KernelGeneratorNode::sub_state(const lll_msgs::msg::Float64VectorStamped::S
     return false;
   }
 
-  m_kernelGen->set_state({msg->data.data(), msg->data.size()});
+  m_kernelGen->set_state(msg->data);
   return true;
 }
 
