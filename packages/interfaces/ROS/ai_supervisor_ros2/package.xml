@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>ai_supervisor_ros2</name>
-  <version>0.3.0</version>
+  <version>0.4.0</version>
   <description>3Laws AI supervisor ROS2 interface</description>
   <maintainer email="tgurriet@3laws.io">Thomas Gurriet</maintainer>
   <license>Exclusive property of 3Laws Robotics Inc.</license>
@@ -29,4 +29,3 @@
     <build_type>ament_cmake</build_type>
   </export>
 </package>
-

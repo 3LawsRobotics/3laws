@@ -79,7 +79,7 @@ public:
 protected:
   bool m_stateInit = false;       ///< State initialized flag
   std::vector<scalar_t> m_state;  ///< Current state holder
-  t_t m_t;                        ///< Current time holder
+  t_t m_t = 0;                    ///< Current time holder
 };
 
 }  // namespace lll

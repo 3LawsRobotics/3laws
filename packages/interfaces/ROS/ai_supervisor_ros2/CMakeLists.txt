@@ -8,7 +8,7 @@ find_package(ament_cmake REQUIRED)
 find_package(lll_msgs REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Eigen3 3.4 REQUIRED)
-find_package(AISupervisor 0.3.0 REQUIRED)
+find_package(AISupervisor 0.4.0 REQUIRED)
 
 # ---------------------------------------------------------------------------------------
 # COMPONENTS

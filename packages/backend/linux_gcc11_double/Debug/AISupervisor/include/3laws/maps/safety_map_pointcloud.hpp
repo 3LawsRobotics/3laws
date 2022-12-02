@@ -56,8 +56,12 @@ public:
    * @param cluster_sizes List of cluster sizes
    * @param pt_size Minimum safe distance to pointcloud points
    */
+  // NOLINTBEGIN
+  // cppcheck-suppress noExplicitConstructor ; we want users to be able to construct a span
+  // implicitly
   SafetyMapPointcloud(
     const span<const size_t, dynamic_extent> cluster_sizes, const scalar_t pt_size = 0.);
+  // NOLINTEND
 
   bool has_gradient() const override;
   size_t n_obstacles() const override;

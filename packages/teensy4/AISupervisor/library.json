@@ -3,7 +3,7 @@
   "authors": {
     "name": "3Laws Robotics Inc"
   },
-  "version": "0.3.0",
+  "version": "0.4.0",
   "platforms": [
     "teensy"
   ],

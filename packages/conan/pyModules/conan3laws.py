@@ -1,8 +1,9 @@
 import os
 
-from conan import ConanFile, tools
 from conan.tools.cmake import CMake, cmake_layout
 from conans.errors import ConanException
+
+from conan import ConanFile, tools
 
 
 def bool_to_cmake(v: bool) -> str:
@@ -39,7 +40,7 @@ class ConanRecipe(ConanFile):
 
     exports_sources = "CMakeLists.txt", "include/*", "src/*", "config/*"
 
-    requires = ["3laws_library-public/0.3.0"]
+    requires = ["3laws_library-public/0.4.0"]
 
     def config_options(self):
         if self.settings.os == "Windows":
