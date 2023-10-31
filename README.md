@@ -35,14 +35,14 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Interactive Package installation
 ```bash
-sudo bash -c "$(wget -qO - https://raw.githubusercontent.com/3LawsRobotics/3laws/beta/rdm/install.sh)"
+sudo bash -c "$(wget -qO - https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh)"
 ```
 
 ### Specific package
 
 Download the package:
 ```bash
-wget https://raw.githubusercontent.com/3LawsRobotics/3laws/beta/rdm/install.sh
+wget https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh
 ```
 Make it executable
 ```bash
