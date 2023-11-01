@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Description &mdash; 3Laws beta documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/robot_diagnostic_module/configuration/robot_description/robot_description.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=f0d2c090"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            3Laws
+          </a>
+              <div class="version">
+                beta
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Robot Diagnostic Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">3Laws</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Robot Description</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="robot-description">
+<h1>Robot Description<a class="headerlink" href="#robot-description" title="Link to this heading"></a></h1>
+<p>This part is the most important one. The more accurate the information provided here, the more insightful the RDM will be.</p>
+<p>Here is a template of this section. Each sub structure is optional but once a substructure is declared, all its fields must be filled (unless Optional is specified)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">robot_description</span><span class="p">:</span>
+  <span class="c1"># robot_type and associated model_type options are (`*` not available yet):</span>
+  <span class="c1">#   mobile_robot -&gt; differential_drive, *omni_directional, *ackerman, bicycle</span>
+  <span class="c1">#   legged_robot -&gt; *bipedal, *quadruped</span>
+  <span class="c1">#   land_vehicle -&gt; *basic</span>
+  <span class="c1">#   aerial_vehicle -&gt; *fixed_wing, *helicopter, *multi_rotor</span>
+  <span class="c1">#   surface_vehicle -&gt; *sail_boat, *outboard_boat, *inboard_boat, *jet_boat</span>
+  <span class="c1">#   underwater_vehicle -&gt; *omni_directional</span>
+  <span class="c1">#   spacecraft -&gt; *omni_directional</span>
+  <span class="c1">#   manipulator -&gt; *fixed_base</span>
+  <span class="c1">#   unclassified -&gt; *unknown, *first_order</span>
+  <span class="n">robot_type</span><span class="p">:</span> <span class="n">mobile_robot</span>
+
+  <span class="n">kinematic_model</span><span class="p">:</span> <span class="c1"># Kinematic model of the robot</span>
+    <span class="n">base_frame_id</span><span class="p">:</span> <span class="n">robot</span> <span class="c1"># Name of the base frame of the robot</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="c1"># Geometry of the robot</span>
+      <span class="n">shape_type</span><span class="p">:</span> <span class="n">box</span> <span class="c1"># Type of the geometry shape (should be one of [point, box, sphere, ellipsoid, capsule, cone, cylinder, mesh])</span>
+      <span class="n">shape_params</span><span class="p">:</span> <span class="c1"># Parameters for the chosen shape_type (See bottom of this file for more info)</span>
+        <span class="n">x_size</span><span class="p">:</span> <span class="mf">0.5</span>
+        <span class="n">y_size</span><span class="p">:</span> <span class="mf">0.4</span>
+        <span class="n">z_size</span><span class="p">:</span> <span class="mf">0.3</span>
+      <span class="n">pose</span><span class="p">:</span> <span class="c1"># [optional] Pose of shape w.r.t base frame</span>
+        <span class="n">translation</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span> <span class="c1"># [optional] Translation w.r.t base frame [x,y,z], default [0,0,0]</span>
+        <span class="n">rotation</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span> <span class="c1"># [optional] Rotation quaternion w.r.t base frame [w,x,y,z], default [1,0,0,0]</span>
+
+  <span class="n">dynamical_model</span><span class="p">:</span> <span class="c1"># [optional] Behavior model of the robot</span>
+    <span class="n">model_type</span><span class="p">:</span> <span class="n">bicycle</span> <span class="c1"># Type of dynamical model for selected robot_type</span>
+    <span class="n">state_domain</span><span class="p">:</span> <span class="c1"># Region of the state space in which the dynamical model has been validated</span>
+      <span class="c1"># Defined as a a convex polytope S={x in Rn | lb &lt;= M.x &lt;= ub}</span>
+      <span class="n">ub</span><span class="p">:</span>
+        <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]</span> <span class="c1"># If simple==true, must have same size as state of model_type,</span>
+        <span class="c1"># otherwise must have size n_cstr</span>
+      <span class="n">lb</span><span class="p">:</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.</span><span class="p">]</span> <span class="c1"># If simple==true, must have same size as state of model_type,</span>
+        <span class="c1"># otherwise must have size n_cstr</span>
+      <span class="n">simple</span><span class="p">:</span> <span class="n">false</span> <span class="c1"># [optional], If true, assumes M is an identity matrix (default: false)</span>
+      <span class="n">n_cstr</span><span class="p">:</span> <span class="mi">3</span> <span class="c1"># [optional if simple==true] Number of rows in M</span>
+      <span class="n">M</span><span class="p">:</span> <span class="c1"># [optional if simple==true] Either a single sequence representing the diagonal of M, or a sequence of the rows of M</span>
+        <span class="o">-</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+        <span class="o">-</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+        <span class="o">-</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+    <span class="n">input_domain</span><span class="p">:</span> <span class="c1"># Region of the input space accessible for control purposes and in which the dynamical model has been validated</span>
+      <span class="c1"># Same representation as &#39;state_domain&#39;</span>
+      <span class="n">ub</span><span class="p">:</span>
+        <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]</span> <span class="c1"># If simple==true, must have same size as input of model_type,</span>
+        <span class="c1"># otherwise must have size n_cstr</span>
+      <span class="n">lb</span><span class="p">:</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">]</span> <span class="c1"># If simple==true, must have same size as input of model_type,</span>
+        <span class="c1"># otherwise must have size n_cstr</span>
+      <span class="n">simple</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">process_noise_covariance</span><span class="p">:</span>
+      <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]</span> <span class="c1"># Either a single sequence representing the diagonal of the process noise covariance matrix,</span>
+      <span class="c1"># or a sequence of its rows. Must have same size as state of model_type</span>
+    <span class="n">model_param</span><span class="p">:</span> <span class="c1"># [variant] Parameters for the chosen model_type (See bottom of this file for more info)</span>
+      <span class="n">wheel_dx</span><span class="p">:</span> <span class="mf">1.</span>
+      <span class="n">origin_dx</span><span class="p">:</span> <span class="mf">1.</span>
+      <span class="n">tau_vel</span><span class="p">:</span> <span class="mf">1.</span>
+      <span class="n">tau_steer</span><span class="p">:</span> <span class="mf">1.</span>
+
+  <span class="n">mission_manager</span><span class="p">:</span> <span class="c1"># [optional]</span>
+    <span class="n">extra_topics</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+    <span class="n">process_name</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+    <span class="n">finite_states</span><span class="p">:</span> <span class="c1"># Finite states of the robot</span>
+      <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span>
+          <span class="o">/</span><span class="n">status</span> <span class="c1"># Name of the ros topic.</span>
+          <span class="c1"># Supported types: [(default) std_msgs/String, std_msgs/FloatXX, std_msgs/Bool, std_msgs/Char, std_msgs/Byte, std_msgs/IntXX, std_msgs/UIntXX]</span>
+        <span class="n">sender_id</span><span class="p">:</span> <span class="n">state_machine</span> <span class="c1"># Display name for sender of this state</span>
+        <span class="n">state_id</span><span class="p">:</span> <span class="n">status</span> <span class="c1"># Identifier for this state, &quot;&lt;sender_id&gt;.&lt;state_id&gt;&quot; must form a UNIQUE identifier among all signals</span>
+        <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span>
+      <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span> <span class="o">/</span><span class="n">search_mode</span>
+        <span class="n">sender_id</span><span class="p">:</span> <span class="n">state_machine</span>
+        <span class="n">state_id</span><span class="p">:</span> <span class="n">search_mode</span>
+        <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span>
+
+  <span class="n">sensors</span><span class="p">:</span> <span class="c1"># [optional]</span>
+    <span class="n">extra_topics</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+    <span class="n">process_name</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+    <span class="n">batteries</span><span class="p">:</span> <span class="p">[]</span> <span class="c1"># Coming soon!</span>
+    <span class="n">cameras</span><span class="p">:</span> <span class="p">[]</span> <span class="c1"># Coming soon!</span>
+    <span class="n">gps</span><span class="p">:</span> <span class="p">[]</span> <span class="c1"># Coming soon!</span>
+    <span class="n">imus</span><span class="p">:</span> <span class="p">[]</span> <span class="c1"># Coming soon!</span>
+    <span class="n">laserscans</span><span class="p">:</span> <span class="c1"># Planar laser scanners</span>
+      <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span>
+          <span class="o">/</span><span class="n">laserscan_1_topic</span> <span class="c1"># Name of the ros topic.</span>
+          <span class="c1"># Supported types: [(default) sensor_msgs/LaserScan]</span>
+        <span class="n">sensor_id</span><span class="p">:</span> <span class="n">laserscan_1</span> <span class="c1"># Display name for this laserscan, must be UNIQUE among all laserscans</span>
+        <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+        <span class="n">specs</span><span class="p">:</span>
+          <span class="n">n_rays</span><span class="p">:</span> <span class="mi">1000</span> <span class="c1"># Expected number of rays in the laserscan</span>
+          <span class="n">angle_min</span><span class="p">:</span> <span class="o">-</span><span class="mf">3.14</span> <span class="c1"># Minimum ray angle</span>
+          <span class="n">angle_max</span><span class="p">:</span> <span class="mf">3.14</span> <span class="c1"># Maximum ray angle</span>
+          <span class="n">range_min</span><span class="p">:</span> <span class="mf">0.</span> <span class="c1"># Minimum ray range</span>
+          <span class="n">range_max</span><span class="p">:</span> <span class="mf">1000.</span> <span class="c1"># Maximum ray range</span>
+          <span class="n">noise_one_sigma</span><span class="p">:</span> <span class="mf">0.025</span> <span class="c1"># Expected standard_error of the sensor (given by the manufacturer, often like: precision = +-2sigma)</span>
+        <span class="n">transform</span><span class="p">:</span> <span class="c1"># Specification of frame w.r.t which the measurement is expressed</span>
+          <span class="n">parent_frame_id</span><span class="p">:</span> <span class="n">robot</span> <span class="c1"># Id of parent frame</span>
+          <span class="n">pose</span><span class="p">:</span> <span class="c1"># [optional] Pose w.r.t parent frame</span>
+            <span class="n">translation</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span> <span class="c1"># [optional] Translation w.r.t parent frame [x,y,z], default [0,0,0]</span>
+            <span class="n">rotation</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span> <span class="c1"># [optional] Rotation quaternion w.r.t parent frame [w,x,y,z], default [1,0,0,0]</span>
+    <span class="n">lidars</span><span class="p">:</span> <span class="p">[]</span> <span class="c1"># Coming soon!</span>
+    <span class="n">loadcells</span><span class="p">:</span> <span class="c1"># Force and torque measurement sensor, 6 axis by default</span>
+      <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span>
+          <span class="o">/</span><span class="n">end_effector_wrench</span> <span class="c1"># Name of the ros topic.</span>
+          <span class="c1"># Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]</span>
+        <span class="n">sensor_id</span><span class="p">:</span> <span class="n">end_effector_loadcell</span> <span class="c1"># Display name for this loadcell, must be UNIQUE among all loadcells</span>
+        <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+        <span class="n">transform</span><span class="p">:</span> <span class="c1"># Specification of frame w.r.t which the measurement is expressed</span>
+          <span class="n">parent_frame_id</span><span class="p">:</span> <span class="n">robot</span> <span class="c1"># Id of parent frame</span>
+          <span class="n">pose</span><span class="p">:</span> <span class="c1"># [optional] Pose w.r.t parent frame</span>
+            <span class="n">translation</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span> <span class="c1"># [optional] Translation w.r.t parent frame [x,y,z], default [0,0,0]</span>
+            <span class="n">rotation</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span> <span class="c1"># [optional] Rotation quaternion w.r.t parent frame [w,x,y,z], default [1,0,0,0]</span>
+        <span class="c1"># axis_mask: # [optional] Define which of the 6 force/torque axes in SE3 the loadcell signals correspond to: [Fx, Fy, Fx, Mx, My, Mz].</span>
+        <span class="c1">#   # If not specified or null, assumes all 6 axes.</span>
+        <span class="c1">#   # Cannot be empty or longer than 6. Index must be between 0 and 5 included.</span>
+        <span class="c1">#   [0, 5] # Corresponds to a 2 axis loadcell [Fx,Mz]</span>
+        <span class="n">noise_one_sigma</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]</span> <span class="c1"># Noise characteristics of loadcell axes. Must have same size as axis_mask</span>
+        <span class="n">bounds</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+
+  <span class="n">perception</span><span class="p">:</span> <span class="c1"># [optional]</span>
+    <span class="n">obstacles</span><span class="p">:</span> <span class="c1"># [optional] List of obstacles</span>
+      <span class="n">interface_id</span><span class="p">:</span> <span class="o">/</span><span class="n">obstacles</span> <span class="c1"># Name of the ros topic. # Supported types: [(default) lll_msgs/ObjectArray]</span>
+      <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+      <span class="n">meshes</span><span class="p">:</span> <span class="c1"># List of meshes to be loaded</span>
+        <span class="p">[]</span>
+        <span class="c1"># - id: sphere # Mesh identifier, must be UNIQUE among all meshes</span>
+        <span class="c1">#   data: # Mesh data</span>
+        <span class="c1">#     mesh_file: sphere.stl # Path to mesh file</span>
+        <span class="c1">#     mesh_type: stl # Type of mesh file</span>
+        <span class="c1">#     mesh_units: mm # Unit of mesh file</span>
+
+  <span class="n">localization</span><span class="p">:</span> <span class="c1"># [optional]</span>
+    <span class="n">extra_topics</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+    <span class="n">process_name</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+    <span class="n">state_estimation</span><span class="p">:</span> <span class="c1"># [optional]</span>
+      <span class="n">interface_id</span><span class="p">:</span>
+        <span class="o">/</span><span class="n">state</span> <span class="c1"># Name of the ros topic.</span>
+        <span class="c1"># Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]</span>
+      <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+      <span class="n">state_size</span><span class="p">:</span> <span class="mi">5</span> <span class="c1"># Size of the state vector</span>
+      <span class="c1"># mask:</span>
+      <span class="c1">#   [0, 1, 2, 3, 5] # [optional] If only a subset of the vectorized message actually constitute the state vector</span>
+      <span class="c1">#   # use this mask to extract the relevant data : state[i] = msg_vectorized[mask[i]].</span>
+      <span class="c1">#   # Must be of size &#39;state_size&#39;, and not contain indices greater than the size of vectorized message.</span>
+      <span class="c1">#   # If not specified or null, will be [0, ..., state_size-1]</span>
+      <span class="n">bounds</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+
+    <span class="n">odometry</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span>
+          <span class="o">/</span><span class="n">odom_node_0_topic</span> <span class="c1"># Name of the ros topic.</span>
+          <span class="c1"># Supported types: [(default) nav_msgs/Odometry]</span>
+        <span class="n">odom_id</span><span class="p">:</span> <span class="n">odom_node_0</span> <span class="c1"># Display name for this odometry source, must be UNIQUE among all odometry</span>
+        <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+        <span class="n">se2_only</span><span class="p">:</span> <span class="n">true</span> <span class="c1"># [optional] Consider only SE2 projection of pose and twist (default: false)</span>
+        <span class="n">position_bounds</span><span class="p">:</span> <span class="c1"># [optional] Position part of the odometry. Components are [x,y,z] or [x,y] if se2_only==true (See bottom of this file for more info)</span>
+          <span class="n">norm_type</span><span class="p">:</span> <span class="n">none</span>
+          <span class="n">norm_upper_bound</span><span class="p">:</span> <span class="mf">1.</span>
+          <span class="n">norm_lower_bound</span><span class="p">:</span> <span class="mf">0.</span>
+          <span class="n">upper_bounds</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]</span>
+          <span class="n">lower_bounds</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]</span>
+          <span class="n">rates_upper_bounds</span><span class="p">:</span> <span class="p">[]</span>
+          <span class="n">rates_lower_bounds</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="n">orientation_bounds</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] Same fields as position. Components are [roll,pitch,yaw] or [yaw] if se2_only==true (See bottom of this file for more info)</span>
+        <span class="n">velocity_linear_bounds</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] Same fields as position. Components are [vx,vy,vz] or [vz,vy] if se2_only==true (See bottom of this file for more info)</span>
+        <span class="n">velocity_angular_bounds</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] Same fields as position. Components are [wx,wy,wz] or [wz] if se2_only==true (See bottom of this file for more info)</span>
+
+  <span class="n">path_planning</span><span class="p">:</span> <span class="c1"># [optional]</span>
+    <span class="n">extra_topics</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+    <span class="n">process_name</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+    <span class="n">paths</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span>
+          <span class="o">/</span><span class="n">desired_path</span> <span class="c1"># Name of the ros topic.</span>
+          <span class="c1"># Supported types: [(default) lll_msgs/Trajectory, nav_msgs/Path, trajectory_msgs/JointTrajectory]</span>
+        <span class="n">path_id</span><span class="p">:</span> <span class="n">main_path</span> <span class="c1"># Display name for this path, must be UNIQUE among all paths</span>
+        <span class="n">trajectory_state_size</span><span class="p">:</span> <span class="mi">7</span> <span class="c1"># Size of the trajectory state vector</span>
+        <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="nb">min</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+        <span class="c1"># state_mask:</span>
+        <span class="c1">#   [0, 1, 2, 3, 4, 5, 6] # [optional] If the path only corresponds to a subset of the state_estimation vector,</span>
+        <span class="c1">#   # use this mask to extract the relevant data : trajectory_state[i] = state_estimation[state_mask[i]].</span>
+        <span class="c1">#   # Must be of size &#39;trajectory_state_size&#39;, and not contain indices greater than state_estimation.state_size.</span>
+        <span class="c1">#   # If not specified or null, will be [0, ..., trajectory_state_size-1]</span>
+        <span class="n">tracking_error_bounds</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] Bounds on controller&#39;s tracking error : path_state - actual_state (See bottom of this file for more info)</span>
+
+  <span class="n">control</span><span class="p">:</span> <span class="c1"># [optional]</span>
+    <span class="n">extra_topics</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+    <span class="n">process_name</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+    <span class="n">setpoint_tacking_controllers</span><span class="p">:</span> <span class="c1"># PID like controllers</span>
+      <span class="o">-</span> <span class="n">controller_id</span><span class="p">:</span> <span class="n">velocity_controller</span> <span class="c1"># Display name for this controller, must be UNIQUE among all controllers</span>
+        <span class="n">state_size</span><span class="p">:</span> <span class="mi">1</span> <span class="c1"># Size of controller setpoint</span>
+        <span class="n">input_size</span><span class="p">:</span> <span class="mi">1</span> <span class="c1"># Size of control input computed by controller</span>
+        <span class="n">desired_state</span><span class="p">:</span>
+          <span class="n">interface_id</span><span class="p">:</span> <span class="o">/</span><span class="n">controller_cmd_topic</span> <span class="c1"># Name of the desired state ros topic.</span>
+          <span class="c1"># Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]</span>
+          <span class="n">mask</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># [optional] If only a subset of desired_state_topic_id vector is actually used by controller,</span>
+          <span class="c1"># use this mask to extract the relevant data : desired_state_used[i] = desired_state_received[desired_state_mask[i]]</span>
+          <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+          <span class="n">bounds</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] Bounds on desired state (See bottom of this file for more info)</span>
+
+        <span class="n">actual_state</span><span class="p">:</span>
+          <span class="n">interface_id</span><span class="p">:</span> <span class="o">/</span><span class="n">controller_state_topic</span> <span class="c1"># Name of the actual state ros topic.</span>
+          <span class="c1"># Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]</span>
+          <span class="n">mask</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] Same as desired_state_mask</span>
+          <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+          <span class="n">bounds</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] Bounds on actual state (See bottom of this file for more info)</span>
+
+        <span class="n">control_input</span><span class="p">:</span>
+          <span class="n">interface_id</span><span class="p">:</span> <span class="o">/</span><span class="n">controller_input_topic</span> <span class="c1"># Name of the control input ros topic.</span>
+          <span class="c1"># Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]</span>
+          <span class="n">mask</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] Same as desired_state_mask</span>
+          <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+          <span class="n">bounds</span><span class="p">:</span> <span class="c1"># [optional] Bounds on controller&#39;s control input (See bottom of this file for more info)</span>
+            <span class="n">norm_type</span><span class="p">:</span> <span class="n">none</span>
+            <span class="n">norm_upper_bound</span><span class="p">:</span> <span class="mf">1.</span>
+            <span class="n">norm_lower_bound</span><span class="p">:</span> <span class="mf">0.</span>
+            <span class="n">upper_bounds</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="n">lower_bounds</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="n">rates_upper_bounds</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.</span><span class="p">]</span>
+            <span class="n">rates_lower_bounds</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">]</span>
+        <span class="n">tracking_error_bounds</span><span class="p">:</span> <span class="c1"># [optional] Bounds on controller&#39;s tracking error : desired_state - actual_state (See bottom of this file for more info)</span>
+          <span class="n">norm_type</span><span class="p">:</span> <span class="n">none</span>
+          <span class="n">norm_upper_bound</span><span class="p">:</span> <span class="mf">1.</span>
+          <span class="n">norm_lower_bound</span><span class="p">:</span> <span class="mf">0.</span>
+          <span class="n">upper_bounds</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.</span><span class="p">]</span>
+          <span class="n">lower_bounds</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">]</span>
+          <span class="n">rates_upper_bounds</span><span class="p">:</span> <span class="p">[]</span>
+          <span class="n">rates_lower_bounds</span><span class="p">:</span> <span class="p">[]</span>
+
+    <span class="n">actuators</span><span class="p">:</span> <span class="c1"># Robot actuation</span>
+      <span class="n">combined</span><span class="p">:</span> <span class="c1"># Combined actuation vector</span>
+        <span class="n">interface_id</span><span class="p">:</span>
+          <span class="o">/</span><span class="n">control_input</span> <span class="c1"># Name of the ros topic publishing the complete robot actuation vector.</span>
+          <span class="c1"># Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]</span>
+        <span class="n">input_size</span><span class="p">:</span> <span class="mi">3</span> <span class="c1"># Size of the combined input vector</span>
+        <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+        <span class="n">bounds</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+        <span class="c1"># mask:</span>
+        <span class="c1">#   [0,1,3] # [optional] If only a subset of the vectorized message actually constitute the combined input vector</span>
+        <span class="c1">#   # use this mask to extract the relevant data : input[i] = msg_vectorized[mask[i]].</span>
+        <span class="c1">#   # Must be of size &#39;input_size&#39;, and not contain indices greater than the size of the vectorized message.</span>
+        <span class="c1">#   # If not specified or null, will be [0, ..., input_size-1]</span>
+
+    <span class="n">supervisors</span><span class="p">:</span> <span class="c1"># 3Laws AI Supervisors</span>
+      <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span> <span class="o">/</span><span class="n">main_supervisor_topic</span> <span class="c1"># Name of the supervisor data ros topic.</span>
+        <span class="n">supervisor_id</span><span class="p">:</span> <span class="n">main_supervisor</span> <span class="c1"># Display name for this supervisor, must be UNIQUE among all supervisor</span>
+        <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+
+  <span class="n">extras</span><span class="p">:</span> <span class="c1"># [optional]</span>
+    <span class="n">passthrough_metrics</span><span class="p">:</span> <span class="c1"># Generic passthrough for scalar metric signals</span>
+      <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span>
+          <span class="o">/</span><span class="n">metric_1_topic</span> <span class="c1"># Name of the ros topic.</span>
+          <span class="c1"># Supported types: [(default) std_msgs/Float64, std_msgs/Float32, std_msgs/Bool, std_msgs/Char, std_msgs/Byte, std_msgs/IntXX, std_msgs/UIntXX]</span>
+        <span class="n">metric_id</span><span class="p">:</span> <span class="n">metric_1</span> <span class="c1"># Display name for this metric, must be UNIQUE among all passthrough metrics</span>
+        <span class="n">metric_group_id</span><span class="p">:</span>
+          <span class="n">position</span> <span class="c1"># [optional] Group this signal belongs to.</span>
+          <span class="c1"># Metrics of the same group are plotted on the same graph in 3laws.app</span>
+
+    <span class="n">clocks</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span>
+          <span class="o">/</span><span class="n">custom_clock</span> <span class="c1"># Name of the ros topic.</span>
+          <span class="c1"># Supported types: [(default) rosgraph_msgs/Clock]</span>
+        <span class="n">clock_id</span><span class="p">:</span> <span class="n">my_clock</span> <span class="c1"># Display name for this clock, must be UNIQUE among all clocks</span>
+        <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+
+    <span class="n">signals</span><span class="p">:</span> <span class="c1"># Generic floating point multidimensional signal values sanity and bounds checking</span>
+      <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span>
+          <span class="o">/</span><span class="n">test_signal_topic</span> <span class="c1"># Name of the ros topic.</span>
+          <span class="c1"># Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]</span>
+        <span class="n">sender_id</span><span class="p">:</span> <span class="n">test_signal_node</span> <span class="c1"># Display name of sender node</span>
+        <span class="n">signal_id</span><span class="p">:</span> <span class="n">test_signal</span> <span class="c1"># Display name of this signal, &quot;&lt;sender_id&gt;.&lt;signal_id&gt;&quot; must form a UNIQUE identifier among all signals</span>
+        <span class="n">signal_size</span><span class="p">:</span> <span class="mi">1</span> <span class="c1"># Size of this signal</span>
+        <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+        <span class="c1"># mask:</span>
+        <span class="c1">#   [2] # [optional] If only a subset of vectorized message actually constitute the signal vector</span>
+        <span class="c1">#   # use this mask to extract the relevant data : signal[i] = msg_vectorized[mask[i]].</span>
+        <span class="c1">#   # Must be of size &#39;signal_size&#39;, and not contain indices greater than the size of the vectorized message.</span>
+        <span class="c1">#   # If not specified or null, will be [0, ..., signal_size-1]</span>
+        <span class="n">bounds</span><span class="p">:</span> <span class="o">~</span> <span class="c1"># [optional] (See bottom of this file for more info)</span>
+
+    <span class="n">nodes</span><span class="p">:</span> <span class="c1"># Generic node health checking metric</span>
+      <span class="o">-</span> <span class="n">node_id</span><span class="p">:</span> <span class="n">test_node</span> <span class="c1"># Display name of node, must be UNIQUE among all nodes</span>
+        <span class="c1"># text_log_interface_id:</span>
+        <span class="c1">#   /test_node_log # [optional] Name of the ros topic publishing log info for that node.</span>
+        <span class="c1">#   # Supported types: [(default) rcl_interfaces/Log]</span>
+        <span class="c1"># process_name: # [optional] (See bottom of this file for more info)</span>
+        <span class="c1">#   test_node_exec.</span>
+        <span class="n">topics</span><span class="p">:</span> <span class="c1"># List of topics published by the node (only available in ros2 humble and up)</span>
+          <span class="o">-</span> <span class="n">interface_id</span><span class="p">:</span>
+              <span class="o">/</span><span class="n">test_node_topic_1</span> <span class="c1"># Name of the ros topic. Associated &#39;interface.message_type_map.&lt;interface_id&gt;&#39; must be specified.</span>
+              <span class="c1"># Supported types: [builtin_interfaces/*, geometry_msgs/*, lll_msgs/*, nav_msgs/*, rcl_interfaces/*, rosgraph_msgs/*, sensor_msgs/*, std_msgs/*, trajectory_msgs/*, visualization_msgs/*]</span>
+            <span class="n">topic_id</span><span class="p">:</span> <span class="n">test_node_topic_1</span> <span class="c1"># Display name for this topic, must be UNIQUE among all topics of each node</span>
+            <span class="n">signal_min_rate</span><span class="p">:</span> <span class="mi">1</span><span class="n">s</span> <span class="c1"># Maximum allowed duration without receiving data</span>
+      <span class="o">-</span> <span class="n">node_id</span><span class="p">:</span> <span class="n">rosout</span>
+        <span class="n">text_log_interface_id</span><span class="p">:</span> <span class="o">/</span><span class="n">rosout</span> <span class="c1"># If equal to &#39;/rosout&#39;, uses &#39;name&#39; field of incoming rcl_interfaces/Log message as node_id for text_log message</span>
+        <span class="n">topics</span><span class="p">:</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, 3Laws Robotics Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: beta
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+       <strong> 
+        <dd><a href="/3laws/en/beta/index.html">beta</a></dd>
+        
+      </strong> 
+      
+      
+        <dd><a href="/3laws/en/alpha/index.html">alpha</a></dd>
+        
+      
+    </dl>
+    <dl>
+      <dt>Downloads</dt>
+      <dd><a href="/3laws/en/beta/3laws_manual.pdf">PDF</a></dd>
+    </dl>
+    <hr />
+    Continuous documentation hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+
+  </div>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
