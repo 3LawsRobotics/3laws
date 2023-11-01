@@ -1,6 +1,6 @@
 {
-  "latest": "0.9.4",
+  "latest": "beta",
   "list": {
-    "refs/tags/0.9.4": "0.9.4"
+    "refs/heads/doc": "beta"
   }
 }

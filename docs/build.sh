@@ -4,7 +4,10 @@
 set -e
 
 # Prepare paths
-srcDir="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+srcDir="$(
+  cd -- "$(dirname "$0")" >/dev/null 2>&1
+  pwd -P
+)"
 mkdir -p gh-pages
 outDir="$PWD/gh-pages"
 mkdir -p build
@@ -23,11 +26,10 @@ echo "Version HTML: $versionsHtml"
 echo ""
 
 # Clone
-if [ -d "src" ]
-then
-    rm -rf src
+if [ -d "src" ]; then
+  rm -rf src
 fi
-git clone --single-branch --bare --branch master https://token:${GITHUB_TOKEN}@github.com/3LawsRobotics/3laws.git src
+git clone --single-branch --bare --branch master "https://token:${GITHUB_TOKEN}@github.com/3LawsRobotics/3laws.git" src
 cd src
 
 # Load versions
@@ -36,37 +38,36 @@ eval "$versionLatestDef"
 
 versionsRaw=$(cat $versionsJson | jq '.list')
 declare -A versions
-versionsContent=$(jq -r '. | to_entries | .[] | "[\"" + .key + "\"]=" + (.value | @sh)' <<< "$versionsRaw")
+versionsContent=$(jq -r '. | to_entries | .[] | "[\"" + .key + "\"]=" + (.value | @sh)' <<<"$versionsRaw")
 versionsDef="versions=($versionsContent)"
 eval "$versionsDef"
 
 echo "Versions: $versionsContent"
 echo "Version latest: $versionLatest"
-echo ""
+echo "${versions[@]}"
 
 # Create doc for each version
-for branch in "${!versions[@]}"
-do
+for branch in "${!versions[@]}"; do
   version="${versions[$branch]}"
 
   echo -e "Processing branch: $branch, version: $version \n"
 
   export DOC_VERSION=$version
 
-  git fetch origin $branch:$branch
-  git worktree add -f "$buildDir/$version" $branch
-  cp $configFile $buildDir/$version/docs
-  install -D $versionsJson $buildDir/$version/docs/metadata/versions.json
-  install -D $versionsHtml $buildDir/$version/docs/_templates/versions.html
+  git fetch origin "$branch:$branch"
+  git worktree add -f "$buildDir/$version" "$branch"
+  cp "$configFile" "$buildDir/$version/docs"
+  install -D "$versionsJson" "$buildDir/$version/docs/metadata/versions.json"
+  install -D "$versionsHtml" "$buildDir/$version/docs/_templates/versions.html"
   workDir=$buildDir/$version/docs
-  sphinx-build -b html -d $workDir/_build $workDir $outDir/en/$version
-  sphinx-build -b rinoh -d $workDir/_build/ $workDir $workDir/_build/pdf
-  cp $workDir/_build/pdf/3laws.pdf $outDir/en/$version/3laws_manual.pdf
+  sphinx-build -b html -d "$workDir/_build" "$workDir" "$outDir/en/$version"
+  sphinx-build -b rinoh -d "$workDir/_build/" "$workDir" "$workDir/_build/pdf"
+  cp "$workDir/_build/pdf/3laws.pdf" "$outDir/en/$version/3laws_manual.pdf"
 done
 
 # Copy and update main index.html
-cp $srcDir/index.html $outDir
-sed -i s/@LATEST_VERSION@/$versionLatest/g $outDir/index.html
+cp "$srcDir/index.html" "$outDir"
+sed -i s/@LATEST_VERSION@/"$versionLatest"/g "$outDir"/index.html
 
 # Create .nojekyll file so that github pages doesn't complain about folders starting with '_'
-touch $outDir/.nojekyll
+touch "$outDir/.nojekyll"

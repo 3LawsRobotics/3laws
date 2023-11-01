@@ -3,23 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to 3Laws's documentation!!
-=================================
+Welcome to 3Laws's documentation!
+==================================
 
 .. toctree::
    :maxdepth: 2
 
    sources/introduction
+   sources/robot_diagnostic_module/index
 
-.. toctree::
-   :maxdepth: 2
-   :caption: AI Supervisor
 
-   sources/ai_supervisor/getting_started
 
-Indices and tables
-==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
