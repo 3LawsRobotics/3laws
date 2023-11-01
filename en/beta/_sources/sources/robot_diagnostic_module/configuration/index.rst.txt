@@ -35,7 +35,7 @@ The configuration has **4** distinct parts
 .. toctree::
    :maxdepth: 2
 
-    credentials/credentials
-    diagnostic_config/diagnostic_config
-    interface/interface
-    robot_description/robot_description
+   credentials/credentials
+   diagnostic_config/diagnostic_config
+   interface/interface
+   robot_description/robot_description
