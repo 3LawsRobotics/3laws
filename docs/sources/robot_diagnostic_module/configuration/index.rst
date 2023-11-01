@@ -14,6 +14,7 @@ The configuration can be build alongside your robot so that it does not represen
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
 
    credentials/credentials
    diagnostic_config/diagnostic_config
