@@ -12,8 +12,16 @@ The **Robot Diagnostic Module** is shipped with a configuration template that ca
 In order to have the more user friendly configuration experience, a lot of the fields are optional.
 The configuration can be build alongside your robot so that it does not represent a burden for the developer.
 
+.. toctree::
+   :maxdepth: 2
+
+   credentials/credentials
+   diagnostic_config/diagnostic_config
+   interface/interface
+   robot_description/robot_description
+
 Scheme
-======
+-------
 
 The configuration has **4** distinct parts
 
@@ -32,10 +40,3 @@ The configuration has **4** distinct parts
 
   And this last part allow the user to specify interface specific options such has ROS Quality of Service
 
-.. toctree::
-   :maxdepth: 2
-
-   credentials/credentials
-   diagnostic_config/diagnostic_config
-   interface/interface
-   robot_description/robot_description
