@@ -1,14 +1,35 @@
-Getting Started
+Installation
 ===============
 
-The **Robot Diagnostic Module (RDM) of 3LawsRobotics** is a powerful tool to gather analytics about your robot.
-It provides low level metrics such as CPU usage, signal delays but also high level safety critical metrics
-like safety envelope violation, planning inconsistency or sensor damage detection.
+The Robot Diagnostic Module is distributed as a debian package.
+A package is available for each of the following configuration
 
-All of these metrics can be viewed on your web browser at `3laws.app <http://3laws.app/>`_.
++-----------------------+--------------+---------------------+---------------+
+| Ubuntu Distribution   | ROS1 version |    ROS2 version     | Architecture  |
++=======================+==============+=====================+===============+
+|        22.04          |     N/A      |     Humble/Iron     | amd64/arm64v8 |
++-----------------------+--------------+---------------------+---------------+
+|        20.04          |     Noetic   |     Galactic/Foxy   | amd64/arm64v8 |
++-----------------------+--------------+---------------------+---------------+
+|        18.04          |     Melodic  |          N/A        | amd64/arm64v8 |
++-----------------------+--------------+---------------------+---------------+
 
-In order to get your account setup and use freely this RDM, please contact contact@3lawsrobotics.com
+Here is the one liner that will download a public script that will, based on your system download the right package.
 
-This product is still at a Beta development stage. New features are developed every month and some breaking changes can still happened.
-The 3LawsRobotics Team is available to answer your question.
+``sudo bash -c "$(wget -qO - https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh)"``
+
+If you want to install a specific package in a non interactive mode, here is the process:
+
+- Download the script:
+
+  ``wget https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh``
+
+- Make it executable
+
+  ``chmod +x install.sh``
+
+- Run it with your arguments
+
+  ``sudo ./install.sh [-hyf] [-r <ROS_DISTRO>] [-a <ARCH>] [-v <UBUNTU_VERSION>]``
+  if ``-yf -r <ROS_DISTRO> -a <ARCH> -v <UBUNTU_VERSION>`` specified, the script is non interactive
 

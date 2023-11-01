@@ -1,14 +1,35 @@
-Getting Started
+Configuration
 ===============
 
-The **Robot Diagnostic Module (RDM) of 3LawsRobotics** is a powerful tool to gather analytics about your robot.
-It provides low level metrics such as CPU usage, signal delays but also high level safety critical metrics
-like safety envelope violation, planning inconsistency or sensor damage detection.
+The configuration is written inside a `YAML <https://yaml.org/>`_. file. This file can be stored anywhere but the default folder is
+``/opt/3lawsRoboticsInc/robot_diagnostic_module/config``
 
-All of these metrics can be viewed on your web browser at `3laws.app <http://3laws.app/>`_.
+Other path can be specified in the command line launch command
 
-In order to get your account setup and use freely this RDM, please contact contact@3lawsrobotics.com
+The **Robot Diagnostic Module** is shipped with a configuration template that can be found here
+ ``/opt/3lawsRoboticsInc/robot_diagnostic_module/config/template_config.yaml``
 
-This product is still at a Beta development stage. New features are developed every month and some breaking changes can still happened.
-The 3LawsRobotics Team is available to answer your question.
+In order to have the more user friendly configuration experience, a lot of the fields are optional.
+The configuration can be build alongside your robot so that it does not represent a burden for the developer.
+
+Scheme
+======
+
+The configuration has **4** distinct parts
+
+- **credentials**:
+
+  This part is here to specify the credentials to access the databases.
+  These credentials are provided to you by email once your 3LawsRobotics account is created
+- **robot_description**:
+
+  This part is the more important one. It describe your robot desired behavior,
+  the interface data stream access for the RDM to monitor.
+- **diagnostic_config**:
+
+  Here are specified the diagnostic specific options such has the criticality of a certain event or the threshold above which a incident is flagged
+- **interface**:
+
+  And this last part allow the user to specify interface specific options such has ROS Quality of Service
+
 

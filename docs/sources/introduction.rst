@@ -1,5 +1,5 @@
 Introduction
 ============
 
-Here is the public documentation of the 3LawsRobotics Products.
+Here is the public documentation for 3LawsRobotics Products.
 
