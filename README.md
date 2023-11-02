@@ -20,7 +20,7 @@
 
 This repository purpose is to offer an easy access to the binary files of the 3Laws Robotics products.
 The first public release of the [**Robot Diagnostic Module**](#Robot-diagnostic-module-installation)
- is already available at a beta state. To get more information about this product, please contact [contact@3lawsrobotics.com](contact@3lawsrobotics.com)
+ is already available at a beta state. To get more information about this product, please contact [support@3lawsrobotics.com](support@3lawsrobotics.com)
 
 Documentation and Tutorial will soon be available.
 

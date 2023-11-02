@@ -7,7 +7,7 @@ like safety envelope violation, planning inconsistency or sensor damage detectio
 
 All of these metrics can be viewed on your web browser at `3laws.app <https://3laws.app/>`_.
 
-In order to get your account setup and use freely this RDM, please contact contact@3lawsrobotics.com
+In order to get your account setup and use freely this RDM, please contact support@3lawsrobotics.com
 
 This product is still at a Beta development stage. New features are developed every month and some breaking changes can still happened.
 The 3LawsRobotics Team is available to answer your question.
