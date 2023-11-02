@@ -74,47 +74,64 @@ Available shape types:
 The kinematic model of the robot defines its geometry. The geometry is described by a base frame,
 a shape, and the pose of that shape in the base frame. We currently support the following shapes:
 
-- Point:
+- **Point**:
+
+.. code-block:: yaml
+
   shape_params: ~
 
-- Box:
+- **Box**:
+
+.. code-block:: yaml
 
   shape_params:
     x_size: <Float>  Total length of the box along x axis
     y_size: <Float>  Total length of the box along y axis
     z_size: <Float>  Total length of the box along z axis_mask
 
-- Sphere:
+- **Sphere**:
+
+.. code-block:: yaml
 
   shape_params:
     radius: <Float>  Radius of the sphere
 
-- Ellipsoid
+- **Ellipsoid**:
+
+.. code-block:: yaml
 
   shape_params:
     radius_x: <Float>  Semi x-axis length
     radius_y: <Float>  Semi y-axis length
     radius_z: <Float>  Semi z-axis length
 
-- Capsule:
+- **Capsule**:
+
+.. code-block:: yaml
 
   shape_params:
     radius: <Float>  Radius of the capsule
     length: <Float>  Length of the capsule
 
-- Cone:
+- **Cone**:
+
+.. code-block:: yaml
 
   shape_params:
     radius: <Float>  Radius of the cone
     length: <Float>  Length of the cone
 
-- Cylinder:
+- **Cylinder**:
+
+.. code-block:: yaml
 
   shape_params:
     radius: <Float>  Radius of the cylinder
     length: <Float>  Length of the cylinder
 
-- Mesh:
+- **Mesh**:
+
+.. code-block:: yaml
 
   shape_params:
     mesh_file: /opt/mesh.stl  Path to mesh file
@@ -137,8 +154,8 @@ Each dynamical model type has its own set of states, inputs, and parameters:
 
     parameters:
 
-    - tau_vel -> time constant of the 1st order tracking response in linear velocity (1/s) (must be strictly positive)
-    - tau_yaw_vel -> time constant of the 1st order tracking response in angular velocity (1/s) (must be strictly positive)
+    - tau_vel: time constant of the 1st order tracking response in linear velocity (1/s) (must be strictly positive)
+    - tau_yaw_vel: time constant of the 1st order tracking response in angular velocity (1/s) (must be strictly positive)
 
   - bicycle: Dynamical model for a 2 wheels or 4 wheel but with coupled front wheel steering vehicle over SE2, with first order tracking response of steering angle and origin velocity magnitude.
 
@@ -148,10 +165,10 @@ Each dynamical model type has its own set of states, inputs, and parameters:
 
     parameters:
 
-    - wheel_dx -> Distance between front and back wheels (m) (must be strictly positive)
-    - origin_dx -> Position of vehicle's origin w.r.t back wheels (m) (must be positive)
-    - tau_vel -> time constant of the 1st order tracking response in linear velocity (1/s) (must be strictly positive)
-    - tau_steer -> time constant of the 1st order tracking response in angular velocity (1/s) (must be strictly positive)
+    - wheel_dx: Distance between front and back wheels (m) (must be strictly positive)
+    - origin_dx: Position of vehicle's origin w.r.t back wheels (m) (must be positive)
+    - tau_vel: time constant of the 1st order tracking response in linear velocity (1/s) (must be strictly positive)
+    - tau_steer: time constant of the 1st order tracking response in angular velocity (1/s) (must be strictly positive)
 
 
 
