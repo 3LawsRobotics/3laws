@@ -195,6 +195,9 @@ Another information can be added to a node: its process_name. When a process nam
 Robot Autonomy stack
 --------------------
 
+Mission Manager
+^^^^^^^^^^^^^^^^
+
 .. code-block:: yaml
 
     mission_manager:
@@ -211,6 +214,11 @@ Robot Autonomy stack
           sender_id: state_machine
           state_id: search_mode
           signal_min_rate: 1s
+
+Path Planning
+^^^^^^^^^^^^^
+
+.. code-block:: yaml
 
     path_planning:
       extra_topics: ~ # [optional]
@@ -230,10 +238,14 @@ Robot Autonomy stack
           tracking_error_bounds: ~ # [optional] Bounds on controller's tracking error : path_state - actual_state
 
 
-Robot perception
+Robot Perception
 ----------------
 
+Sensors:
+^^^^^^^^
+
 .. code-block:: yaml
+
 
   sensors:
       extra_topics: ~ # [optional]
@@ -242,89 +254,126 @@ Robot perception
       cameras: [] # Coming soon!
       gps: [] # Coming soon!
       imus: [] # Coming soon!
-      laserscans: # Planar laser scanners
-        - interface_id:
-            /laserscan_1_topic # Name of the ros topic.
-            # Supported types: [(default) sensor_msgs/LaserScan]
-          sensor_id: laserscan_1 # Display name for this laserscan, must be UNIQUE among all laserscans
-          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-          specs:
-            n_rays: 1000 # Expected number of rays in the laserscan
-            angle_min: -3.14 # Minimum ray angle
-            angle_max: 3.14 # Maximum ray angle
-            range_min: 0. # Minimum ray range
-            range_max: 1000. # Maximum ray range
-            noise_one_sigma: 0.025 # Expected standard_error of the sensor (given by the manufacturer, often like: precision = +-2sigma)
-          transform: # Specification of frame w.r.t which the measurement is expressed
-            parent_frame_id: robot # Id of parent frame
-            pose: # [optional] Pose w.r.t parent frame
-              translation: [0., 0., 0.] # [optional] Translation w.r.t parent frame [x,y,z], default [0,0,0]
-              rotation: [1., 0., 0., 0.] # [optional] Rotation quaternion w.r.t parent frame [w,x,y,z], default [1,0,0,0]
       lidars: [] # Coming soon!
-      loadcells: # Force and torque measurement sensor, 6 axis by default
-        - interface_id:
-            /end_effector_wrench # Name of the ros topic.
-            # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-          sensor_id: end_effector_loadcell # Display name for this loadcell, must be UNIQUE among all loadcells
-          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-          transform: # Specification of frame w.r.t which the measurement is expressed
-            parent_frame_id: robot # Id of parent frame
-            pose: # [optional] Pose w.r.t parent frame
-              translation: [0., 0., 0.] # [optional] Translation w.r.t parent frame [x,y,z], default [0,0,0]
-              rotation: [1., 0., 0., 0.] # [optional] Rotation quaternion w.r.t parent frame [w,x,y,z], default [1,0,0,0]
-          # axis_mask: # [optional] Define which of the 6 force/torque axes in SE3 the loadcell signals correspond to: [Fx, Fy, Fx, Mx, My, Mz].
-          #   # If not specified or null, assumes all 6 axes.
-          #   # Cannot be empty or longer than 6. Index must be between 0 and 5 included.
-          #   [0, 5] # Corresponds to a 2 axis loadcell [Fx,Mz]
-          noise_one_sigma: [1., 1., 1., 1., 1., 1.] # Noise characteristics of loadcell axes. Must have same size as axis_mask
-          bounds: ~ # [optional]
+      laserscans: # See next section
+      loadcells: # See next section
 
-    perception:
-      obstacles: # [optional] List of obstacles
-        interface_id: /obstacles # Name of the ros topic. # Supported types: [(default) lll_msgs/ObjectArray]
-        signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-        meshes: # List of meshes to be loaded
-          []
-          # - id: sphere # Mesh identifier, must be UNIQUE among all meshes
-          #   data: # Mesh data
-          #     mesh_file: sphere.stl # Path to mesh file
-          #     mesh_type: stl # Type of mesh file
-          #     mesh_units: mm # Unit of mesh file
+Laserscan
+"""""""""
 
-    localization:
-      extra_topics: ~ # [optional]
-      process_name: ~ # [optional]
-      state_estimation: # [optional]
-        interface_id:
-          /state # Name of the ros topic.
-          # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-        signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-        state_size: 5 # Size of the state vector
-        # mask:
-        #   [0, 1, 2, 3, 5] # [optional] If only a subset of the vectorized message actually constitute the state vector
-        #   # use this mask to extract the relevant data : state[i] = msg_vectorized[mask[i]].
-        #   # Must be of size 'state_size', and not contain indices greater than the size of vectorized message.
-        #   # If not specified or null, will be [0, ..., state_size-1]
-        bounds: ~ # [optional]
+.. code-block:: yaml
 
-      odometry:
-        - interface_id:
-            /odom_node_0_topic # Name of the ros topic.
-            # Supported types: [(default) nav_msgs/Odometry]
-          odom_id: odom_node_0 # Display name for this odometry source, must be UNIQUE among all odometry
-          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-          se2_only: true # [optional] Consider only SE2 projection of pose and twist (default: false)
-          position_bounds: # [optional] Position part of the odometry. Components are [x,y,z] or [x,y] if se2_only==true
-            norm_type: none
-            norm_upper_bound: 1.
-            norm_lower_bound: 0.
-            upper_bounds: [1., 1.]
-            lower_bounds: [-1., -1.]
-            rates_upper_bounds: []
-            rates_lower_bounds: []
-          orientation_bounds: ~ # [optional] Same fields as position. Components are [roll,pitch,yaw] or [yaw] if se2_only==true
-          velocity_linear_bounds: ~ # [optional] Same fields as position. Components are [vx,vy,vz] or [vz,vy] if se2_only==true
-          velocity_angular_bounds: ~ # [optional] Same fields as position. Components are [wx,wy,wz] or [wz] if se2_only==true
+  laserscans: # Planar laser scanners
+    - interface_id:
+        /laserscan_1_topic # Name of the ros topic.
+        # Supported types: [(default) sensor_msgs/LaserScan]
+      sensor_id: laserscan_1 # Display name for this laserscan, must be UNIQUE among all laserscans
+      signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+      specs:
+        n_rays: 1000 # Expected number of rays in the laserscan
+        angle_min: -3.14 # Minimum ray angle
+        angle_max: 3.14 # Maximum ray angle
+        range_min: 0. # Minimum ray range
+        range_max: 1000. # Maximum ray range
+        noise_one_sigma: 0.025 # Expected standard_error of the sensor (given by the manufacturer, often like: precision = +-2sigma)
+      transform: # Specification of frame w.r.t which the measurement is expressed
+        parent_frame_id: robot # Id of parent frame
+        pose: # [optional] Pose w.r.t parent frame
+          translation: [0., 0., 0.] # [optional] Translation w.r.t parent frame [x,y,z], default [0,0,0]
+          rotation: [1., 0., 0., 0.] # [optional] Rotation quaternion w.r.t parent frame [w,x,y,z], default [1,0,0,0]
+
+Loadcells
+"""""""""
+
+.. code-block:: yaml
+
+  loadcells: # Force and torque measurement sensor, 6 axis by default
+    - interface_id:
+        /end_effector_wrench # Name of the ros topic.
+        # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+      sensor_id: end_effector_loadcell # Display name for this loadcell, must be UNIQUE among all loadcells
+      signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+      transform: # Specification of frame w.r.t which the measurement is expressed
+        parent_frame_id: robot # Id of parent frame
+        pose: # [optional] Pose w.r.t parent frame
+          translation: [0., 0., 0.] # [optional] Translation w.r.t parent frame [x,y,z], default [0,0,0]
+          rotation: [1., 0., 0., 0.] # [optional] Rotation quaternion w.r.t parent frame [w,x,y,z], default [1,0,0,0]
+      # axis_mask: # [optional] Define which of the 6 force/torque axes in SE3 the loadcell signals correspond to: [Fx, Fy, Fx, Mx, My, Mz].
+      #   # If not specified or null, assumes all 6 axes.
+      #   # Cannot be empty or longer than 6. Index must be between 0 and 5 included.
+      #   [0, 5] # Corresponds to a 2 axis loadcell [Fx,Mz]
+      noise_one_sigma: [1., 1., 1., 1., 1., 1.] # Noise characteristics of loadcell axes. Must have same size as axis_mask
+      bounds: ~ # [optional]
+
+Perception
+^^^^^^^^^^
+
+.. code-block:: yaml
+
+  perception:
+    obstacles: # [optional] List of obstacles
+      interface_id: /obstacles # Name of the ros topic. # Supported types: [(default) lll_msgs/ObjectArray]
+      signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+      meshes: # List of meshes to be loaded
+        []
+        # - id: sphere # Mesh identifier, must be UNIQUE among all meshes
+        #   data: # Mesh data
+        #     mesh_file: sphere.stl # Path to mesh file
+        #     mesh_type: stl # Type of mesh file
+        #     mesh_units: mm # Unit of mesh file
+
+
+Localization
+^^^^^^^^^^
+
+.. code-block:: yaml
+
+  localization:
+    extra_topics: ~ # [optional]
+    process_name: ~ # [optional]
+    state_estimation: # [optional] See next section
+    odometry: # [optional] See next section
+
+State Estimation
+""""""""""""""""
+
+.. code-block:: yaml
+  state_estimation:
+    interface_id:
+      /state # Name of the ros topic.
+      # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+    signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+    state_size: 5 # Size of the state vector
+    # mask:
+    #   [0, 1, 2, 3, 5] # [optional] If only a subset of the vectorized message actually constitute the state vector
+    #   # use this mask to extract the relevant data : state[i] = msg_vectorized[mask[i]].
+    #   # Must be of size 'state_size', and not contain indices greater than the size of vectorized message.
+    #   # If not specified or null, will be [0, ..., state_size-1]
+    bounds: ~ # [optional]
+
+Odometry
+""""""""""
+
+.. code-block:: yaml
+
+  odometry:
+    - interface_id:
+        /odom_node_0_topic # Name of the ros topic.
+        # Supported types: [(default) nav_msgs/Odometry]
+      odom_id: odom_node_0 # Display name for this odometry source, must be UNIQUE among all odometry
+      signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+      se2_only: true # [optional] Consider only SE2 projection of pose and twist (default: false)
+      position_bounds: # [optional] Position part of the odometry. Components are [x,y,z] or [x,y] if se2_only==true
+        norm_type: none
+        norm_upper_bound: 1.
+        norm_lower_bound: 0.
+        upper_bounds: [1., 1.]
+        lower_bounds: [-1., -1.]
+        rates_upper_bounds: []
+        rates_lower_bounds: []
+      orientation_bounds: ~ # [optional] Same fields as position. Components are [roll,pitch,yaw] or [yaw] if se2_only==true
+      velocity_linear_bounds: ~ # [optional] Same fields as position. Components are [vx,vy,vz] or [vz,vy] if se2_only==true
+      velocity_angular_bounds: ~ # [optional] Same fields as position. Components are [wx,wy,wz] or [wz] if se2_only==true
 
 
 Robot control
@@ -335,65 +384,87 @@ Robot control
   control:
     extra_topics: ~ # [optional]
     process_name: ~ # [optional]
-    setpoint_tacking_controllers: # PID like controllers
-      - controller_id: velocity_controller # Display name for this controller, must be UNIQUE among all controllers
-        state_size: 1 # Size of controller setpoint
-        input_size: 1 # Size of control input computed by controller
-        desired_state:
-          interface_id: /controller_cmd_topic # Name of the desired state ros topic.
-          # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-          mask: [0] # [optional] If only a subset of desired_state_topic_id vector is actually used by controller,
-          # use this mask to extract the relevant data : desired_state_used[i] = desired_state_received[desired_state_mask[i]]
-          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-          bounds: ~ # [optional] Bounds on desired state
+    setpoint_tacking_controllers: # See next section
+    actuators: # See next section
+    supervisors: # See next section
 
-        actual_state:
-          interface_id: /controller_state_topic # Name of the actual state ros topic.
-          # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-          mask: ~ # [optional] Same as desired_state_mask
-          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-          bounds: ~ # [optional] Bounds on actual state
+SetPoint Tacking Controller:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        control_input:
-          interface_id: /controller_input_topic # Name of the control input ros topic.
-          # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-          mask: ~ # [optional] Same as desired_state_mask
-          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-          bounds: # [optional] Bounds on controller's control input
-            norm_type: none
-            norm_upper_bound: 1.
-            norm_lower_bound: 0.
-            upper_bounds: []
-            lower_bounds: []
-            rates_upper_bounds: [1.]
-            rates_lower_bounds: [-1.]
-        tracking_error_bounds: # [optional] Bounds on controller's tracking error : desired_state - actual_state
+.. code-block:: yaml
+
+  setpoint_tacking_controllers: # PID like controllers
+    - controller_id: velocity_controller # Display name for this controller, must be UNIQUE among all controllers
+      state_size: 1 # Size of controller setpoint
+      input_size: 1 # Size of control input computed by controller
+      desired_state:
+        interface_id: /controller_cmd_topic # Name of the desired state ros topic.
+        # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+        mask: [0] # [optional] If only a subset of desired_state_topic_id vector is actually used by controller,
+        # use this mask to extract the relevant data : desired_state_used[i] = desired_state_received[desired_state_mask[i]]
+        signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+        bounds: ~ # [optional] Bounds on desired state
+
+      actual_state:
+        interface_id: /controller_state_topic # Name of the actual state ros topic.
+        # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+        mask: ~ # [optional] Same as desired_state_mask
+        signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+        bounds: ~ # [optional] Bounds on actual state
+
+      control_input:
+        interface_id: /controller_input_topic # Name of the control input ros topic.
+        # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+        mask: ~ # [optional] Same as desired_state_mask
+        signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+        bounds: # [optional] Bounds on controller's control input
           norm_type: none
           norm_upper_bound: 1.
           norm_lower_bound: 0.
-          upper_bounds: [1.]
-          lower_bounds: [-1.]
-          rates_upper_bounds: []
-          rates_lower_bounds: []
+          upper_bounds: []
+          lower_bounds: []
+          rates_upper_bounds: [1.]
+          rates_lower_bounds: [-1.]
 
-    actuators: # Robot actuation
-      combined: # Combined actuation vector
-        interface_id:
-          /control_input # Name of the ros topic publishing the complete robot actuation vector.
-          # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-        input_size: 3 # Size of the combined input vector
-        signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-        bounds: ~ # [optional]
-        # mask:
-        #   [0,1,3] # [optional] If only a subset of the vectorized message actually constitute the combined input vector
-        #   # use this mask to extract the relevant data : input[i] = msg_vectorized[mask[i]].
-        #   # Must be of size 'input_size', and not contain indices greater than the size of the vectorized message.
-        #   # If not specified or null, will be [0, ..., input_size-1]
+      tracking_error_bounds: # [optional] Bounds on controller's tracking error : desired_state - actual_state
+        norm_type: none
+        norm_upper_bound: 1.
+        norm_lower_bound: 0.
+        upper_bounds: [1.]
+        lower_bounds: [-1.]
+        rates_upper_bounds: []
+        rates_lower_bounds: []
 
-    supervisors: # 3Laws AI Supervisors
-      - interface_id: /main_supervisor_topic # Name of the supervisor data ros topic.
-        supervisor_id: main_supervisor # Display name for this supervisor, must be UNIQUE among all supervisor
-        signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+
+Actuators
+^^^^^^^^^^
+
+.. code-block:: yaml
+
+  actuators: # Robot actuation
+    combined: # Combined actuation vector
+      interface_id:
+        /control_input # Name of the ros topic publishing the complete robot actuation vector.
+        # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+      input_size: 3 # Size of the combined input vector
+      signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+      bounds: ~ # [optional]
+      # mask:
+      #   [0,1,3] # [optional] If only a subset of the vectorized message actually constitute the combined input vector
+      #   # use this mask to extract the relevant data : input[i] = msg_vectorized[mask[i]].
+      #   # Must be of size 'input_size', and not contain indices greater than the size of the vectorized message.
+      #   # If not specified or null, will be [0, ..., input_size-1]
+
+
+Supervisors
+^^^^^^^^^^^^
+
+.. code-block:: yaml
+
+  supervisors: # 3Laws AI Supervisors
+    - interface_id: /main_supervisor_topic # Name of the supervisor data ros topic.
+      supervisor_id: main_supervisor # Display name for this supervisor, must be UNIQUE among all supervisor
+      signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
 
 
 Extras
@@ -401,51 +472,79 @@ Extras
 
 .. code-block:: yaml
 
-    extras:
-      passthrough_metrics: # Generic passthrough for scalar metric signals
-        - interface_id:
-            /metric_1_topic # Name of the ros topic.
-            # Supported types: [(default) std_msgs/Float64, std_msgs/Float32, std_msgs/Bool, std_msgs/Char, std_msgs/Byte, std_msgs/IntXX, std_msgs/UIntXX]
-          metric_id: metric_1 # Display name for this metric, must be UNIQUE among all passthrough metrics
-          metric_group_id:
-            position # [optional] Group this signal belongs to.
-            # Metrics of the same group are plotted on the same graph in 3laws.app
+  extras:
+    passthrough_metrics: # See next section
+    clocks: # See next section
+    signals: # See next section
+    nodes: # See next section
 
-      clocks:
-        - interface_id:
-            /custom_clock # Name of the ros topic.
-            # Supported types: [(default) rosgraph_msgs/Clock]
-          clock_id: my_clock # Display name for this clock, must be UNIQUE among all clocks
-          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
 
-      signals: # Generic floating point multidimensional signal values sanity and bounds checking
-        - interface_id:
-            /test_signal_topic # Name of the ros topic.
-            # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-          sender_id: test_signal_node # Display name of sender node
-          signal_id: test_signal # Display name of this signal, "<sender_id>.<signal_id>" must form a UNIQUE identifier among all signals
-          signal_size: 1 # Size of this signal
-          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-          # mask:
-          #   [2] # [optional] If only a subset of vectorized message actually constitute the signal vector
-          #   # use this mask to extract the relevant data : signal[i] = msg_vectorized[mask[i]].
-          #   # Must be of size 'signal_size', and not contain indices greater than the size of the vectorized message.
-          #   # If not specified or null, will be [0, ..., signal_size-1]
-          bounds: ~ # [optional]
+Passthrough Metrics
+^^^^^^^^^^^^^^^^^^^
 
-      nodes: # Generic node health checking metric
-        - node_id: test_node # Display name of node, must be UNIQUE among all nodes
-          # text_log_interface_id:
-          #   /test_node_log # [optional] Name of the ros topic publishing log info for that node.
-          #   # Supported types: [(default) rcl_interfaces/Log]
-          # process_name: # [optional]
-          #   test_node_exec.
-          topics: # List of topics published by the node (only available in ros2 humble and up)
-            - interface_id:
-                /test_node_topic_1 # Name of the ros topic. Associated 'interface.message_type_map.<interface_id>' must be specified.
-                # Supported types: [builtin_interfaces/*, geometry_msgs/*, lll_msgs/*, nav_msgs/*, rcl_interfaces/*, rosgraph_msgs/*, sensor_msgs/*, std_msgs/*, trajectory_msgs/*, visualization_msgs/*]
-              topic_id: test_node_topic_1 # Display name for this topic, must be UNIQUE among all topics of each node
-              signal_min_rate: 1s # Maximum allowed duration without receiving data
-        - node_id: rosout
-          text_log_interface_id: /rosout # If equal to '/rosout', uses 'name' field of incoming rcl_interfaces/Log message as node_id for text_log message
-          topics: []
+.. code-block:: yaml
+
+  passthrough_metrics: # Generic passthrough for scalar metric signals
+    - interface_id:
+        /metric_1_topic # Name of the ros topic.
+        # Supported types: [(default) std_msgs/Float64, std_msgs/Float32, std_msgs/Bool, std_msgs/Char, std_msgs/Byte, std_msgs/IntXX, std_msgs/UIntXX]
+      metric_id: metric_1 # Display name for this metric, must be UNIQUE among all passthrough metrics
+      metric_group_id:
+        position # [optional] Group this signal belongs to.
+        # Metrics of the same group are plotted on the same graph in 3laws.app
+
+
+Clocks
+^^^^^^
+
+.. code-block:: yaml
+
+  clocks:
+    - interface_id:
+        /custom_clock # Name of the ros topic.
+        # Supported types: [(default) rosgraph_msgs/Clock]
+      clock_id: my_clock # Display name for this clock, must be UNIQUE among all clocks
+      signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+
+Signals
+^^^^^^^^
+
+.. code-block:: yaml
+
+  signals: # Generic floating point multidimensional signal values sanity and bounds checking
+    - interface_id:
+        /test_signal_topic # Name of the ros topic.
+        # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+      sender_id: test_signal_node # Display name of sender node
+      signal_id: test_signal # Display name of this signal, "<sender_id>.<signal_id>" must form a UNIQUE identifier among all signals
+      signal_size: 1 # Size of this signal
+      signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+      # mask:
+      #   [2] # [optional] If only a subset of vectorized message actually constitute the signal vector
+      #   # use this mask to extract the relevant data : signal[i] = msg_vectorized[mask[i]].
+      #   # Must be of size 'signal_size', and not contain indices greater than the size of the vectorized message.
+      #   # If not specified or null, will be [0, ..., signal_size-1]
+      bounds: ~ # [optional]
+
+
+Nodes
+^^^^^^
+
+.. code-block:: yaml
+
+  nodes: # Generic node health checking metric
+    - node_id: test_node # Display name of node, must be UNIQUE among all nodes
+      # text_log_interface_id:
+      #   /test_node_log # [optional] Name of the ros topic publishing log info for that node.
+      #   # Supported types: [(default) rcl_interfaces/Log]
+      # process_name: # [optional]
+      #   test_node_exec.
+      topics: # List of topics published by the node (only available in ros2 humble and up)
+        - interface_id:
+            /test_node_topic_1 # Name of the ros topic. Associated 'interface.message_type_map.<interface_id>' must be specified.
+            # Supported types: [builtin_interfaces/*, geometry_msgs/*, lll_msgs/*, nav_msgs/*, rcl_interfaces/*, rosgraph_msgs/*, sensor_msgs/*, std_msgs/*, trajectory_msgs/*, visualization_msgs/*]
+          topic_id: test_node_topic_1 # Display name for this topic, must be UNIQUE among all topics of each node
+          signal_min_rate: 1s # Maximum allowed duration without receiving data
+    - node_id: rosout
+      text_log_interface_id: /rosout # If equal to '/rosout', uses 'name' field of incoming rcl_interfaces/Log message as node_id for text_log message
+      topics: []
