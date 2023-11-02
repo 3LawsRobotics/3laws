@@ -14,6 +14,14 @@ A package is available for each of the following configuration
 |        18.04          |     Melodic  |          N/A        | amd64/arm64v8 |
 +-----------------------+--------------+---------------------+---------------+
 
+.. contents:: Table of Contents
+   :depth: 2
+   :local:
+
+
+Quick Installation
+------------------
+
 Here is the one liner that will download a public script that will, based on your system download the right package.
 
 .. code-block:: bash
@@ -21,6 +29,8 @@ Here is the one liner that will download a public script that will, based on you
   sudo bash -c "$(wget -qO - https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh)"
 
 
+Non Interactive Installation
+----------------------------
 If you want to install a specific package in a non interactive mode, here is the process:
 
 - Download the script:
