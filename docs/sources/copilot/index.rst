@@ -1,7 +1,8 @@
 The Supervisor/Copilot
 ======================
+
 Theory of Operation
-===================
+-------------------
 
 The 3Laws Copilot is based on Control Barrier Functions as described in:
 
@@ -22,7 +23,7 @@ control strategy is built into the CoPilot by 3Laws based on the objective
 for the particular deployment.
 
 Basic Architecture
-==================
+------------------
 
 From an operational standpoint, the CoPilot (when used for collision avoidance)
 sits between the planning layer and the hardware control layer.  "Hardware control"
