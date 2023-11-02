@@ -20,6 +20,7 @@
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Template configuration" href="../examples/template_example.html" />
     <link rel="prev" title="Interface Configuration" href="../interface/interface.html" /> 
 </head>
 
@@ -57,12 +58,14 @@
 <li class="toctree-l4"><a class="reference internal" href="../diagnostic_config/diagnostic_config.html">Diagnostic Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../interface/interface.html">Interface Configuration</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Robot Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/template_example.html">Template configuration</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../copilot/index.html">The Supervisor/Copilot</a></li>
 </ul>
 
         </div>
@@ -435,6 +438,20 @@ For example a node sensor is created and will group all topics from each sensor 
 </div>
 <section id="state-estimation">
 <h4>State Estimation<a class="headerlink" href="#state-estimation" title="Link to this heading"></a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">state_estimation</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">interface_id</span><span class="p">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">/state</span><span class="w"> </span><span class="c1"># Name of the ros topic.</span>
+<span class="w">    </span><span class="c1"># Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]</span>
+<span class="w">  </span><span class="nt">signal_min_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1s</span><span class="w"> </span><span class="c1"># Maximum time without receiving data before signal is considered timed out</span>
+<span class="w">  </span><span class="nt">state_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span><span class="w"> </span><span class="c1"># Size of the state vector</span>
+<span class="w">  </span><span class="c1"># mask:</span>
+<span class="w">  </span><span class="c1">#   [0, 1, 2, 3, 5] # [optional] If only a subset of the vectorized message actually constitute the state vector</span>
+<span class="w">  </span><span class="c1">#   # use this mask to extract the relevant data : state[i] = msg_vectorized[mask[i]].</span>
+<span class="w">  </span><span class="c1">#   # Must be of size &#39;state_size&#39;, and not contain indices greater than the size of vectorized message.</span>
+<span class="w">  </span><span class="c1">#   # If not specified or null, will be [0, ..., state_size-1]</span>
+<span class="w">  </span><span class="nt">bounds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~</span><span class="w"> </span><span class="c1"># [optional]</span>
+</pre></div>
+</div>
 </section>
 <section id="odometry">
 <h4>Odometry<a class="headerlink" href="#odometry" title="Link to this heading"></a></h4>
@@ -626,6 +643,7 @@ For example a node sensor is created and will group all topics from each sensor 
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../interface/interface.html" class="btn btn-neutral float-left" title="Interface Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../examples/template_example.html" class="btn btn-neutral float-right" title="Template configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -79,6 +79,7 @@ Scheme
    diagnostic_config/diagnostic_config
    interface/interface
    robot_description/robot_description
+   examples/template_example
 
 The configuration has **4** distinct parts
 

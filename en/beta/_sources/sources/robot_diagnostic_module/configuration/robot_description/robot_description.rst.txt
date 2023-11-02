@@ -324,7 +324,7 @@ Perception
 
 
 Localization
-^^^^^^^^^^
+^^^^^^^^^^^^^
 
 .. code-block:: yaml
 
@@ -338,6 +338,7 @@ State Estimation
 """"""""""""""""
 
 .. code-block:: yaml
+
   state_estimation:
     interface_id:
       /state # Name of the ros topic.
