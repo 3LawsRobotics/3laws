@@ -64,7 +64,6 @@
 <li class="toctree-l4"><a class="reference internal" href="diagnostic_config/diagnostic_config.html">Diagnostic Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="interface/interface.html">Interface Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="robot_description/robot_description.html">Robot Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="examples/template_example.html">Template configuration</a></li>
 </ul>
 </li>
 </ul>
@@ -137,13 +136,13 @@ The configuration can be build alongside your robot so that it does not represen
 <h3><a class="toc-backref" href="#id3" role="doc-backlink">Bounds</a><a class="headerlink" href="#bounds" title="Link to this heading"></a></h3>
 <p>All bounds parameters are similar:</p>
 <ul class="simple">
-<li><p>norm_type: Norm to use for norm bound, possible values (none, L_1, L_2, L_infinity)</p></li>
-<li><p>norm_upper_bound: Upper norm bound, floating point</p></li>
-<li><p>norm_lower_bound: Lower norm bound, floating point</p></li>
-<li><p>upper_bounds:  Upper bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
-<li><p>lower_bounds: Lower bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
-<li><p>rates_upper_bounds: Upper bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
-<li><p>rates_lower_bounds:  Lower bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+<li><p><strong>norm_type</strong>: Norm to use for norm bound, possible values (none, L_1, L_2, L_infinity)</p></li>
+<li><p><strong>norm_upper_bound</strong>: Upper norm bound, floating point</p></li>
+<li><p><strong>norm_lower_bound</strong>: Lower norm bound, floating point</p></li>
+<li><p><strong>upper_bounds</strong>:  Upper bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+<li><p><strong>lower_bounds</strong>: Lower bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+<li><p><strong>rates_upper_bounds</strong>: Upper bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+<li><p><strong>rates_lower_bounds</strong>:  Lower bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
 </ul>
 <p>Set both (rate_)upper_bounds[i] and (rates_)lower_bounds[i] to .inf to disable bound on component i.</p>
 <p>Leave empty to deactivate all (rate) bounds checking.</p>
@@ -153,22 +152,22 @@ The configuration can be build alongside your robot so that it does not represen
 <h3><a class="toc-backref" href="#id4" role="doc-backlink">Duration parameters</a><a class="headerlink" href="#duration-parameters" title="Link to this heading"></a></h3>
 <p>Parameters like signal_min_rate represent durations.
 They can be specified by an integer number corresponding to a number of nanoseconds:</p>
-<blockquote>
-<div><p>signal_min_rate: 1 -&gt; 1 nanoseconds</p>
-<p>signal_min_rate: 1000000000 -&gt; 1 second</p>
-</div></blockquote>
+<ul class="simple">
+<li><p><strong>signal_min_rate</strong>: 1 -&gt; 1 nanoseconds</p></li>
+<li><p><strong>signal_min_rate</strong>: 1000000000 -&gt; 1 second</p></li>
+</ul>
 <p>They can also be specified by an integer of floating point followed by the time scale:</p>
-<blockquote>
-<div><p>signal_min_rate: 1ns -&gt; 1 nanoseconds</p>
-<p>signal_min_rate: 25us -&gt; 25 microseconds</p>
-<p>signal_min_rate: 0.5ms -&gt; 500 milliseconds</p>
-<p>signal_min_rate: 1s -&gt; 1 second</p>
-<p>signal_min_rate: 20hz -&gt; 50 milliseconds</p>
-<p>signal_min_rate: 1min -&gt; 1 minute</p>
-<p>signal_min_rate: 1h -&gt; 1 hour</p>
-<p>signal_min_rate: 1d -&gt; 1 day</p>
-<p>signal_min_rate: 1y -&gt; 1 year</p>
-</div></blockquote>
+<ul class="simple">
+<li><p><strong>signal_min_rate</strong>: 1ns -&gt; 1 nanoseconds</p></li>
+<li><p><strong>signal_min_rate</strong>: 25us -&gt; 25 microseconds</p></li>
+<li><p><strong>signal_min_rate</strong>: 0.5ms -&gt; 500 milliseconds</p></li>
+<li><p><strong>signal_min_rate</strong>: 1s -&gt; 1 second</p></li>
+<li><p><strong>signal_min_rate</strong>: 20hz -&gt; 50 milliseconds</p></li>
+<li><p><strong>signal_min_rate</strong>: 1min -&gt; 1 minute</p></li>
+<li><p><strong>signal_min_rate</strong>: 1h -&gt; 1 hour</p></li>
+<li><p><strong>signal_min_rate</strong>: 1d -&gt; 1 day</p></li>
+<li><p><strong>signal_min_rate</strong>: 1y -&gt; 1 year</p></li>
+</ul>
 </section>
 </section>
 <section id="scheme">
