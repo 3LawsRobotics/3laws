@@ -30,7 +30,7 @@ sits between the planning layer and the hardware control layer.  "Hardware contr
 typically refers to a speed or attitude controller for a vehicle or a joint
 attitude/speed controller for an articulated robot.
 
-.. image: data/supervisor_architecture_1.png
+.. image:: data/supervisor_architecture_1.png
    :width: 200px
    :alt: CoPilot Architecture showing inputs and outputs from a typical Copilot
 
@@ -38,6 +38,6 @@ The CoPilot will evaluate the likelihood of a collision and will only modify
 the desired input from the planner when a collision is predicted within the
 estimation window.
 
-.. image: data/supervisor_architecture_1b.png
+.. image:: data/supervisor_architecture_1b.png
    :width: 200px
    :alt: CoPilot Architecture showing inputs and outputs from a typical Copilot
