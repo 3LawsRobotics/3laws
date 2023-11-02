@@ -100,7 +100,7 @@
 <li><p><a class="reference internal" href="#robot-model" id="id1">Robot model</a></p>
 <ul>
 <li><p><a class="reference internal" href="#available-shape-types" id="id2">Available shape types:</a></p></li>
-<li><p><a class="reference internal" href="#available-robot-type" id="id3">Available robot type</a></p></li>
+<li><p><a class="reference internal" href="#available-robot-type" id="id3">Available robot type:</a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#robot-autonomy-stack" id="id4">Robot Autonomy stack</a></p></li>
@@ -111,17 +111,7 @@
 </nav>
 <section id="robot-model">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">Robot model</a><a class="headerlink" href="#robot-model" title="Link to this heading"></a></h2>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># robot_type and associated model_type options are (`*` not available yet):</span>
-<span class="c1">#   mobile_robot -&gt; differential_drive, *omni_directional, *ackerman, bicycle</span>
-<span class="c1">#   legged_robot -&gt; *bipedal, *quadruped</span>
-<span class="c1">#   land_vehicle -&gt; *basic</span>
-<span class="c1">#   aerial_vehicle -&gt; *fixed_wing, *helicopter, *multi_rotor</span>
-<span class="c1">#   surface_vehicle -&gt; *sail_boat, *outboard_boat, *inboard_boat, *jet_boat</span>
-<span class="c1">#   underwater_vehicle -&gt; *omni_directional</span>
-<span class="c1">#   spacecraft -&gt; *omni_directional</span>
-<span class="c1">#   manipulator -&gt; *fixed_base</span>
-<span class="c1">#   unclassified -&gt; *unknown, *first_order</span>
-<span class="nt">robot_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;String&gt;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">robot_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;String&gt; See available robot type section for more details</span>
 
 <span class="nt">kinematic_model</span><span class="p">:</span><span class="w"> </span><span class="c1"># Kinematic model of the robot</span>
 <span class="w">  </span><span class="nt">base_frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;String&gt;</span><span class="w"> </span><span class="c1"># Name of the base frame of the robot</span>
@@ -233,7 +223,7 @@ mesh_units: mm  [optional] Units of the mesh file, available options: [mm, cm, d
 </ul>
 </section>
 <section id="available-robot-type">
-<h3><a class="toc-backref" href="#id3" role="doc-backlink">Available robot type</a><a class="headerlink" href="#available-robot-type" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Available robot type:</a><a class="headerlink" href="#available-robot-type" title="Link to this heading"></a></h3>
 <p>Each dynamical model type has its own set of states, inputs, and parameters:</p>
 <ul>
 <li><p>mobile_robot:</p>

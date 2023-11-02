@@ -17,17 +17,7 @@ Robot model
 
 .. code-block:: yaml
 
-    # robot_type and associated model_type options are (`*` not available yet):
-    #   mobile_robot -> differential_drive, *omni_directional, *ackerman, bicycle
-    #   legged_robot -> *bipedal, *quadruped
-    #   land_vehicle -> *basic
-    #   aerial_vehicle -> *fixed_wing, *helicopter, *multi_rotor
-    #   surface_vehicle -> *sail_boat, *outboard_boat, *inboard_boat, *jet_boat
-    #   underwater_vehicle -> *omni_directional
-    #   spacecraft -> *omni_directional
-    #   manipulator -> *fixed_base
-    #   unclassified -> *unknown, *first_order
-    robot_type: <String>
+    robot_type: <String> See available robot type section for more details
 
     kinematic_model: # Kinematic model of the robot
       base_frame_id: <String> # Name of the base frame of the robot
@@ -132,7 +122,7 @@ a shape, and the pose of that shape in the base frame. We currently support the 
     mesh_units: mm  [optional] Units of the mesh file, available options: [mm, cm, dm, m, dam, hm, km, mi, nm, yd, ft, in], default: m
 
 
-Available robot type
+Available robot type:
 ^^^^^^^^^^^^^^^^^^^^^
 
 Each dynamical model type has its own set of states, inputs, and parameters:

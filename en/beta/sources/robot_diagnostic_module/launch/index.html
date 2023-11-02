@@ -82,14 +82,18 @@
              
   <section id="launch-the-rdm">
 <h1>Launch the RDM<a class="headerlink" href="#launch-the-rdm" title="Link to this heading"></a></h1>
-<p>To launch the RDM, you only have to source your ros distribution: <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">/opt/ros/&lt;DISTRO&gt;/setup.sh</span></code>
-and to run the command <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">launch</span> <span class="pre">lll_rdm</span> <span class="pre">rdm.launch.py</span></code></p>
+<p>To launch the RDM, you only have to source your ros distribution:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/&lt;DISTRO&gt;/setup.sh
+</pre></div>
+</div>
+<p>and to run the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>lll_rdm<span class="w"> </span>rdm.launch.py
+</pre></div>
+</div>
 <p>You can add the following command line options:</p>
-<ul>
+<ul class="simple">
 <li><p>use_sim_time: &lt;Boolean, default: false&gt; Specify if the RDM use the ros time or the machine time</p></li>
-<li><p>config_filename:</p>
-<p>&lt;String&gt; Path to the config file if not in the <code class="docutils literal notranslate"><span class="pre">/opt/3lawsRoboticsInc/robot_diagnostic_module/config</span></code> folder (<strong>needs to start with /</strong>) or just the config file name inside the default folder.</p>
-</li>
+<li><p>config_filename: &lt;String&gt; Path to the config file if not in the <em>/opt/3lawsRoboticsInc/robot_diagnostic_module/config</em> folder (<strong>needs to start with /</strong>) or just the config file name inside the default folder.</p></li>
 <li><p>robot_id: &lt;String&gt; name of your robot</p></li>
 <li><p>log_level: &lt;trace|debug|info|error, default: info&gt; Log level of the RDM</p></li>
 <li><p>dry_run: &lt;Boolean&gt; Start the RDM, check the config file and turn off without error if everything has been launched correctly</p></li>
