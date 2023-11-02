@@ -1,9 +1,17 @@
 Configuration
 ===============
 
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   examples/template_example
+
 .. contents:: Table of Contents
    :depth: 2
    :local:
+
+
 
 The configuration is written inside a `YAML <https://yaml.org/>`_. file. This file can be stored anywhere but the default folder is
 ``/opt/3lawsRoboticsInc/robot_diagnostic_module/config``
@@ -16,15 +24,15 @@ The **Robot Diagnostic Module** is shipped with a configuration template that ca
 In order to have the more user friendly configuration experience, a lot of the fields are optional.
 The configuration can be build alongside your robot so that it does not represent a burden for the developer.
 
-.. toctree::
-   :maxdepth: 1
-   :hidden:
 
-   examples/template_example
 
-:doc: `examples/template_example`:
+Configuration Template
+------------------------
 
 You can find here a complete template configuration.
+
+- :doc:`examples/template_example`:
+
 
 
 General configuration rules
