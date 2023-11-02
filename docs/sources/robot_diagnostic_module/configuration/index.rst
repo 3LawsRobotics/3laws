@@ -33,11 +33,11 @@ All bounds parameters are similar:
 - rates_upper_bounds: Upper bounds on the value of the components of the tracking_error, sequence of floating point
 - rates_lower_bounds:  Lower bounds on the value of the components of the tracking_error, sequence of floating point
 
-Set both (rate_)upper_bounds[i] and (rates_)lower_bounds[i] to .inf to disable bound on component i.
+Set both (rate\_)upper_bounds[i] and (rates\_)lower_bounds[i] to .inf to disable bound on component i.
 
 Leave empty to deactivate all (rate) bounds checking.
 
-Both (rate_)upper_bounds and (rates_)lower_bounds must have same size
+Both (rate\_)upper_bounds and (rates\_)lower_bounds must have same size
 
 Duration parameters
 ^^^^^^^^^^^^^^^^^^^^
