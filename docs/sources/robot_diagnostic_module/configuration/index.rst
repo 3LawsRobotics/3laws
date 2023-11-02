@@ -1,15 +1,6 @@
 Configuration
 ===============
 
-.. .. toctree::
-..    :maxdepth: 2
-..    :hidden:
-
-..    credentials/credentials
-..    diagnostic_config/diagnostic_config
-..    interface/interface
-..    robot_description/robot_description
-
 .. contents:: Table of Contents
    :depth: 2
    :local:
@@ -79,6 +70,15 @@ They can also be specified by an integer of floating point followed by the time 
 
 Scheme
 -------
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   credentials/credentials
+   diagnostic_config/diagnostic_config
+   interface/interface
+   robot_description/robot_description
 
 The configuration has **4** distinct parts
 
