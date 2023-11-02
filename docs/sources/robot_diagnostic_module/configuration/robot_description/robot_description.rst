@@ -170,7 +170,27 @@ Each dynamical model type has its own set of states, inputs, and parameters:
     - tau_vel: time constant of the 1st order tracking response in linear velocity (1/s) (must be strictly positive)
     - tau_steer: time constant of the 1st order tracking response in angular velocity (1/s) (must be strictly positive)
 
+Auto Generated Nodes:
+---------------------
 
+The RDM will automatically create node based on the configuration. So for each substructure of robot_description, a node will be created.
+For example a node sensor is created and will group all topics from each sensor declared in the configuration.
+
+If you want to add extra topic to a node, you can declare them via the **extra_topics** structure. This structure is a list of topics.
+
+A topic has to be declared like this:
+
+.. code-block:: yaml
+
+  - interface_id:
+      /test_node_topic_1 # Name of the ros topic. Associated 'interface.message_type_map.<interface_id>' must be specified.
+      # Supported types: [builtin_interfaces/*, geometry_msgs/*, lll_msgs/*, nav_msgs/*, rcl_interfaces/*, rosgraph_msgs/*, sensor_msgs/*, std_msgs/*, trajectory_msgs/*, visualization_msgs/*]
+    topic_id: test_node_topic_1 # Display name for this topic, must be UNIQUE among all topics of each node
+    signal_min_rate: 1s # Maximum allowed duration without receiving data
+
+If a topic is declared like this, inside the interface section, **the message_type has to be declared**.
+
+Another information can be added to a node: its process_name. When a process name is specified, the RDM will find the process and monitor his CPU and network usage.
 
 Robot Autonomy stack
 --------------------
