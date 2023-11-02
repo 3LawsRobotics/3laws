@@ -4,7 +4,7 @@ Interface Configuration
 The interface structure is here to get precision on the interface.
 Right know only ROS interfaces are available, the interface option are here to specify Quality of Service and topic types
 
-::
+.. code-block:: yaml
 
   interface:
     retimestamp: never/always/if_zero specify if the timestamp has to be set

@@ -3,11 +3,20 @@ Robot Description
 
 This part is the most important one. The more accurate the information provided here, the more insightful the RDM will be.
 
-Here is a template of this section. Each sub structure is optional but once a substructure is declared, all its fields must be filled (unless Optional is specified)
+Each sub structure is optional but once a substructure is declared, all its fields must be filled (unless Optional is specified)
 
-::
 
-  robot_description:
+
+.. contents:: Table of Contents
+   :depth: 2
+   :local:
+
+
+Robot model
+-----------
+
+.. code-block:: yaml
+
     # robot_type and associated model_type options are (`*` not available yet):
     #   mobile_robot -> differential_drive, *omni_directional, *ackerman, bicycle
     #   legged_robot -> *bipedal, *quadruped
@@ -18,57 +27,152 @@ Here is a template of this section. Each sub structure is optional but once a su
     #   spacecraft -> *omni_directional
     #   manipulator -> *fixed_base
     #   unclassified -> *unknown, *first_order
-    robot_type: mobile_robot
+    robot_type: <String>
 
     kinematic_model: # Kinematic model of the robot
-      base_frame_id: robot # Name of the base frame of the robot
+      base_frame_id: <String> # Name of the base frame of the robot
       geometry: # Geometry of the robot
-        shape_type: box # Type of the geometry shape (should be one of [point, box, sphere, ellipsoid, capsule, cone, cylinder, mesh])
-        shape_params: # Parameters for the chosen shape_type (See bottom of this file for more info)
-          x_size: 0.5
-          y_size: 0.4
-          z_size: 0.3
+        shape_type: <Enum point|box|sphere|ellipsoid|capsule|cone|cylinder|mesh> # Type of the geometry shape (should be one of [point, box, sphere, ellipsoid, capsule, cone, cylinder, mesh])
+        shape_params: # Parameters for the chosen shape_type
+          x_size: <Float> #in Meter
+          y_size: <Float> #in Meter
+          z_size: <Float> #in Meter
         pose: # [optional] Pose of shape w.r.t base frame
-          translation: [0., 0., 0.] # [optional] Translation w.r.t base frame [x,y,z], default [0,0,0]
-          rotation: [1., 0., 0., 0.] # [optional] Rotation quaternion w.r.t base frame [w,x,y,z], default [1,0,0,0]
+          translation: <Float array[3]> # [optional] Translation w.r.t base frame [x,y,z], default [0,0,0]
+          rotation: <Float array[4]> # [optional] Rotation quaternion w.r.t base frame [w,x,y,z], default [1,0,0,0]
 
     dynamical_model: # [optional] Behavior model of the robot
-      model_type: bicycle # Type of dynamical model for selected robot_type
+      model_type: <String> # Type of dynamical model for selected robot_type
       state_domain: # Region of the state space in which the dynamical model has been validated
-        # Defined as a a convex polytope S={x in Rn | lb <= M.x <= ub}
-        ub:
-          [1., 2., 3.] # If simple==true, must have same size as state of model_type,
-          # otherwise must have size n_cstr
-        lb:
-          [-1., -2., -3.] # If simple==true, must have same size as state of model_type,
-          # otherwise must have size n_cstr
-        simple: false # [optional], If true, assumes M is an identity matrix (default: false)
+        simple: <Boolean> # [optional], If true, assumes M is an identity matrix (default: false)
         n_cstr: 3 # [optional if simple==true] Number of rows in M
         M: # [optional if simple==true] Either a single sequence representing the diagonal of M, or a sequence of the rows of M
           - [1., 0., 0., 0., 0.]
           - [0., 1., 0., 0., 0.]
           - [0., 0., 1., 0., 0.]
-      input_domain: # Region of the input space accessible for control purposes and in which the dynamical model has been validated
-        # Same representation as 'state_domain'
+        # Defined as a a convex polytope S={x in Rn | lb <= M.x <= ub}
         ub:
-          [1., 2.] # If simple==true, must have same size as input of model_type,
+          <Float array[n_cstr]> # If simple==true, must have same size as state of model_type,
           # otherwise must have size n_cstr
         lb:
-          [-1., -2.] # If simple==true, must have same size as input of model_type,
+          <Float array[n_cstr]> # If simple==true, must have same size as state of model_type,
           # otherwise must have size n_cstr
-        simple: true
+
+        input_domain: # Region of the input space accessible for control purposes and in which the dynamical model has been validated
+          # Same representation as 'state_domain'
+          ub:
+            <Float array[model_input_size]> # If simple==true, must have same size as input of model_type,
+            # otherwise must have size n_cstr
+          lb:
+            <Float array[model_input_size]> # If simple==true, must have same size as input of model_type,
+            # otherwise must have size n_cstr
+          simple: <Boolean>
+
       process_noise_covariance:
-        [1., 1., 1., 1., 1.] # Either a single sequence representing the diagonal of the process noise covariance matrix,
+        <Float array[model_state_size]> # Either a single sequence representing the diagonal of the process noise covariance matrix,
         # or a sequence of its rows. Must have same size as state of model_type
-      model_param: # [variant] Parameters for the chosen model_type (See bottom of this file for more info)
+      model_param: # [variant] Parameters for the chosen model_type, as example here for the bicycle
         wheel_dx: 1.
         origin_dx: 1.
         tau_vel: 1.
         tau_steer: 1.
 
-    mission_manager: # [optional]
-      extra_topics: ~ # [optional] (See bottom of this file for more info)
-      process_name: ~ # [optional] (See bottom of this file for more info)
+
+Available shape types:
+^^^^^^^^^^^^^^^^^^^^^^
+
+The kinematic model of the robot defines its geometry. The geometry is described by a base frame,
+a shape, and the pose of that shape in the base frame. We currently support the following shapes:
+
+- Point:
+  shape_params: ~
+
+- Box:
+
+  shape_params:
+    x_size: <Float>  Total length of the box along x axis
+    y_size: <Float>  Total length of the box along y axis
+    z_size: <Float>  Total length of the box along z axis_mask
+
+- Sphere:
+
+  shape_params:
+    radius: <Float>  Radius of the sphere
+
+- Ellipsoid
+
+  shape_params:
+    radius_x: <Float>  Semi x-axis length
+    radius_y: <Float>  Semi y-axis length
+    radius_z: <Float>  Semi z-axis length
+
+- Capsule:
+
+  shape_params:
+    radius: <Float>  Radius of the capsule
+    length: <Float>  Length of the capsule
+
+- Cone:
+
+  shape_params:
+    radius: <Float>  Radius of the cone
+    length: <Float>  Length of the cone
+
+- Cylinder:
+
+  shape_params:
+    radius: <Float>  Radius of the cylinder
+    length: <Float>  Length of the cylinder
+
+- Mesh:
+
+  shape_params:
+    mesh_file: /opt/mesh.stl  Path to mesh file
+    mesh_type: stl  Type of mesh file, available options: [stl]
+    mesh_units: mm  [optional] Units of the mesh file, available options: [mm, cm, dm, m, dam, hm, km, mi, nm, yd, ft, in], default: m
+
+
+Available robot type
+^^^^^^^^^^^^^^^^^^^^^
+
+Each dynamical model type has its own set of states, inputs, and parameters:
+
+- mobile_robot:
+
+  - differential_drive: Dynamical model for a rigid body over SE2 with first order tracking response of longitudinal and rotational body velocities
+
+    states: [x,y,yaw,vx_body_actual,wz_body_actual]
+
+    inputs: [vx_body_command,wz_body_command]
+
+    parameters:
+
+    - tau_vel -> time constant of the 1st order tracking response in linear velocity (1/s) (must be strictly positive)
+    - tau_yaw_vel -> time constant of the 1st order tracking response in angular velocity (1/s) (must be strictly positive)
+
+  - bicycle: Dynamical model for a 2 wheels or 4 wheel but with coupled front wheel steering vehicle over SE2, with first order tracking response of steering angle and origin velocity magnitude.
+
+    states: [x,y,yaw,||v_body||_actual,steering_angle_actual]
+
+    inputs: [||v_body||_command,steering_angle_command]
+
+    parameters:
+
+    - wheel_dx -> Distance between front and back wheels (m) (must be strictly positive)
+    - origin_dx -> Position of vehicle's origin w.r.t back wheels (m) (must be positive)
+    - tau_vel -> time constant of the 1st order tracking response in linear velocity (1/s) (must be strictly positive)
+    - tau_steer -> time constant of the 1st order tracking response in angular velocity (1/s) (must be strictly positive)
+
+
+
+Robot Autonomy stack
+--------------------
+
+.. code-block:: yaml
+
+    mission_manager:
+      extra_topics: ~ # [optional]
+      process_name: ~ # [optional]
       finite_states: # Finite states of the robot
         - interface_id:
             /status # Name of the ros topic.
@@ -81,9 +185,32 @@ Here is a template of this section. Each sub structure is optional but once a su
           state_id: search_mode
           signal_min_rate: 1s
 
-    sensors: # [optional]
-      extra_topics: ~ # [optional] (See bottom of this file for more info)
-      process_name: ~ # [optional] (See bottom of this file for more info)
+    path_planning:
+      extra_topics: ~ # [optional]
+      process_name: ~ # [optional]
+      paths:
+        - interface_id:
+            /desired_path # Name of the ros topic.
+            # Supported types: [(default) lll_msgs/Trajectory, nav_msgs/Path, trajectory_msgs/JointTrajectory]
+          path_id: main_path # Display name for this path, must be UNIQUE among all paths
+          trajectory_state_size: 7 # Size of the trajectory state vector
+          signal_min_rate: 1min # Maximum time without receiving data before signal is considered timed out
+          # state_mask:
+          #   [0, 1, 2, 3, 4, 5, 6] # [optional] If the path only corresponds to a subset of the state_estimation vector,
+          #   # use this mask to extract the relevant data : trajectory_state[i] = state_estimation[state_mask[i]].
+          #   # Must be of size 'trajectory_state_size', and not contain indices greater than state_estimation.state_size.
+          #   # If not specified or null, will be [0, ..., trajectory_state_size-1]
+          tracking_error_bounds: ~ # [optional] Bounds on controller's tracking error : path_state - actual_state
+
+
+Robot perception
+----------------
+
+.. code-block:: yaml
+
+  sensors:
+      extra_topics: ~ # [optional]
+      process_name: ~ # [optional]
       batteries: [] # Coming soon!
       cameras: [] # Coming soon!
       gps: [] # Coming soon!
@@ -123,9 +250,9 @@ Here is a template of this section. Each sub structure is optional but once a su
           #   # Cannot be empty or longer than 6. Index must be between 0 and 5 included.
           #   [0, 5] # Corresponds to a 2 axis loadcell [Fx,Mz]
           noise_one_sigma: [1., 1., 1., 1., 1., 1.] # Noise characteristics of loadcell axes. Must have same size as axis_mask
-          bounds: ~ # [optional] (See bottom of this file for more info)
+          bounds: ~ # [optional]
 
-    perception: # [optional]
+    perception:
       obstacles: # [optional] List of obstacles
         interface_id: /obstacles # Name of the ros topic. # Supported types: [(default) lll_msgs/ObjectArray]
         signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
@@ -137,9 +264,9 @@ Here is a template of this section. Each sub structure is optional but once a su
           #     mesh_type: stl # Type of mesh file
           #     mesh_units: mm # Unit of mesh file
 
-    localization: # [optional]
-      extra_topics: ~ # [optional] (See bottom of this file for more info)
-      process_name: ~ # [optional] (See bottom of this file for more info)
+    localization:
+      extra_topics: ~ # [optional]
+      process_name: ~ # [optional]
       state_estimation: # [optional]
         interface_id:
           /state # Name of the ros topic.
@@ -151,7 +278,7 @@ Here is a template of this section. Each sub structure is optional but once a su
         #   # use this mask to extract the relevant data : state[i] = msg_vectorized[mask[i]].
         #   # Must be of size 'state_size', and not contain indices greater than the size of vectorized message.
         #   # If not specified or null, will be [0, ..., state_size-1]
-        bounds: ~ # [optional] (See bottom of this file for more info)
+        bounds: ~ # [optional]
 
       odometry:
         - interface_id:
@@ -160,7 +287,7 @@ Here is a template of this section. Each sub structure is optional but once a su
           odom_id: odom_node_0 # Display name for this odometry source, must be UNIQUE among all odometry
           signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
           se2_only: true # [optional] Consider only SE2 projection of pose and twist (default: false)
-          position_bounds: # [optional] Position part of the odometry. Components are [x,y,z] or [x,y] if se2_only==true (See bottom of this file for more info)
+          position_bounds: # [optional] Position part of the odometry. Components are [x,y,z] or [x,y] if se2_only==true
             norm_type: none
             norm_upper_bound: 1.
             norm_lower_bound: 0.
@@ -168,91 +295,86 @@ Here is a template of this section. Each sub structure is optional but once a su
             lower_bounds: [-1., -1.]
             rates_upper_bounds: []
             rates_lower_bounds: []
-          orientation_bounds: ~ # [optional] Same fields as position. Components are [roll,pitch,yaw] or [yaw] if se2_only==true (See bottom of this file for more info)
-          velocity_linear_bounds: ~ # [optional] Same fields as position. Components are [vx,vy,vz] or [vz,vy] if se2_only==true (See bottom of this file for more info)
-          velocity_angular_bounds: ~ # [optional] Same fields as position. Components are [wx,wy,wz] or [wz] if se2_only==true (See bottom of this file for more info)
+          orientation_bounds: ~ # [optional] Same fields as position. Components are [roll,pitch,yaw] or [yaw] if se2_only==true
+          velocity_linear_bounds: ~ # [optional] Same fields as position. Components are [vx,vy,vz] or [vz,vy] if se2_only==true
+          velocity_angular_bounds: ~ # [optional] Same fields as position. Components are [wx,wy,wz] or [wz] if se2_only==true
 
-    path_planning: # [optional]
-      extra_topics: ~ # [optional] (See bottom of this file for more info)
-      process_name: ~ # [optional] (See bottom of this file for more info)
-      paths:
-        - interface_id:
-            /desired_path # Name of the ros topic.
-            # Supported types: [(default) lll_msgs/Trajectory, nav_msgs/Path, trajectory_msgs/JointTrajectory]
-          path_id: main_path # Display name for this path, must be UNIQUE among all paths
-          trajectory_state_size: 7 # Size of the trajectory state vector
-          signal_min_rate: 1min # Maximum time without receiving data before signal is considered timed out
-          # state_mask:
-          #   [0, 1, 2, 3, 4, 5, 6] # [optional] If the path only corresponds to a subset of the state_estimation vector,
-          #   # use this mask to extract the relevant data : trajectory_state[i] = state_estimation[state_mask[i]].
-          #   # Must be of size 'trajectory_state_size', and not contain indices greater than state_estimation.state_size.
-          #   # If not specified or null, will be [0, ..., trajectory_state_size-1]
-          tracking_error_bounds: ~ # [optional] Bounds on controller's tracking error : path_state - actual_state (See bottom of this file for more info)
 
-    control: # [optional]
-      extra_topics: ~ # [optional] (See bottom of this file for more info)
-      process_name: ~ # [optional] (See bottom of this file for more info)
-      setpoint_tacking_controllers: # PID like controllers
-        - controller_id: velocity_controller # Display name for this controller, must be UNIQUE among all controllers
-          state_size: 1 # Size of controller setpoint
-          input_size: 1 # Size of control input computed by controller
-          desired_state:
-            interface_id: /controller_cmd_topic # Name of the desired state ros topic.
-            # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-            mask: [0] # [optional] If only a subset of desired_state_topic_id vector is actually used by controller,
-            # use this mask to extract the relevant data : desired_state_used[i] = desired_state_received[desired_state_mask[i]]
-            signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-            bounds: ~ # [optional] Bounds on desired state (See bottom of this file for more info)
+Robot control
+--------------
 
-          actual_state:
-            interface_id: /controller_state_topic # Name of the actual state ros topic.
-            # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-            mask: ~ # [optional] Same as desired_state_mask
-            signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-            bounds: ~ # [optional] Bounds on actual state (See bottom of this file for more info)
+.. code-block:: yaml
 
-          control_input:
-            interface_id: /controller_input_topic # Name of the control input ros topic.
-            # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-            mask: ~ # [optional] Same as desired_state_mask
-            signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-            bounds: # [optional] Bounds on controller's control input (See bottom of this file for more info)
-              norm_type: none
-              norm_upper_bound: 1.
-              norm_lower_bound: 0.
-              upper_bounds: []
-              lower_bounds: []
-              rates_upper_bounds: [1.]
-              rates_lower_bounds: [-1.]
-          tracking_error_bounds: # [optional] Bounds on controller's tracking error : desired_state - actual_state (See bottom of this file for more info)
+  control:
+    extra_topics: ~ # [optional]
+    process_name: ~ # [optional]
+    setpoint_tacking_controllers: # PID like controllers
+      - controller_id: velocity_controller # Display name for this controller, must be UNIQUE among all controllers
+        state_size: 1 # Size of controller setpoint
+        input_size: 1 # Size of control input computed by controller
+        desired_state:
+          interface_id: /controller_cmd_topic # Name of the desired state ros topic.
+          # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+          mask: [0] # [optional] If only a subset of desired_state_topic_id vector is actually used by controller,
+          # use this mask to extract the relevant data : desired_state_used[i] = desired_state_received[desired_state_mask[i]]
+          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+          bounds: ~ # [optional] Bounds on desired state
+
+        actual_state:
+          interface_id: /controller_state_topic # Name of the actual state ros topic.
+          # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+          mask: ~ # [optional] Same as desired_state_mask
+          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+          bounds: ~ # [optional] Bounds on actual state
+
+        control_input:
+          interface_id: /controller_input_topic # Name of the control input ros topic.
+          # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+          mask: ~ # [optional] Same as desired_state_mask
+          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+          bounds: # [optional] Bounds on controller's control input
             norm_type: none
             norm_upper_bound: 1.
             norm_lower_bound: 0.
-            upper_bounds: [1.]
-            lower_bounds: [-1.]
-            rates_upper_bounds: []
-            rates_lower_bounds: []
+            upper_bounds: []
+            lower_bounds: []
+            rates_upper_bounds: [1.]
+            rates_lower_bounds: [-1.]
+        tracking_error_bounds: # [optional] Bounds on controller's tracking error : desired_state - actual_state
+          norm_type: none
+          norm_upper_bound: 1.
+          norm_lower_bound: 0.
+          upper_bounds: [1.]
+          lower_bounds: [-1.]
+          rates_upper_bounds: []
+          rates_lower_bounds: []
 
-      actuators: # Robot actuation
-        combined: # Combined actuation vector
-          interface_id:
-            /control_input # Name of the ros topic publishing the complete robot actuation vector.
-            # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
-          input_size: 3 # Size of the combined input vector
-          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
-          bounds: ~ # [optional] (See bottom of this file for more info)
-          # mask:
-          #   [0,1,3] # [optional] If only a subset of the vectorized message actually constitute the combined input vector
-          #   # use this mask to extract the relevant data : input[i] = msg_vectorized[mask[i]].
-          #   # Must be of size 'input_size', and not contain indices greater than the size of the vectorized message.
-          #   # If not specified or null, will be [0, ..., input_size-1]
+    actuators: # Robot actuation
+      combined: # Combined actuation vector
+        interface_id:
+          /control_input # Name of the ros topic publishing the complete robot actuation vector.
+          # Supported types: [(default) lll_msgs/Float64VectorStamped, any other vectorizable type (see bottom of this file)]
+        input_size: 3 # Size of the combined input vector
+        signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+        bounds: ~ # [optional]
+        # mask:
+        #   [0,1,3] # [optional] If only a subset of the vectorized message actually constitute the combined input vector
+        #   # use this mask to extract the relevant data : input[i] = msg_vectorized[mask[i]].
+        #   # Must be of size 'input_size', and not contain indices greater than the size of the vectorized message.
+        #   # If not specified or null, will be [0, ..., input_size-1]
 
-      supervisors: # 3Laws AI Supervisors
-        - interface_id: /main_supervisor_topic # Name of the supervisor data ros topic.
-          supervisor_id: main_supervisor # Display name for this supervisor, must be UNIQUE among all supervisor
-          signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
+    supervisors: # 3Laws AI Supervisors
+      - interface_id: /main_supervisor_topic # Name of the supervisor data ros topic.
+        supervisor_id: main_supervisor # Display name for this supervisor, must be UNIQUE among all supervisor
+        signal_min_rate: 1s # Maximum time without receiving data before signal is considered timed out
 
-    extras: # [optional]
+
+Extras
+--------
+
+.. code-block:: yaml
+
+    extras:
       passthrough_metrics: # Generic passthrough for scalar metric signals
         - interface_id:
             /metric_1_topic # Name of the ros topic.
@@ -282,14 +404,14 @@ Here is a template of this section. Each sub structure is optional but once a su
           #   # use this mask to extract the relevant data : signal[i] = msg_vectorized[mask[i]].
           #   # Must be of size 'signal_size', and not contain indices greater than the size of the vectorized message.
           #   # If not specified or null, will be [0, ..., signal_size-1]
-          bounds: ~ # [optional] (See bottom of this file for more info)
+          bounds: ~ # [optional]
 
       nodes: # Generic node health checking metric
         - node_id: test_node # Display name of node, must be UNIQUE among all nodes
           # text_log_interface_id:
           #   /test_node_log # [optional] Name of the ros topic publishing log info for that node.
           #   # Supported types: [(default) rcl_interfaces/Log]
-          # process_name: # [optional] (See bottom of this file for more info)
+          # process_name: # [optional]
           #   test_node_exec.
           topics: # List of topics published by the node (only available in ros2 humble and up)
             - interface_id:

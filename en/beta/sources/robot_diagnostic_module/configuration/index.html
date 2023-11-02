@@ -20,7 +20,6 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Credentials" href="credentials/credentials.html" />
     <link rel="prev" title="Launch the RDM" href="../launch/index.html" /> 
 </head>
 
@@ -52,10 +51,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../launch/index.html">Launch the RDM</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="credentials/credentials.html">Credentials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostic_config/diagnostic_config.html">Diagnostic Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="interface/interface.html">Interface Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="robot_description/robot_description.html">Robot Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#general-configuration-rules">General configuration rules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bounds">Bounds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#duration-parameters">Duration parameters</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#scheme">Scheme</a></li>
 </ul>
 </li>
@@ -89,6 +89,18 @@
              
   <section id="configuration">
 <h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h1>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#general-configuration-rules" id="id1">General configuration rules</a></p>
+<ul>
+<li><p><a class="reference internal" href="#bounds" id="id2">Bounds</a></p></li>
+<li><p><a class="reference internal" href="#duration-parameters" id="id3">Duration parameters</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#scheme" id="id4">Scheme</a></p></li>
+</ul>
+</nav>
 <p>The configuration is written inside a <a class="reference external" href="https://yaml.org/">YAML</a>. file. This file can be stored anywhere but the default folder is
 <code class="docutils literal notranslate"><span class="pre">/opt/3lawsRoboticsInc/robot_diagnostic_module/config</span></code></p>
 <p>Other path can be specified in the command line launch command</p>
@@ -98,16 +110,48 @@
 </dl>
 <p>In order to have the more user friendly configuration experience, a lot of the fields are optional.
 The configuration can be build alongside your robot so that it does not represent a burden for the developer.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="credentials/credentials.html">Credentials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="diagnostic_config/diagnostic_config.html">Diagnostic Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interface/interface.html">Interface Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="robot_description/robot_description.html">Robot Description</a></li>
+<section id="general-configuration-rules">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">General configuration rules</a><a class="headerlink" href="#general-configuration-rules" title="Link to this heading"></a></h2>
+<section id="bounds">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">Bounds</a><a class="headerlink" href="#bounds" title="Link to this heading"></a></h3>
+<p>All bounds parameters are similar:</p>
+<ul class="simple">
+<li><p>norm_type: Norm to use for norm bound, possible values (none, L_1, L_2, L_infinity)</p></li>
+<li><p>norm_upper_bound: Upper norm bound, floating point</p></li>
+<li><p>norm_lower_bound: Lower norm bound, floating point</p></li>
+<li><p>upper_bounds:  Upper bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+<li><p>lower_bounds: Lower bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+<li><p>rates_upper_bounds: Upper bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+<li><p>rates_lower_bounds:  Lower bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
 </ul>
-</div>
+<p>Set both (<a href="#id5"><span class="problematic" id="id6">rate_</span></a>)upper_bounds[i] and (<a href="#id7"><span class="problematic" id="id8">rates_</span></a>)lower_bounds[i] to .inf to disable bound on component i.</p>
+<p>Leave empty to deactivate all (rate) bounds checking.</p>
+<p>Both (<a href="#id9"><span class="problematic" id="id10">rate_</span></a>)upper_bounds and (<a href="#id11"><span class="problematic" id="id12">rates_</span></a>)lower_bounds must have same size</p>
+</section>
+<section id="duration-parameters">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Duration parameters</a><a class="headerlink" href="#duration-parameters" title="Link to this heading"></a></h3>
+<p>Parameters like signal_min_rate represent durations.
+They can be specified by an integer number corresponding to a number of nanoseconds:</p>
+<blockquote>
+<div><p>signal_min_rate: 1 -&gt; 1 nanoseconds</p>
+<p>signal_min_rate: 1000000000 -&gt; 1 second</p>
+</div></blockquote>
+<p>They can also be specified by an integer of floating point followed by the time scale:</p>
+<blockquote>
+<div><p>signal_min_rate: 1ns -&gt; 1 nanoseconds</p>
+<p>signal_min_rate: 25us -&gt; 25 microseconds</p>
+<p>signal_min_rate: 0.5ms -&gt; 500 milliseconds</p>
+<p>signal_min_rate: 1s -&gt; 1 second</p>
+<p>signal_min_rate: 20hz -&gt; 50 milliseconds</p>
+<p>signal_min_rate: 1min -&gt; 1 minute</p>
+<p>signal_min_rate: 1h -&gt; 1 hour</p>
+<p>signal_min_rate: 1d -&gt; 1 day</p>
+<p>signal_min_rate: 1y -&gt; 1 year</p>
+</div></blockquote>
+</section>
+</section>
 <section id="scheme">
-<h2>Scheme<a class="headerlink" href="#scheme" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Scheme</a><a class="headerlink" href="#scheme" title="Link to this heading"></a></h2>
 <p>The configuration has <strong>4</strong> distinct parts</p>
 <ul>
 <li><p><a class="reference internal" href="credentials/credentials.html"><span class="doc">Credentials</span></a> (Credentials):</p>
@@ -133,7 +177,6 @@ the interface data stream access for the RDM to monitor.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../launch/index.html" class="btn btn-neutral float-left" title="Launch the RDM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="credentials/credentials.html" class="btn btn-neutral float-right" title="Credentials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

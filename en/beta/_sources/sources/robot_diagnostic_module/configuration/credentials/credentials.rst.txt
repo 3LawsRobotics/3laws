@@ -4,7 +4,7 @@ Credentials
 Credentials are used to connect to the databases to store the data.
 Here is the structure and the field detail.
 
-::
+.. code-block:: yaml
 
   credentials:
     company_id: Company name

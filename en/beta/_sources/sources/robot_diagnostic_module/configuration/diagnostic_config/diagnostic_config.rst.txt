@@ -16,7 +16,7 @@ So for example, a Distance Array like this [0.001, 0.005, 0.01] will flag a mino
 then reevaluates it to 0.005 if the value is inferior to 0.005
 and finally raise the severity to critical if the value goes under 0.001
 
-::
+.. code-block:: yaml
 
   diagnostic_config:
     timeout_factor: <Int> Specify how much time the max signal rate has to be wait
