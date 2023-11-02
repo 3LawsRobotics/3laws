@@ -99,11 +99,11 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#robot-model" id="id1">Robot model</a></p>
 <ul>
-<li><p><a class="reference internal" href="#available-shape-types" id="id2">Available shape types:</a></p></li>
-<li><p><a class="reference internal" href="#available-robot-type" id="id3">Available robot type:</a></p></li>
+<li><p><a class="reference internal" href="#available-shape-types" id="id2">Available shape types</a></p></li>
+<li><p><a class="reference internal" href="#available-robot-type" id="id3">Available robot type</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#auto-generated-nodes" id="id4">Auto Generated Nodes:</a></p></li>
+<li><p><a class="reference internal" href="#auto-generated-nodes" id="id4">Auto Generated Nodes</a></p></li>
 <li><p><a class="reference internal" href="#robot-autonomy-stack" id="id5">Robot Autonomy stack</a></p>
 <ul>
 <li><p><a class="reference internal" href="#mission-manager" id="id6">Mission Manager</a></p></li>
@@ -119,7 +119,7 @@
 </li>
 <li><p><a class="reference internal" href="#robot-control" id="id12">Robot control</a></p>
 <ul>
-<li><p><a class="reference internal" href="#setpoint-tacking-controller" id="id13">SetPoint Tacking Controller:</a></p></li>
+<li><p><a class="reference internal" href="#setpoint-tacking-controller" id="id13">SetPoint Tacking Controller</a></p></li>
 <li><p><a class="reference internal" href="#actuators" id="id14">Actuators</a></p></li>
 <li><p><a class="reference internal" href="#supervisors" id="id15">Supervisors</a></p></li>
 </ul>
@@ -188,7 +188,7 @@
 </pre></div>
 </div>
 <section id="available-shape-types">
-<h3><a class="toc-backref" href="#id2" role="doc-backlink">Available shape types:</a><a class="headerlink" href="#available-shape-types" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">Available shape types</a><a class="headerlink" href="#available-shape-types" title="Link to this heading"></a></h3>
 <p>The kinematic model of the robot defines its geometry. The geometry is described by a base frame,
 a shape, and the pose of that shape in the base frame. We currently support the following shapes:</p>
 <ul class="simple">
@@ -257,7 +257,7 @@ a shape, and the pose of that shape in the base frame. We currently support the 
 </div>
 </section>
 <section id="available-robot-type">
-<h3><a class="toc-backref" href="#id3" role="doc-backlink">Available robot type:</a><a class="headerlink" href="#available-robot-type" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Available robot type</a><a class="headerlink" href="#available-robot-type" title="Link to this heading"></a></h3>
 <p>Each dynamical model type has its own set of states, inputs, and parameters:</p>
 <ul>
 <li><p>mobile_robot:</p>
@@ -288,7 +288,7 @@ a shape, and the pose of that shape in the base frame. We currently support the 
 </section>
 </section>
 <section id="auto-generated-nodes">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">Auto Generated Nodes:</a><a class="headerlink" href="#auto-generated-nodes" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Auto Generated Nodes</a><a class="headerlink" href="#auto-generated-nodes" title="Link to this heading"></a></h2>
 <p>The RDM will automatically create node based on the configuration. So for each substructure of robot_description, a node will be created.
 For example a node sensor is created and will group all topics from each sensor declared in the configuration.</p>
 <p>If you want to add extra topic to a node, you can declare them via the <strong>extra_topics</strong> structure. This structure is a list of topics.</p>
@@ -472,7 +472,7 @@ For example a node sensor is created and will group all topics from each sensor 
 </pre></div>
 </div>
 <section id="setpoint-tacking-controller">
-<h3><a class="toc-backref" href="#id13" role="doc-backlink">SetPoint Tacking Controller:</a><a class="headerlink" href="#setpoint-tacking-controller" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">SetPoint Tacking Controller</a><a class="headerlink" href="#setpoint-tacking-controller" title="Link to this heading"></a></h3>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">setpoint_tacking_controllers</span><span class="p">:</span><span class="w"> </span><span class="c1"># PID like controllers</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">controller_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity_controller</span><span class="w"> </span><span class="c1"># Display name for this controller, must be UNIQUE among all controllers</span>
 <span class="w">    </span><span class="nt">state_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"> </span><span class="c1"># Size of controller setpoint</span>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Supervisor/Copilot &mdash; 3Laws beta documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/copilot/index.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=f0d2c090"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            3Laws
+          </a>
+              <div class="version">
+                beta
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_diagnostic_module/index.html">Robot Diagnostic Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">3Laws</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The Supervisor/Copilot</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-supervisor-copilot">
+<h1>The Supervisor/Copilot<a class="headerlink" href="#the-supervisor-copilot" title="Link to this heading"></a></h1>
+<section id="theory-of-operation">
+<h2>Theory of Operation<a class="headerlink" href="#theory-of-operation" title="Link to this heading"></a></h2>
+<p>The 3Laws Copilot is based on Control Barrier Functions as described in:</p>
+<p><strong>Backup Control Barrier Functions: Formultation and Comparative Study</strong>,
+Yuxiao Chen1 , Mrdjan Jankovic2 , Mario Santillo2 , and Aaron D. Ames1,
+arXiv:2104.11332v1 [eess.SY] 22 Apr 2021, <strong>Applied Safety Critical Control</strong>
+Thomas Gurriet, Doctor of Philosophy, CALIFORNIA INSTITUTE OF TECHNOLOGY, Pasadena, California 2020</p>
+<p>The basic concept is to use the current state of a dynamical system (robot arm,
+mobile device, aircraft, marine vessel, etc.) to drive a model of that system.
+Inputs including locations, geometries, speeds, and accelerations of obstacles
+are also needed when the CoPilot is designed for collision avoidance. A prediction
+of when a collision will occur is used as a basis to modify the currently
+requested steering/speed/attitude commands when necessary.  The CoPilot uses
+an alternative planning/control strategy to prevent the collision by
+slowing or diverting the device away from the collision path.  The alternative
+control strategy is built into the CoPilot by 3Laws based on the objective
+for the particular deployment.</p>
+</section>
+<section id="basic-architecture">
+<h2>Basic Architecture<a class="headerlink" href="#basic-architecture" title="Link to this heading"></a></h2>
+<p>From an operational standpoint, the CoPilot (when used for collision avoidance)
+sits between the planning layer and the hardware control layer.  “Hardware control”
+typically refers to a speed or attitude controller for a vehicle or a joint
+attitude/speed controller for an articulated robot.</p>
+<p>The CoPilot will evaluate the likelihood of a collision and will only modify
+the desired input from the planner when a collision is predicted within the
+estimation window.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, 3Laws Robotics Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: beta
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+       <strong> 
+        <dd><a href="/3laws/en/beta/index.html">beta</a></dd>
+        
+      </strong> 
+      
+    </dl>
+    <dl>
+      <dt>Downloads</dt>
+      <dd><a href="/3laws/en/beta/3laws_manual.pdf">PDF</a></dd>
+    </dl>
+    <hr />
+    Continuous documentation hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+
+  </div>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
