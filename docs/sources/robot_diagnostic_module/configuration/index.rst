@@ -31,7 +31,7 @@ Configuration Template
 
 You can find here a complete template configuration.
 
-- :doc:`examples/template_example`:
+- :doc:`examples/template_example`
 
 
 
