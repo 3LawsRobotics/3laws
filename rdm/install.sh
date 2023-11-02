@@ -457,6 +457,8 @@ if [ -f "$ASSET_NAME" ]; then
   # Install package
   sudo apt install -f ./"$ASSET_NAME"
   cout "Success installation!"
+  cout "Remove artifacts"
+  rm "$ASSET_NAME"
 else
   cout "Package not found...If you encounter any issues, please contact: support@3lawsrobotics.com"
 fi
