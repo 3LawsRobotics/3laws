@@ -85,15 +85,18 @@ The configuration has **4** distinct parts
 - :doc:`credentials/credentials`:
 
   This part is here to specify the credentials to access the databases.
-  These credentials are provided to you by email once your 3LawsRobotics account is created
+  These credentials are provided to you by email once your 3LawsRobotics account is created.
 - :doc:`diagnostic_config/diagnostic_config`:
 
   This part is the more important one. It describe your robot desired behavior,
   the interface data stream access for the RDM to monitor.
 - :doc:`interface/interface`:
 
-  Here are specified the diagnostic specific options such has the criticality of a certain event or the threshold above which a incident is flagged
+  Here are specified the diagnostic specific options such has the criticality of a certain event or the threshold above which a incident is flagged.
 - :doc:`robot_description/robot_description`:
 
-  And this last part allow the user to specify interface specific options such has ROS Quality of Service
+  And this last part allow the user to specify interface specific options such has ROS Quality of Service.
 
+- :doc: `examples/template_example`:
+
+  You can find here a complete template configuration.

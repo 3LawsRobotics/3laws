@@ -68,7 +68,7 @@ Robot model
         tau_steer: 1.
 
 
-Available shape types:
+Available shape types
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The kinematic model of the robot defines its geometry. The geometry is described by a base frame,
@@ -139,7 +139,7 @@ a shape, and the pose of that shape in the base frame. We currently support the 
     mesh_units: mm  [optional] Units of the mesh file, available options: [mm, cm, dm, m, dam, hm, km, mi, nm, yd, ft, in], default: m
 
 
-Available robot type:
+Available robot type
 ^^^^^^^^^^^^^^^^^^^^^
 
 Each dynamical model type has its own set of states, inputs, and parameters:
@@ -170,7 +170,7 @@ Each dynamical model type has its own set of states, inputs, and parameters:
     - tau_vel: time constant of the 1st order tracking response in linear velocity (1/s) (must be strictly positive)
     - tau_steer: time constant of the 1st order tracking response in angular velocity (1/s) (must be strictly positive)
 
-Auto Generated Nodes:
+Auto Generated Nodes
 ---------------------
 
 The RDM will automatically create node based on the configuration. So for each substructure of robot_description, a node will be created.
@@ -388,7 +388,7 @@ Robot control
     actuators: # See next section
     supervisors: # See next section
 
-SetPoint Tacking Controller:
+SetPoint Tacking Controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: yaml
