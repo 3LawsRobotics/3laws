@@ -43,13 +43,13 @@ Bounds
 
 All bounds parameters are similar:
 
-- norm_type: Norm to use for norm bound, possible values (none, L_1, L_2, L_infinity)
-- norm_upper_bound: Upper norm bound, floating point
-- norm_lower_bound: Lower norm bound, floating point
-- upper_bounds:  Upper bounds on the value of the components of the tracking_error, sequence of floating point
-- lower_bounds: Lower bounds on the value of the components of the tracking_error, sequence of floating point
-- rates_upper_bounds: Upper bounds on the value of the components of the tracking_error, sequence of floating point
-- rates_lower_bounds:  Lower bounds on the value of the components of the tracking_error, sequence of floating point
+- **norm_type**: Norm to use for norm bound, possible values (none, L_1, L_2, L_infinity)
+- **norm_upper_bound**: Upper norm bound, floating point
+- **norm_lower_bound**: Lower norm bound, floating point
+- **upper_bounds**:  Upper bounds on the value of the components of the tracking_error, sequence of floating point
+- **lower_bounds**: Lower bounds on the value of the components of the tracking_error, sequence of floating point
+- **rates_upper_bounds**: Upper bounds on the value of the components of the tracking_error, sequence of floating point
+- **rates_lower_bounds**:  Lower bounds on the value of the components of the tracking_error, sequence of floating point
 
 Set both (rate\_)upper_bounds[i] and (rates\_)lower_bounds[i] to .inf to disable bound on component i.
 
@@ -62,29 +62,20 @@ Duration parameters
 Parameters like signal_min_rate represent durations.
 They can be specified by an integer number corresponding to a number of nanoseconds:
 
-  signal_min_rate: 1 -> 1 nanoseconds
-
-  signal_min_rate: 1000000000 -> 1 second
+- **signal_min_rate**: 1 -> 1 nanoseconds
+- **signal_min_rate**: 1000000000 -> 1 second
 
 They can also be specified by an integer of floating point followed by the time scale:
 
-  signal_min_rate: 1ns -> 1 nanoseconds
-
-  signal_min_rate: 25us -> 25 microseconds
-
-  signal_min_rate: 0.5ms -> 500 milliseconds
-
-  signal_min_rate: 1s -> 1 second
-
-  signal_min_rate: 20hz -> 50 milliseconds
-
-  signal_min_rate: 1min -> 1 minute
-
-  signal_min_rate: 1h -> 1 hour
-
-  signal_min_rate: 1d -> 1 day
-
-  signal_min_rate: 1y -> 1 year
+- **signal_min_rate**: 1ns -> 1 nanoseconds
+- **signal_min_rate**: 25us -> 25 microseconds
+- **signal_min_rate**: 0.5ms -> 500 milliseconds
+- **signal_min_rate**: 1s -> 1 second
+- **signal_min_rate**: 20hz -> 50 milliseconds
+- **signal_min_rate**: 1min -> 1 minute
+- **signal_min_rate**: 1h -> 1 hour
+- **signal_min_rate**: 1d -> 1 day
+- **signal_min_rate**: 1y -> 1 year
 
 Scheme
 -------
@@ -97,7 +88,6 @@ Scheme
    diagnostic_config/diagnostic_config
    interface/interface
    robot_description/robot_description
-   examples/template_example
 
 The configuration has **4** distinct parts
 
