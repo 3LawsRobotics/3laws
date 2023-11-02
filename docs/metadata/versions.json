@@ -1,6 +1,7 @@
 {
   "latest": "beta",
   "list": {
-    "refs/heads/master": "beta"
+    "refs/heads/master": "beta-v0.9.4",
+    "refs/heads/doc_sup": "beta-v0.9.5"
   }
 }
