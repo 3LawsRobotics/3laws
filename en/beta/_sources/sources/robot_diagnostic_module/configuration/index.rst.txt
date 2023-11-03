@@ -1,12 +1,6 @@
 Configuration
 ===============
 
-.. toctree::
-   :maxdepth: 1
-   :hidden:
-
-   examples/template_example
-
 .. contents:: Table of Contents
    :depth: 2
    :local:
