@@ -40,6 +40,14 @@ bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/ins
 
 ### Specific package
 
+You can add arguments after the command to specify the wanted ros and ubuntu version, the desired CPU architecture and non interactive arguments like Always Yes and Force.
+
+- ```-r <ROS_DISTRO>```
+- ```-a <ARCH>```
+- ```-v <UBUNTU_DISTRO>```
+- ```-f <Force even if versions doesn't match>```
+- ```-y <Always yes>```
+
 ```bash
 bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh) [-hyf] [-r <ROS_DISTRO>] [-a <ARCH>] [-v <UBUNTU_VERSION>]
 ```
