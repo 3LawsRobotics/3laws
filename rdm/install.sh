@@ -131,6 +131,10 @@ promptChoiceUbuntuDistro() {
   echo "$REPLY"
 }
 
+JAMMY_ROS=("iron" "humble")
+FOCAL_ROS=("foxy" "noetic" "galactic")
+BIONIC_ROS=("melodic")
+
 promptChoiceROSDistro() {
   if [[ $ALWAYS_YES == 1 ]]; then
     cerr "Always Yes selected but a multichoices question has been raised"
@@ -138,7 +142,22 @@ promptChoiceROSDistro() {
     exit 1
   fi
   local REPLY=""
-  select which in "iron" "humble" "foxy" "galactic" "noetic" "melodic"; do
+  if [ -z "$UBUNTU_DISTRO" ]; then
+    local ros_list=("iron" "humble" "foxy" "galactic" "noetic" "melodic")
+  fi
+  if [[ $UBUNTU_DISTRO == "22.04" ]]; then
+    local ros_list=("${JAMMY_ROS[@]}")
+  fi
+
+  if [[ $UBUNTU_DISTRO == "20.04" ]]; then
+    local ros_list=("${FOCAL_ROS[@]}")
+  fi
+
+  if [[ $UBUNTU_DISTRO == "18.04" ]]; then
+    local ros_list=("${BIONIC_ROS[@]}")
+  fi
+
+  select which in "${ros_list[@]}"; do
     case $which in
     "iron")
       REPLY="iron"
@@ -172,24 +191,21 @@ promptChoiceROSDistro() {
 
 valid_args() {
   if [[ $UBUNTU_DISTRO == "22.04" ]]; then
-    local valid_ros=("iron" "humble")
-    for value in "${valid_ros[@]}"; do
+    for value in "${JAMMY_ROS[@]}"; do
       [[ $value == "$QUERY_DISTRO" ]] && return 1
     done
     return 0
   fi
 
   if [[ $UBUNTU_DISTRO == "20.04" ]]; then
-    local valid_ros=("foxy" "noetic" "galactic")
-    for value in "${valid_ros[@]}"; do
+    for value in "${FOCAL_ROS[@]}"; do
       [[ $value == "$QUERY_DISTRO" ]] && return 1
     done
     return 0
   fi
 
   if [[ $UBUNTU_DISTRO == "18.04" ]]; then
-    local valid_ros=("melodic")
-    for value in "${valid_ros[@]}"; do
+    for value in "${BIONIC_ROS[@]}"; do
       [[ $value == "$QUERY_DISTRO" ]] && return 1
     done
     return 0
@@ -285,12 +301,7 @@ shift "$((OPTIND - 1))"
 ctitle "3Laws Robot Diagnostic Module Installer (v$SCRIPT_VERSION)"
 
 if [ "$FORCE" == 1 ] && { [ -z "$WANTED_ARCH" ] || [ -z "$WANTED_ROS" ] || [ -z "$WANTED_UBUNTU" ]; }; then
-  cerr "The force arg requires all information to be provided"
-  exit 1
-fi
-
-if [ "$EUID" -ne 0 ]; then
-  cerr "This script must be run as sudo or with superuser privileges."
+  cerr "The force arg requires all information to be provided, arch, ros and ubuntu version"
   exit 1
 fi
 
@@ -300,6 +311,7 @@ if command -v roscore &>/dev/null; then
   ROS1_DISTRO=$(rosversion -d)
   QUERY_DISTRO=$ROS1_DISTRO
 fi
+
 HAS_ROS2=0
 if command -v ros2 &>/dev/null; then
   HAS_ROS2=1
@@ -316,17 +328,6 @@ arm* | aarch*)
 esac
 
 if [ $FORCE == 0 ]; then
-  if [ -n "$WANTED_ROS" ]; then
-    if [ "$QUERY_DISTRO" != "$WANTED_ROS" ]; then
-      cwarn "Specified ROS version does not match the detected one, select your version:"
-      QUERY_DISTRO=$(promptChoiceROSDistro)
-    fi
-  fi
-
-  if [ $HAS_ROS1 == "$HAS_ROS2" ]; then
-    cwarn "Unable to select a ROS distribution, select your version:"
-    QUERY_DISTRO=$(promptChoiceROSDistro)
-  fi
 
   if [ -n "$WANTED_UBUNTU" ]; then
     if [ "$UBUNTU_DISTRO" != "$WANTED_UBUNTU" ]; then
@@ -342,12 +343,19 @@ if [ $FORCE == 0 ]; then
     fi
   fi
 
-else
-
-  if [[ $QUERY_DISTRO != "$WANTED_ROS" ]]; then
-    cwarn "Specified ROS version does not match the detected one, continue with $WANTED_ROS"
-    QUERY_DISTRO=$WANTED_ROS
+  if [ -n "$WANTED_ROS" ]; then
+    if [ "$QUERY_DISTRO" != "$WANTED_ROS" ]; then
+      cwarn "Specified ROS version does not match the detected one, select your version:"
+      QUERY_DISTRO=$(promptChoiceROSDistro)
+    fi
   fi
+
+  if [ $HAS_ROS1 == "$HAS_ROS2" ]; then
+    cwarn "Unable to select a ROS distribution, select your version:"
+    QUERY_DISTRO=$(promptChoiceROSDistro)
+  fi
+
+else
 
   if [[ $UBUNTU_DISTRO != "$WANTED_UBUNTU" ]]; then
     cwarn "Specified Ubuntu version does not match the detected one, continue with $WANTED_UBUNTU"
@@ -357,6 +365,11 @@ else
   if [[ $ARCH != "$WANTED_ARCH" ]]; then
     cwarn "Specified Architecture does not match the detected one, continue with $WANTED_ARCH"
     ARCH=$WANTED_ARCH
+  fi
+
+  if [[ $QUERY_DISTRO != "$WANTED_ROS" ]]; then
+    cwarn "Specified ROS version does not match the detected one, continue with $WANTED_ROS"
+    QUERY_DISTRO=$WANTED_ROS
   fi
 fi
 
@@ -414,15 +427,32 @@ else
   cwarn "Package not downloaded."
 fi
 
-if [ -f "$ASSET_NAME" ]; then
+if [[ -f "$ASSET_NAME" ]]; then
+  INSTALL=$(promptYesNo "Do you want to install $ASSET_NAME and its dependency (libstd++13) ?" 1)
+
+  if [ "$INSTALL" == 0 ]; then
+    cout "Package downloaded but not installed, if you choose to install manually, be sure to have libstd++13 on your system"
+    exit 0
+  fi
+
+  SUDO=""
+  if [[ "$EUID" -ne 0 && $INSTALL == 1 ]]; then
+    cwarn "To install the RDM automatically some commands must be run as sudo"
+    SUDO="sudo "
+  fi
   # Install dependencies
   STDLIB=libstdc++-13-dev
   STDLIB_INSTALLED=0
   dpkg -l $STDLIB &>/dev/null && STDLIB_INSTALLED=1
-  SED_INSTALLED=0
-  dpkg -l sed &>/dev/null && SED_INSTALLED=1
+  # SED_INSTALLED=0
+  # dpkg -l sed &>/dev/null && SED_INSTALLED=1
 
-  if [[ $STDLIB_INSTALLED == 0 || $SED_INSTALLED == 0 ]]; then
+  # if [[ $STDLIB_INSTALLED == 0 || $SED_INSTALLED == 0 ]]; then
+  #   cout "Installing dependencies..."
+  #   $SUDO apt-get update &>/dev/null
+  # fi
+
+  if [[ $STDLIB_INSTALLED == 0 ]]; then
     cout "Installing dependencies..."
     $SUDO apt-get update &>/dev/null
   fi
@@ -444,18 +474,18 @@ if [ -f "$ASSET_NAME" ]; then
     }
   fi
 
-  if [[ $SED_INSTALLED == 0 ]]; then
-    {
-      $SUDO apt-get install -y sed &>/dev/null
-      cwarn "Installed 'sed' on system!"
-    } || {
-      cerr "Failed to install 'sed' dependency!"
-      exit 65
-    }
-  fi
+  # if [[ $SED_INSTALLED == 0 ]]; then
+  #   {
+  #     $SUDO apt-get install -y sed &>/dev/null
+  #     cwarn "Installed 'sed' on system!"
+  #   } || {
+  #     cerr "Failed to install 'sed' dependency!"
+  #     exit 65
+  #   }
+  # fi
 
   # Install package
-  sudo apt install -f ./"$ASSET_NAME"
+  $SUDO apt install -f ./"$ASSET_NAME"
   cout "Success installation!"
   cout "Remove artifacts"
   rm "$ASSET_NAME"

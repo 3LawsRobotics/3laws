@@ -35,25 +35,38 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Interactive Package installation
 ```bash
-sudo bash -c "$(wget -qO - https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh)"
+bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh)
 ```
 
 ### Specific package
+
+```bash
+bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh) [-hyf] [-r <ROS_DISTRO>] [-a <ARCH>] [-v <UBUNTU_VERSION>]
+```
+
+### Non interactive
 
 Download the package:
 ```bash
 wget https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh
 ```
-Make it executable
+Make it executable:
 ```bash
 chmod +x install.sh
 ```
-Run it with your arguments
+Run it with your arguments:
 ```bash
 sudo ./install.sh [-hyf] [-r <ROS_DISTRO>] [-a <ARCH>] [-v <UBUNTU_VERSION>]
 ```
 
 if ```-yf -r <ROS_DISTRO> -a <ARCH> -v <UBUNTU_VERSION>``` specified, the script is non interactive
+
+As an example:
+
+```bash
+sudo ./install.sh -yf -r foxy -a arm64 -v 20.04
+```
+
 
 ## Robot diagnostic module uninstall:
 
