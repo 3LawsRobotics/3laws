@@ -13,11 +13,15 @@ planning signals and system dynamics.
 
 on Control Barrier Functions as described in:
 
-**Backup Control Barrier Functions: Formultation and Comparative Study**,
+::
+   
 Yuxiao Chen1 , Mrdjan Jankovic2 , Mario Santillo2 , and Aaron D. Ames1,
+**Backup Control Barrier Functions: Formultation and Comparative Study**,
 arXiv:2104.11332v1 [eess.SY] 22 Apr 2021, **Applied Safety Critical Control**
 Thomas Gurriet, Doctor of Philosophy, CALIFORNIA INSTITUTE OF TECHNOLOGY, Pasadena, California 2020
 
+::
+   
 A. Singletary, S. Kolathaya and A. D. Ames, **Safety-Critical Kinematic Control of Robotic Systems** in IEEE Control Systems Letters, vol. 6, pp. 139-144, 2022, doi: 10.1109/LCSYS.2021.3050609.
 
 The basic concept is to use the current state of a dynamical system (robot arm,
@@ -52,10 +56,11 @@ estimation window.
    :alt: CoPilot Architecture showing inputs and outputs from a typical Copilot
 
 There are 2 main steps to integrate CoPilot into an existing stack:
+
 1. Remap the output from the planner (or component that produces commands such
-   as the path to follow, the vehicle speed, or the navigation) and set it as
-   the input to the CoPilot.  Then remap the input of the controller (or
-   component that converts the navigation instructions into hardware/
-   actuator instruction to use the output of CoPilot.
+as the path to follow, the vehicle speed, or the navigation) and set it as
+the input to the CoPilot.  Then remap the input of the controller (or
+component that converts the navigation instructions into hardware/
+actuator instruction to use the output of CoPilot.
 2. Start the CoPilot as part of the stack.
    
