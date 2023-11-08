@@ -144,3 +144,6 @@ CoPilot Operational Modes
 Based on the above description, the CoPilot has been built to support the various
 possible approaches to computing and activating the best failsafe only when
 necessary.
+
+Additional parameters may be added based on the equations of motion for the
+individual system.
