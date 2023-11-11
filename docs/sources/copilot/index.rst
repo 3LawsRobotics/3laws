@@ -1,14 +1,14 @@
-The Supervisor/Copilot
-======================
+The Copilot
+===========
 
 Theory of Operation
 -------------------
 
-The 3Laws Copilot is based the theories behind invariant sets for the states
-of the device. For systems that
+The 3Laws Copilot is a product that uses theories from "invariant set" math for the states of systems to create a mechanism to keep the devices away from
+unsafe areas. For systems that
 are controlled through feedback or feedforward, the desirable state is based
 on the needs of the operation. The idea of an invariant set is that once the
-system is within the set, it will be kept within that set by the control or
+system is within the set, it can be kept within that set by the control or
 planning signals ("failsafe") and system dynamics.  For collision avoidance scenarios, the
 desired set is space where the distance to the nearest object (and relative
 approach speed) is maintained sufficiently large.  In the case of geo-fencing
@@ -27,7 +27,8 @@ Doctor of Philosophy, CALIFORNIA INSTITUTE OF TECHNOLOGY, Pasadena, California 2
 \A. Singletary, S. Kolathaya and A. D. Ames, **Safety-Critical Kinematic Control of Robotic Systems** in IEEE Control Systems Letters, vol. 6, pp. 139-144, 2022, doi: 10.1109/LCSYS.2021.3050609.
 
 The basic concept is to use the current state of a dynamical system (robot arm,
-mobile device, aircraft, marine vessel, etc.) to drive a model of that system.
+mobile device, aircraft, marine vessel, etc.) to drive a model of that system
+to predict when an undesirable condition will occur.
 Inputs including locations, geometries, speeds, and accelerations of obstacles
 are also needed when the CoPilot is designed for collision avoidance. A prediction
 of when a collision will occur is used as a basis to modify the currently
@@ -41,18 +42,70 @@ which can be used to describe the desired state set (e.g. the safe set). It
 is typically not possible to come up with an explicit expression to describe
 the desired invariant set, so some alternative approaches to enforce the same
 concepts have been developed. The CBFs also provide requirements on what
-backup/recovery commanding strategy should be employed to keep the system
+conditions the backup/recovery commanding strategy must satisfy to keep the system
 state inside the target set.  Those requirement involve combining the
 derivatives of the CBFs with respect to the state variables and the equations
 of motion of the original system. The resulting expression is a multi-dimensional
 inequality.  The equation of motion of the system is a function (typically
 nonlinear) of the current system state and of the inputs to the system.  Since
-the failsafes are used as inputs to the system, one can evaluate if
+the failsafes are used to commands the system, one can evaluate if
 a particular failsafe strategy satisfies the relationships that will result
 in keeping the state inside the target set/space.
 
-The current approaches to computing the system's status with respect to
-leaving the invariant set are as follows:
+Basic Architecture
+------------------
+
+From an operational standpoint, the CoPilot (when used for collision avoidance)
+sits between the planning layer and the hardware control layer.  "Hardware control"
+typically refers to a speed or attitude controller for a vehicle or a joint
+attitude/speed controller for an articulated robot.
+
+.. image:: data/supervisor_architecture_1.png
+   :width: 700px
+   :alt: CoPilot Architecture showing inputs and outputs from a typical Copilot
+
+The CoPilot will evaluate the likelihood of a collision and will only modify
+the desired input from the planner when a collision is predicted within the
+estimation window.
+
+.. image:: data/supervisor_architecture_1b.png
+   :width: 700px
+   :alt: CoPilot Architecture showing inputs and outputs from a typical Copilot
+
+There are 2 main steps to integrate CoPilot into an existing stack:
+
+1. Remap the output from the planner (or component that produces commands such
+   as the path to follow, the vehicle speed, or the navigation) and set it as
+   the input to the CoPilot.  Then remap the input of the controller (or
+   component that converts the navigation instructions into hardware/
+   actuator instruction to use the output of CoPilot.
+2. Start the CoPilot as part of the stack.
+
+
+Available Configurations
+------------------------
+
+The following configurations of robot platform and operational objective are
+currently available.
+
++---------------------+---------------------+----------------+
+| Robot Configuration | Collision Avoidance | GeoFencing     |
++=====================+=====================+================+
+| Unicycle            |    in development   |                |
++---------------------+---------------------+----------------+
+| Bicycle             |    in development   |                |
++---------------------+---------------------+----------------+
+| Copter Drone        |                     | in develompent |
++---------------------+---------------------+----------------+
+
+CoPilot Operational Modes
+-------------------------
+
+Based on the physical system being used and the desired operation conditions,
+the CoPilot has multiple methods to produce solutions determine the best
+failsafe strategy to use at any time. CoPilot currently supports the following
+methods, but 3Laws has already selected the most appropriate for the dynamical
+systems that is has implemented.
 
 - Explicit: For simple physical systems it is possible to construct analytical
   functions.  For example, if the goal is to keep an object within a box that
@@ -108,42 +161,7 @@ leaving the invariant set are as follows:
   the various forward integrations.  This ends up being computationally
   costly, so algorithms have been created to switch between possible failsafes
   to produce a good failsafe for the current step.
-  
-Basic Architecture
-------------------
 
-From an operational standpoint, the CoPilot (when used for collision avoidance)
-sits between the planning layer and the hardware control layer.  "Hardware control"
-typically refers to a speed or attitude controller for a vehicle or a joint
-attitude/speed controller for an articulated robot.
-
-.. image:: data/supervisor_architecture_1.png
-   :width: 700px
-   :alt: CoPilot Architecture showing inputs and outputs from a typical Copilot
-
-The CoPilot will evaluate the likelihood of a collision and will only modify
-the desired input from the planner when a collision is predicted within the
-estimation window.
-
-.. image:: data/supervisor_architecture_1b.png
-   :width: 700px
-   :alt: CoPilot Architecture showing inputs and outputs from a typical Copilot
-
-There are 2 main steps to integrate CoPilot into an existing stack:
-
-1. Remap the output from the planner (or component that produces commands such
-   as the path to follow, the vehicle speed, or the navigation) and set it as
-   the input to the CoPilot.  Then remap the input of the controller (or
-   component that converts the navigation instructions into hardware/
-   actuator instruction to use the output of CoPilot.
-2. Start the CoPilot as part of the stack.
-   
-CoPilot Operational Modes
--------------------------
-
-Based on the above description, the CoPilot has been built to support the various
-possible approaches to computing and activating the best failsafe only when
-necessary.
 
 Additional parameters may be added based on the equations of motion for the
 individual system.
