@@ -98,6 +98,57 @@ currently available.
 | Copter Drone        |                     | in develompent |
 +---------------------+---------------------+----------------+
 
+Applications
+------------
+**Active Collision Avoidance**: In the collision avoidance use case, the CoPilot is designed to modify the
+planner's outputs in order to prevent impacts between the robot and other
+actors/obstacles in the operational space. CoPilot can be used as a redundant
+system that filters the planner and only injects changes when a collision is
+predicted.  In many cases, this allows for reducing the load on the planner
+for calculating paths around obstacles or for using the CoPilot as a redundant
+component in the stack, allowing improved reliability calculations by having
+a dissimilar component that can perform obstacle handling as a parallel task.
+A sensor system that detects the presence of the obstacles (e.g. LIDAR, RADAR,
+ultra-sonic) is required for collision avoidance. The sensor suite can be
+shared with the stack or can be dedicated.
+
+In the case of a human "planner", the CoPilot can be responsible for avoiding
+obstacles (assuming they are detected by sensors).  Avoidance actions that
+can be activated in the CoPilot include stopping, avoiding the obstacle to
+the left/right, and backing up.  Custom actions (such as diverting and parking
+until a moving obstacle on a known trajecotry has passed by) can also be
+implemented.
+
+**Repetitive Path Collision Avoidance**: Using a simulation framework with known
+obstacles in the space, Copilot can modify pre-planned paths to avoid
+potential collisions.  The margins between the robot (even for articulated
+robots) and the obstacles can be adjusted based on estimated uncertainties
+in the behavior of the robot and of positioning of the fixed objects. The
+primary use case for this is for systems that perform repetitive tasks.
+
+**GeoFencing**: In previous deployments, the CoPilot has been inserted into the
+autonomy stack at different locations based on the needs for time-criticality.
+CoPilot it most often deployed between the planner and the inner-loop controller,
+but it can also be deployed between the inner-loop controller and the hardware
+for cases where the vehicle, like a racing copter, is going to approach
+undesirable configurations at rates that the high-level planner is unable to
+replan-for, or if the system is being controlled by a human (or automated
+planner) that is not aware of the position of the drone relative to the keep-out
+area.
+
+.. image:: data/supervisor_architecture_1c.png
+   :width: 700px
+   :alt: CoPilot: Alternate placements in the autonomy stack
+
+**Configuration Bounding**:
+CoPilot's underlying math is designed to control state variables such as
+position, speed, and accelerations.  This means that configuring CoPilot to
+avoid situations such as vehicle roll-over because of large lateral accelerations
+or sliding because of large accelerations can also be implemented as objectives.
+Please contact 3Laws for discussions on how these objectives can be made
+available.
+
+
 CoPilot Operational Modes
 -------------------------
 
@@ -107,60 +158,61 @@ failsafe strategy to use at any time. CoPilot currently supports the following
 methods, but 3Laws has already selected the most appropriate for the dynamical
 systems that is has implemented.
 
-- Explicit: For simple physical systems it is possible to construct analytical
-  functions.  For example, if the goal is to keep an object within a box that
-  spans x=[-1,1] and y=[-1,1], the barrier function (inequalities) can be x^2-1 >= 0 and y^2 - 1 >= 0.  With an explicit barrier function and the equation of
-  motion for the system, various failsafe strategies can be evaluated for
-  compliance with the needs.  
+**Explicit:**
+For simple physical systems it is possible to construct analytical
+functions.  For example, if the goal is to keep an object within a box that
+spans x=[-1,1] and y=[-1,1], the barrier function (inequalities) can be x^2-1 >= 0 and y^2 - 1 >= 0.  With an explicit barrier function and the equation of
+motion for the system, various failsafe strategies can be evaluated for
+compliance with the needs.  
 
-- Discretized: It is often possible to describe the desired cost that indicates
-  that the system is within (or outside) the desired state set through a discrete
-  grid that provides the cost at each point.  The CoPilot can scan through these
-  points to determine the system's condition and the validity of the failsafe
-  at that point.
+**Discretized:** It is often possible to describe the desired cost that indicates
+that the system is within (or outside) the desired state set through a discrete
+grid that provides the cost at each point.  The CoPilot can scan through these
+points to determine the system's condition and the validity of the failsafe
+at that point.
 
-  One can use a QP solver to find the best failsafe strategy.
+One can use a QP solver to find the best failsafe strategy.
 
-  A problem with the explicit approach is that if the system reaches the
-  boundary of the safety set, then the desired input from the planner is
-  ignored because the failsafe is the only strategy that is applied.  For
-  example, this might result in a condition where a request to back away from
-  an obstacle is not allowed to happen.
+A problem with the explicit approach is that if the system reaches the
+boundary of the safety set, then the desired input from the planner is
+ignored because the failsafe is the only strategy that is applied.  For
+example, this might result in a condition where a request to back away from
+an obstacle is not allowed to happen.
 
-- Explicit smart switching has heuristic-based approaches to avoid the problem
-  of getting stuck. The computation carries along several failsafe strategies.
-  If one of the strategies can drive the system away from the boundary better
-  than the others, that strategy is applied.  Once the system is no longer at
-  the boundary of the safe region, motion requests from the planner are applied
-  instead of being overridden. 
+**Explicit smart switching** has heuristic-based approaches to avoid the problem
+of getting stuck. The computation carries along several failsafe strategies.
+If one of the strategies can drive the system away from the boundary better
+than the others, that strategy is applied.  Once the system is no longer at
+the boundary of the safe region, motion requests from the planner are applied
+instead of being overridden. 
 
-- Implicit: Another approach is to create a failsafe strategy ahead of time.
-  The system's equations of motion can then be integrated forward in time over
-  a fixed horizon (e.g. 10 seconds) with the current command requests and the
-  failsafes applied over the entire
-  time. If the forward projection estimates that the system would depart from
-  the desired set, then the failsafe strategy is applied instead of the currently
-  requested motion.  By starting the application of the failsafe as soon as a
-  departure is predicted, the system can be kept inside the set.
-  We don't know how far we are from the edge of the control invariant set, but
-  we can measure the distance to the edge of the original "safety" set.
+**Implicit:** Another approach is to create a failsafe strategy ahead of time.
+The system's equations of motion can then be integrated forward in time over
+a fixed horizon (e.g. 10 seconds) with the current command requests and the
+failsafes applied over the entire
+time. If the forward projection estimates that the system would depart from
+the desired set, then the failsafe strategy is applied instead of the currently
+requested motion.  By starting the application of the failsafe as soon as a
+departure is predicted, the system can be kept inside the set.
+We don't know how far we are from the edge of the control invariant set, but
+we can measure the distance to the edge of the original "safety" set.
 
-  When integrating over the trajectory, also integrates the sensitivity. The
-  sensitivity gives information about what modifications to the failsafe
-  could be made. The sensitivity at each point is the effect of changing the
-  failsafe at the beginning of the integration. The edge of the control
-  invariant safety
-  set is described by the collection of multiplying the gradients of the full safety
-  sets times the gradient of the equation of motion times the sensitivity over the horizon of integration. This results in a scalar constraint
-  for each step that must be greater than zero.  These
-  work as constraints on a quadratic problem that is searching for the best
-  failsafe strategy to apply.
+When integrating over the trajectory, also integrates the sensitivity. The
+sensitivity gives information about what modifications to the failsafe
+could be made. The sensitivity at each point is the effect of changing the
+failsafe at the beginning of the integration. The edge of the control
+invariant safety
+set is described by the collection of multiplying the gradients of the full safety
+sets times the gradient of the equation of motion times the sensitivity over the horizon of integration. This results in a scalar constraint
+for each step that must be greater than zero.  These
+work as constraints on a quadratic problem that is searching for the best
+failsafe strategy to apply.
 
-- Implicit with switching: To make the system less prone to getting stuck
-  when using the implicit approach, a family of failsafes can be used to calculate
-  the various forward integrations.  This ends up being computationally
-  costly, so algorithms have been created to switch between possible failsafes
-  to produce a good failsafe for the current step.
+**Implicit with switching:** To make the system less prone to getting stuck
+when using the implicit approach, a family of failsafes can be used to calculate
+the various forward integrations.  This ends up being computationally
+costly, so algorithms have been created to switch between possible failsafes
+to produce a good failsafe for the current step.
 
 
 Additional parameters may be added based on the equations of motion for the
