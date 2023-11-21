@@ -1,56 +1,6 @@
 The Copilot
 ===========
 
-Theory of Operation
--------------------
-
-The 3Laws Copilot is a product that uses theories from "invariant set" math for the states of systems to create a mechanism to keep the devices away from
-unsafe areas. For systems that
-are controlled through feedback or feedforward, the desirable state is based
-on the needs of the operation. The idea of an invariant set is that once the
-system is within the set, it can be kept within that set by the control or
-planning signals ("failsafe") and system dynamics.  For collision avoidance scenarios, the
-desired set is space where the distance to the nearest object (and relative
-approach speed) is maintained sufficiently large.  In the case of geo-fencing
-applications the desired invariant set is anywhere other than the geo-fenced
-region. For a system that may fall over, the desired state might be one where
-it remains upright.
-
-Theory and practical uses are described in:
-
-Yuxiao Chen1 , Mrdjan Jankovic2 , Mario Santillo2 , and Aaron D. Ames1, **Backup Control Barrier Functions: Formultation and Comparative Study**,
-arXiv:2104.11332v1 [eess.SY] 22 Apr 2021,
-   
-Thomas Gurriet, **Applied Safety Critical Control**
-Doctor of Philosophy, CALIFORNIA INSTITUTE OF TECHNOLOGY, Pasadena, California 2020
-
-\A. Singletary, S. Kolathaya and A. D. Ames, **Safety-Critical Kinematic Control of Robotic Systems** in IEEE Control Systems Letters, vol. 6, pp. 139-144, 2022, doi: 10.1109/LCSYS.2021.3050609.
-
-The basic concept is to use the current state of a dynamical system (robot arm,
-mobile device, aircraft, marine vessel, etc.) to drive a model of that system
-to predict when an undesirable condition will occur.
-Inputs including locations, geometries, speeds, and accelerations of obstacles
-are also needed when the CoPilot is designed for collision avoidance. A prediction
-of when a collision will occur is used as a basis to modify the currently
-requested steering/speed/attitude commands when necessary.  The CoPilot uses
-an alternative planning/control strategy called a "failsafe" to prevent the collision by
-slowing or diverting the device away from the collision path.  The failsafe is built into the CoPilot by 3Laws based on the objective
-for the particular deployment.
-
-Set-invariant theories are implemented through Control Barrier Functions (CBFs)
-which can be used to describe the desired state set (e.g. the safe set). It
-is typically not possible to come up with an explicit expression to describe
-the desired invariant set, so some alternative approaches to enforce the same
-concepts have been developed. The CBFs also provide requirements on what
-conditions the backup/recovery commanding strategy must satisfy to keep the system
-state inside the target set.  Those requirement involve combining the
-derivatives of the CBFs with respect to the state variables and the equations
-of motion of the original system. The resulting expression is a multi-dimensional
-inequality.  The equation of motion of the system is a function (typically
-nonlinear) of the current system state and of the inputs to the system.  Since
-the failsafes are used to commands the system, one can evaluate if
-a particular failsafe strategy satisfies the relationships that will result
-in keeping the state inside the target set/space.
 
 Basic Architecture
 ------------------
@@ -95,7 +45,7 @@ currently available.
 +---------------------+---------------------+----------------+
 | Bicycle             |    in development   |                |
 +---------------------+---------------------+----------------+
-| Copter Drone        |                     | in develompent |
+| Copter Drone        |                     | in development |
 +---------------------+---------------------+----------------+
 
 Applications
@@ -148,6 +98,81 @@ or sliding because of large accelerations can also be implemented as objectives.
 Please contact 3Laws for discussions on how these objectives can be made
 available.
 
+Platforms
+---------
+3Laws is pre-packaging several combinations of platform (e.g. robot mechanical
+layout) and Application. These are the most common use-cases that 3Laws is
+aware of.
+
+**Unicycle:** A wheeled-ground-based robot with differential drive for steering
+and coordinated drive for forward/back motion.  The vehicle is able to stop and
+rotate in-place. Configuration parameters include wheel radius, distance between
+the wheels, vehicle extents, acceleration limits, and speed limits.
+
+**Bicycle:** A vehicle that can be modeled with a single-track rolling model
+(e.g. car, truck, golf-cart).  Control consists of speed and steering. Rear
+wheels do not steer. Configuration parameters include wheel radius, maximum
+steering angles, effective wheelbase, vehicle extents, vehicle mass,
+acceleration limits, speed limits, and for faster vehicles, understeer
+gradient.
+
+**Copter:** Flying vehicle that can move and rotate freely in a 3-dimensional
+world, but must be upright most of the time to avoid colliding with the ground.
+Configuration parameters include vehicle extents, mass, moments of inertia,
+acceleration limits, and speed limits.
+
+Theory of Operation
+-------------------
+
+The 3Laws Copilot is a product that uses theories from **invariant set** math for the states of systems to create a mechanism to keep the devices away from
+undesiread state configurations (e.g. unsafe areas, unstable configurations). For systems that
+are controlled through feedback or feedforward, the desirable state is based
+on the needs of the operation and what sensing/actuation methods are
+available. The concept of an **invariant set** is that once the
+system is within the set, it can be kept within that set by the control or
+planning ("failsafe") signals based on system dynamics.  For collision avoidance scenarios, the
+desired set is space where the distance to the nearest object (and relative
+approach speed) is maintained sufficiently large.  In the case of geo-fencing
+applications the desired invariant set is anywhere other than the geo-fenced
+region. For a system that may fall over, the desired state might be one where
+it remains upright.
+
+Theory and practical uses are described in:
+
+Yuxiao Chen1 , Mrdjan Jankovic2 , Mario Santillo2 , and Aaron D. Ames1, **Backup Control Barrier Functions: Formultation and Comparative Study**,
+arXiv:2104.11332v1 [eess.SY] 22 Apr 2021,
+   
+Thomas Gurriet, **Applied Safety Critical Control**
+Doctor of Philosophy, CALIFORNIA INSTITUTE OF TECHNOLOGY, Pasadena, California 2020
+
+\A. Singletary, S. Kolathaya and A. D. Ames, **Safety-Critical Kinematic Control of Robotic Systems** in IEEE Control Systems Letters, vol. 6, pp. 139-144, 2022, doi: 10.1109/LCSYS.2021.3050609.
+
+The basic concept is to use the current state of a dynamical system (robot arm,
+mobile device, aircraft, marine vessel, etc.) to drive a model of that system
+to predict when an undesirable condition will occur.
+Inputs including locations, geometries, speeds, and accelerations of obstacles
+are also needed when the CoPilot is designed for collision avoidance. One way to do this is to predict
+when a collision will occur and to modify the currently
+requested steering/speed/attitude commands as necessary.  The CoPilot then uses
+alternative planning/control strategies to calculate the commands to
+slow or divert the device away from the collision path.  The alternative strategies are built into the CoPilot by 3Laws based on the objective
+for the particular deployment.
+
+Set-invariant theories are implemented through Control Barrier Functions (CBFs)
+which can be used to describe the desired state set (e.g. the safe set). It
+is typically not possible to come up with an explicit expression to describe
+the desired invariant set, so some alternative approaches to enforce the same
+concepts have been developed. The CBFs also provide requirements on what
+conditions the backup/recovery commanding strategy must satisfy to keep the system
+state inside the target set.  Those requirement involve combining the
+derivatives of the CBFs with respect to the state variables and the equations
+of motion of the original system. The resulting expression is a multi-dimensional
+inequality.  The equation of motion of the system is a function (typically
+nonlinear) of the current system state and of the inputs to the system.  Since
+the failsafes are used to commands the system, one can evaluate if
+a particular failsafe strategy satisfies the relationships that will result
+in keeping the state inside the target set/space.
+
 
 CoPilot Operational Modes
 -------------------------
@@ -164,12 +189,6 @@ functions.  For example, if the goal is to keep an object within a box that
 spans x=[-1,1] and y=[-1,1], the barrier function (inequalities) can be x^2-1 >= 0 and y^2 - 1 >= 0.  With an explicit barrier function and the equation of
 motion for the system, various failsafe strategies can be evaluated for
 compliance with the needs.  
-
-**Discretized:** It is often possible to describe the desired cost that indicates
-that the system is within (or outside) the desired state set through a discrete
-grid that provides the cost at each point.  The CoPilot can scan through these
-points to determine the system's condition and the validity of the failsafe
-at that point.
 
 One can use a QP solver to find the best failsafe strategy.
 
