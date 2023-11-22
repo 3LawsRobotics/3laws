@@ -139,13 +139,13 @@ it remains upright.
 
 Theory and practical uses are described in:
 
-Yuxiao Chen1 , Mrdjan Jankovic2 , Mario Santillo2 , and Aaron D. Ames1, **Backup Control Barrier Functions: Formultation and Comparative Study**,
-arXiv:2104.11332v1 [eess.SY] 22 Apr 2021,
-   
-Thomas Gurriet, **Applied Safety Critical Control**
-Doctor of Philosophy, CALIFORNIA INSTITUTE OF TECHNOLOGY, Pasadena, California 2020
+Ames, Aaron D., et al. "Control barrier function based quadratic programs for safety critical systems." IEEE Transactions on Automatic Control 62.8 (2016): 3861-3876.
 
-\A. Singletary, S. Kolathaya and A. D. Ames, **Safety-Critical Kinematic Control of Robotic Systems** in IEEE Control Systems Letters, vol. 6, pp. 139-144, 2022, doi: 10.1109/LCSYS.2021.3050609.
+Chen, Yuxiao, et al. "Backup control barrier functions: Formulation and comparative study." 2021 60th IEEE Conference on Decision and Control (CDC). IEEE, 2021.
+   
+Gurriet, Thomas. "Applied safety critical control." PhD diss., California Institute of Technology, 2020.
+
+Singletary, Andrew, Shishir Kolathaya, and Aaron D. Ames. "Safety-critical kinematic control of robotic systems." IEEE Control Systems Letters 6 (2021): 139-144.
 
 The basic concept is to use the current state of a dynamical system (robot arm,
 mobile device, aircraft, marine vessel, etc.) to drive a model of that system
