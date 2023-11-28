@@ -42,9 +42,9 @@ bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/ins
 
 You can add arguments after the command to specify the wanted ros and ubuntu version, the desired CPU architecture and non interactive arguments like Always Yes and Force.
 
-- ```-r <ROS_DISTRO>```
-- ```-a <ARCH>```
-- ```-v <UBUNTU_DISTRO>```
+- ```-a <ARCH [amd64, arm64]>```
+- ```-v <UBUNTU_DISTRO [18.04, 20.04, 22.04]>```
+- ```-r <ROS_DISTRO [iron, humble, galactic, foxy, noetic]>```
 - ```-f <Force even if versions doesn't match>```
 - ```-y <Always yes>```
 
