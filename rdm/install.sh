@@ -376,7 +376,9 @@ fi
 # Check args validity
 check_values
 
-REGEX_QUERY="lll-rdm-${QUERY_DISTRO}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+_$ARCH"
+PACKAGE_NAME="lll-rdm-${ROS_DISTRO}"
+
+REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+_$ARCH"
 
 # Define variables.
 GH_API="https://api.github.com"
