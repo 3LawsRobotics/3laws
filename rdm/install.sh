@@ -192,23 +192,23 @@ promptChoiceROSDistro() {
 valid_args() {
   if [[ $UBUNTU_DISTRO == "22.04" ]]; then
     for value in "${JAMMY_ROS[@]}"; do
-      [[ $value == "$QUERY_DISTRO" ]] && return 1
+      [[ $value == "$QUERY_DISTRO" ]] && return 0
     done
-    return 0
+    return 1
   fi
 
   if [[ $UBUNTU_DISTRO == "20.04" ]]; then
     for value in "${FOCAL_ROS[@]}"; do
-      [[ $value == "$QUERY_DISTRO" ]] && return 1
+      [[ $value == "$QUERY_DISTRO" ]] && return 0
     done
-    return 0
+    return 1
   fi
 
   if [[ $UBUNTU_DISTRO == "18.04" ]]; then
     for value in "${BIONIC_ROS[@]}"; do
-      [[ $value == "$QUERY_DISTRO" ]] && return 1
+      [[ $value == "$QUERY_DISTRO" ]] && return 0
     done
-    return 0
+    return 1
   fi
 }
 
@@ -220,6 +220,7 @@ Install 3Laws Robot Diagnostic Module
    -h                 show this help menu
    -y                 answer yes to all yes/no questions
    -r                 Optional: ROS distribution
+   -f                 Force install, specify all arguments
    -a                 CPU architecture (arm64v8|amd64)
    -v                 Ubuntu version (22.04|20.04|18.04)
 EOF
@@ -236,20 +237,19 @@ check_values() {
   fi
   if [[ -z $QUERY_DISTRO ]]; then
     cerr "ROS distro not found, specify iron|humble|foxy|galactic|noetic|melodic"
-    echo $QUERY_DISTRO
     QUERY_DISTRO=$(promptChoiceROSDistro)
   fi
 
-  if [[ $(valid_args) == 0 ]]; then
-    if [ $FORCE == 1 ]; then
-      cerr "ROS distro not compatible with your ubuntu distibution"
+  if ! valid_args; then
+    if [ "$FORCE" == 1 ]; then
+      cerr "ROS distro not compatible with your ubuntu distribution"
       echo "22.04: iron | humble"
       echo "20.04: noetic | galactic | foxy"
       echo "18.04: melodic"
       cout "Retry with other arguments"
       exit 1
     fi
-    cerr "ROS distro not compatible with your ubuntu distibution"
+    cerr "ROS distro not compatible with your ubuntu distribution"
     echo "22.04: iron | humble"
     echo "20.04: noetic | galactic | foxy"
     echo "18.04: melodic"
@@ -376,7 +376,7 @@ fi
 # Check args validity
 check_values
 
-PACKAGE_NAME="lll-rdm-${ROS_DISTRO}"
+PACKAGE_NAME="lll-rdm-${QUERY_DISTRO}"
 
 REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+_$ARCH"
 
@@ -399,7 +399,7 @@ ASSET_ID=$(echo "$RESPONSE" | grep -C3 "name.:.\+$REGEX_QUERY" | grep -w id | tr
 [ "$ASSET_ID" ] || {
   VALID_ASSETS=$(echo "$RESPONSE" | grep -o "name.:.\+lll-rdm-[a-zA-Z]\+_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]_[a-zA-Z0-9]\+" | cut -d ":" -f2- | cut -d "\"" -f2-)
   if [ -z "$VALID_ASSETS" ]; then
-    cerr "An error occured, please contact support@3lawsrobotics.com"
+    cerr "An error occurred, please contact support@3lawsrobotics.com"
   else
     echo -e "Error: Failed to get asset id, valid packages:\n$VALID_ASSETS"
   fi
