@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 SCRIPT_VERSION="0.8.0"
+RDM_RELEASE="0.10.0"
+CONTROL_PANEL_RELEASE="control_panel_1.0.0"
 
 # Exit on errors
 set -e
@@ -268,7 +270,7 @@ WANTED_ROS=""
 WANTED_ARCH=""
 WANTED_UBUNTU=""
 
-while getopts hyfr:a:v: opt; do
+while getopts hyifr:a:v: opt; do
   case $opt in
   h)
     show_help
@@ -376,20 +378,19 @@ fi
 # Check args validity
 check_values
 
-PACKAGE_NAME="lll-rdm-${QUERY_DISTRO}"
-
-REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+_$ARCH"
-
 # Define variables.
 GH_API="https://api.github.com"
 GH_REPO="$GH_API/repos/3LawsRobotics/3laws"
-GH_TAGS="$GH_REPO/releases/latest"
+GH_TAGS="$GH_REPO/releases/tags/${RDM_RELEASE}"
 CURL_ARGS="-LJO#"
 
 curl -o /dev/null -s $GH_REPO || {
   echo "Error: Invalid repo, token or network issue!"
   exit 1
 }
+
+PACKAGE_NAME="lll-rdm-${QUERY_DISTRO}"
+REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+_$ARCH"
 
 # Read asset tags.
 RESPONSE=$(curl -s -H "application/vnd.github+json" $GH_TAGS)
@@ -434,57 +435,110 @@ if [[ -f "$ASSET_NAME" ]]; then
 
   if [ "$INSTALL" == 0 ]; then
     cout "Package downloaded but not installed, if you choose to install manually, be sure to have libstd++13 on your system"
+  else
+    SUDO=""
+    if [[ "$EUID" -ne 0 && $INSTALL == 1 ]]; then
+      cwarn "To install the RDM automatically some commands must be run as sudo"
+      SUDO="sudo "
+    fi
+    # Install dependencies
+    STDLIB=libstdc++-13-dev
+    STDLIB_INSTALLED=0
+    dpkg -l $STDLIB &>/dev/null && STDLIB_INSTALLED=1
+
+    if [[ $STDLIB_INSTALLED == 0 ]]; then
+      cout "Installing dependencies..."
+      $SUDO apt-get update &>/dev/null
+    fi
+
+    if [[ $STDLIB_INSTALLED == 0 ]]; then
+      {
+        {
+          $SUDO apt-get install -y $STDLIB &>/dev/null
+        } || {
+          $SUDO apt-get install -y --no-install-recommends software-properties-common &>/dev/null
+          $SUDO add-apt-repository -y "ppa:ubuntu-toolchain-r/test" &>/dev/null
+          cwarn "Added 'ppa:ubuntu-toolchain-r/test' to apt sources!"
+          $SUDO apt-get install -y $STDLIB &>/dev/null
+        }
+        cwarn "Installed '$STDLIB' on system!"
+      } || {
+        cerr "Failed to install '$STDLIB' dependency!"
+        exit 65
+      }
+    fi
+
+    # Install package
+    $SUDO apt install -f ./"$ASSET_NAME"
+    cout "Success installation!"
+    cout "Remove artifacts"
+    rm "$ASSET_NAME"
+  fi
+else
+  cout "Package not found...If you encounter any issues, please contact: support@3lawsrobotics.com"
+fi
+
+ros=ros2
+if [ $HAS_ROS1 == 1 ]; then
+  ros=ros1
+fi
+
+# Install Control Panel
+PACKAGE_NAME="lll-control-panel-${ros}"
+REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+"
+
+GH_TAGS="$GH_REPO/releases/tags/${CONTROL_PANEL_RELEASE}"
+
+RESPONSE=$(curl -s -H "application/vnd.github+json" $GH_TAGS)
+ASSET_NAME=$(echo "$RESPONSE" | grep -o "name.:.\+${REGEX_QUERY}.deb" | cut -d ":" -f2- | cut -d "\"" -f2-)
+ASSET_ID=$(echo "$RESPONSE" | grep -C3 "name.:.\+$REGEX_QUERY" | grep -w id | tr : = | tr -cd '[[:alnum:]]=' | cut -d'=' -f2-)
+
+[ "$ASSET_ID" ] || {
+  VALID_ASSETS=$(echo "$RESPONSE" | grep -o "name.:.\+lll-control-panel-${ros}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]_[a-zA-Z0-9]\+" | cut -d ":" -f2- | cut -d "\"" -f2-)
+  if [ -z "$VALID_ASSETS" ]; then
+    cerr "An error occurred, please contact support@3lawsrobotics.com"
+  else
+    echo -e "Error: Failed to get asset id, valid packages:\n$VALID_ASSETS"
+  fi
+  exit 1
+}
+
+GH_ASSET="$GH_REPO/releases/assets/$ASSET_ID"
+
+DOWNLOAD=0
+if [ -f "$ASSET_NAME" ]; then
+  cwarn "$ASSET_NAME already in your directory."
+  OVERWRITE=$(promptYesNo "Do you want to overwrite $ASSET_NAME in the current directory ?" 1)
+  if [ "$OVERWRITE" -eq 1 ]; then
+    cwarn "Removing $ASSET_NAME"
+    rm "$ASSET_NAME"
+    DOWNLOAD=1
+  fi
+else
+  DOWNLOAD=$(promptYesNo "Do you want to download $ASSET_NAME in the current directory" 1)
+fi
+
+if [[ $DOWNLOAD == 1 ]]; then
+  echo "Downloading package..." >&2
+  curl $CURL_ARGS -s -H 'Accept: application/octet-stream' "$GH_ASSET"
+  cout "Package $ASSET_NAME has been downloaded."
+else
+  cwarn "Package not downloaded."
+fi
+
+if [[ -f "$ASSET_NAME" ]]; then
+  INSTALL=$(promptYesNo "Do you want to install $ASSET_NAME ?" 1)
+
+  if [ "$INSTALL" == 0 ]; then
+    cout "Package downloaded but not installed"
     exit 0
   fi
 
   SUDO=""
   if [[ "$EUID" -ne 0 && $INSTALL == 1 ]]; then
-    cwarn "To install the RDM automatically some commands must be run as sudo"
+    cwarn "To install the Control Panel automatically some commands must be run as sudo"
     SUDO="sudo "
   fi
-  # Install dependencies
-  STDLIB=libstdc++-13-dev
-  STDLIB_INSTALLED=0
-  dpkg -l $STDLIB &>/dev/null && STDLIB_INSTALLED=1
-  # SED_INSTALLED=0
-  # dpkg -l sed &>/dev/null && SED_INSTALLED=1
-
-  # if [[ $STDLIB_INSTALLED == 0 || $SED_INSTALLED == 0 ]]; then
-  #   cout "Installing dependencies..."
-  #   $SUDO apt-get update &>/dev/null
-  # fi
-
-  if [[ $STDLIB_INSTALLED == 0 ]]; then
-    cout "Installing dependencies..."
-    $SUDO apt-get update &>/dev/null
-  fi
-
-  if [[ $STDLIB_INSTALLED == 0 ]]; then
-    {
-      {
-        $SUDO apt-get install -y $STDLIB &>/dev/null
-      } || {
-        $SUDO apt-get install -y --no-install-recommends software-properties-common &>/dev/null
-        $SUDO add-apt-repository -y "ppa:ubuntu-toolchain-r/test" &>/dev/null
-        cwarn "Added 'ppa:ubuntu-toolchain-r/test' to apt sources!"
-        $SUDO apt-get install -y $STDLIB &>/dev/null
-      }
-      cwarn "Installed '$STDLIB' on system!"
-    } || {
-      cerr "Failed to install '$STDLIB' dependency!"
-      exit 65
-    }
-  fi
-
-  # if [[ $SED_INSTALLED == 0 ]]; then
-  #   {
-  #     $SUDO apt-get install -y sed &>/dev/null
-  #     cwarn "Installed 'sed' on system!"
-  #   } || {
-  #     cerr "Failed to install 'sed' dependency!"
-  #     exit 65
-  #   }
-  # fi
 
   # Install package
   $SUDO apt install -f ./"$ASSET_NAME"
