@@ -3,17 +3,17 @@ name: Release Commit
 on:
   workflow_dispatch:
     inputs:
-        version_name:
-          description: "Number of the version of the RDM to release"
-          required: true
-          type: string
+      version_name:
+        description: "Number of the version of the RDM to release"
+        required: true
+        type: string
 
 jobs:
   release_commit:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{secrets.GITHUB_TOKEN}}          
-      CI_COMMIT_MESSAGE: "New RDM release: ${{inputs.version_name}}"
+      GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      CI_COMMIT_MESSAGE: "New release: ${{inputs.version_name}}"
     steps:
       - name: checkhout
         uses: actions/checkout@v3
@@ -24,12 +24,12 @@ jobs:
         run: |
           TODAY=$( date -u '+%Y-%m-%d' )
           echo "${{inputs.version_name}} : $TODAY" >> RDM_version_history.txt
-          
+
           FILE_TO_COMMIT=RDM_version_history.txt
           MESSAGE="$CI_COMMIT_MESSAGE"
           SHA=$( git rev-parse master:$FILE_TO_COMMIT )
           CONTENT=$( base64 -i $FILE_TO_COMMIT )
-          
+
           echo "Push commit"
           gh api --method PUT /repos/:owner/:repo/contents/$FILE_TO_COMMIT \
             --field message="${MESSAGE}" \
