@@ -270,7 +270,7 @@ WANTED_ROS=""
 WANTED_ARCH=""
 WANTED_UBUNTU=""
 
-while getopts hyifr:a:v: opt; do
+while getopts hyfr:a:v: opt; do
   case $opt in
   h)
     show_help
