@@ -4,12 +4,12 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Robot Diagnostic Module &mdash; 3Laws beta documentation</title>
+  <title>Control Panel &mdash; 3Laws beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
   
-    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/robot_diagnostic_module/index.html" />
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/control_panel/index.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -21,9 +21,7 @@
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Installation" href="installation/index.html" />
-    <link rel="prev" title="Introduction" href="../introduction.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,14 +46,9 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Robot Diagnostic Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation/index.html">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="launch/index.html">Launch the RDM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configuration/index.html">Configuration</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_diagnostic_module/index.html">Robot Diagnostic Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot/index.html">The Copilot</a></li>
 </ul>
 
@@ -73,7 +66,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Robot Diagnostic Module</li>
+      <li class="breadcrumb-item active">Control Panel</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -82,38 +75,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="robot-diagnostic-module">
-<h1>Robot Diagnostic Module<a class="headerlink" href="#robot-diagnostic-module" title="Link to this heading"></a></h1>
-<p>The <strong>Robot Diagnostic Module (RDM) of 3LawsRobotics</strong> is a powerful tool to gather analytics about your robot.
-It provides low level metrics such as CPU usage, signal delays but also high level safety critical metrics
-like safety envelope violation, planning inconsistency or sensor damage detection.</p>
-<p>All of these metrics can be viewed on your web browser at <a class="reference external" href="https://3laws.app/">3laws.app</a>.</p>
+  <section id="control-panel">
+<h1>Control Panel<a class="headerlink" href="#control-panel" title="Link to this heading"></a></h1>
+<p>The <strong>Control Panel of 3LawsRobotics</strong> is a helper tool to help the configuration of the 3Laws Robotics supervisor.
+It provides a web interface to configure the 3Laws Robotics supervisor and visualize the robot’s state.
+Currently in alpha version, it runs on your local network and can be accessed from any device with a web browser.
+The backend is written in Python and uses the CGI protocol (Common Gateway Interface) to communicate with the web interface.</p>
 <p>In order to get your account setup and use freely this RDM, please contact <a class="reference external" href="mailto:support&#37;&#52;&#48;3lawsrobotics&#46;com">support<span>&#64;</span>3lawsrobotics<span>&#46;</span>com</a></p>
-<p>This product is still at a Beta development stage. New features are developed every month and some breaking changes can still happened.
+<p>This product is still at a alpha development stage. New features are developed every month and some breaking changes can still happened.
 The 3LawsRobotics Team is available to answer your question.</p>
-<p><strong>For now only a ROS1, ROS2 interface is available but we intend to extend the offer of possible interfaces in the near future with support for MavLink or MQTT for instance.</strong></p>
+<p><strong>For now only a ROS1, ROS2 interfaces are configurable via this control panel.</strong></p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation/index.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation/index.html#quick-installation">Quick Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation/index.html#non-interactive-installation">Non Interactive Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation/index.html#requirements">Requirements</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="launch/index.html">Launch the RDM</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="configuration/index.html">Configuration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="configuration/index.html#configuration-template">Configuration Template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configuration/index.html#general-configuration-rules">General configuration rules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configuration/index.html#scheme">Scheme</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="launch/index.html">Launch the Control Panel</a></li>
 </ul>
 </div>
 </section>
@@ -121,10 +105,7 @@ The 3LawsRobotics Team is available to answer your question.</p>
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="installation/index.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

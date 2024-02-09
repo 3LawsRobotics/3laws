@@ -4,12 +4,12 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Launch the RDM &mdash; 3Laws beta documentation</title>
+  <title>Launch the Control Panel &mdash; 3Laws beta documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
 
   
-    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/robot_diagnostic_module/launch/index.html" />
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/control_panel/launch/index.html" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -21,9 +21,7 @@
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Configuration" href="../configuration/index.html" />
-    <link rel="prev" title="Installation" href="../installation/index.html" /> 
+    <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,14 +46,9 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Robot Diagnostic Module</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Launch the RDM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../configuration/index.html">Configuration</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_diagnostic_module/index.html">Robot Diagnostic Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../copilot/index.html">The Copilot</a></li>
 </ul>
 
@@ -73,8 +66,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Robot Diagnostic Module</a></li>
-      <li class="breadcrumb-item active">Launch the RDM</li>
+      <li class="breadcrumb-item active">Launch the Control Panel</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -83,33 +75,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="launch-the-rdm">
-<h1>Launch the RDM<a class="headerlink" href="#launch-the-rdm" title="Link to this heading"></a></h1>
-<p>To launch the RDM, you only have to source your ros distribution:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/&lt;DISTRO&gt;/setup.sh
+  <section id="launch-the-control-panel">
+<h1>Launch the Control Panel<a class="headerlink" href="#launch-the-control-panel" title="Link to this heading"></a></h1>
+<p>The control panel is installed as a systemd service.
+To start the control panel, use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>lll_control_panel
 </pre></div>
 </div>
-<p>and to run the command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>lll_rdm<span class="w"> </span>rdm.launch.py
+<p>and to stop it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>strop<span class="w"> </span>lll_control_panel
+</pre></div>
+</div>
+<p>Also you can start it manually with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>/opt/3lawsRoboticsInc/control_panel/server.py
 </pre></div>
 </div>
 <p>You can add the following command line options:</p>
 <ul class="simple">
-<li><p><strong>use_sim_time</strong>: &lt;Boolean, default: false&gt; Specify if the RDM use the ros time or the machine time</p></li>
-<li><p><strong>config_filename</strong>: &lt;String&gt; Path to the config file if not in the <em>/opt/3lawsRoboticsInc/robot_diagnostic_module/config</em> folder (<strong>needs to start with /</strong>) or just the config file name inside the default folder.</p></li>
-<li><p><strong>robot_id</strong>: &lt;String&gt; name of your robot</p></li>
-<li><p><strong>log_level</strong>: &lt;trace|debug|info|error, default: info&gt; Log level of the RDM</p></li>
-<li><p><strong>dry_run</strong>: &lt;Boolean&gt; Start the RDM, check the config file and turn off without error if everything has been launched correctly</p></li>
+<li><p><strong>-p or –port</strong>: &lt;number, default: 8000&gt; Specify the port to use</p></li>
 </ul>
+<p>You can specify the emplacement of the configuration file by setting the environment variable <cite>LLL_CONFIG_FOLDER</cite></p>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../installation/index.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../configuration/index.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
