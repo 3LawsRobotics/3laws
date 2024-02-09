@@ -12,6 +12,7 @@ Welcome to 3Laws's documentation!
    sources/introduction
    sources/robot_diagnostic_module/index
    sources/copilot/index
+   sources/control_panel/index
 
 
 
