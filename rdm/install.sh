@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-SCRIPT_VERSION="0.8.0"
-RDM_RELEASE="0.10.0"
-CONTROL_PANEL_RELEASE="control_panel_1.0.0"
+SCRIPT_VERSION="0..0"
+RDM_RELEASE="rdm_0.11.0"
+CONTROL_PANEL_RELEASE="control_panel_0.1.0"
 
 # Exit on errors
 set -e
