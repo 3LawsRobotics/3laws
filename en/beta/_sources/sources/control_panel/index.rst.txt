@@ -22,3 +22,8 @@ The 3LawsRobotics Team is available to answer your question.
    :maxdepth: 2
 
    launch/index
+
+.. toctree::
+   :maxdepth: 2
+
+   usage/index
