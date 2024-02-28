@@ -57,7 +57,7 @@ The computed metrics are published on ROS topics and can be used to monitor the 
 Configuration
 -------------
 The Supervisor require a bit of configuration to work properly.
-Knowing that this process can be a bit complex, 3LawsRobotics created a `control panel <control_panel/index.rst>`_ to help you configure the supervisor.
+Knowing that this process can be a bit complex, 3LawsRobotics created a `control panel <control_panel/index.html>`_ to help you configure the supervisor.
 
 The control panel is a web application that will guide you through the configuration of the supervisor.
 It will ask you for the robot's model, the safety constraints and the control commands topics.

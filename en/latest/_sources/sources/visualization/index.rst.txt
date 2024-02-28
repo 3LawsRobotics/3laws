@@ -1,7 +1,7 @@
 Visualization
 ===============
 
-In order to visualize your monitoring data. 3LawsRobotics provides a `Grafana <https://grafana.com/grafana/>`_ dashboard. You can access it by opening your web browser and navigating to `https://3laws.app`.
+In order to visualize your monitoring data. 3LawsRobotics provides a `Grafana <https://grafana.com/grafana/>`_ dashboard. You can access it by opening your web browser and navigating to `https://3laws.app <https://3laws.app>`_.
 Your credentials will be given to you by your 3LawsRobotics representative.
 
 This dashboards are tailored to quick diagnostic. This means that the workflow will help you dive into the data that is relevant to your current problems. The dashboards are organized in the following way:
