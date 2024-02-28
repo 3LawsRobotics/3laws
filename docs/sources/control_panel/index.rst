@@ -16,13 +16,7 @@ The 3LawsRobotics Team is available to answer your question.
 .. toctree::
    :maxdepth: 2
 
-   installation/index
-
-.. toctree::
-   :maxdepth: 2
-
    launch/index
-
 .. toctree::
    :maxdepth: 2
 

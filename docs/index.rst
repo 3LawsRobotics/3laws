@@ -4,14 +4,17 @@
    contain the root `toctree` directive.
 
 Welcome to 3Laws's documentation!
-==================================
+=================================
+
+Table of Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    sources/introduction
+   sources/installation
+   sources/quick_start
    sources/robot_diagnostic_module/index
-   sources/copilot/index
    sources/control_panel/index
 
 
