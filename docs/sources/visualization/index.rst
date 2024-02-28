@@ -1,6 +1,9 @@
 Visualization
 ===============
 
+Dashboards
+------------
+
 In order to visualize your monitoring data. 3LawsRobotics provides a `Grafana <https://grafana.com/grafana/>`_ dashboard. You can access it by opening your web browser and navigating to `https://3laws.app <https://3laws.app>`_.
 Your credentials will be given to you by your 3LawsRobotics representative.
 
@@ -15,3 +18,25 @@ This dashboards are tailored to quick diagnostic. This means that the workflow w
 
 Each dashboard is composed of several panels with always an overview that helps you to quickly see if everything is fine and then more detailed panels that will help you to precisely diagnose the problem.
 
+Navigation Tools
+----------------
+
+The dashboards are composed of several navigation tools that will help you to quickly diagnose a problem.
+Here is a screenshot of a dashboard with the navigation tools highlighted:
+
+.. image:: data/general_annotated.png
+  :width: 800
+  :alt: General Dashboard
+- **Time Range**: This tool allows you to select the time range of the data that you want to visualize. You can select a predefined range or a custom range.
+- **Refresh**: This tool allows you to refresh the data displayed in the dashboard. You can select the refresh interval or manually refresh the data.
+
+
+Incident Management
+-------------------
+
+The Dashboards display a list of incident, you can use it to navigate directly to the right detailed dashboard.
+The timestamp of the incident is clickable and will bring to the right detailed dashboard at the time of the incident.
+
+.. image:: data/robot_overview_annotated.png
+  :width: 800
+  :alt: Robot Overview Dashboard
