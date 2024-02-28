@@ -1,5 +1,9 @@
-Installation
-===============
+Installation and Update
+========================
+
+.. contents:: Table of Contents
+   :depth: 2
+   :local:
 
 The Supervisor is distributed as a debian package.
 A package is available for each of the following configuration
@@ -14,9 +18,6 @@ A package is available for each of the following configuration
 |        18.04          |     Melodic  |          N/A        | amd64/arm64v8 |
 +-----------------------+--------------+---------------------+---------------+
 
-.. contents:: Table of Contents
-   :depth: 2
-   :local:
 
 
 Quick Installation
@@ -57,4 +58,15 @@ If you want to install a specific package in a non interactive mode, here is the
   sudo ./install.sh [-hyf] [-r <ROS_DISTRO>] [-a <ARCH>] [-v <UBUNTU_VERSION>]
 
 if ``-yf -r <ROS_DISTRO> -a <ARCH> -v <UBUNTU_VERSION>`` specified, the script is non interactive
+
+Update
+------
+
+To update the Supervisor, you can use the same command as for the installation.
+
+The supervisor will be updated to the latest version available for your distribution, **All your configuration will be kept**.
+
+.. code-block:: bash
+
+  bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh)
 

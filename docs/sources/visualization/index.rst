@@ -1,6 +1,12 @@
 Visualization
 ===============
 
+Visualization is a key part of the monitoring system. The following sections will guide you through the visualization tools that are available to you.
+
+.. contents:: Table of Contents
+   :depth: 2
+   :local:
+
 Dashboards
 ------------
 

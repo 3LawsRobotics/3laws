@@ -12,8 +12,8 @@ Table of Contents:
    :maxdepth: 1
 
    sources/introduction
-   sources/installation
-   sources/quick_start
+   sources/getting_started
+   sources/installation_update
    sources/control_panel/index
    sources/visualization/index
 
