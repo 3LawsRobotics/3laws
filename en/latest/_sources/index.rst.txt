@@ -14,8 +14,8 @@ Table of Contents:
    sources/introduction
    sources/installation
    sources/quick_start
-   sources/robot_diagnostic_module/index
    sources/control_panel/index
+   sources/visualization/index
 
 
 

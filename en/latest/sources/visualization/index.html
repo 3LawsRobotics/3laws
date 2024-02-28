@@ -4,12 +4,12 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Control Panel &mdash; 3Laws latest documentation</title>
+  <title>Visualization &mdash; 3Laws latest documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
   
-    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/control_panel/index.html" />
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/visualization/index.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -22,8 +22,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Launch the Control Panel" href="launch/index.html" />
-    <link rel="prev" title="Quick Start" href="../quick_start.html" /> 
+    <link rel="prev" title="Use the Control Panel" href="../control_panel/usage/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,12 +51,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Control Panel</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="launch/index.html">Launch the Control Panel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage/index.html">Use the Control Panel</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../visualization/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control_panel/index.html">Control Panel</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Visualization</a></li>
 </ul>
 
         </div>
@@ -74,7 +69,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Control Panel</li>
+      <li class="breadcrumb-item active">Visualization</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -83,34 +78,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="control-panel">
-<h1>Control Panel<a class="headerlink" href="#control-panel" title="Link to this heading"></a></h1>
-<p>The <strong>Control Panel of 3LawsRobotics</strong> is a helper tool to help the configuration of the 3Laws Robotics supervisor.
-It provides a web interface to configure the 3Laws Robotics supervisor and visualize the robot’s state.
-Currently in alpha version, it runs on your local network and can be accessed from any device with a web browser.
-The backend is written in Python and uses the CGI protocol (Common Gateway Interface) to communicate with the web interface.</p>
-<p>In order to get your account setup and use freely this RDM, please contact <a class="reference external" href="mailto:support&#37;&#52;&#48;3lawsrobotics&#46;com">support<span>&#64;</span>3lawsrobotics<span>&#46;</span>com</a></p>
-<p>This product is still at a alpha development stage. New features are developed every month and some breaking changes can still happened.
-The 3LawsRobotics Team is available to answer your question.</p>
-<p><strong>For now only a ROS1, ROS2 interfaces are configurable via this control panel.</strong></p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="launch/index.html">Launch the Control Panel</a></li>
+  <section id="visualization">
+<h1>Visualization<a class="headerlink" href="#visualization" title="Link to this heading"></a></h1>
+<p>In order to visualize your monitoring data. 3LawsRobotics provides a <a class="reference external" href="https://grafana.com/grafana/">Grafana</a> dashboard. You can access it by opening your web browser and navigating to <cite>https://3laws.app</cite>.
+Your credentials will be given to you by your 3LawsRobotics representative.</p>
+<p>This dashboards are tailored to quick diagnostic. This means that the workflow will help you dive into the data that is relevant to your current problems. The dashboards are organized in the following way:</p>
+<ul class="simple">
+<li><p><strong>General</strong>: This dashboard displays your robots that are currently monitored and their current state. It will also gives you a list of the latest events that have been recorded by the monitoring system.</p></li>
+<li><p><strong>Behavior</strong>: This dashboard gives you insights into the behavior of your robot, like his computed safety score, your distance to obstacle, etc.</p></li>
+<li><p><strong>Hardware</strong>: This dashboard expose the hardware health of the robot. It let you quickly see if the current physical behavior of the robot is coherent with your model or if some degradation is happening.</p></li>
+<li><p><strong>Systems</strong>: This is the most important dashboard. It gives information about the system of the robot like signals delay, computer usage and Node status.</p></li>
+<li><p><strong>Perception</strong>: This dashboard make it easy to diagnose a sensors issue like obstructed sensor or noisy sensor.</p></li>
+<li><p><strong>Control</strong>: Finally this dashboard allows you to observe the good tracking and feasibility of the control commands or the planning algorithms</p></li>
 </ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="usage/index.html">Use the Control Panel</a></li>
-</ul>
-</div>
+<p>Each dashboard is composed of several panels with always an overview that helps you to quickly see if everything is fine and then more detailed panels that will help you to precisely diagnose the problem.</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../quick_start.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="launch/index.html" class="btn btn-neutral float-right" title="Launch the Control Panel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../control_panel/usage/index.html" class="btn btn-neutral float-left" title="Use the Control Panel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
