@@ -6,4 +6,13 @@ In addition, the supervisor contains a diagnostic module to monitor relevant met
 
 In order to make the configuration and the usage of the supervisor easier, we provide a control panel, that will guide you through the configuration of the supervisor and help you visualize the supervisor's safety filter in action.
 
-- :doc:`supervisor/index`
+Installation
+-------------
+
+- :doc:`installation`
+
+Quick Start
+-----------
+
+- :doc:`quickstart`
+
