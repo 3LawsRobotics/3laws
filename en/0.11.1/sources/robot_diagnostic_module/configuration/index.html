@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration &mdash; 3Laws 0.11.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/robot_diagnostic_module/configuration/index.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=57cbeb03"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Credentials" href="credentials/credentials.html" />
+    <link rel="prev" title="Launch the RDM" href="../launch/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            3Laws
+          </a>
+              <div class="version">
+                0.11.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Robot Diagnostic Module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../launch/index.html">Launch the RDM</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-template">Configuration Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#general-configuration-rules">General configuration rules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bounds">Bounds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#duration-parameters">Duration parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scheme">Scheme</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="credentials/credentials.html">Credentials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostic_config/diagnostic_config.html">Diagnostic Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interface/interface.html">Interface Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="robot_description/robot_description.html">Robot Description</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../copilot/index.html">The Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../control_panel/index.html">Control Panel</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">3Laws</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Robot Diagnostic Module</a></li>
+      <li class="breadcrumb-item active">Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h1>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#configuration-template" id="id1">Configuration Template</a></p></li>
+<li><p><a class="reference internal" href="#general-configuration-rules" id="id2">General configuration rules</a></p>
+<ul>
+<li><p><a class="reference internal" href="#bounds" id="id3">Bounds</a></p></li>
+<li><p><a class="reference internal" href="#duration-parameters" id="id4">Duration parameters</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#scheme" id="id5">Scheme</a></p></li>
+</ul>
+</nav>
+<p>The configuration is written inside a <a class="reference external" href="https://yaml.org/">YAML</a>. file. This file can be stored anywhere but the default folder is
+<code class="docutils literal notranslate"><span class="pre">/opt/3lawsRoboticsInc/robot_diagnostic_module/config</span></code></p>
+<p>Other path can be specified in the command line launch command</p>
+<dl class="simple">
+<dt>The <strong>Robot Diagnostic Module</strong> is shipped with a configuration template that can be found here</dt><dd><p><code class="docutils literal notranslate"><span class="pre">/opt/3lawsRoboticsInc/robot_diagnostic_module/config/template_config.yaml</span></code></p>
+</dd>
+</dl>
+<p>In order to have the more user friendly configuration experience, a lot of the fields are optional.
+The configuration can be build alongside your robot so that it does not represent a burden for the developer.</p>
+<section id="configuration-template">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Configuration Template</a><a class="headerlink" href="#configuration-template" title="Link to this heading"></a></h2>
+<p>You can find here a complete template configuration.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="examples/template_example.html"><span class="doc">Template configuration</span></a></p></li>
+</ul>
+</section>
+<section id="general-configuration-rules">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">General configuration rules</a><a class="headerlink" href="#general-configuration-rules" title="Link to this heading"></a></h2>
+<section id="bounds">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Bounds</a><a class="headerlink" href="#bounds" title="Link to this heading"></a></h3>
+<p>All bounds parameters are similar:</p>
+<ul class="simple">
+<li><p><strong>norm_type</strong>: Norm to use for norm bound, possible values (none, L_1, L_2, L_infinity)</p></li>
+<li><p><strong>norm_upper_bound</strong>: Upper norm bound, floating point</p></li>
+<li><p><strong>norm_lower_bound</strong>: Lower norm bound, floating point</p></li>
+<li><p><strong>upper_bounds</strong>:  Upper bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+<li><p><strong>lower_bounds</strong>: Lower bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+<li><p><strong>rates_upper_bounds</strong>: Upper bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+<li><p><strong>rates_lower_bounds</strong>:  Lower bounds on the value of the components of the tracking_error, sequence of floating point</p></li>
+</ul>
+<p>Set both (rate_)upper_bounds[i] and (rates_)lower_bounds[i] to .inf to disable bound on component i.</p>
+<p>Leave empty to deactivate all (rate) bounds checking.</p>
+<p>Both (rate_)upper_bounds and (rates_)lower_bounds must have same size</p>
+</section>
+<section id="duration-parameters">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Duration parameters</a><a class="headerlink" href="#duration-parameters" title="Link to this heading"></a></h3>
+<p>Parameters like signal_min_rate represent durations.
+They can be specified by an integer number corresponding to a number of nanoseconds:</p>
+<ul class="simple">
+<li><p><strong>signal_min_rate</strong>: 1 -&gt; 1 nanoseconds</p></li>
+<li><p><strong>signal_min_rate</strong>: 1000000000 -&gt; 1 second</p></li>
+</ul>
+<p>They can also be specified by an integer of floating point followed by the time scale:</p>
+<ul class="simple">
+<li><p><strong>signal_min_rate</strong>: 1ns -&gt; 1 nanoseconds</p></li>
+<li><p><strong>signal_min_rate</strong>: 25us -&gt; 25 microseconds</p></li>
+<li><p><strong>signal_min_rate</strong>: 0.5ms -&gt; 500 milliseconds</p></li>
+<li><p><strong>signal_min_rate</strong>: 1s -&gt; 1 second</p></li>
+<li><p><strong>signal_min_rate</strong>: 20hz -&gt; 50 milliseconds</p></li>
+<li><p><strong>signal_min_rate</strong>: 1min -&gt; 1 minute</p></li>
+<li><p><strong>signal_min_rate</strong>: 1h -&gt; 1 hour</p></li>
+<li><p><strong>signal_min_rate</strong>: 1d -&gt; 1 day</p></li>
+<li><p><strong>signal_min_rate</strong>: 1y -&gt; 1 year</p></li>
+</ul>
+</section>
+</section>
+<section id="scheme">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Scheme</a><a class="headerlink" href="#scheme" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<p>The configuration has <strong>4</strong> distinct parts</p>
+<ul>
+<li><p><a class="reference internal" href="credentials/credentials.html"><span class="doc">Credentials</span></a>:</p>
+<p>This part is here to specify the credentials to access the databases.
+These credentials are provided to you by email once your 3LawsRobotics account is created.</p>
+</li>
+<li><p><a class="reference internal" href="diagnostic_config/diagnostic_config.html"><span class="doc">Diagnostic Configuration</span></a>:</p>
+<p>This part is the more important one. It describe your robot desired behavior,
+the interface data stream access for the RDM to monitor.</p>
+</li>
+<li><p><a class="reference internal" href="interface/interface.html"><span class="doc">Interface Configuration</span></a>:</p>
+<p>Here are specified the diagnostic specific options such has the criticality of a certain event or the threshold above which a incident is flagged.</p>
+</li>
+<li><p><a class="reference internal" href="robot_description/robot_description.html"><span class="doc">Robot Description</span></a>:</p>
+<p>And this last part allow the user to specify interface specific options such has ROS Quality of Service.</p>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../launch/index.html" class="btn btn-neutral float-left" title="Launch the RDM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="credentials/credentials.html" class="btn btn-neutral float-right" title="Credentials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, 3Laws Robotics Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: 0.11.1
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+      
+        <dd><a href="/3laws/en/beta/index.html">beta</a></dd>
+        
+      
+       <strong> 
+        <dd><a href="/3laws/en/0.11.1/index.html">0.11.1</a></dd>
+        
+      </strong> 
+      
+    </dl>
+    <dl>
+      <dt>Downloads</dt>
+      <dd><a href="/3laws/en/0.11.1/3laws_manual.pdf">PDF</a></dd>
+    </dl>
+    <hr />
+    Continuous documentation hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+
+  </div>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

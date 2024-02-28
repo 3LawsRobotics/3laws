@@ -10,8 +10,9 @@ Welcome to 3Laws's documentation!
    :maxdepth: 2
 
    sources/introduction
+   sources/installation
+   sources/quick_start
    sources/robot_diagnostic_module/index
-   sources/copilot/index
    sources/control_panel/index
 
 
