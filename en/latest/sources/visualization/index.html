@@ -52,7 +52,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../control_panel/index.html">Control Panel</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Visualization</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dashboards">Dashboards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#navigation-tools">Navigation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#incident-management">Incident Management</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -80,6 +85,8 @@
              
   <section id="visualization">
 <h1>Visualization<a class="headerlink" href="#visualization" title="Link to this heading"></a></h1>
+<section id="dashboards">
+<h2>Dashboards<a class="headerlink" href="#dashboards" title="Link to this heading"></a></h2>
 <p>In order to visualize your monitoring data. 3LawsRobotics provides a <a class="reference external" href="https://grafana.com/grafana/">Grafana</a> dashboard. You can access it by opening your web browser and navigating to <a class="reference external" href="https://3laws.app">https://3laws.app</a>.
 Your credentials will be given to you by your 3LawsRobotics representative.</p>
 <p>This dashboards are tailored to quick diagnostic. This means that the workflow will help you dive into the data that is relevant to your current problems. The dashboards are organized in the following way:</p>
@@ -92,6 +99,23 @@ Your credentials will be given to you by your 3LawsRobotics representative.</p>
 <li><p><strong>Control</strong>: Finally this dashboard allows you to observe the good tracking and feasibility of the control commands or the planning algorithms</p></li>
 </ul>
 <p>Each dashboard is composed of several panels with always an overview that helps you to quickly see if everything is fine and then more detailed panels that will help you to precisely diagnose the problem.</p>
+</section>
+<section id="navigation-tools">
+<h2>Navigation Tools<a class="headerlink" href="#navigation-tools" title="Link to this heading"></a></h2>
+<p>The dashboards are composed of several navigation tools that will help you to quickly diagnose a problem.
+Here is a screenshot of a dashboard with the navigation tools highlighted:</p>
+<a class="reference internal image-reference" href="../../_images/general_annotated.png"><img alt="General Dashboard" src="../../_images/general_annotated.png" style="width: 800px;" /></a>
+<ul class="simple">
+<li><p><strong>Time Range</strong>: This tool allows you to select the time range of the data that you want to visualize. You can select a predefined range or a custom range.</p></li>
+<li><p><strong>Refresh</strong>: This tool allows you to refresh the data displayed in the dashboard. You can select the refresh interval or manually refresh the data.</p></li>
+</ul>
+</section>
+<section id="incident-management">
+<h2>Incident Management<a class="headerlink" href="#incident-management" title="Link to this heading"></a></h2>
+<p>The Dashboards display a list of incident, you can use it to navigate directly to the right detailed dashboard.
+The timestamp of the incident is clickable and will bring to the right detailed dashboard at the time of the incident.</p>
+<a class="reference internal image-reference" href="../../_images/robot_overview_annotated.png"><img alt="Robot Overview Dashboard" src="../../_images/robot_overview_annotated.png" style="width: 800px;" /></a>
+</section>
 </section>
 
 
