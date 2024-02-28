@@ -52,7 +52,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">1. Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuration">1. Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">2. Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#launch">3. Launch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#monitor">4. Monitor</a></li>
 </ul>
@@ -87,10 +87,18 @@
              
   <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-</div>
+<p>This guide will help you to install and configure the Supervisor on your robot.</p>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#installation" id="id1">1. Installation</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id2">2. Configuration</a></p></li>
+<li><p><a class="reference internal" href="#launch" id="id3">3. Launch</a></p></li>
+<li><p><a class="reference internal" href="#monitor" id="id4">4. Monitor</a></p></li>
+</ul>
+</nav>
 <section id="installation">
-<h2>1. Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1. Installation</a><a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <p>The first step is to install the Supervisor on your robot.</p>
 <p>On your robot computer, open a terminal and run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>&lt;<span class="o">(</span>curl<span class="w"> </span>https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh<span class="o">)</span>
@@ -104,18 +112,18 @@
 <p>The Supervisor is now installed on your robot.</p>
 </section>
 <section id="configuration">
-<h2>1. Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">2. Configuration</a><a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
 <p>After a successful installation, you will need to configure the Supervisor to match your robot.
 For this use the Control Panel that started automatically after the installation or open a terminal and run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>lll_control_panel
 </pre></div>
 </div>
-<p>By default the control panel is accessible to the following address: <a href="#id1"><span class="problematic" id="id2">`http://localhost:8000`_</span></a></p>
+<p>By default the control panel is accessible to the following address: <cite>http://localhost:8000</cite></p>
 <p>Optionally, you can start a rosbridge server to connect the Control Panel to your robot:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>rosbridge_server<span class="w"> </span>rosbridge_websocket
 </pre></div>
 </div>
-<p>This will provide a websocket server at <a href="#id3"><span class="problematic" id="id4">`ws://localhost:9090`_</span></a> that the control panel can connect to to get topics and services information.</p>
+<p>This will provide a websocket server at <cite>ws://localhost:9090</cite> that the control panel can connect to to get topics and services information.</p>
 <p>Finally, open a web browser and go to the Control Panel address.
 Follow the instructions to configure the Supervisor. You will need to provide the following information:</p>
 <ul class="simple">
@@ -128,7 +136,7 @@ Follow the instructions to configure the Supervisor. You will need to provide th
 </ul>
 </section>
 <section id="launch">
-<h2>3. Launch<a class="headerlink" href="#launch" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">3. Launch</a><a class="headerlink" href="#launch" title="Link to this heading"></a></h2>
 <p>Before starting the supervisor be sure to have your ROS environment correctly set up and sourced.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/&lt;DISTRO&gt;/setup.sh
 </pre></div>
@@ -139,7 +147,7 @@ Follow the instructions to configure the Supervisor. You will need to provide th
 </div>
 </section>
 <section id="monitor">
-<h2>4. Monitor<a class="headerlink" href="#monitor" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">4. Monitor</a><a class="headerlink" href="#monitor" title="Link to this heading"></a></h2>
 <p>Thanks to the websocket server, you can monitor the Supervisor using the Control Panel.
 Go to the Operations tab verify that the Supervisor is running and that the state and perception interfaces are correctly connected.</p>
 </section>

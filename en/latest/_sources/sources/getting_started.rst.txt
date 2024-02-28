@@ -1,14 +1,11 @@
 Getting Started
 ===============
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Steps:
+This guide will help you to install and configure the Supervisor on your robot.
 
-   1. installation
-   2. configuration
-   3. launch
-   4. monitor
+.. contents:: Table of Contents
+   :depth: 2
+   :local:
 
 
 1. Installation
@@ -32,7 +29,7 @@ Restart your terminal to complete the installation. If ROS is not sourced, run t
 
 The Supervisor is now installed on your robot.
 
-1. Configuration
+2. Configuration
 ----------------
 
 After a successful installation, you will need to configure the Supervisor to match your robot.
@@ -42,7 +39,7 @@ For this use the Control Panel that started automatically after the installation
 
   sudo systemctl start lll_control_panel
 
-By default the control panel is accessible to the following address: `http://localhost:8000`_
+By default the control panel is accessible to the following address: `http://localhost:8000`
 
 Optionally, you can start a rosbridge server to connect the Control Panel to your robot:
 
@@ -50,7 +47,7 @@ Optionally, you can start a rosbridge server to connect the Control Panel to you
 
   ros2 run rosbridge_server rosbridge_websocket
 
-This will provide a websocket server at `ws://localhost:9090`_ that the control panel can connect to to get topics and services information.
+This will provide a websocket server at `ws://localhost:9090` that the control panel can connect to to get topics and services information.
 
 Finally, open a web browser and go to the Control Panel address.
 Follow the instructions to configure the Supervisor. You will need to provide the following information:

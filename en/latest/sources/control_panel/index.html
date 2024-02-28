@@ -22,7 +22,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Launch the Control Panel" href="launch/index.html" />
+    <link rel="next" title="Visualization" href="../visualization/index.html" />
     <link rel="prev" title="Installation and Update" href="../installation_update.html" /> 
 </head>
 
@@ -53,8 +53,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation_update.html">Installation and Update</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Control Panel</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="launch/index.html">Launch the Control Panel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage/index.html">Use the Control Panel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch-the-control-panel">Launch the Control Panel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-the-control-panel">Use the Control Panel</a><ul class="simple">
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../visualization/index.html">Visualization</a></li>
@@ -85,6 +87,13 @@
              
   <section id="control-panel">
 <h1>Control Panel<a class="headerlink" href="#control-panel" title="Link to this heading"></a></h1>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#launch-the-control-panel" id="id1">Launch the Control Panel</a></p></li>
+<li><p><a class="reference internal" href="#use-the-control-panel" id="id2">Use the Control Panel</a></p></li>
+</ul>
+</nav>
 <p>The <strong>Control Panel of 3LawsRobotics</strong> is a helper tool to help the configuration of the 3Laws Robotics supervisor.
 It provides a web interface to configure the 3Laws Robotics supervisor and visualize the robot’s state.
 Currently in alpha version, it runs on your local network and can be accessed from any device with a web browser.
@@ -93,16 +102,50 @@ The backend is written in Python and uses the CGI protocol (Common Gateway Inter
 <p>This product is still at a alpha development stage. New features are developed every month and some breaking changes can still happened.
 The 3LawsRobotics Team is available to answer your question.</p>
 <p><strong>For now only a ROS1, ROS2 interfaces are configurable via this control panel.</strong></p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="launch/index.html">Launch the Control Panel</a></li>
+<section id="launch-the-control-panel">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Launch the Control Panel</a><a class="headerlink" href="#launch-the-control-panel" title="Link to this heading"></a></h2>
+<p>The control panel is installed as a systemd service.
+To start the control panel, use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>lll_control_panel
+</pre></div>
+</div>
+<p>and to stop it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>lll_control_panel
+</pre></div>
+</div>
+<p>Also you can start it manually with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>/opt/3lawsRoboticsInc/control_panel/server.py
+</pre></div>
+</div>
+<p>You can add the following command line options:</p>
+<ul class="simple">
+<li><p><strong>-p or –port</strong>: &lt;number, default: 8000&gt; Specify the port to use</p></li>
 </ul>
+<p>You can specify the emplacement of the configuration file by setting the environment variable <cite>LLL_CONFIG_FOLDER</cite></p>
+</section>
+<section id="use-the-control-panel">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Use the Control Panel</a><a class="headerlink" href="#use-the-control-panel" title="Link to this heading"></a></h2>
+<p>The control panel is meant to be user friendly and safe explanatory.
+However some detail might be useful to know.</p>
+<p>Here is a picture of the control panel:</p>
+<a class="reference internal image-reference" href="../../_images/Base_Info_Configuration.png"><img alt="Control Panel without any configuration" src="../../_images/Base_Info_Configuration.png" style="width: 800px;" /></a>
+<p>The control panel is divided in 3 parts:</p>
+<ul class="simple">
+<li><p>The Navigation bar, where you can find the main pages, a Ros Bridge WebSocket status indicator and a WebSocket parameter button.</p></li>
+<li><p>The main page, where you can find the configuration form and the control buttons.</p></li>
+<li><p>The footer, where you can find the version number and the 3LawsRobotics website link and a link to the update pages.</p></li>
+</ul>
+<p>In order to use this control panel at its best, you need to configure the Ros Bridge WebSocket parameters.
+To do so, click on the WebSocket parameter button in the navigation bar and fill the form with the correct parameters.</p>
+<p>By default, the control panel is configured to connect to a Ros Bridge WebSocket running on the same machine, on the port 9090.
+More information on the Ros Bridge WebSocket can be found following this link: <a class="reference external" href="http://wiki.ros.org/rosbridge_suite">Ros Bridge WebSocket</a>.</p>
+<a class="reference internal image-reference" href="../../_images/Valid_Ros_WS_params.png"><img alt="Control Panel with connected Ros Bridge WebSocket" src="../../_images/Valid_Ros_WS_params.png" style="width: 800px;" /></a>
+<p>A successful connection to the Ros Bridge WebSocket will be indicated by a green status indicator in the navigation bar.</p>
+<div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="usage/index.html">Use the Control Panel</a></li>
-</ul>
 </div>
+</section>
 </section>
 
 
@@ -110,7 +153,7 @@ The 3LawsRobotics Team is available to answer your question.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../installation_update.html" class="btn btn-neutral float-left" title="Installation and Update" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="launch/index.html" class="btn btn-neutral float-right" title="Launch the Control Panel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../visualization/index.html" class="btn btn-neutral float-right" title="Visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
