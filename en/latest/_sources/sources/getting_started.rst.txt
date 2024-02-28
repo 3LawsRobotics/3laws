@@ -3,13 +3,12 @@ Getting Started
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Steps:
 
-   installation
-   configuration
-   launch
-   monitor
-   troubleshooting
+   1. installation
+   2. configuration
+   3. launch
+   4. monitor
 
 
 1. Installation

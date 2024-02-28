@@ -13,7 +13,7 @@ Table of Contents:
 
    sources/introduction
    sources/getting_started
-   sources/installation
+   sources/installation_update
    sources/control_panel/index
    sources/visualization/index
 
