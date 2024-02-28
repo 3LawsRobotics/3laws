@@ -12,7 +12,7 @@ and to stop it:
 
 .. code-block:: bash
 
-  sudo systemctl strop lll_control_panel
+  sudo systemctl stop lll_control_panel
 
 Also you can start it manually with the following command:
 

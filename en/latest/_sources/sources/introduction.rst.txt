@@ -6,17 +6,23 @@ In addition, the supervisor contains a diagnostic module to monitor relevant met
 
 In order to make the configuration and the usage of the supervisor easier, we provide a control panel, that will guide you through the configuration of the supervisor and help you visualize the supervisor's safety filter in action.
 
-**Installation:**
 
-- :doc:`installation`
+Architecture
+------------
 
-**Quick Start:**
+The supervisor is composed of 3 main modules:
 
-- :doc:`quick_start`
+- The RAM: The RunTime Assurance Module is the core of the supervisor. It is a filter at the control level that ensures that the robot's control commands are safe and do not violate any safety constraints.
+- The RDM: The Robot Diagnostic Module is a diagnostic tool that monitors and compute metrics about the robot health and safety.
+- The Control Panel: The control panel is a web application that will guide you through the configuration of the supervisor. It will ask you for the robot's model, the safety constraints and the control commands topics. Also, the control panel will help you visualize the supervisor's safety filter in action.
 
 
-ROS dependencies
-----------------
+.. image:: data/architecture.png
+   :width: 800px
+   :alt: Architecture schema
+
+Supervisor interfaces
+---------------------
 
 The 3Laws Robotics supervisor is designed to work with ROS.
 The supervisor is a ROS node that subscribes to the robot's state, perception and control commands, and publishes the filtered control commands to the robot's actuators.
@@ -35,10 +41,10 @@ Multiple ROS version are supported. Here is a list of the tested versions:
 +-----------------------+--------------+---------------------+
 
 
-RealTime Assurance Module (RAM)
+RunTime Assurance Module (RAM)
 --------------------------------
 
-The RealTime Assurance Module (RAM) is a filter at the control level. It is designed to ensure that the robot's control commands are safe and do not violate any safety constraints.
+The RunTime Assurance Module (RAM) is a filter at the control level. It is designed to ensure that the robot's control commands are safe and do not violate any safety constraints.
 Based on formal mathematical proven methods, the RAM is able to guarantee that the robot will not violate any safety constraints, while still allowing the robot to perform at its best.
 
 This ability can be used to safely develop your robot's control and planning algorithms without the need to worry about safety.
@@ -64,3 +70,4 @@ It will ask you for the robot's model, the safety constraints and the control co
 Also, the control panel will help you visualize the supervisor's safety filter in action.
 
 In order to successfully identify the user, the configuration requires a token that 3LawsRobotics will provide you with.
+

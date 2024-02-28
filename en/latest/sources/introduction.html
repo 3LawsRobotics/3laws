@@ -22,7 +22,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="next" title="Getting Started" href="getting_started.html" />
     <link rel="prev" title="Welcome to 3Laws’s documentation!" href="../index.html" /> 
 </head>
 
@@ -50,14 +50,15 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#ros-dependencies">ROS dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#realtime-assurance-module-ram">RealTime Assurance Module (RAM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#supervisor-interfaces">Supervisor interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#runtime-assurance-module-ram">RunTime Assurance Module (RAM)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#robot-diagnostic-module-rdm">Robot Diagnostic Module (RDM)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Update</a></li>
 <li class="toctree-l1"><a class="reference internal" href="control_panel/index.html">Control Panel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualization/index.html">Visualization</a></li>
 </ul>
@@ -90,16 +91,18 @@
 <p>The 3Laws Robotics supervisor is a software package that provides a control filter to insure safety without compromising performance.
 In addition, the supervisor contains a diagnostic module to monitor relevant metrics for safety and performance.</p>
 <p>In order to make the configuration and the usage of the supervisor easier, we provide a control panel, that will guide you through the configuration of the supervisor and help you visualize the supervisor’s safety filter in action.</p>
-<p><strong>Installation:</strong></p>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
+<p>The supervisor is composed of 3 main modules:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="installation.html"><span class="doc">Installation</span></a></p></li>
+<li><p>The RAM: The RunTime Assurance Module is the core of the supervisor. It is a filter at the control level that ensures that the robot’s control commands are safe and do not violate any safety constraints.</p></li>
+<li><p>The RDM: The Robot Diagnostic Module is a diagnostic tool that monitors and compute metrics about the robot health and safety.</p></li>
+<li><p>The Control Panel: The control panel is a web application that will guide you through the configuration of the supervisor. It will ask you for the robot’s model, the safety constraints and the control commands topics. Also, the control panel will help you visualize the supervisor’s safety filter in action.</p></li>
 </ul>
-<p><strong>Quick Start:</strong></p>
-<ul class="simple">
-<li><p><a class="reference internal" href="quick_start.html"><span class="doc">Quick Start</span></a></p></li>
-</ul>
-<section id="ros-dependencies">
-<h2>ROS dependencies<a class="headerlink" href="#ros-dependencies" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="../_images/architecture.png"><img alt="Architecture schema" src="../_images/architecture.png" style="width: 800px;" /></a>
+</section>
+<section id="supervisor-interfaces">
+<h2>Supervisor interfaces<a class="headerlink" href="#supervisor-interfaces" title="Link to this heading"></a></h2>
 <p>The 3Laws Robotics supervisor is designed to work with ROS.
 The supervisor is a ROS node that subscribes to the robot’s state, perception and control commands, and publishes the filtered control commands to the robot’s actuators.
 Also the supervisor can subscribes to the robot’s sensors and planning topics and publishes the diagnostic information.</p>
@@ -127,9 +130,9 @@ Also the supervisor can subscribes to the robot’s sensors and planning topics 
 </tbody>
 </table>
 </section>
-<section id="realtime-assurance-module-ram">
-<h2>RealTime Assurance Module (RAM)<a class="headerlink" href="#realtime-assurance-module-ram" title="Link to this heading"></a></h2>
-<p>The RealTime Assurance Module (RAM) is a filter at the control level. It is designed to ensure that the robot’s control commands are safe and do not violate any safety constraints.
+<section id="runtime-assurance-module-ram">
+<h2>RunTime Assurance Module (RAM)<a class="headerlink" href="#runtime-assurance-module-ram" title="Link to this heading"></a></h2>
+<p>The RunTime Assurance Module (RAM) is a filter at the control level. It is designed to ensure that the robot’s control commands are safe and do not violate any safety constraints.
 Based on formal mathematical proven methods, the RAM is able to guarantee that the robot will not violate any safety constraints, while still allowing the robot to perform at its best.</p>
 <p>This ability can be used to safely develop your robot’s control and planning algorithms without the need to worry about safety.
 With the supervisor, focus on your core value and let the supervisor take care of the safety.</p>
@@ -158,7 +161,7 @@ Also, the control panel will help you visualize the supervisor’s safety filter
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to 3Laws’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
