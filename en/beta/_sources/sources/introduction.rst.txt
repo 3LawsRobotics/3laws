@@ -14,5 +14,5 @@ Installation
 Quick Start
 -----------
 
-- :doc:`quickstart`
+- :doc:`quick_start`
 
