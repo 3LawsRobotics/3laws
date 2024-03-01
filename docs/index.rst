@@ -3,10 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to 3Laws's documentation!
+Welcome to 3Laws Supervisor
 =================================
 
-Table of Contents:
+The 3Laws Supervisor is a tool that runs partly on your robot(s) and partly
+as a cloud service. 
 
 .. toctree::
    :maxdepth: 1
