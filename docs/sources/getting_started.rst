@@ -6,9 +6,9 @@ This guide will help you install and configure the 3Laws Supervisor on your robo
 3Laws Supervisor is designed for installation on Ubuntu systems with ROS1 or
 ROS2 already deployed on the computer.  The Supervisor is roughly made up of 3 functionalities that are discussed in this manual:
 
-#. Robot Diagnostics Module (RDM): A tool to collect metrics about the system operation in real time.  Some of the threshold violations are published in real-time locally, and some are published only in aggregated fashion. The published messages can be sent to a cloud-based dashboard server or can be used locally for decision making by customer software.
+#. Robot diagnostics monitoring (RDM) collects metrics about the system operation in real time.  Some of the threshold violations are published in real-time locally, and some are published only in aggregated fashion. The published messages can be sent to a cloud-based dashboard server or can be used locally for decision making by customer software.
 
-#. RunTime Assurance (RTA) or "Copilot": This is a "safety filter" that takes the information about collision threshold violations from RDM and produces corrective actions to keep the robot away from the possible collision.  By default, this capability is no active.
+#. Run-time assurance (RTA) or "Copilot" is a "safety filter" that takes the information about collision threshold violations from the diagnostics monitor and produces corrective actions to keep the robot away from the possible collision.  By default, this capability is no active.
 
 #. Control Panel: A configuration graphical (browser-based) tool is available to help set the Supervisor up for the robot.
    
@@ -21,15 +21,13 @@ ROS2 already deployed on the computer.  The Supervisor is roughly made up of 3 f
 1. Installation
 ***************
 
-To start the installation of Supervisor on your system, open a terminal and run the following command:
+To install Supervisor on your system, open a terminal and run the following command:
 
 .. code-block:: bash
 
   bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh)
 
-This script will download a package from github and will begin the installation.Note that the package name starts with "lll-rdm". This represents 3Laws along with the products original name (Robot Diagnostics Module). As the script proceeds it will try to determine your system's configuration so that
-the appropriate components are installed. The script will prompt you
-for help with configuration if it is unable to find your computer's ROS distribution or architecture.
+This script will download a package from github and will begin the installation.Note that the package name starts with "lll-rdm". The "lll" represents 3Laws. The product's original name was Robot Diagnostics Module. As the script proceeds it will try to determine your system's configuration so that the appropriate components are installed. The script will prompt you for help with configuration if it is unable to find your computer's ROS distribution or architecture.
 
 During the execution of the script, several questions will be asked:
 #. A request to confirm the desire to download the package.
@@ -151,7 +149,7 @@ The Configuration > Supervisor page contains configuration entries for both the 
     * Advanced Settings: Max delay (s) and Timeout Factor are thresholds for triggering events informing that data failed to arrive (if data is not received for max-delay * timeout-factor seconds.  If the copilot (run-time assurance) is active, failure to receive robot state or desired control input (in timeout factor * 1/signal-rate) will cause the copilot to switch to the Failure Command Mode (which is explained below).
   * Copilot : The Copilot enables the run-time assurance capability where desired commands to the robot from the autonomy stack ("desired inputs") are modified in order to avoid collisions, and altered versions are published through a separate message. 
     
-    * Activate: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Copilot will only modify the outputs if the option is activated.  If it is not activated, the un-modified "desired control input" will be transmitted on the designated "Computed safe control" message. 
+    * Activate: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Copilot will only modify the outputs if the option is activated.  If it is not activated, the unmodified "desired control input" will be transmitted on the designated "Computed safe control" message. 
       
     * Aggressiveness: This parameter controls how far from the nearest obstacle the safety filter starts having more effect on the commands and how strongly the safety filter pushes the robot back into the "safe" region if the safety definition has been violated.  A larger value means that the control inputs from the planner will start to be modified when the robot is farther from an object/obstacle.  In general this will produce larger margins.  A larger value also means that if an obstacle is detected within the collision distance, the command modified by the run-time assurance will try to move the robot away from the object more aggressively.  Typical values are between 0.5 and 1.0, but values in the range of 1000 might be used in reasonable situations.  A smaller value means that the the robot will get closer to the obstacles (higher performance) before being diverted. 
 
@@ -166,7 +164,7 @@ The Configuration > Supervisor page contains configuration entries for both the 
       * Yield on failure:  This checkbox is like the "Send Desired" option.  Setting this checkbox will override the failure control mode and just forward the "Desired control input" unmodified.
       * Can resume from failure: With this checkbox filled in, once the input data (control input, laser scan, and state) values start appearing after a failure, the robot will be commanded back into motion (if the desired control input is asking for that).  If the box is unchecked once there is a failure, the robot will remain stopped until the Supervisor is restarted.
 
-      * Use localization:  Supervisor provides a MarkerArray that displays the robot's bounding box and rays to the closest obstacles.  If "Use Localization" is set, the display is created relative to the world frame.  In situations where the localization may be less reliable, this checkbox can be de-selected, and the visualization will be based on the current robot base frame.
+      * Use localization:  Supervisor provides a MarkerArray that displays the robot's bounding box and rays to the closest obstacles.  If "Use Localization" is set, the display is created relative to the world frame.  In situations where the localization may be less reliable, this checkbox can be deselected, and the visualization will be based on the current robot base frame.
 
       * Accept wrong size laserscan: One of the checks that is made on the incoming data is that the laserscan is delivering the expected number of scan points each frame. However, there are many laser scanners that are not consistent in the number of scan points they deliver.  Checking this option allows for laser scanners with non-constant number of scan points reported.
 
@@ -184,7 +182,7 @@ The Configuration > Supervisor page contains configuration entries for both the 
 
 - **Supervisor activation logic**:
 
-  * Finite States are messages that the Diagnostics can listen to and issue events when the value of the finite state matches a pre-defined value.  This could be useful to adivse, for example, as the temperature of a component or process reaches pre-defined values.  If the temperature goes too high or too low, the time at which the threshold is reached may be of interest.  Keep in mind that if a value changes too rapidly, it might pass through a single value too quickly to be detected at that value, so in some cases it may make more sense to use an integer representation of the variable.   Internally, the diagnostic converts the measurand and the threshold to strings for comparison.
+  * Finite States are messages that the Diagnostics can listen to and issue events when the value of the finite state matches a predefined value.  This could be useful to provide notifications, for example, as the temperature of a component or process reaches predefined values.  If the temperature goes too high or too low, the time at which the threshold is reached may be of interest.  Keep in mind that if a value changes too rapidly, it might pass through a single value too quickly to be detected at that value, so in some cases it may make more sense to use an integer representation of the variable.   Internally, the diagnostic converts the measurand and the threshold to strings for comparison.
 
 Localization
 ============
@@ -196,7 +194,7 @@ Dialogs to connect to the state information provided for the robot and for confi
    :alt: Configuration > Localization page where monitoring of the vehicles location/state is configured. 
 
 
-- **Localization topic**: The connection to the ROS state topic is configured in this area. As with input commands, the message topic name, message topic type, expected message topic quality, and expected message rates are specified. If the message quality fails or the message receipt rate is not met, the monitor will issue allerts, and the Copilot will switch to the Failsafe strategy.  The mask can be used to **NEED HELP UNDERSTANDING HOW THE MASK IS USED**
+- **Localization topic**: The connection to the ROS state topic is configured in this area. As with input commands, the message topic name, message topic type, expected message topic quality, and expected message rates are specified. If the message quality fails or the message receipt rate is not met, the monitor will issue alerts, and the Copilot will switch to the Failsafe strategy.  The mask needs to be customized if the localization topic is a vector of values that is not a standard ROS message.  The index in the input vector relating to the individual states (x, y, yaw) nees to be set correctly. 
 
 
 - **Robot state constraints**: Limits on the absolute location (relative to the origin of the world frame) and limits on the measured rates of change (with respect to time) of the vehicle state are set in this area in order to trigger events and alerts for the monitoring function.  The "no bounds" option allows infinite travel in the respective directions or speeds.
@@ -221,7 +219,7 @@ The collision avoidance depends mostly on the Configuration > Perception dialog 
 
   * Laserscan Pose: The orientation and position of the laserscan relative to the vehicle body or whichever frame is used must be specified. As with the robot's body position, the user is advised to plot the data in rviz to ensure that the geometry is set correctly.
 
-- **Obstacle Map**: An existing perception system can be used instead of a 2D-LIDAR, but it most provide an ObjectArray that matches the definition for an lllₘsgs/ObjectArray.  The definition is as follows:
+- **Obstacle Map**: An existing perception system can be used instead of a 2D-LIDAR, but it most provide an ObjectArray that matches the definition for an lll_rsgs/ObjectArray.  The definition is as follows:
 
   std_msgs/Header header
   Object[] objects
@@ -244,13 +242,13 @@ where Object[] is defined by:
   ## Bounds on object frame velocity (considered inactive if non finite)
   geometry_msgs/Twist velocity_upper_bounds
   geometry_msgs/Twist velocity_lower_bounds
-  ## Bounds on object frame velocity norms (considered inactive if stricly less than 0)
+  ## Bounds on object frame velocity norms (considered inactive if strictly less than 0)
   float64 linear_velocity_norm2_bound
   float64 angular_velocity_norm2_bound
   ## Bounds on object frame acceleration  (considered inactive if non finite)
-  geometry_msgs/Accel acceleration_upper_bounds
+  geometry_mix's/Accel acceleration_upper_bounds
   geometry_msgs/Accel acceleration_lower_bounds
-  ## Bounds on object frame acceleration norms (considered inactive if stricly less than 0)
+  ## Bounds on object frame acceleration norms (considered inactive if strictly less than 0)
   float64 linear_acceleration_norm2_bound
   float64 angular_acceleration_norm2_bound
 
@@ -264,17 +262,35 @@ Before starting the supervisor be sure to have your ROS environment correctly se
 
   source /opt/ros/<DISTRO>/setup.sh
 
-To launch the Supervisor you can use the following command:
+To launch the Supervisor, use the following command:
 
 .. code-block:: bash
 
   ros2 launch lll_rdm rdm.launch.py
 
-4. Monitor
-**********
+4. Operations
+*************
 
-Thanks to the websocket server, you can monitor the Supervisor using the Control Panel.
-Go to the Operations tab verify that the Supervisor is running and that the state and perception interfaces are correctly connected.
+If the websocket (rosbridge) is running along with the supervisor, the Control Panel's *Operations* tab can be used to obtain a quick overview of the status of the copilot.  
 
+.. image:: data/cpanel6.png
+   :width: 800px
+   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
+In the image above, the Supervisor is operational and the Copilot is configured to be active as indicated by the arrows between them.  However, these boxes are colored yellow/gold, indicating that they are still initializing.   The framed section above the diagram shows the activity status for some of the critical components:
 
+* The model is healthy (green check).
+
+* The Supervisor in unhealthy/initializing (gold).
+
+* Localization is also unhealthy/initializing (gold).
+
+* Perception is reported as healthy.
+
+The lower section of the panel is showing strip charts.  The categories that are currently displayed represent:
+
+* the State Safeness - the barrier function value.  When this value goes to zero or below zero, the system is evaluated as being in a collision state.
+
+* the Input Modification status - When this value is zero, the copilot is not modifying the input from the autonomy stack. That is, the filtering is in passive mode.  When this value is non-zero, it means that the copilot is actively modifying the commanded input.
+
+* Assurance violation represents that during the process of solving to find the closest input to the desired one, assumptions in the model or uncertainty had to be violated in order to produce a valid solution.  In this case the copilot is producing the best input to bring the system to the desired set, but the guarantees that the system is in the desired region and will remain there no longer hold.
