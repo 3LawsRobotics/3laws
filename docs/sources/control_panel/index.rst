@@ -1,6 +1,30 @@
 Control Panel
 ========================
 
+
+.. EXAMPLE FOR COLLAPSE
+
+.. collapse:: Details
+
+    Something small enough to escape casual notice.
+
+
+.. collapse:: A Different Label
+    :class: custom-summary
+    :name: summary0
+
+    Something else that might escape notice.
+
+.. collapse:: A long code block
+
+    .. code-block:: python
+
+        print("Not really")
+
+Another summary
+  with open details because the source list has the additional class
+  value "open".
+
 .. contents:: Table of Contents
    :depth: 2
    :local:

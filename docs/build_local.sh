@@ -3,6 +3,11 @@
 # Exit on error
 set -e
 
+SCRIPTS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+
+rm -r "$SCRIPTS_DIR"/.gh-pages
+rm -r "$SCRIPTS_DIR"/build
+
 # Prepare paths
 srcDir="$(
   cd -- "$(dirname "$0")" >/dev/null 2>&1
