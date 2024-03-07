@@ -1,13 +1,8 @@
 Introduction
 ############
 
-<<<<<<< HEAD
 The 3Laws Robotics Supervisor is a software package that provides a control filter to add collision avoidance without compromising performance.
 The Supervisor contains a diagnostic module that monitors multiple metrics that indicate safety and performance.
-=======
-The 3Laws Robotics Supervisor is a software package that provides a control filter to ensure safety without compromising performance.
-Additionally, the Supervisor contains a diagnostic module that monitors multiple metrics that indicate safety and performance.
->>>>>>> fe03473 (First pass (incomplete) - Want to add copilot explanation back in later)
 
 Multiple ROS version are supported:
 
