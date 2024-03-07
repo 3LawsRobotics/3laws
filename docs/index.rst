@@ -10,12 +10,10 @@ The 3Laws Supervisor is a tool that runs on your robot(s) and can optionally
 transmit data to a cloud-based dashboard. 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
 
    sources/introduction
-   sources/getting_started
-   sources/installation_update
-   sources/control_panel/index
+   sources/usage
    sources/visualization/index
 
 

@@ -1,5 +1,5 @@
 Introduction
-============
+############
 
 The 3Laws Robotics Supervisor is a software package that provides a control filter to add collision avoidance without compromising performance.
 The Supervisor contains a diagnostic module that monitors multiple metrics that indicate safety and performance.
@@ -18,7 +18,7 @@ Multiple ROS version are supported:
 
 
 Architecture
-------------
+************
 
 The Supervisor has 3 main functions:
 
@@ -31,14 +31,14 @@ The Supervisor has 3 main functions:
    :alt: Architecture schema
 
 Supervisor interfaces
----------------------
+*********************
 
 The 3Laws Robotics Supervisor currently requires that the robot uses the Robot Operating System (`ROS <http://www.ros.org>`_).
 The Supervisor is a ROS node that subscribes to the robot's state, sensors, planning, computational measures, perception, and control commands.  If the RTA capability is enabled, Supervisor will also publish safety-filtered control commands to the robot's actuators.
 
 
-RunTime Assurance
------------------
+Run-time assurance
+******************
 
 The run-time assurance capability, also referred to as **Copilot**, is a filter that operates at the control rate. It is designed to ensure that the robot's control commands avoid collisions by maintaining minimum distances to proximity to points measured by a laser scanner.  Based on formal mathematical proven methods, the Copilot is able to prevent the robot from colliding while still allowing the robot to reach maximum performance when the system is far from any obstacles in its current travel direction. 
 
@@ -49,18 +49,18 @@ predict potential collisions.  Supervisor currently supports differential-drive 
 
 
 Robot diagnostics monitor
--------------------------
+*************************
 
 The diagnostics that monitors and compute metrics about the robot health and safety.  The computed metrics are published on ROS topics that are available locally on the robot.  High frequency versions of the metrics can be used to monitor the robot's health and safety in real-time.  In other words, these metrics are available to other processes on the robot which can then use the information to make decisions.
 
 The metrics are also summarized and optionally sent to a cloud database for display and analysis. 3LawsRobotics cloud dashboards help diagnose issues the robot might have. These Dashboards are made using `Grafana <https://grafana.com/grafana/>`_.
 
 Configuration
--------------
+*************
 For effective operation, the Supervisor needs to be configured. Details for this step are presented in `Getting Started <getting_started.html>`_.
 The Control Panel also visualizes operation of the Supervisor's Copilot.
 
 New Topics
-----------
+**********
 
 **ADD LIST OF TOPICS PUBLISHED BY SUPERVISOR WITH EXPLANATIONS** 
