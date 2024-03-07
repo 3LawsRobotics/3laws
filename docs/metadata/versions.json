@@ -2,6 +2,7 @@
   "latest": "latest",
   "list": {
     "refs/heads/master": "latest",
-    "refs/tags/rdm_0.11.1": "RDM-v0.11.1"
+    "refs/tags/rdm_0.11.1": "RDM-v0.11.1",
+    "refs/heads/feature/al_updates": "pre-release"
   }
 }
