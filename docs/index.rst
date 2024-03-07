@@ -6,8 +6,8 @@
 Welcome to 3Laws Supervisor
 =================================
 
-The 3Laws Supervisor is a tool that runs partly on your robot(s) and partly
-as a cloud service. 
+The 3Laws Supervisor is a tool that runs on your robot(s) and can optionally
+transmit data to a cloud-based dashboard. 
 
 .. toctree::
    :maxdepth: 1

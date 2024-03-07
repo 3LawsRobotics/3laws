@@ -75,14 +75,3 @@ More information on the Ros Bridge WebSocket can be found following this link: `
    :alt: Control Panel with connected Ros Bridge WebSocket
 
 A successful connection to the Ros Bridge WebSocket will be indicated by a green status indicator in the navigation bar.
-
-
-
-.. toctree::
-   :maxdepth: 2
-
-   launch/index
-.. toctree::
-   :maxdepth: 2
-
-   usage/index

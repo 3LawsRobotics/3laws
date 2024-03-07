@@ -144,7 +144,7 @@ The Configuration > Supervisor page contains configuration entries for both the 
    :alt: Configuration > Supervisor page where robot diagnostic monitoring thresholds and run-time assurance settings are available. 
 
 
-- **Basic configuration**: To enable broadcasting of the aggregated statistics to the cloud account, select the *Upload metrics to cloud database" box.
+- **Basic configuration**: To enable broadcasting of the aggregated statistics to the cloud account, select the *Upload metrics to cloud database* box.
 
   * **World Frame**: Similar to "base robot frame", the name of the world frame (typically *odom* or *map*) must be specified.
     
