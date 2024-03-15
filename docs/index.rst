@@ -14,7 +14,9 @@ transmit data to a cloud-based dashboard.
 
    sources/introduction
    sources/usage
+   sources/copyrights
    sources/visualization/index
+   sources/theory
 
 
 
