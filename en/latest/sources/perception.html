@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perception &mdash; 3Laws latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/perception.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Copyrights" href="copyrights.html" />
+    <link rel="prev" title="Localization" href="localization.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            3Laws
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="usage.html">Using Supervisor</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usage.html#installation">1. Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="usage.html#configuration">2. Configuration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="credentials.html">Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robot_model.html">Robot Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supervisor.html">Supervisor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="localization.html">Localization</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Perception</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#launch">3. Launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#operations">4. Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#update">5. Update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="copyrights.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory and Implementation of Control Barrier Functions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">3Laws</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="usage.html">Using Supervisor</a></li>
+      <li class="breadcrumb-item active">Perception</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="perception">
+<h1>Perception<a class="headerlink" href="#perception" title="Link to this heading"></a></h1>
+<p>The collision avoidance depends mostly on the Configuration &gt; Perception dialog where the connection and description of either a laserscan sensor or an obstacle map message is configured.</p>
+<a class="reference internal image-reference" href="../_images/cpanel5.png"><img alt="Configuration &gt; Perception page: The laserscan or list of obstacles is configured here." src="../_images/cpanel5.png" style="width: 800px;" /></a>
+<ul class="simple">
+<li><p><strong>Laserscan sensor</strong>: The Supervisor can handle data points from one 2-dimensional laser (LIDAR) scanner.</p>
+<ul>
+<li><p><strong>Display name</strong>: A user-specified name can be provided so that diagnostic information can quickly be understood.</p></li>
+<li><p><strong>ROS Topic</strong>: The ROS message name, topic type, quality of service and Signal Rate must all be specified so that the Supervisor can subscribe to the sensor data.</p></li>
+<li><p><strong>Specs</strong>:  The expected number of points per scan along with the first (typically minimum) and last (typically maximum) angle must be specified so that the angular resolution can be calculated for the nominal case. The first and last angle values should normally describe a laser that scans in the clockwise direction, so the first is smaller than the last. However, if the laser scans in the counter-clockwise direction the first angle should be set to be smaller than the last.  It is very important that the total range of the laser is less than 2π.  The Supervisor does not disambiguate angles if the total field is larger than 2π.  The scanner’s range can be set so that readings smaller than the minimum or larger than the maximum are discarded.</p></li>
+<li><p><strong>Laserscan Pose</strong>: The orientation and position of the laserscan relative to the vehicle body or whichever frame is used must be specified. As with the robot’s body position, the user is advised to plot the data in rviz to ensure that the geometry is set correctly.</p></li>
+</ul>
+</li>
+<li><p><strong>Obstacle Map</strong>: An existing perception system can be used instead of a 2D-LIDAR, but it most provide an ObjectArray that matches the definition for an lll_rsgs/ObjectArray.  The definition is as follows:</p></li>
+</ul>
+<div class="line-block">
+<div class="line">std_msgs/Header header</div>
+<div class="line">Object[] objects</div>
+</div>
+<p>where Object[] is defined by:
+|  std_msgs/Header header
+|  # Identifier of the object
+|  string id
+|  # Object geometry, and pose of geometry in object frame
+|  ObjectGeometry geometry
+|  # Object pose world frame
+|  geometry_msgs/PoseWithCovariance pose
+|  # Object velocity in object frame
+|  geometry_msgs/TwistWithCovariance velocity
+|  # Object behavior model
+|  # Bounds on object frame velocity (considered inactive if non finite)
+|  geometry_msgs/Twist velocity_upper_bounds
+|  geometry_msgs/Twist velocity_lower_bounds
+|  # Bounds on object frame velocity norms (considered inactive if strictly less than 0)
+|  float64 linear_velocity_norm2_bound
+|  float64 angular_velocity_norm2_bound
+|  # Bounds on object frame acceleration  (considered inactive if non finite)
+|  geometry_mix’s/Accel acceleration_upper_bounds
+|  geometry_msgs/Accel acceleration_lower_bounds
+|  # Bounds on object frame acceleration norms (considered inactive if strictly less than 0)
+|  float64 linear_acceleration_norm2_bound
+|  float64 angular_acceleration_norm2_bound</p>
+<p>… important:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">When</span> <span class="n">using</span> <span class="n">obstacle</span> <span class="n">lists</span><span class="p">,</span> <span class="k">if</span> <span class="n">the</span> <span class="n">obstacles</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">the</span> <span class="o">*</span><span class="n">world</span><span class="o">*</span> <span class="n">coordinate</span> <span class="n">frames</span><span class="p">,</span> <span class="n">the</span> <span class="n">copilot</span><span class="s1">&#39;s use of localization must be enabled.</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="localization.html" class="btn btn-neutral float-left" title="Localization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="copyrights.html" class="btn btn-neutral float-right" title="Copyrights" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, 3Laws Robotics Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: latest
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+       <strong> 
+        <dd><a href="/3laws/en/latest/index.html">latest</a></dd>
+        
+      </strong> 
+      
+      
+        <dd><a href="/3laws/en/RDM-v0.11.1/index.html">RDM-v0.11.1</a></dd>
+        
+      
+    </dl>
+    <dl>
+      <dt>Downloads</dt>
+      <dd><a href="/3laws/en/latest/3laws_manual.pdf">PDF</a></dd>
+    </dl>
+    <hr />
+    Continuous documentation hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+
+  </div>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

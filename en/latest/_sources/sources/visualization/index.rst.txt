@@ -33,7 +33,9 @@ Here is a screenshot of a dashboard with the navigation tools highlighted:
 .. image:: data/general_annotated.png
   :width: 800
   :alt: General Dashboard
+        
 - **Time Range**: This tool allows you to select the time range of the data that you want to visualize. You can select a predefined range or a custom range.
+
 - **Refresh**: This tool allows you to refresh the data displayed in the dashboard. You can select the refresh interval or manually refresh the data.
 
 

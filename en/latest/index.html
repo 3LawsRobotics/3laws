@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to 3Laws’s documentation! &mdash; 3Laws latest documentation</title>
+  <title>Welcome to 3Laws Supervisor &mdash; 3Laws latest documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -49,10 +49,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="sources/introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sources/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sources/installation_update.html">Installation and Update</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sources/control_panel/index.html">Control Panel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources/usage.html">Using Supervisor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources/copyrights.html">Copyrights</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sources/visualization/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources/theory.html">Theory and Implementation of Control Barrier Functions</a></li>
 </ul>
 
         </div>
@@ -69,7 +69,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Welcome to 3Laws’s documentation!</li>
+      <li class="breadcrumb-item active">Welcome to 3Laws Supervisor</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,16 +78,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-3laws-s-documentation">
-<h1>Welcome to 3Laws’s documentation!<a class="headerlink" href="#welcome-to-3laws-s-documentation" title="Link to this heading"></a></h1>
-<p>Table of Contents:</p>
+  <section id="welcome-to-3laws-supervisor">
+<h1>Welcome to 3Laws Supervisor<a class="headerlink" href="#welcome-to-3laws-supervisor" title="Link to this heading"></a></h1>
+<p>The 3Laws Supervisor is a tool that runs on your robot(s) and can optionally
+transmit data to a cloud-based dashboard.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="sources/introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sources/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sources/installation_update.html">Installation and Update</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sources/control_panel/index.html">Control Panel</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sources/visualization/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources/introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources/introduction.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/introduction.html#supervisor-interfaces">Supervisor interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/introduction.html#run-time-assurance">Run-time assurance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/introduction.html#robot-diagnostics-monitor">Robot diagnostics monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/introduction.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/introduction.html#diagnostic-messages">Diagnostic Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sources/usage.html">Using Supervisor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources/usage.html#installation">1. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/usage.html#configuration">2. Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sources/credentials.html">Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sources/robot_model.html">Robot Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sources/supervisor.html">Supervisor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sources/localization.html">Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sources/perception.html">Perception</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sources/usage.html#launch">3. Launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/usage.html#operations">4. Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/usage.html#update">5. Update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sources/copyrights.html">Copyrights</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources/copyrights.html#rd-party-software-used-by-3laws-supervisor">3rd Party Software used by 3Laws Supervisor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sources/copyrights.html#id1">ROS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sources/copyrights.html#other-libraries">Other Libraries</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sources/visualization/index.html">Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources/visualization/index.html#dashboards">Dashboards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/visualization/index.html#navigation-tools">Navigation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/visualization/index.html#incident-management">Incident Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sources/theory.html">Theory and Implementation of Control Barrier Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources/theory.html#basic-architecture">Basic Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/theory.html#available-configurations-in-supervisor">Available Configurations in Supervisor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/theory.html#applications">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/theory.html#platforms">Platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/theory.html#theory-of-operation">Theory of Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources/theory.html#cbf-operational-modes">CBF Operational Modes</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -134,10 +177,6 @@
       
       
         <dd><a href="/3laws/en/RDM-v0.11.1/index.html">RDM-v0.11.1</a></dd>
-        
-      
-      
-        <dd><a href="/3laws/en/pre-release/index.html">pre-release</a></dd>
         
       
     </dl>

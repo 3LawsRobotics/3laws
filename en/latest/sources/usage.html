@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using Supervisor &mdash; 3Laws latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/usage.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Credentials" href="credentials.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            3Laws
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Supervisor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">1. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">2. Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="credentials.html">Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robot_model.html">Robot Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supervisor.html">Supervisor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="localization.html">Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="perception.html">Perception</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#launch">3. Launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#operations">4. Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update">5. Update</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="copyrights.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization/index.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory and Implementation of Control Barrier Functions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">3Laws</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Using Supervisor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-supervisor">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Using Supervisor</a><a class="headerlink" href="#using-supervisor" title="Link to this heading"></a></h1>
+<p>This page will help you install and configure the 3Laws Supervisor on your robot.</p>
+<p>3Laws Supervisor is designed for installation on Ubuntu systems with ROS1 or
+ROS2 already deployed on the computer.  The Supervisor is roughly made up of 3 functionalities that are discussed in this manual:</p>
+<ol class="arabic simple">
+<li><p>Robot diagnostics monitoring collects metrics about the system operation in real time.  Some of the threshold violations are published in real-time locally, and some are published only in aggregated fashion. The published messages can be sent to a cloud-based dashboard server or can be used locally for decision making by customer software.</p></li>
+<li><p>Run-time assurance or “Copilot” operates as a filter that takes the information about collision threshold violations from the diagnostics monitor and produces corrective actions to keep the robot away from the possible collision.  By default, this capability is not active.</p></li>
+<li><p>Control Panel: A configuration graphical (browser-based) tool is available to help set the Supervisor up for the robot.</p></li>
+</ol>
+<nav class="contents" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#using-supervisor" id="id1">Using Supervisor</a></p>
+<ul>
+<li><p><a class="reference internal" href="#installation" id="id2">1. Installation</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id3">2. Configuration</a></p></li>
+<li><p><a class="reference internal" href="#launch" id="id4">3. Launch</a></p></li>
+<li><p><a class="reference internal" href="#operations" id="id5">4. Operations</a></p></li>
+<li><p><a class="reference internal" href="#update" id="id6">5. Update</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="installation">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1. Installation</a><a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>To install Supervisor on your system, open a terminal and run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>&lt;<span class="o">(</span>curl<span class="w"> </span>https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh<span class="o">)</span>
+</pre></div>
+</div>
+<p>This script will download a package from github and will begin the installation.Note that the package name starts with “lll-rdm”. The “lll” represents 3Laws. The product’s original name was “Robot Diagnostics Module”. As the script proceeds it will try to determine your system’s configuration so that the appropriate components are installed. The script will prompt you for help with configuration if it is unable to find your computer’s ROS distribution or architecture.</p>
+<p>During the execution of the script, several questions will be asked:
+#. A request to confirm the desire to download the package.</p>
+<ol class="arabic simple">
+<li><p>Confirmation of the desire to install the package.</p></li>
+<li><p>A <em>sudo</em> password to be able to install to shared folders (/opt/ros).</p></li>
+<li><p>Confirmation of the desire to <em>download</em> the optional Control Panel component which is designed to make the configuration process easier.</p></li>
+<li><p>Confirmation of the desire to <em>install</em> the optional Control Panel component.</p></li>
+</ol>
+<p>The script will add components to the global ROS installation.  These new
+components will not be available until the ROS paths are updated. If your configuration automatically runs the ROS setup script when a new shell is started, please close the terminal and open a new one.  Otherwise, please run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/&lt;DISTRO&gt;/setup.sh
+</pre></div>
+</div>
+<p>The Supervisor will now be available for operation.</p>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">2. Configuration</a><a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<p>The 3Laws Supervisor is able to support several different types of robots and it
+needs to connect to your system’s data sources and sinks.  The configuration process aims to specify this type of information.  The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started <em>after</em> the configuration is created/updated.</p>
+<p>A graphical (browser-based) configuration tool (called <strong>Control Panel</strong>) is
+available to help with the configuration effort.</p>
+<p>After installation open a browser window and navigate to the address <cite>http://localhost:8000</cite>.
+If this window does not appear, please manually start the Control Panel server
+with the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>lll_control_panel
+</pre></div>
+</div>
+<p>The Control Panel’s capabilities can be augmented through a rosbridge server.
+With that server, the control panel can more easily display some real-time
+information about the Supervisor’s status.  To install and start a rosbridge
+server (where &lt;rosdistro&gt; is replaced with the version of ROS on your system):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>ros-&lt;rosdistro&gt;-rosbridge-server
+ros2<span class="w"> </span>run<span class="w"> </span>rosbridge_server<span class="w"> </span>rosbridge_websocket
+</pre></div>
+</div>
+<p>This will provide a websocket server at <cite>ws://localhost:9090</cite> that the control panel can connect to in order to retrieve topics and services information.</p>
+<p>The initial view of the Control Panel is the “Configuration” page, which consists of sections (tabs) listed as <em>Credentials</em>, <em>Robot Model</em>, <em>Supervisor</em>, <em>Localization</em>, and <em>Perception</em>.  The details of the contents of each of these pages are linked below.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The entire configuration needs to be completed before starting the Supervisor software.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="credentials.html">Credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot_model.html">Robot Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supervisor.html">Supervisor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="localization.html">Localization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perception.html">Perception</a></li>
+</ul>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Remember to save each page after inputing the data.</p>
+</div>
+</section>
+<section id="launch">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">3. Launch</a><a class="headerlink" href="#launch" title="Link to this heading"></a></h2>
+<p>Before starting the supervisor be sure to have your ROS environment correctly set up and sourced.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/&lt;DISTRO&gt;/setup.sh
+</pre></div>
+</div>
+<p>To launch the Supervisor, use the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>lll_rdm<span class="w"> </span>rdm.launch.py
+</pre></div>
+</div>
+</section>
+<section id="operations">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">4. Operations</a><a class="headerlink" href="#operations" title="Link to this heading"></a></h2>
+<p>If the websocket (rosbridge) is running along with the supervisor, the Control Panel’s <em>Operations</em> tab can be used to obtain a quick overview of the status of the copilot.</p>
+<a class="reference internal image-reference" href="../_images/cpanel6.png"><img alt="Operations page showing a configured robot that does not yet have sensor or planning data." src="../_images/cpanel6.png" style="width: 800px;" /></a>
+<p>In the image above, the Supervisor is operational and the Copilot is configured to be active as indicated by the arrows between them.  However, these boxes are colored yellow/gold, indicating that they are still initializing.   The framed section above the diagram shows the activity status for some of the critical components:</p>
+<ul class="simple">
+<li><p>The model is healthy (green check).</p></li>
+<li><p>The Supervisor in unhealthy/initializing (gold).</p></li>
+<li><p>Localization is also unhealthy/initializing (gold).</p></li>
+<li><p>Perception is reported as healthy.</p></li>
+</ul>
+<p>The lower section of the panel is showing strip charts.  The categories that are currently displayed represent:</p>
+<ul class="simple">
+<li><p>the State Safeness - the barrier function value.  When this value goes to zero or below zero, the system is evaluated as being in a collision state.</p></li>
+<li><p>the Input Modification status - When this value is zero, the copilot is not modifying the input from the autonomy stack. That is, the filtering is in passive mode.  When this value is non-zero, it means that the copilot is actively modifying the commanded input.</p></li>
+<li><p>Assurance violation represents that during the process of solving to find the closest input to the desired one, assumptions in the model or uncertainty had to be violated in order to produce a valid solution.  In this case the copilot is producing the best input to bring the system to the desired set, but the guarantees that the system is in the desired region and will remain there no longer hold.</p></li>
+</ul>
+</section>
+<section id="update">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">5. Update</a><a class="headerlink" href="#update" title="Link to this heading"></a></h2>
+<p>To update the Supervisor, you can use the same command as for the installation.</p>
+<p>The supervisor will be updated to the latest version available for your distribution, <strong>Existing configurations will not be modified</strong>, but if new variables need to be configured, you will be advised during the installation.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>&lt;<span class="o">(</span>curl<span class="w"> </span>https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh<span class="o">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="credentials.html" class="btn btn-neutral float-right" title="Credentials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, 3Laws Robotics Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Read the Docs</span>
+    v: latest
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions</dt>
+      
+       <strong> 
+        <dd><a href="/3laws/en/latest/index.html">latest</a></dd>
+        
+      </strong> 
+      
+      
+        <dd><a href="/3laws/en/RDM-v0.11.1/index.html">RDM-v0.11.1</a></dd>
+        
+      
+    </dl>
+    <dl>
+      <dt>Downloads</dt>
+      <dd><a href="/3laws/en/latest/3laws_manual.pdf">PDF</a></dd>
+    </dl>
+    <hr />
+    Continuous documentation hosting provided by <a href="https://pages.github.com/">GitHub Pages</a>.
+
+  </div>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
