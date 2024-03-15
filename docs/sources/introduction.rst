@@ -57,7 +57,7 @@ The metrics are also summarized and optionally sent to a cloud database for disp
 
 Configuration
 *************
-For effective operation, the Supervisor needs to be configured. Details for this step are presented in `Getting Started <getting_started.html>`_.
+For effective operation, the Supervisor needs to be configured. Details for this step are presented in `Using Supervisor <usage.html>`_.
 The Control Panel also visualizes operation of the Supervisor's Copilot.
 
 Diagnostic Messages
