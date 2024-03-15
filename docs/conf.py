@@ -29,7 +29,7 @@ else:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 project = '3Laws'
-copyright = '2022, 3Laws Robotics Inc.'
+copyright = '2024, 3Laws Robotics Inc.'
 author = 'Thomas Gurriet (tgurriet@3laws.io)'
 version = current_version
 release = current_version
