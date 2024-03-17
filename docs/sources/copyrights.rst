@@ -68,8 +68,8 @@ Citation::
 
 The full source code to ROS2 is available at `ROS2 Github <https://github.com/ros2>`_ including licenses for its use.
 
-Other Libraries
-===============
+Unmodified 3rd Party Libraries
+==============================
 
 The following libraries have been incorporated into the 3Laws Supervisors without modifications.  Source code for each of them is available at the given links.
 The licenses listed below apply individually to each package.
@@ -352,7 +352,9 @@ License: `MIT, Unlicense <https://github.com/nothings/stb/blob/master/LICENSE>`_
 
 `openddl-parser <https://github.com/kimkulling/openddl-parser>`_
 ----------------------------------------------------------------
-License: `MIT <https://github.com/kimkulling/openddl-parser/blob/master/LICENSE>`::
+.. _OpenDDL MIT: https://github.com/kimkulling/openddl-parser/blob/master/LICENSE
+
+License: `OpenDDL MIT`_
 
   The MIT License (MIT)
 
@@ -464,7 +466,9 @@ License `console_bridge BSD-3 Clause`_::
 
 `ascent <https://github.com/Alpine-DAV/ascent>`_
 ------------------------------------------------
-License: `<https://github.com/Alpine-DAV/ascent/blob/develop/LICENSE>`::
+.. _Ascent License: https://github.com/Alpine-DAV/ascent/blob/develop/LICENSE
+
+`Ascent License`_::
 
   Copyright (c) 2015-2023, Lawrence Livermore National Security, LLC.
 
@@ -514,3 +518,10 @@ License `gtest BSD-3 Clause`_::
     * Neither the name of Google Inc. nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Modified 3rd Party Libraries
+==============================
+
+The following libraries have been incorporated into the 3Laws Supervisors with modifications.  Source code for each of them is available at the given links.
+The licenses listed below apply individually to each package.
+  
