@@ -3,22 +3,22 @@ Supervisor
 
 The Configuration > Supervisor page contains configuration entries for both the monitoring and Copilot components.
 
-.. image:: data/cpanel3.png
+.. image:: ../data/cpanel3.png
    :width: 800px
-   :alt: Configuration > Supervisor page where robot diagnostic monitoring thresholds and run-time assurance settings are available. 
+   :alt: Configuration > Supervisor page where robot diagnostic monitoring thresholds and run-time assurance settings are available.
 
 
 - **Basic configuration**: To enable broadcasting of the aggregated statistics to the cloud account, select the *Upload metrics to cloud database* box.
 
   * **World Frame**: Similar to "base robot frame", the name of the world frame (typically *odom* or *map*) must be specified.
-    
+
     * **Advanced Settings**: Max delay (s) and Timeout Factor are thresholds for triggering events informing that data failed to arrive (if data is not received for max-delay * timeout-factor seconds.  If the copilot (run-time assurance) is active, failure to receive robot state or desired control input (in timeout factor * 1/signal-rate) will cause the copilot to switch to the Failure Command Mode (which is explained below).
-      
-  * **Copilot**: The Copilot enables the run-time assurance capability where desired commands to the robot from the autonomy stack ("desired inputs") are modified in order to avoid collisions, and altered versions are published through a separate message. 
-    
-    * **Activate**: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Copilot will only modify the outputs if the option is activated.  If it is not activated, the unmodified "desired control input" will be transmitted on the designated "Computed safe control" message. 
-      
-    * **Aggressiveness**: This parameter controls how far from the nearest obstacle the safety filter starts having more effect on the commands and how strongly the safety filter pushes the robot back into the "safe" region if the safety definition has been violated.  A larger value means that the control inputs from the planner will start to be modified when the robot is farther from an object/obstacle.  In general this will produce larger margins.  A larger value also means that if an obstacle is detected within the collision distance, the command modified by the run-time assurance will try to move the robot away from the object more aggressively.  Typical values are between 0.5 and 1.0, but values in the range of 1000 might be used in reasonable situations.  A smaller value means that the the robot will get closer to the obstacles (higher performance) before being diverted. 
+
+  * **Copilot**: The Copilot enables the run-time assurance capability where desired commands to the robot from the autonomy stack ("desired inputs") are modified in order to avoid collisions, and altered versions are published through a separate message.
+
+    * **Activate**: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Copilot will only modify the outputs if the option is activated.  If it is not activated, the unmodified "desired control input" will be transmitted on the designated "Computed safe control" message.
+
+    * **Aggressiveness**: This parameter controls how far from the nearest obstacle the safety filter starts having more effect on the commands and how strongly the safety filter pushes the robot back into the "safe" region if the safety definition has been violated.  A larger value means that the control inputs from the planner will start to be modified when the robot is farther from an object/obstacle.  In general this will produce larger margins.  A larger value also means that if an obstacle is detected within the collision distance, the command modified by the run-time assurance will try to move the robot away from the object more aggressively.  Typical values are between 0.5 and 1.0, but values in the range of 1000 might be used in reasonable situations.  A smaller value means that the the robot will get closer to the obstacles (higher performance) before being diverted.
 
  The following are under the "Advanced Settings".  If the Copilot is activated, these should be customized:
 
@@ -31,7 +31,7 @@ The Configuration > Supervisor page contains configuration entries for both the 
       * **Yield on failure**:  This checkbox is like the "Send Desired" option.  Setting this checkbox will override the failure control mode and just forward the "Desired control input" unmodified.
       * **Can resume from failure**: With this checkbox filled in, once the input data (control input, laser scan, and state) values start appearing after a failure, the robot will be commanded back into motion (if the desired control input is asking for that).  If the box is unchecked once there is a failure, the robot will remain stopped until the Supervisor is restarted.
 
-      * **Use localization**:  Supervisor provides a MarkerArray that displays the robot's bounding box and rays to the closest obstacles.  If "Use Localization" is set, the display is created relative to the world frame.  In situations where the localization may be less reliable, this checkbox can be deselected, and the visualization will be based on the current robot base frame.  Localization is also very useful if the control rate is low (e.g. longer times between commands) or there are delays between sensing and actuating.  If the robot's motion is large during the time period of the control calculation, the model will account for it as long as localization is accurate.  
+      * **Use localization**:  Supervisor provides a MarkerArray that displays the robot's bounding box and rays to the closest obstacles.  If "Use Localization" is set, the display is created relative to the world frame.  In situations where the localization may be less reliable, this checkbox can be deselected, and the visualization will be based on the current robot base frame.  Localization is also very useful if the control rate is low (e.g. longer times between commands) or there are delays between sensing and actuating.  If the robot's motion is large during the time period of the control calculation, the model will account for it as long as localization is accurate.
 
       * **Accept wrong size laserscan**: One of the checks that is made on the incoming data is that the laserscan is delivering the expected number of scan points each frame. However, there are many laser scanners that are not consistent in the number of scan points they deliver.  Checking this option allows for laser scanners with non-constant number of scan points reported.
 

@@ -11,11 +11,11 @@ ROS2 already deployed on the computer.  The Supervisor is roughly made up of 3 f
 #. Run-time assurance or "Copilot" operates as a filter that takes the information about collision threshold violations from the diagnostics monitor and produces corrective actions to keep the robot away from the possible collision.  By default, this capability is not active.
 
 #. Control Panel: A configuration graphical (browser-based) tool is available to help set the Supervisor up for the robot.
-   
+
 
 .. contents:: Table of Contents
    :depth: 2
-    
+
 
 1. Installation
 ***************
@@ -86,14 +86,14 @@ The initial view of the Control Panel is the "Configuration" page, which consist
 
 .. toctree::
 
-    credentials
-    robot_model
-    supervisor
-    localization
-    perception
+    configuration/credentials
+    configuration/robot_model
+    configuration/supervisor
+    configuration/localization
+    configuration/perception
 
 .. important::
-   
+
   Remember to save each page after inputing the data.
 
 
@@ -115,8 +115,7 @@ To launch the Supervisor, use the following command:
 4. Operations
 *************
 
-If the websocket (rosbridge) is running along with the supervisor, the Control Panel's *Operations* tab can be used to obtain a quick overview of the status of the copilot.  
-
+If the websocket (rosbridge) is running along with the supervisor, the Control Panel's *Operations* tab can be used to obtain a quick overview of the status of the copilot.
 .. image:: data/cpanel6.png
    :width: 800px
    :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
