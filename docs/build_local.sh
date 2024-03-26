@@ -9,6 +9,12 @@ srcDir="$(
   pwd -P
 )"
 version="latest"
+
+# Clean output directory
+rm -rf "$srcDir/.gh-pages"
+rm -rf "$srcDir/build"
+
+# Create output directory
 mkdir -p "$srcDir/.gh-pages"
 outDir="$srcDir/.gh-pages"
 buildDir="$srcDir/build"
