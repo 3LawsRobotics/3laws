@@ -29,6 +29,7 @@ To install Supervisor on your system, open a terminal and run the following comm
 This script will download a package from github and will begin the installation.Note that the package name starts with "lll-rdm". The "lll" represents 3Laws. The product's original name was "Robot Diagnostics Module". As the script proceeds it will try to determine your system's configuration so that the appropriate components are installed. The script will prompt you for help with configuration if it is unable to find your computer's ROS distribution or architecture.
 
 During the execution of the script, several questions will be asked:
+
 #. A request to confirm the desire to download the package.
 
 #. Confirmation of the desire to install the package.
@@ -48,7 +49,23 @@ components will not be available until the ROS paths are updated. If your config
 
 The Supervisor will now be available for operation.
 
-2. Configuration
+2. CLI (Command Line Interface)
+********************************
+
+The Supervisor package comes with a command line interface (CLI) that can be used to interact with the Supervisor.
+
+This CLI is called `3laws` and can be used to start, stop, and restart the control panel used for the configuration of the Supervisor.
+
+The CLI provides also a command to check for updates of the Supervisor. (These updates still have to be installed manually. See: `6. Update`_)
+
+
+Run the following command to see the available commands:
+
+.. code-block:: bash
+
+  3laws --help-all
+
+1. Configuration
 ****************
 
 The 3Laws Supervisor is able to support several different types of robots and it
@@ -94,10 +111,10 @@ The initial view of the Control Panel is the "Configuration" page, which consist
 
 .. important::
 
-  Remember to save each page after inputing the data.
+  Remember to save each page after updating the data.
 
 
-3. Launch
+4. Launch
 *********
 
 Before starting the supervisor be sure to have your ROS environment correctly set up and sourced.
@@ -112,10 +129,11 @@ To launch the Supervisor, use the following command:
 
   ros2 launch lll_rdm rdm.launch.py
 
-4. Operations
+5. Operations
 *************
 
 If the websocket (rosbridge) is running along with the supervisor, the Control Panel's *Operations* tab can be used to obtain a quick overview of the status of the copilot.
+
 .. image:: data/cpanel6.png
    :width: 800px
    :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
@@ -138,7 +156,7 @@ The lower section of the panel is showing strip charts.  The categories that are
 
 * Assurance violation represents that during the process of solving to find the closest input to the desired one, assumptions in the model or uncertainty had to be violated in order to produce a valid solution.  In this case the copilot is producing the best input to bring the system to the desired set, but the guarantees that the system is in the desired region and will remain there no longer hold.
 
-5. Update
+6. Update
 **********
 
 To update the Supervisor, you can use the same command as for the installation.
