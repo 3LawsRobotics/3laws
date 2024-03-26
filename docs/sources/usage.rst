@@ -74,13 +74,24 @@ needs to connect to your system's data sources and sinks.  The configuration pro
 A graphical (browser-based) configuration tool (called **Control Panel**) is
 available to help with the configuration effort.
 
-After installation open a browser window and navigate to the address `http://localhost:8000`.
-If this window does not appear, please manually start the Control Panel server
-with the command:
+After installation you can use the CLI to start the Control Panel:
 
 .. code-block:: bash
 
-  sudo systemctl start lll_control_panel
+  3laws control-panel run
+
+If you prefer using a service to run the Control Panel in the background, you can use the following command:
+
+.. code-block:: bash
+
+  3laws control-panel enable
+
+This will create a user service. This one will be started automatically when the system boots up. The Control Panel will be available at `http://localhost:8080`.  If you want to change the port, you can use the following command:
+
+.. code-block:: bash
+
+  3laws control-panel enable --port <PORT>
+
 
 The Control Panel's capabilities can be augmented through a rosbridge server.
 With that server, the control panel can more easily display some real-time
@@ -94,6 +105,11 @@ server (where <rosdistro> is replaced with the version of ROS on your system):
 
 This will provide a websocket server at `ws://localhost:9090` that the control panel can connect to in order to retrieve topics and services information.
 
+The navigation bar of the control panel will show the status of the rosbridge server connection:
+
+.. image:: data/navigation_bar_rosbridge.png
+   :width: 800px
+   :alt: Control Panel NavBar with ros bridge connected.
 
 The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as *Credentials*, *Robot Model*, *Supervisor*, *Localization*, and *Perception*.  The details of the contents of each of these pages are linked below.
 
@@ -114,7 +130,7 @@ The initial view of the Control Panel is the "Configuration" page, which consist
   Remember to save each page after updating the data.
 
 
-4. Launch
+1. Launch
 *********
 
 Before starting the supervisor be sure to have your ROS environment correctly set up and sourced.
