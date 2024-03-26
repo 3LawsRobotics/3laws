@@ -1,47 +1,81 @@
-Copyrights
-##########
+Copyrights and Licenses
+#######################
 
 The 3Laws Robotics Supervisor is a proprietary, commercial package. This is the 3Laws End User License Agreement
 
-END-USER LICENSE AGREEMENT
-NOTICE:  READ THIS BEFORE USING THIS PROGRAM
+3LAWS SOFTWARE LICENSE AGREEMENT
+********************************
 
-YOUR USE OF THIS SOFTWARE PROGRAM INDICATES YOUR ACCEPTANCE OF THESE TERMS AND CONDITIONS. READ ALL THE TERMS AND CONDITIONS OF THIS LICENSE AGREEMENT PRIOR TO USE.  IF YOU DO NOT ACCEPT THESE TERMS, YOU MUST CEASE USE OF THE PROGRAM.  PLEASE NOTE THAT YOU MAY NOT USE, COPY, MODIFY OR TRANSFER THE PROGRAM, ITS CONTENT OR DOCUMENTATION OR ANY COPY EXCEPT AS EXPRESSLY PROVIDED IN THIS AGREEMENT.
+1. SOFTWARE AND SUPPORT
+   
+1.1 3Laws Robotics, Inc. (“3Laws”) provides its software solution designed to improve and enhance the safety and performance of robotics and other automated solutions (collectively, the “Software”) to you (“Customer”) pursuant to this Software License Agreement (the “Agreement”). By entering into a Software order form (or other ordering document) or Software-related agreement with 3Laws (each an “Order Form”) or otherwise registering for, downloading, accessing or using the Software, Customer unconditionally accepts and agrees to all of the terms of this Agreement.  By entering into this agreement on behalf of a company or other legal entity, Customer represents that it has the authority to bind such entity and its affiliates to the terms of this Agreement, and, accordingly, the term "Customer" shall refer to such entity and its affiliates. If Customer does not have such authority, or Customer does not agree to all of the terms of this Agreement, Customer may not use the Software.  Each applicable Order Form is subject to and governed by the terms of this Agreement and forms a part hereof.
 
-LICENSE:   This software program, its content and documentation are licensed, not sold, to you.  You have a nonexclusive and nontransferable right to use (i.e., to store, load, install, execute and display) the enclosed program in accordance with the documentation.  You may install this program on a single physical system for each license you have purchased.
+1.2 Subject to the terms of this Agreement, 3Laws (a) grants Customer a non-exclusive, non-sublicensable, non-transferable license, solely during the Term, to use the Software solely installed on the robotic system(s) identified in the applicable Order Form solely for Customer’s internal business purposes, and (b) will use commercially reasonable efforts to provide Customer reasonable support services, through electronic mail, chat or another online mechanism, in accordance with 3Laws’ standard practice. 
 
-This program can only be used with a single computer processor located in the United States and any other country to which this software is legally exported; you may physically transfer the program from one computer to another, provided that the program is deleted from the first once its use begins on the second.  This software is considered to be in use with a computer processor when it is loaded into the temporary memory or installed into the permanent memory of that computer, provided that a copy installed on a network server for the sole purpose of distribution to other computers is not "in use."  You agree that the program, its content and its documentation belong to 3Laws Robotics, Inc.  
+1.3 3Laws reserves the right to change or modify portions of this Agreement at any time.  If 3Laws does so, it will post the changes on this page and will indicate at the top of this page the date this Agreement was last revised. 3Laws will also notify Customer, either through the Software user interface, in an email notification or through other reasonable means. Any such changes will become effective no earlier than fourteen (14) days after being posted, except that changes addressing new functions of the Software or changes made for legal reasons may become effective immediately. Customer’s continued use of the Software after the date any such changes become effective constitutes acceptance of the new Agreement.
 
-You agree to use your best efforts to prevent and protect the contents of the program and documentation from unauthorized disclosure or use.  3Laws Robotics, Inc. reserves all rights not expressly granted to you.
+1.4 From time to time, Customer may be invited to try certain features or functionality of the Software at no charge for a free trial or evaluation period or if such features are not generally available to customers (collectively, “Evaluation Features”). Evaluation Features will be designated as beta, pilot, evaluation, trial, limited release or the like.  Evaluation Features are for Customer’s internal evaluation purposes only and not for production use, are not supported, are provided “as is” without warranty of any kind, and may be subject to additional terms.  Unless otherwise stated by 3Laws, any Evaluation Features trial period will expire sixty (60) days from the trial start date.  3Laws may discontinue any Evaluation Features (or Customer’s rights thereto) at any time in its sole discretion and may never make them generally available.  3Laws will have no liability for any harm or damage arising out of or in connection with any Evaluation Features. 
 
-LIMITATIONS ON USE.  You may not rent, lease or distribute copies of the program, its content or its documentation to others.  You may not modify, translate or create derivative works from the program, its content or its documentation.  You shall not misappropriate 3Laws Robotics' name or any 3Laws Robotics' trademarks or service marks.  3Laws Robotics has no control over your use of the program and do not and cannot warrant the results that may be obtained by its use.
+2. RESTRICTIONS AND RESPONSIBILITIES
 
-BACKUP AND TRANSFER.   You may make one copy of the program for backup purposes, provided that you retain all copyright and trademark notices thereon.  You may not sublicense the program or its content or assign, delegate or otherwise transfer this license or any of the related rights or obligations for any reason.  Any attempt to make any such sublicense, assignment, delegation or other transfer by you shall be void.
+2.1 Customer will only use the Software as expressly permitted herein and in the applicable Order Form and agrees that it will not (and will not allow any other party to), directly or indirectly: reverse engineer, decompile, disassemble or otherwise attempt to discover the source code, object code or underlying structure, ideas, know-how or algorithms relevant to the Software or any related documentation, algorithms or data; modify, translate, or create derivative works based on the Software (except to the extent expressly permitted by 3Laws in writing); use the Software for timesharing or service bureau purposes or otherwise for the benefit of a third; use the Software in violation of any applicable law or regulation; remove any proprietary notices or labels; or modify, adapt, benchmark or hack the Software, or otherwise attempt to gain unauthorized access to the Software. All Software is Confidential Information of 3Laws and subject to the terms of Section 3. 
 
-COPYRIGHT.   The program, content and related documentation are copyrighted.  You may not copy the program, its content or the documentation (or this license) except to create one backup copy as set forth above and to load the program into the computer as part of executing the program.  Among other things, you may not copy the program onto any shared repository or similar system.  Any and all other copies of the program, its content or its documentation made by you are in violation of this license. 
+2.2 Customer represents, covenants, and warrants that Customer will use the Software only in compliance with 3Laws’ standard published policies and codes of conduct then in effect and all applicable laws and regulations.  Customer hereby agrees to indemnify and hold harmless 3Laws against any damages, losses, liabilities, settlements and expenses (including without limitation costs and attorneys’ fees) in connection with any claim or action that arises from an alleged violation of any of the foregoing or otherwise from Customer’s use of Software. Although 3Laws has no obligation to monitor Customer’s use of the Software, 3Laws may do so and may prohibit any use of the Software (or disable content or data) it believes may be (or alleged to be) in violation of the foregoing or any other term of this Agreement.
 
-OWNERSHIP.    You agree that you neither own nor hereby acquire any claim or right of ownership to the program, content and documentation or to any related patents, copyrights, trademarks or other intellectual property.  3Laws Robotics, Inc. retains ownership of the documentation and all copies thereof and the program and its content and all subsequent copies of the program and content at all times, regardless of the form or media in or on which the original or other copies may subsequently exist.  This license is not a sale of the original or any subsequent copy.
+2.3 Customer acknowledges that the Software (i) records and logs certain usage information related to the Software and related robotic systems, and (ii) requires license keys from 3Laws in order to function.  Customer shall not disable or tamper with such recording, logging and/or license key functionality in any way and shall provide 3Laws with reasonable access (either direct or remote, at 3Laws’ option) to all systems on which the Software is installed, operated or used for purposes of monitoring or retrieving any such information or license keys and otherwise cooperate with 3Laws’ efforts to obtain and monitor such information and 3Laws license keys. 
 
-TERM AND TERMINATION.   This license is effective until terminated.  You may terminate this license at any time by destroying the program and documentation and the permitted backup copy.  This license automatically terminates if you fail to comply with its terms and conditions.  You agree that, upon termination, you will destroy (or permanently erase) all copies of the program and documentation or return the original program and documentation to 3Laws Robotics, Inc. together with any other material you have received from 3Laws Robotics, Inc. in connection with the program.
+3. CONFIDENTIALITY; PROPRIETARY RIGHTS
 
-NO WARRANTY.  THE PROGRAM SHALL SUBSTANTIALLY CONFORM TO ITS FUNCTIONAL SPECIFICATIONS.  EXCEPT AS SET FORTH ABOVE, THE PROGRAM, CONTENT AND THE DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+3.1 Each party (the “Receiving Party”) understands that the other party (the “Disclosing Party”) has disclosed or may disclose business, technical or financial information relating to the Disclosing Party’s business (hereinafter referred to as “Proprietary Information” of the Disclosing Party).  Proprietary Information of 3Laws includes all Software and other non-public information regarding features, functionality and performance of the Software.  The Receiving Party agrees:
+| (i) to take reasonable precautions to protect such Proprietary Information, and
+| (ii) not to use (except as expressly permitted herein) or divulge to any third person any such Proprietary Information.
+The Disclosing Party agrees that the foregoing shall not apply with respect to any information that the Receiving Party can document (a) is or becomes generally available to the public, (b) was in its possession or known by it prior to receipt from the Disclosing Party, (c) was rightfully disclosed to it without restriction by a third party, (d) was independently developed without use of any Proprietary Information of the Disclosing Party or (e) is required to be disclosed by law.
 
-THE FOREGOING WARRANTIES ARE IN LIEU OF, AND THIS AGREEMENT EXPRESSLY EXCLUDES, ALL OTHER WARRANTIES, EITHER EXPRESS OR IMPLIED, ORAL OR WRITTEN, INCLUDING, WITHOUT LIMITATION, (A) ANY WARRANTY THAT THE PROGRAM IS ERROR-FREE, WILL OPERATE WITHOUT INTERRUPTION OR IS COMPATIBLE WITH ALL EQUIPMENT AND SOFTWARE CONFIGURATIONS AND (B) ANY AND ALL IMPLIED WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSES.
-3Laws Robotics' entire liability, and your exclusive remedy, for any breach of the foregoing warranties shall be for 3Laws Robotics, at is sole option, to repair or replace such defective or nonconforming media or program; if 3Laws Robotics is unable to repair or replace such program within 30 days, you may elect to terminate the license at which time 3Laws Robotics shall refund any and all license or other fees paid by you.  You shall have no other remedy for breach of warranty
+3.2 3Laws shall own and retain all right, title and interest in and to (a) the Software, and all improvements, enhancements or modifications thereto, (b) any software, applications, inventions or other technology developed in connection with any related services or support, and (c) all intellectual property rights relating to any of the foregoing.  No rights or licenses are granted except as expressly set forth herein. 
 
-To obtain warranty service, contact 3Laws Robotics through e-mail to support@3laws.io.
+3.3 With respect to any Customer-related data collected by 3Laws in connection with Customer’s use of the Software (“Customer Data”), 3Laws will maintain a security program materially in accordance with industry standards that is designed to
+| (i) ensure the security and integrity of Customer Data;
+| (ii) protect against threats or hazards to the security or integrity of Customer Data; and
+| (iii) prevent unauthorized access to Customer Data.
+In furtherance of the foregoing, 3Laws will maintain administrative, physical and technical safeguards to protect the security of Customer Data that are consistent with industry practices. To the extent that 3Laws processes any Personal Data (as defined in the DPA referenced below) contained in Customer Data that is subject to Data Protection Legislation (as defined in the DPA) in the provision of the Software, the Data Processing Addendum (“DPA”) currently available at: https://www.3Laws.com/DPA is hereby deemed incorporated herein by reference.
 
-Some states do not allow the exclusion of implied warranties so the above exclusion may not apply to you.  In such event, any implied warranties shall be limited in duration to 90 days from the date on which you license the program in perpetuity as set forth above to the fullest extent permitted by law.  This warranty gives you specific legal rights and you may also have other rights which vary from state to state.
+Notwithstanding anything to the contrary, 3Laws shall have the right collect, aggregate, retain and analyze data and other information relating to the provision, use and performance of various aspects of the Software and related systems and technologies (including, without limitation, Customer Data and data derived therefrom), and 3Laws will be free (during and after the term hereof) to
+| (i) use such information and data to improve and enhance the Software and for other development, diagnostic and corrective purposes in connection with the Software and other 3Laws offerings, and
+| (ii) disclose such data solely in aggregate or other de-identified form in connection with its business.
+Further, for clarity, 3Laws owns all statistical data derived from the operation of the Software, including data regarding the configurations, usage metrics, log data and the performance results for the Software, and nothing herein shall be construed as prohibiting 3Laws from utilizing any such statistical and usage data to optimize and improve the Software or otherwise in connection with its business.
 
-LIMITATION OF REMEDIES.  IN NO EVENT WILL 3LAWS ROBOTICS BE LIABLE FOR ANY DIRECT OR INDIRECT DAMAGES OR OTHER RELIEF ARISING OUT OF YOUR USE OR INABILITY TO USE THE PROGRAM, INCLUDING, BUT NOT LIMITED TO, LOST PROFITS, LOST BUSINESS OR LOST OPPORTUNITY, OR ANY OTHER SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF SUCH USE OR INABILITY TO USE THE PROGRAM, EVEN IF 3LAWS ROBOTICS, INC. OR AN AUTHORIZED DEALER, DISTRIBUTOR OR SUPPLIER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, OR FOR ANY CLAIM BY ANY OTHER PARTY.  3LAWS ROBOTICS' TOTAL LIABILITY TO YOU FOR ANY CAUSE WHATSOEVER SHALL BE LIMITED TO THE AMOUNT PAID BY YOU FOR THIS PRODUCT.  
+4. PAYMENT OF FEES
 
-Some states do not allow the exclusion or limitation of incidental or consequential damages so the above limitation or exclusion may not apply to you.
+4.1 Customer will pay 3Laws the then applicable fees for the Software as described in the relevant Order Form (or in the Software itself, as applicable) in accordance with the terms therein (the “Fees”).  All Fees are non-cancelable and non-refundable regardless of any early termination of this Agreement.  If Customer’s use of the Software exceeds any applicable limits set forth on the Order Form or otherwise requires the payment of additional Fees (per the terms of this Agreement or those in the Order Form), Customer shall be billed for such usage and Customer agrees to pay the additional fees in the manner provided herein.  3Laws reserves the right to change the Fees or applicable charges and to institute new charges and Fees at the end of the initial Term (defined below) or then‑current renewal term, upon thirty (30) days’ prior notice to Customer (which may be sent by email).  If Customer believes that 3Laws has billed Customer incorrectly, Customer must contact 3Laws no later than sixty (60) days after the closing date on the first billing statement in which the error or problem appeared, in order to receive an adjustment or credit.  Inquiries should be directed to 3Laws’ customer support department
 
-This license will be governed by the laws of the State of California as applied to transactions taking place wholly within California between California residents.
+4.2 3Laws may also choose to bill through an invoice, in which case, full payment for invoices issued in any given month must be received by 3Laws thirty (30) days after the mailing date of the invoice.  Unpaid amounts are subject to a finance charge of 1.5% per month on any outstanding balance, or the maximum permitted by law, whichever is lower, plus all expenses of collection and may result in immediate termination of access to the Software. Customer shall be responsible for all sales, use, value-added and any other taxes associated with its Software access, other than U.S. taxes based on 3Laws’ net income. 
 
-U.S. GOVERNMENT RESTRICTED RIGHTS LEGEND.   Use, duplication, reproduction or disclosure by the Government is subject to restrictions in subdivision (c)(1)(ii) of the Rights in Technical Data and Computer Software clause at 252.227-7013 and in subparagraphs (a) through (d) of the Commercial Software - Restricted Rights Clause at 52.227-19 or any comparable or successor laws or regulations.
+5. TERMINATION
 
-YOUR USE OF THE SOFTWARE AND ITS CONTENT EVIDENCES THAT YOU HAVE READ THIS LICENSE, THAT YOU AGREE THAT YOU ARE BOUND BY ITS TERMS AND THAT IT IS THE ONLY AGREEMENT BETWEEN US REGARDING THE PROGRAM AND DOCUMENTATION.  IF ANY PROVISION OF THIS AGREEMENT IS INVALID OR UNENFORCEABLE UNDER APPLICABLE LAW, IT IS, TO THAT EXTENT, DEEMED OMITTED AND THE REMAINING PROVISION WILL CONTINUE IN FULL FORCE AND EFFECT.
+5.1 Subject to earlier termination as provided below, this Agreement is for the term specified in the Order Form, or, if no term is specified therein, for a period of one (1) year from the date Customer is first granted access to the Software (the “Term”).  The Term of this Agreement shall be automatically renewed for additional periods of the same duration as the Term, unless either party provides written notice of non-renewal at least thirty (30) days prior to the end of the then-current Term.
+
+5.2 In addition to any other remedies it may have, either party may also terminate this Agreement upon thirty (30) days’ notice (or without notice in the case of nonpayment), if the other party materially breaches any of the terms or conditions of this Agreement and such breach is not cured during the notice period.   3Laws shall also have the right to terminate this Agreement for convenience at any time upon sixty (60) days prior written notice.
+
+3Laws may also reasonably suspend Customer’s and/or any users’ access to Software at any time in its reasonable discretion if it possesses a good faith belief that Customer’s use of the Software may be in violation of this Agreement or otherwise place 3Laws (or its customers or other interests) at risk of harm, damage, loss or liability.  Upon termination, Customer’s right to use the Software shall immediately terminate, all outstanding Fees due for the Software for the entire Term (regardless of any early termination) shall immediately become due and payable, Customer shall return (or at 3Laws’ option destroy) all Software, and each party shall return to the other all Proprietary Information. All sections of this Agreement which by their nature should survive termination will survive termination, including, without limitation, all rights to payment of Fees, confidentiality obligations, warranty disclaimers, and limitations of liability.
+
+6. WARRANTY AND DISCLAIMERS
+
+3Laws warrants that the Software will conform to the published specifications in all material respects during the Term. ANY LIABILITY OF 3LAWS WITH RESPECT TO THE SOFTWARE OR THE PERFORMANCE THEREOF UNDER ANY WARRANTY, NEGLIGENCE, STRICT LIABILITY OR OTHER THEORY WILL BE LIMITED EXCLUSIVELY TO SOFTWARE REPAIR OR REPLACEMENT OR, IF REPAIR OR REPLACEMENT IS, IN 3LAWS’ OPINION, IMPRACTICAL, TO REFUND OF THE FEES PAID THEREFOR. 3Laws does not warrant that the Software will be uninterrupted or error free; nor does it make any warranty as to the results that may be obtained from use of the Software.  EXCEPT AS EXPRESSLY SET FORTH IN THIS SECTION, THE SOFTWARE IS PROVIDED “AS IS” AND 3LAWS DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+7. LIMITATION OF LIABILITY
+
+NOTWITHSTANDING ANYTHING TO THE CONTRARY, 3LAWS AND ITS SUPPLIERS, OFFICERS, DIRECTORS, AFFILIATES, REPRESENTATIVES, CONTRACTORS AND EMPLOYEES SHALL NOT BE RESPONSIBLE OR LIABLE WITH RESPECT TO ANY SUBJECT MATTER OF THIS AGREEMENT OR TERMS AND CONDITIONS RELATED THERETO UNDER ANY CONTRACT, NEGLIGENCE, STRICT LIABILITY OR OTHER LEGAL OR EQUITABLE THEORY:
+| (A) FOR ERROR OR INTERRUPTION OF USE OR FOR LOSS OR INACCURACY OR CORRUPTION OF DATA OR COST OF PROCUREMENT OF SUBSTITUTE GOODS, SERVICES OR TECHNOLOGY OR LOSS OF BUSINESS;
+| (B) FOR ANY INDIRECT, EXEMPLARY, INCIDENTAL, SPECIAL OR CONSEQUENTIAL DAMAGES;
+| (C) FOR ANY MATTER BEYOND 3LAWS’ REASONABLE CONTROL; OR (D) FOR ANY AMOUNTS THAT, TOGETHER WITH AMOUNTS ASSOCIATED WITH ALL OTHER CLAIMS, EXCEED THE FEES RECEIVED BY 3LAWS UNDER THIS AGREEMENT IN THE 12 MONTHS PRIOR TO THE ACT THAT GAVE RISE TO THE LIABILITY, IN EACH CASE, WHETHER OR NOT 3LAWS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+8. GOVERNMENT MATTERS
+
+Customer may not remove or export from the United States or allow the export or re-export of the Software or Software or anything related thereto, or any direct product thereof in violation of any restrictions, laws or regulations of the United States Department of Commerce, the United States Department of Treasury Office of Foreign Assets Control, or any other United States or foreign agency or authority.  As defined in FAR section 2.101, the Software and documentation are “commercial items” and according to DFAR section 252.227‑7014(a)(1) and (5) are deemed to be “commercial computer software” and “commercial computer software documentation.”  Consistent with DFAR section 227.7202 and FAR section 12.212, any use modification, reproduction, release, performance, display, or disclosure of such commercial software or commercial software documentation by the U.S. Government (or any other foreign or domestic governmental entity) will be governed solely by the terms of this Agreement and will be prohibited except to the extent expressly permitted by the terms of this Agreement.
+
+9. MISCELLANEOUS
+
+If any provision of this Agreement is found to be unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary so that this Agreement will otherwise remain in full force and effect and enforceable.  This Agreement is not assignable, transferable or sublicensable by Customer except with 3Laws’ prior written consent.  3Laws may transfer and assign any of its rights and obligations under this Agreement without consent.  Except to the extent the parties have mutually executed and delivered a separate written agreement covering the same 3Laws Software (a “Separate Signed Agreement”), this Agreement is the complete and exclusive statement of the mutual understanding of the parties and supersedes and cancels all previous written and oral agreements, communications and other understandings relating to the subject matter of this Agreement, and all waivers and modifications must be in a writing signed by both parties, except as otherwise provided herein.  In the event of a conflict between the terms of this Agreement and the terms of a Separate Signed Agreement, the terms of the Separate Signed Agreement shall supersede and control.  However, any different or additional terms of any purchase order, confirmation, or similar pre-printed form (other than an Order Form accepted in writing by 3Laws) will have no force or effect.  No agency, partnership, joint venture, or employment is created as a result of this Agreement and Customer does not have any authority of any kind to bind 3Laws in any respect whatsoever.  In any action or proceeding to enforce rights under this Agreement, the prevailing party will be entitled to recover costs and attorneys’ fees.  All notices under this Agreement will be in writing and will be deemed to have been duly given when received, if personally delivered; when receipt is electronically confirmed, if transmitted by facsimile or e-mail; the day after it is sent, if sent for next day delivery by recognized overnight delivery Software; and upon receipt, if sent by certified or registered mail, return receipt requested.  This Agreement shall be governed by the laws of the State of California without regard to its conflict of laws provisions.
 
 
 3rd Party Software used by 3Laws Supervisor
@@ -518,6 +552,43 @@ License `gtest BSD-3 Clause`_::
     * Neither the name of Google Inc. nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Libcrypto (OpenSSL) `<https://wiki.openssl.org/index.php/Main_Page>`_
+---------------------------------------------------------------------
+.. _OpenSSL License1: https://openssl.org/source/license.html
+
+License: `OpenSSL License1`_::
+  Copyright OpenSSL 2024
+  Contents licensed under the terms of the OpenSSL license
+  See https://www.openssl.org/source/license.html for details
+   
+CRC_CPP `<https://github.com/AshleyRoll/crc_cpp>`_
+---------------------------------------------------------------------
+.. _crc_cpp License: https://github.com/AshleyRoll/crc_cpp#
+
+License: `crc_cpp License`_::
+  MIT License
+
+  Copyright (c) 2020 Ashley Roll
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.  
+   
 
 Modified 3rd Party Libraries
 ==============================
