@@ -6,6 +6,8 @@ The 3Laws Robotics Supervisor is a proprietary, commercial package. This is the 
 3LAWS SOFTWARE LICENSE AGREEMENT
 ********************************
 
+Updated 2024-03-27
+
 1. SOFTWARE AND SUPPORT
    
 1.1 3Laws Robotics, Inc. (“3Laws”) provides its software solution designed to improve and enhance the safety and performance of robotics and other automated solutions (collectively, the “Software”) to you (“Customer”) pursuant to this Software License Agreement (the “Agreement”). By entering into a Software order form (or other ordering document) or Software-related agreement with 3Laws (each an “Order Form”) or otherwise registering for, downloading, accessing or using the Software, Customer unconditionally accepts and agrees to all of the terms of this Agreement.  By entering into this agreement on behalf of a company or other legal entity, Customer represents that it has the authority to bind such entity and its affiliates to the terms of this Agreement, and, accordingly, the term "Customer" shall refer to such entity and its affiliates. If Customer does not have such authority, or Customer does not agree to all of the terms of this Agreement, Customer may not use the Software.  Each applicable Order Form is subject to and governed by the terms of this Agreement and forms a part hereof.
