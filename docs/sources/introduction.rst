@@ -13,9 +13,9 @@ Multiple ROS version are supported:
 +-----------------------+--------------+---------------------+
 |        20.04          |     Noetic   |     Galactic/Foxy   |
 +-----------------------+--------------+---------------------+
-|        18.04          |     Melodic  |          N/A        |
-+-----------------------+--------------+---------------------+
 
+Supervisor is available for x86_64 and ARM-64 processor architectures.  Other architectures
+may be available upon request.
 
 Architecture
 ************
