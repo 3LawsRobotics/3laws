@@ -12,4 +12,5 @@ doc/
 graph_info.json
 install/
 .gh-pages
+*~
 __pycache__
