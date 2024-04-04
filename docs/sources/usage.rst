@@ -56,7 +56,7 @@ The Supervisor package comes with a command line interface (CLI) that can be use
 
 This CLI is called `3laws` and can be used to start, stop, and restart the control panel used for the configuration of the Supervisor.
 
-The CLI provides also a command to check for updates of the Supervisor. (These updates still have to be installed manually. See: `6. Update`_)
+The CLI provides also a command to check for updates of the Supervisor. (These updates still have to be installed manually. See: `7. Update`_)
 
 
 Run the following command to see the available commands:
@@ -65,7 +65,7 @@ Run the following command to see the available commands:
 
   3laws --help-all
 
-1. Configuration
+3. Configuration
 ****************
 
 The 3Laws Supervisor is able to support several different types of robots and it
@@ -130,7 +130,7 @@ The initial view of the Control Panel is the "Configuration" page, which consist
   Remember to save each page after updating the data.
 
 
-1. Launch
+4. Launch
 *********
 
 Before starting the supervisor be sure to have your ROS environment correctly set up and sourced.
@@ -145,7 +145,22 @@ To launch the Supervisor, use the following command:
 
   ros2 launch lll_rdm rdm.launch.py
 
-5. Operations
+5. Visualize Data
+*****************
+
+The Supervisor publishes a number of topics that can be used to visualize the data that it is collecting.
+published via ROS this topic can be visualized using RViz or directly from the shell.
+A detailed list of the topics published by the Supervisor can be found here:
+
+.. toctree::
+
+    details/topics
+
+.. note::
+
+  The topics are published in the namespace `/lll`.
+
+6. Operations
 *************
 
 If the websocket (rosbridge) is running along with the supervisor, the Control Panel's *Operations* tab can be used to obtain a quick overview of the status of the copilot.
@@ -172,7 +187,7 @@ The lower section of the panel is showing strip charts.  The categories that are
 
 * Assurance violation represents that during the process of solving to find the closest input to the desired one, assumptions in the model or uncertainty had to be violated in order to produce a valid solution.  In this case the copilot is producing the best input to bring the system to the desired set, but the guarantees that the system is in the desired region and will remain there no longer hold.
 
-6. Update
+7. Update
 **********
 
 To update the Supervisor, you can use the same command as for the installation.
@@ -182,4 +197,5 @@ The supervisor will be updated to the latest version available for your distribu
 .. code-block:: bash
 
   bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh)
+
 
