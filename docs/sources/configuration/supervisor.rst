@@ -8,13 +8,13 @@ The Configuration > Supervisor page contains configuration entries for both the 
    :alt: Configuration > Supervisor page where robot diagnostic monitoring thresholds and run-time assurance settings are available.
 
 
-- **Upload log to 3laws robotics clod**: To enable broadcasting of the aggregated statistics to the cloud account, select the *Upload log to 3laws robotics cloud* box.  An arrangement with 3Laws for this service is required ahead of time in order for the uploads to function correctly.
+- **Upload log to 3laws robotics cloud**: For debugging purposes, 3Laws creates a log when Supervisor is started.  Enabling this option, allows 3Laws to provide better support with troubleshooting if there is a problem.
 
   * **World Frame**: Similar to "base robot frame", the name of the world frame (typically *odom* or *map*) must be specified.
     
   * **Advanced Settings > Project to SE2**: By default, the system is assumed to operate in 3-dimensional space. Projecting to SE2 assumes that the vehicle is traveling on a flat surface or that its travel distance is small enough that earth curvature effects are not significant.
 
-  * **Advanced Settings**:  The computational priority of the Supervisor node can be set through the "niceness" parameter, where -20 would set it as very high priority and +20 would be very low priority. A niceness of zero is recommended. (Please review documentation on setting priority in Linux using "nice" for a deeper explanation.)  *Retimestamp policy* means that if the timestamp is zero, the current clock time is used instead.  ?????
+  * **Advanced Settings**:  The computational priority of the Supervisor node can be set through the "niceness" parameter, where -20 would set it as very high priority and +19 would be very low priority. A niceness of zero is recommended. (Please review documentation on setting priority in Linux using "nice" for a deeper explanation.)  *Retimestamp policy* is used to add or correct the timestamp on log messages that seem to have an incorrect one.  Leaving the timestamp unchanged is also an option. 
       
   * **Copilot**: The Copilot enables the run-time assurance capability where desired commands to the robot from the autonomy stack ("desired inputs") are modified in order to avoid collisions, and altered versions are published through a separate message. 
     
