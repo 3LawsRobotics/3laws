@@ -1,11 +1,11 @@
 Perception
 ============
 
-The collision avoidance depends mostly on the Configuration > Perception dialog where the connection and description of either a laserscan sensor or an obstacle map message is configured.  
+The collision avoidance depends mostly on the Configuration > Perception dialog where the connection and description of either a laserscan sensor or an obstacle map message is configured.
 
-.. image:: data/cpanel5.png
+.. image:: ../data/cpanel5.png
    :width: 800px
-   :alt: Configuration > Perception page: The laserscan or list of obstacles is configured here. 
+   :alt: Configuration > Perception page: The laserscan or list of obstacles is configured here.
 
 - **Laserscan sensor**: The Supervisor can handle data points from one 2-dimensional laser (LIDAR) scanner.
 

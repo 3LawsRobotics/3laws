@@ -3,7 +3,7 @@ Credentials
 
 The *Credentials* page is shown in this image:
 
-.. image:: data/cpanel1.png
+.. image:: ../data/cpanel1.png
    :width: 800px
    :alt: Configuration > Credentials: Control Panel page presenting Credentials, Robot name, and Company ID
 
