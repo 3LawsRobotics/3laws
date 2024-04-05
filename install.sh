@@ -379,7 +379,7 @@ check_values
 # Define variables.
 GH_API="https://api.github.com"
 GH_REPO="$GH_API/repos/3LawsRobotics/3laws"
-GH_TAGS="$GH_REPO/releases/tags/latest"
+GH_TAGS="$GH_REPO/releases/latest"
 CURL_ARGS="-LJO#"
 
 curl -o /dev/null -s $GH_REPO || {
@@ -398,7 +398,7 @@ ASSET_ID=$(echo "$RESPONSE" | grep -C3 "name.:.\+$REGEX_QUERY" | grep -w id | tr
 [ "$ASSET_ID" ] || {
   VALID_ASSETS=$(echo "$RESPONSE" | grep -o "name.:.\+lll-supervisor-full-[a-zA-Z]\+_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]_[a-zA-Z0-9]\+" | cut -d ":" -f2- | cut -d "\"" -f2-)
   if [ -z "$VALID_ASSETS" ]; then
-    cerr "An error occurred, please contact support@3lawsrobotics.com"
+    cerr "No valid assets are available for your configuration, please contact support@3lawsrobotics.com"
   else
     echo -e "Error: Failed to get asset id, valid packages:\n$VALID_ASSETS"
   fi
