@@ -19,33 +19,40 @@ The collision avoidance depends mostly on the Configuration > Perception dialog 
 
 - **Obstacle Map**: An existing perception system can be used instead of a 2D-LIDAR, but it most provide an ObjectArray that matches the definition for an lll_rsgs/ObjectArray.  The definition is as follows:
 
-|  std_msgs/Header header
-|  Object[] objects
+.. code::
+
+   std_msgs/Header header
+   Object[] objects
 
 where Object[] is defined by:
-|  std_msgs/Header header
-|  # Identifier of the object
-|  string id
-|  # Object geometry, and pose of geometry in object frame
-|  ObjectGeometry geometry
-|  # Object pose world frame
-|  geometry_msgs/PoseWithCovariance pose
-|  # Object velocity in object frame
-|  geometry_msgs/TwistWithCovariance velocity
-|  # Object behavior model
-|  # Bounds on object frame velocity (considered inactive if non finite)
-|  geometry_msgs/Twist velocity_upper_bounds
-|  geometry_msgs/Twist velocity_lower_bounds
-|  # Bounds on object frame velocity norms (considered inactive if strictly less than 0)
-|  float64 linear_velocity_norm2_bound
-|  float64 angular_velocity_norm2_bound
-|  # Bounds on object frame acceleration  (considered inactive if non finite)
-|  geometry_mix's/Accel acceleration_upper_bounds
-|  geometry_msgs/Accel acceleration_lower_bounds
-|  # Bounds on object frame acceleration norms (considered inactive if strictly less than 0)
-|  float64 linear_acceleration_norm2_bound
-|  float64 angular_acceleration_norm2_bound
 
-... important::
+.. code::
+          
+  std_msgs/Header header
+  # Identifier of the object
+  string id
+  # Object geometry, and pose of geometry in object frame
+  ObjectGeometry geometry
+  # Object pose world frame
+  geometry_msgs/PoseWithCovariance pose
+  # Object velocity in object frame
+  geometry_msgs/TwistWithCovariance velocity
+  # Object behavior model
+  # Bounds on object frame velocity (considered inactive if non finite)
+  geometry_msgs/Twist velocity_upper_bounds
+  geometry_msgs/Twist velocity_lower_bounds
+  # Bounds on object frame velocity norms (considered inactive if strictly less than 0)
+  float64 linear_velocity_norm2_bound
+  float64 angular_velocity_norm2_bound
+  # Bounds on object frame acceleration  (considered inactive if non finite)
+  geometry_mix's/Accel acceleration_upper_bounds
+  geometry_msgs/Accel acceleration_lower_bounds
+  # Bounds on object frame acceleration norms (considered inactive if strictly less than 0)
+  float64 linear_acceleration_norm2_bound
+  float64 angular_acceleration_norm2_bound
+
+.. important::
 
   When using obstacle lists, if the obstacles are in the *world* coordinate frames, the copilot's use of localization must be enabled.
+
+\

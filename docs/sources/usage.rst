@@ -43,13 +43,14 @@ The script will add components to the global ROS installation. These new compone
 
 The Supervisor will now be available for operation.
 
-1. CLI (Command Line Interface)
-********************************
+2. Command Line Interface (CLI) for the Control Panel
+******************************************************
 
-The Supervisor package comes with a command line interface (CLI) that can be used to interact with the Supervisor.
+The Supervisor package provides a CLI that can be used to interact with the Supervisor.
 
-This CLI is called `3laws` and can be used to start, stop, and restart the control panel used for the configuration of the Supervisor.
+The command for the CLI is `3laws`. It can be used to start, stop, and restart the control panel service used for the configuration of the Supervisor.
 
+The CLI also an instruction to check for updates of the Supervisor. (These updates still have to be installed manually. See: `6. Update`_)
 The CLI provides also a command to check for updates of the Supervisor. (These updates still have to be installed manually. See: `7. Update`_)
 
 
@@ -76,17 +77,22 @@ If you prefer using a service to run the Control Panel in the background, you ca
 
 .. code-block:: bash
 
-  3laws control-panel enable
+  3laws control-panel autostart enable
 
 This will create a user service. This one will be started automatically when the system boots up. The Control Panel will be available at `http://localhost:8080`. If you want to change the port, you can use the following command:
 
 .. code-block:: bash
 
-  3laws control-panel enable --port <PORT>
+  3laws control-panel autostart enable --port <PORT>
 
+To turn off the service so that the Control Panel web server no longer automatially runs on reboot, use:
 
-The Control Panel's capabilities can be augmented through a rosbridge server.
-With that server, the control panel can more easily display some real-time information about the Supervisor's status. To install and start a rosbridge server (where <rosdistro> is replaced with the version of ROS on your system):
+.. code-block:: bash
+                
+   3laws control-panel autostart disable
+   
+The Control Panel can also display a summary of operational conditions, but this capability requires a rosbridge server.  To install and start a rosbridge
+server (where <rosdistro> is replaced with the version of ROS on your system):
 
 .. code-block:: bash
 
@@ -103,10 +109,6 @@ The navigation bar of the control panel will show the status of the rosbridge se
 
 The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as **Credentials**, **Robot Model**, **Supervisor**, **Localization**, and **Perception**. The details of the contents of each of these pages are linked below.
 
-.. important::
-
-  The entire configuration needs to be completed before starting the Supervisor software.
-
 .. toctree::
 
     configuration/credentials
@@ -117,10 +119,14 @@ The initial view of the Control Panel is the "Configuration" page, which consist
 
 .. important::
 
+  The entire configuration needs to be completed before starting the Supervisor software.
+
+.. important::
+
   Remember to save each page after updating the data.
 
 
-1. Launch
+4. Launch
 *********
 
 Before starting the supervisor be sure to have your ROS environment correctly set up and sourced.
@@ -133,7 +139,36 @@ To launch the Supervisor, use the following command:
 
 .. code-block:: bash
 
-  ros2 launch lll_rdm rdm.launch.py
+  ros2 launch lll_supervisor supervisor.launch.py
+
+Remapping of the supervisor output signal can be done by adding (for example) the highlighted lines to the */opt/ros/<ros-distro>/share/lll_supervisor/launch/supervisor.launch.py* file:
+
+.. code-block:: python
+   :emphasize-lines: 18,19,20
+      
+    launchdesc.add_action(
+        Node(
+            package=PACKAGE_NAME,
+            namespace=NAMESPACE,
+            executable=EXECUTABLE,
+            output=OUTPUT,
+            emulate_tty=True,
+            parameters=[
+                {
+                    "use_sim_time": LaunchConfiguration("use_sim_time"),
+                    "config_filepath": LaunchConfiguration("config_filepath"),
+                    "robot_id": LaunchConfiguration("robot_id"),
+                    "log_level": LaunchConfiguration("log_level"),
+                    "dry_run": LaunchConfiguration("dry_run"),
+                    "log_filepath": LaunchConfiguration("log_filepath"),
+                },
+            ],
+            remappings=[
+              ('/lll/ram/filtered_input', '/cmd_vel'),
+            ],
+            arguments=["--ros-args", "--disable-stdout-logs"],
+        )
+    )
 
 5. Visualize Data
 *****************
@@ -159,24 +194,16 @@ If the websocket (rosbridge) is running along with the supervisor, the Control P
    :width: 800px
    :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
-In the image above, the Supervisor is operational and the Copilot is configured to be active as indicated by the arrows between them. However, these boxes are colored yellow/gold, indicating that they are still initializing.  The framed section above the diagram shows the activity status for some of the critical components:
+In the image above, the Supervisor is operational and all the Copilot is configured to be active as indicated by the arrows between them.  When data is not yet available (e.g. rosbridge connection is not operational) the boxes appear as golden.  If the component has not yet initialized, the background for the box is blue, while if there is a detected error, the box is red.  Proper operation is indicated by a green-colored box.
 
-* The model is healthy (green check).
-
-* The Supervisor in unhealthy/initializing (gold).
-
-* Localization is also unhealthy/initializing (gold).
-
-* Perception is reported as healthy.
-
-The lower section of the panel is showing strip charts. The categories that are currently displayed represent:
+The lower section of the panel is showing strip charts.  The categories that are currently displayed represent:
 
 * the State Safeness - the barrier function value. When this value goes to zero or below zero, the system is evaluated as being in a collision state.
 
 * the Input Modification status - When this value is zero, the copilot is not modifying the input from the autonomy stack. That is, the filtering is in passive mode. When this value is non-zero, it means that the copilot is actively modifying the commanded input.
 
-* Assurance violation represents that during the process of solving to find the closest input to the desired one, assumptions in the model or uncertainty had to be violated in order to produce a valid solution. In this case the copilot is producing the best input to bring the system to the desired set, but the guarantees that the system is in the desired region and will remain there no longer hold.
-
+* Latest logs - shows the most recently detected events.
+  
 7. Update
 **********
 
