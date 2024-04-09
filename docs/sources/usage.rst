@@ -90,7 +90,7 @@ To turn off the service so that the Control Panel service is removed from the sy
 
    3laws control-panel autostart disable
 
-The Control Panel can also display a summary of operational conditions, but this capability requires a rosbridge server.  To install and start a rosbridge
+The Control Panel can also display a summary of operational conditions, but this capability requires a rosbridge server. To install and start a rosbridge
 server (where <rosdistro> is replaced with the version of ROS on your system):
 
 .. code-block:: bash
@@ -193,9 +193,9 @@ If the websocket (rosbridge) is running along with the supervisor, the Control P
    :width: 800px
    :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
-In the image above, the Supervisor is operational and all the Copilot is configured to be active as indicated by the arrows between them.  When data is not yet available (e.g. rosbridge connection is not operational) the boxes appear as golden.  If the component has not yet initialized, the background for the box is blue, while if there is a detected error, the box is red.  Proper operation is indicated by a green-colored box.
+In the image above, the Supervisor is operational and all the Copilot is configured to be active as indicated by the arrows between them. When data is not yet available (e.g. rosbridge connection is not operational) the boxes appear as golden. If the component has not yet initialized, the background for the box is blue, while if there is a detected error, the box is red. Proper operation is indicated by a green-colored box.
 
-The lower section of the panel is showing strip charts.  The categories that are currently displayed represent:
+The lower section of the panel is showing strip charts. The categories that are currently displayed represent:
 
 * the State Safeness - the barrier function value. When this value goes to zero or below zero, the system is evaluated as being in a collision state.
 
