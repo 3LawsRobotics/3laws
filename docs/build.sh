@@ -33,10 +33,10 @@ git clone --single-branch --bare --branch master "https://token:${GITHUB_TOKEN}@
 cd src
 
 # Load versions
-versionLatestDef="versionLatest=$(cat $versionsJson | jq '.latest')"
+versionLatestDef="versionLatest=$(cat "$versionsJson" | jq '.latest')"
 eval "$versionLatestDef"
 
-versionsRaw=$(cat $versionsJson | jq '.list')
+versionsRaw=$(cat "$versionsJson" | jq '.list')
 declare -A versions
 versionsContent=$(jq -r '. | to_entries | .[] | "[\"" + .key + "\"]=" + (.value | @sh)' <<<"$versionsRaw")
 versionsDef="versions=($versionsContent)"
@@ -61,8 +61,6 @@ for branch in "${!versions[@]}"; do
   install -D "$versionsHtml" "$buildDir/$version/docs/_templates/versions.html"
   workDir=$buildDir/$version/docs
   sphinx-build -b html -d "$workDir/_build" "$workDir" "$outDir/en/$version"
-  sphinx-build -b rinoh -d "$workDir/_build/" "$workDir" "$workDir/_build/pdf"
-  cp "$workDir/_build/pdf/3laws.pdf" "$outDir/en/$version/3laws_manual.pdf"
 done
 
 # Copy and update main index.html
