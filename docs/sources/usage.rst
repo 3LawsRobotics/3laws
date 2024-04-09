@@ -50,7 +50,6 @@ The Supervisor package provides a CLI that can be used to interact with the Supe
 
 The command for the CLI is `3laws`. It can be used to start, stop, and restart the control panel service used for the configuration of the Supervisor.
 
-The CLI also an instruction to check for updates of the Supervisor. (These updates still have to be installed manually. See: `6. Update`_)
 The CLI provides also a command to check for updates of the Supervisor. (These updates still have to be installed manually. See: `7. Update`_)
 
 
@@ -60,7 +59,7 @@ Run the following command to see the available commands:
 
   3laws --help-all
 
-3. Configuration
+1. Configuration
 ****************
 
 The 3Laws Supervisor is able to support several types of robots and needs to connect to your system's data sources and sinks. The configuration process aims to specify this type of information. The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.
@@ -88,9 +87,9 @@ This will create a user service. This one will be started automatically when the
 To turn off the service so that the Control Panel web server no longer automatially runs on reboot, use:
 
 .. code-block:: bash
-                
+
    3laws control-panel autostart disable
-   
+
 The Control Panel can also display a summary of operational conditions, but this capability requires a rosbridge server.  To install and start a rosbridge
 server (where <rosdistro> is replaced with the version of ROS on your system):
 
@@ -145,7 +144,7 @@ Remapping of the supervisor output signal can be done by adding (for example) th
 
 .. code-block:: python
    :emphasize-lines: 18,19,20
-      
+
     launchdesc.add_action(
         Node(
             package=PACKAGE_NAME,
@@ -203,7 +202,7 @@ The lower section of the panel is showing strip charts.  The categories that are
 * the Input Modification status - When this value is zero, the copilot is not modifying the input from the autonomy stack. That is, the filtering is in passive mode. When this value is non-zero, it means that the copilot is actively modifying the commanded input.
 
 * Latest logs - shows the most recently detected events.
-  
+
 7. Update
 **********
 
