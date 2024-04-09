@@ -2,7 +2,6 @@ Introduction
 ############
 
 The 3Laws Robotics Supervisor is a software package that provides a control filter to add collision avoidance without compromising performance.
-The Supervisor contains a diagnostic module that monitors multiple metrics that calculate safety margins and performance.
 
 Multiple ROS version are supported:
 
@@ -57,7 +56,7 @@ The metrics are also summarized and optionally sent to a cloud database for disp
 Configuration
 *************
 
-The most straightforward way to insert Supervisor into an existing command chain is to use the ROS remapping feature as illustrated in the figure below.  There is no need to make any changes to the signals published or subscribed-to by the existing components. In the example below, the **/cmd_vel** signal represents the output of the Planner and the input to the Controller.  At launch time, the Planner's signal can be remapped to an alternate name like **/cmd_vel_plan**.   
+The most straightforward way to insert Supervisor into an existing command chain is to use the ROS remapping feature as illustrated in the figure below.  There is no need to make any changes to the signals published or subscribed-to by the existing components. In the example below, the **/cmd_vel** signal represents the output of the Planner and the input to the Controller.  At launch time, the Planner's signal can be remapped to an alternate name like **/cmd_vel_plan**.
 
 .. image:: data/supervisor_insertion_1.png
    :width: 800px

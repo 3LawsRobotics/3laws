@@ -5,11 +5,11 @@ This page will help you install and configure the 3Laws Supervisor on your robot
 
 3Laws Supervisor is designed for installation on Ubuntu systems with ROS1 or ROS2 already deployed on the computer. The Supervisor has 3 main functionalities that are discussed in this manual:
 
-#. Run-time assurance or "Copilot" operates as a filter that takes the information about collision threshold violations from the diagnostics monitor and produces corrective actions to keep the robot away from the possible collision. By default, this capability is active.
+#. **Run-time assurance or "Copilot"** operates as a filter that takes the information about collision threshold violations from the diagnostics monitor and produces corrective actions to keep the robot away from the possible collision. By default, this capability is active.
 
-#. Robot diagnostics monitoring collects metrics about the system operation in real time. Some of the threshold violations are published in real-time locally, and some are published only in aggregated fashion. The published messages can be sent to a cloud hosted database and visualize via web-based dashboards or can be used locally for decision making by customer software.
+#. **Robot diagnostics monitoring** collects metrics about the system operation in real time. Some of the threshold violations are published in real-time locally, and some are published only in aggregated fashion. The published messages can be sent to a cloud hosted database and visualize via web-based dashboards or can be used locally for decision making by customer software.
 
-#. Control Panel: A configuration graphical (browser-based) tool is available to help set the Supervisor up for the robot.
+#. **Control Panel** is a graphical (browser-based) configuration tool to set up the Supervisor for the robot.
 
 
 .. contents:: Table of Contents
@@ -23,7 +23,7 @@ To install Supervisor on your system, open a terminal and run the following comm
 
 .. code-block:: bash
 
-  bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh) ..TODO: update this link
+  bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install.sh)
 
 This script will download a package from github and will begin the installation. Note that the package name starts with "lll-supervisor". The "lll" represents 3Laws. As the script proceeds it will try to determine your system's configuration so that the appropriate components are installed. The script will prompt you for help with configuration if it is unable to find your computer's ROS distribution or architecture.
 
@@ -41,7 +41,7 @@ The script will add components to the global ROS installation. These new compone
 
   source /opt/ros/<DISTRO>/setup.sh
 
-The Supervisor will now be available for operation.
+The Supervisor will now be installed on your system.
 
 2. Command Line Interface (CLI) for the Control Panel
 ******************************************************
@@ -59,7 +59,7 @@ Run the following command to see the available commands:
 
   3laws --help-all
 
-1. Configuration
+3. Configuration
 ****************
 
 The 3Laws Supervisor is able to support several types of robots and needs to connect to your system's data sources and sinks. The configuration process aims to specify this type of information. The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.
@@ -84,7 +84,7 @@ This will create a user service. This one will be started automatically when the
 
   3laws control-panel autostart enable --port <PORT>
 
-To turn off the service so that the Control Panel web server no longer automatially runs on reboot, use:
+To turn off the service so that the Control Panel service is removed from the system:
 
 .. code-block:: bash
 
