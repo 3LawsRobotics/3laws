@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-SCRIPT_VERSION="0.8.0"
-RDM_RELEASE="rdm_0.11.1"
-CONTROL_PANEL_RELEASE="control_panel_0.1.1"
+SCRIPT_VERSION="1.0.0"
 
 # Exit on errors
 set -e
@@ -260,7 +258,7 @@ check_values() {
     QUERY_DISTRO=$(promptChoiceROSDistro)
   fi
 
-  cout "The RDM package for ubuntu $UBUNTU_DISTRO $ARCH and Ros $QUERY_DISTRO will be downloaded"
+  cout "The Supervisor package for ubuntu $UBUNTU_DISTRO $ARCH and Ros $QUERY_DISTRO will be downloaded"
 }
 
 # Script Options
@@ -381,7 +379,7 @@ check_values
 # Define variables.
 GH_API="https://api.github.com"
 GH_REPO="$GH_API/repos/3LawsRobotics/3laws"
-GH_TAGS="$GH_REPO/releases/tags/${RDM_RELEASE}"
+GH_TAGS="$GH_REPO/releases/latest"
 CURL_ARGS="-LJO#"
 
 curl -o /dev/null -s $GH_REPO || {
@@ -389,7 +387,7 @@ curl -o /dev/null -s $GH_REPO || {
   exit 1
 }
 
-PACKAGE_NAME="lll-rdm-${QUERY_DISTRO}"
+PACKAGE_NAME="lll-supervisor-full-${QUERY_DISTRO}"
 REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+_$ARCH"
 
 # Read asset tags.
@@ -398,9 +396,9 @@ ASSET_NAME=$(echo "$RESPONSE" | grep -o "name.:.\+${REGEX_QUERY}.deb" | cut -d "
 ASSET_ID=$(echo "$RESPONSE" | grep -C3 "name.:.\+$REGEX_QUERY" | grep -w id | tr : = | tr -cd '[[:alnum:]]=' | cut -d'=' -f2-)
 
 [ "$ASSET_ID" ] || {
-  VALID_ASSETS=$(echo "$RESPONSE" | grep -o "name.:.\+lll-rdm-[a-zA-Z]\+_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]_[a-zA-Z0-9]\+" | cut -d ":" -f2- | cut -d "\"" -f2-)
+  VALID_ASSETS=$(echo "$RESPONSE" | grep -o "name.:.\+lll-supervisor-full-[a-zA-Z]\+_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]_[a-zA-Z0-9]\+" | cut -d ":" -f2- | cut -d "\"" -f2-)
   if [ -z "$VALID_ASSETS" ]; then
-    cerr "An error occurred, please contact support@3lawsrobotics.com"
+    cerr "No valid assets are available for your configuration, please contact support@3lawsrobotics.com"
   else
     echo -e "Error: Failed to get asset id, valid packages:\n$VALID_ASSETS"
   fi
@@ -438,7 +436,7 @@ if [[ -f "$ASSET_NAME" ]]; then
   else
     SUDO=""
     if [[ "$EUID" -ne 0 && $INSTALL == 1 ]]; then
-      cwarn "To install the RDM automatically some commands must be run as sudo"
+      cwarn "To install the supervisor automatically some commands must be run as sudo"
       SUDO="sudo "
     fi
     # Install dependencies
@@ -474,77 +472,6 @@ if [[ -f "$ASSET_NAME" ]]; then
     cout "Remove artifacts"
     rm "$ASSET_NAME"
   fi
-else
-  cout "Package not found...If you encounter any issues, please contact: support@3lawsrobotics.com"
-fi
-
-ros=ros2
-if [ $HAS_ROS1 == 1 ]; then
-  ros=ros1
-fi
-
-# Install Control Panel
-PACKAGE_NAME="lll-control-panel-${ros}"
-REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+"
-
-GH_TAGS="$GH_REPO/releases/tags/${CONTROL_PANEL_RELEASE}"
-
-RESPONSE=$(curl -s -H "application/vnd.github+json" $GH_TAGS)
-ASSET_NAME=$(echo "$RESPONSE" | grep -o "name.:.\+${REGEX_QUERY}.deb" | cut -d ":" -f2- | cut -d "\"" -f2-)
-ASSET_ID=$(echo "$RESPONSE" | grep -C3 "name.:.\+$REGEX_QUERY" | grep -w id | tr : = | tr -cd '[[:alnum:]]=' | cut -d'=' -f2-)
-
-[ "$ASSET_ID" ] || {
-  VALID_ASSETS=$(echo "$RESPONSE" | grep -o "name.:.\+lll-control-panel-${ros}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]_[a-zA-Z0-9]\+" | cut -d ":" -f2- | cut -d "\"" -f2-)
-  if [ -z "$VALID_ASSETS" ]; then
-    cerr "An error occurred, please contact support@3lawsrobotics.com"
-  else
-    echo -e "Error: Failed to get asset id, valid packages:\n$VALID_ASSETS"
-  fi
-  exit 1
-}
-
-GH_ASSET="$GH_REPO/releases/assets/$ASSET_ID"
-
-DOWNLOAD=0
-if [ -f "$ASSET_NAME" ]; then
-  cwarn "$ASSET_NAME already in your directory."
-  OVERWRITE=$(promptYesNo "Do you want to overwrite $ASSET_NAME in the current directory ?" 1)
-  if [ "$OVERWRITE" -eq 1 ]; then
-    cwarn "Removing $ASSET_NAME"
-    rm "$ASSET_NAME"
-    DOWNLOAD=1
-  fi
-else
-  DOWNLOAD=$(promptYesNo "Do you want to download $ASSET_NAME in the current directory" 1)
-fi
-
-if [[ $DOWNLOAD == 1 ]]; then
-  echo "Downloading package..." >&2
-  curl $CURL_ARGS -s -H 'Accept: application/octet-stream' "$GH_ASSET"
-  cout "Package $ASSET_NAME has been downloaded."
-else
-  cwarn "Package not downloaded."
-fi
-
-if [[ -f "$ASSET_NAME" ]]; then
-  INSTALL=$(promptYesNo "Do you want to install $ASSET_NAME ?" 1)
-
-  if [ "$INSTALL" == 0 ]; then
-    cout "Package downloaded but not installed"
-    exit 0
-  fi
-
-  SUDO=""
-  if [[ "$EUID" -ne 0 && $INSTALL == 1 ]]; then
-    cwarn "To install the Control Panel automatically some commands must be run as sudo"
-    SUDO="sudo "
-  fi
-
-  # Install package
-  $SUDO apt install -f ./"$ASSET_NAME"
-  cout "Success installation!"
-  cout "Remove artifacts"
-  rm "$ASSET_NAME"
 else
   cout "Package not found...If you encounter any issues, please contact: support@3lawsrobotics.com"
 fi
