@@ -37,8 +37,8 @@ cout "Removing cleanly lll-supervisor"
 
 # Check if the service exists and remove it
 if [ -f "$HOME/.config/systemd/user/lll_control_panel.service" ]; then
-  systemctl --user stop backup
-  systemctl --user disable backup
+  systemctl --user stop lll_control_panel
+  systemctl --user disable lll_control_panel
   rm -f "$HOME/.config/systemd/user/lll_control_panel.service"
   systemctl --user daemon-reload
 fi || true
