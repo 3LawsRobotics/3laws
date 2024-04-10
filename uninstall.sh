@@ -52,3 +52,9 @@ fi || true
 if ! ($SUDO apt remove lll-supervisor* -y); then
   cerr "Error: Failed to fully remove lll-supervisor"
 fi
+
+launch_cache_folder=/opt/ros/humble/share/lll_supervisor/launch
+if [ -d "$launch_cache_folder" ]; then
+  echo "Deleting folder cache $launch_cache_folder"
+  rm -rf "$launch_cache_folder"
+fi || true
