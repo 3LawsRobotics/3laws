@@ -50,7 +50,7 @@ The Supervisor package provides a CLI that can be used to interact with the Supe
 
 The command for the CLI is `3laws`. It can be used to start, stop, and restart the control panel service used for the configuration of the Supervisor.
 
-The CLI provides also a command to check for updates of the Supervisor. (These updates still have to be installed manually. See: `7. Update`_)
+The CLI provides also a command to check for updates of the Supervisor. (These updates still have to be installed manually. See: `7. Version Update`_)
 
 
 Run the following command to see the available commands:
@@ -59,8 +59,8 @@ Run the following command to see the available commands:
 
   3laws --help-all
 
-3. Configuration
-****************
+3. Configuration through the Visual Interface
+*********************************************
 
 The 3Laws Supervisor is able to support several types of robots and needs to connect to your system's data sources and sinks. The configuration process aims to specify this type of information. The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.
 
@@ -106,15 +106,20 @@ The navigation bar of the control panel will show the status of the rosbridge se
    :width: 800px
    :alt: Control Panel NavBar with ros bridge connected.
 
+
 The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as **Credentials**, **Robot Model**, **Supervisor**, **Localization**, and **Perception**. The details of the contents of each of these pages are linked below.
+
+
+Sensor configuration for Collision Avoidance: <configuration/perception>
 
 .. toctree::
 
-    configuration/credentials
-    configuration/robot_model
-    configuration/supervisor
-    configuration/localization
-    configuration/perception
+   License key and Robot Name <configuration/credentials>
+   Robot Shape/Kinematics and Command Inputs <configuration/robot_model>
+   Copilot tuning and Additional States to Monitor <configuration/supervisor>
+   Localization state and Constraints on State <configuration/localization>
+   Sensor Configuration for Collision Avoidance <configuration/perception>
+
 
 .. important::
 
@@ -169,8 +174,8 @@ Remapping of the supervisor output signal can be done by adding (for example) th
         )
     )
 
-5. Visualize Data
-*****************
+5. Additional topics published by Supervisor
+********************************************
 
 The Supervisor publishes a number of topics that can be used to visualize the data that it is collecting.
 published via ROS this topic can be visualized using RViz or directly from the shell.
@@ -203,8 +208,8 @@ The lower section of the panel is showing strip charts. The categories that are 
 
 * Latest logs - shows the most recently detected events.
 
-7. Update
-**********
+7. Version Update
+*****************
 
 To update the Supervisor, you can use the same command as for the installation.
 

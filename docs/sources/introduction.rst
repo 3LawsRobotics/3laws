@@ -16,8 +16,15 @@ Multiple ROS version are supported:
 The software is also supported on other versions of ROS, but is not tested as completely. Supervisor is available for x86_64 and ARM-64 processor architectures. Other architectures
 may be available upon request.
 
-Architecture
-************
+Supervisor interfaces
+*********************
+
+The 3Laws Robotics Supervisor currently requires that the robot uses the Robot Operating System (`ROS <http://www.ros.org>`_).
+The Supervisor is a ROS node that subscribes to the robot's state, sensors, planning, computational measures, perception, and control commands. If the RTA capability is enabled, Supervisor will also publish safety-filtered control commands to the robot's actuators.
+A detailed description of the Supervisor ROS topics is provided here: :doc:`ROS topics <details/topics>`
+
+Functionality
+*************
 
 The Supervisor has 3 main functions:
 
@@ -29,15 +36,8 @@ The Supervisor has 3 main functions:
    :width: 800px
    :alt: Architecture schema
 
-Supervisor interfaces
-*********************
-
-The 3Laws Robotics Supervisor currently requires that the robot uses the Robot Operating System (`ROS <http://www.ros.org>`_).
-The Supervisor is a ROS node that subscribes to the robot's state, sensors, planning, computational measures, perception, and control commands. If the RTA capability is enabled, Supervisor will also publish safety-filtered control commands to the robot's actuators.
-A detailed description of the Supervisor ROS topics is provided here: :doc:`ROS topics <details/topics>`
-
 Run-time assurance
-******************
+==================
 
 The run-time assurance capability, also referred to as **Copilot**, is a filter that operates at the control rate. It is designed to ensure that the robot's control commands keep the robot in a user defined safe state. Based on formal mathematical proven methods, the Copilot is able to prevent the robot from colliding while still allowing the robot to reach maximum performance when the system is far from any obstacles **in its current travel direction**.
 
@@ -47,7 +47,7 @@ The Copilot uses basic kinematic and dynamic models for the robot in order to pr
 
 
 Robot diagnostics monitor
-*************************
+=========================
 
 The diagnostics that monitors and compute metrics about the robot health and safety. The computed metrics are published on ROS topics that are available locally on the robot. High frequency versions of the metrics can be used to monitor the robot's health and safety in real-time. In other words, these metrics are available to other processes on the robot which can then use the information to make decisions.
 
