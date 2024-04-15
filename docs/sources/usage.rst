@@ -1,7 +1,5 @@
-Using Supervisor
-################
-
-This page will help you install and configure the 3Laws Supervisor on your robot.
+Supervisor Installation and Operation
+#####################################
 
 3Laws Supervisor is designed for installation on Ubuntu systems with ROS1 or ROS2 already deployed on the computer. The Supervisor has 3 main functionalities that are discussed in this manual:
 
@@ -15,8 +13,9 @@ This page will help you install and configure the 3Laws Supervisor on your robot
 .. contents:: Table of Contents
    :depth: 2
 
+.. _Installation:
 
-1. Installation
+Installation
 ***************
 
 To install Supervisor on your system, open a terminal and run the following command:
@@ -41,16 +40,16 @@ The script will add components to the global ROS installation. These new compone
 
   source /opt/ros/<DISTRO>/setup.sh
 
-The Supervisor will now be installed on your system.
+At this point, the Supervisor is installed on the system, but needs a configuration file (*~/.3laws/config/supervisor.yaml*).  The configuration file can be built using the browser-based **Control Panel** visual interface discussed below.
 
-2. Command Line Interface (CLI) for the Control Panel
+Command Line Interface (CLI) for the Control Panel
 ******************************************************
 
 The Supervisor package provides a CLI that can be used to interact with the Supervisor.
 
 The command for the CLI is `3laws`. It can be used to start, stop, and restart the control panel service used for the configuration of the Supervisor.
 
-The CLI provides also a command to check for updates of the Supervisor. (These updates still have to be installed manually. See: `7. Update`_)
+The CLI provides also a command to check for updates of the Supervisor. (These updates still have to be installed manually. See: `Version Update`_)
 
 
 Run the following command to see the available commands:
@@ -58,13 +57,6 @@ Run the following command to see the available commands:
 .. code-block:: bash
 
   3laws --help-all
-
-3. Configuration
-****************
-
-The 3Laws Supervisor is able to support several types of robots and needs to connect to your system's data sources and sinks. The configuration process aims to specify this type of information. The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.
-
-A graphical (browser-based) configuration tool (called **Control Panel**) is available to help with the configuration effort.
 
 After installation you can use the CLI to start the Control Panel:
 
@@ -106,15 +98,23 @@ The navigation bar of the control panel will show the status of the rosbridge se
    :width: 800px
    :alt: Control Panel NavBar with ros bridge connected.
 
+Configuration through the **Control Panel** visual interface
+************************************************************
+
+The 3Laws Supervisor is able to support several types of robots, but needs to connect to your system's data sources and sinks. The configuration process aims to specify this type of information. The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.
+
+
 The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as **Credentials**, **Robot Model**, **Supervisor**, **Localization**, and **Perception**. The details of the contents of each of these pages are linked below.
+
 
 .. toctree::
 
-    configuration/credentials
-    configuration/robot_model
-    configuration/supervisor
-    configuration/localization
-    configuration/perception
+   1. License key and Robot Name <configuration/credentials>
+   2. Robot Shape/Kinematics and Command Inputs <configuration/robot_model>
+   3. Copilot tuning and Additional States to Monitor <configuration/supervisor>
+   4. Localization state and Constraints on State <configuration/localization>
+   5. Sensor Configuration for Collision Avoidance <configuration/perception>
+
 
 .. important::
 
@@ -125,7 +125,7 @@ The initial view of the Control Panel is the "Configuration" page, which consist
   Remember to save each page after updating the data.
 
 
-4. Launch
+Launch
 *********
 
 Before starting the supervisor be sure to have your ROS environment correctly set up and sourced.
@@ -169,8 +169,8 @@ Remapping of the supervisor output signal can be done by adding (for example) th
         )
     )
 
-5. Visualize Data
-*****************
+Additional topics published by Supervisor
+********************************************
 
 The Supervisor publishes a number of topics that can be used to visualize the data that it is collecting.
 published via ROS this topic can be visualized using RViz or directly from the shell.
@@ -184,7 +184,7 @@ A detailed list of the topics published by the Supervisor can be found here:
 
   The topics are published in the namespace `/lll`.
 
-6. Operations
+Operations
 *************
 
 If the websocket (rosbridge) is running along with the supervisor, the Control Panel's *Operations* tab can be used to obtain a quick overview of the status of the copilot.
@@ -203,8 +203,8 @@ The lower section of the panel is showing strip charts. The categories that are 
 
 * Latest logs - shows the most recently detected events.
 
-7. Update
-**********
+Version Update
+*****************
 
 To update the Supervisor, you can use the same command as for the installation.
 
