@@ -44,7 +44,7 @@ extensions = [
     "sphinx_sitemap",
     "sphinx_copybutton",
 ]
-
+html_show_sphinx = False
 html_show_sourcelink = False
 
 templates_path = ["_templates"]

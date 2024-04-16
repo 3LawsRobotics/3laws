@@ -98,7 +98,7 @@ The navigation bar of the control panel will show the status of the rosbridge se
    :width: 800px
    :alt: Control Panel NavBar with ros bridge connected.
 
-Configuration through the **Control Panel** visual interface
+Configuration through the Control Panel visual interface
 ************************************************************
 
 The 3Laws Supervisor is able to support several types of robots, but needs to connect to your system's data sources and sinks. The configuration process aims to specify this type of information. The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.
@@ -213,5 +213,3 @@ The supervisor will be updated to the latest version available for your distribu
 .. code-block:: bash
 
   bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install.sh)
-
-
