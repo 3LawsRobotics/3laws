@@ -467,7 +467,7 @@ if [[ -f "$ASSET_NAME" ]]; then
     fi
 
     # Install package
-    $SUDO apt install -f ./"$ASSET_NAME"
+    $SUDO apt install -f ./"$ASSET_NAME" -y --no-install-recommends
     cout "Success installation!"
     cout "Remove artifacts"
     rm "$ASSET_NAME"
