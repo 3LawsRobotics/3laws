@@ -452,12 +452,12 @@ if [[ -f "$ASSET_NAME" ]]; then
     if [[ $STDLIB_INSTALLED == 0 ]]; then
       {
         {
-          $SUDO apt-get install -y $STDLIB &>/dev/null
+          $SUDO apt-get install -y --no-install-recommends $STDLIB &>/dev/null
         } || {
           $SUDO apt-get install -y --no-install-recommends software-properties-common &>/dev/null
           $SUDO add-apt-repository -y "ppa:ubuntu-toolchain-r/test" &>/dev/null
           cwarn "Added 'ppa:ubuntu-toolchain-r/test' to apt sources!"
-          $SUDO apt-get install -y $STDLIB &>/dev/null
+          $SUDO apt-get install -y --no-install-recommends $STDLIB &>/dev/null
         }
         cwarn "Installed '$STDLIB' on system!"
       } || {
