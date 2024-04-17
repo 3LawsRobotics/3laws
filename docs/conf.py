@@ -43,6 +43,7 @@ extensions = [
     "sphinx.ext.githubpages",
     "sphinx_sitemap",
     "sphinx_copybutton",
+    "sphinxcontrib.youtube",
 ]
 html_show_sphinx = False
 html_show_sourcelink = False

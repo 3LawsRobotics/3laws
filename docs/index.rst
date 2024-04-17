@@ -19,9 +19,9 @@ __________________
 .. toctree::
    :maxdepth: 3
 
-   sources/introduction
-   sources/usage
-   sources/theory
-   sources/changelog
+   sources/getting_started
+   sources/user_guide
+   sources/knowledge
    sources/faq
+   sources/changelog
    sources/legal

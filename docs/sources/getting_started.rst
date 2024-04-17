@@ -1,22 +1,25 @@
-Supervisor Installation and Operation
+Getting started
 #####################################
-
-3Laws Supervisor is designed for installation on Ubuntu systems with ROS1 or ROS2 already deployed on the computer. The Supervisor has 3 main functionalities that are discussed in this manual:
-
-#. **Run-time assurance or "Copilot"** operates as a filter that takes the information about collision threshold violations from the diagnostics monitor and produces corrective actions to keep the robot away from the possible collision. By default, this capability is active.
-
-#. **Robot diagnostics monitoring** collects metrics about the system operation in real time. Some of the threshold violations are published in real-time locally, and some are published only in aggregated fashion. The published messages can be sent to a cloud hosted database and visualize via web-based dashboards or can be used locally for decision making by customer software.
-
-#. **Control Panel** is a graphical (browser-based) configuration tool to set up the Supervisor for the robot.
-
-
-.. contents:: Table of Contents
-   :depth: 2
 
 .. _Installation:
 
 Installation
 ***************
+
+The 3Laws Robotics Supervisor currently requires that the robot uses the Robot Operating System (`ROS <http://www.ros.org>`_).
+
+Multiple ROS version are supported:
+
++-----------------------+--------------+---------------------+
+| Ubuntu Distribution   | ROS1 version |    ROS2 version     |
++=======================+==============+=====================+
+|        22.04          |     N/A      |     Humble/Iron     |
++-----------------------+--------------+---------------------+
+|        20.04          |     Noetic   |     Galactic/Foxy   |
++-----------------------+--------------+---------------------+
+
+Supervisor is available for x86_64 and ARM-64 processor architectures. Other architectures
+may be available upon request.
 
 To install Supervisor on your system, open a terminal and run the following command:
 

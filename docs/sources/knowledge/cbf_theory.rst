@@ -1,5 +1,5 @@
 Theory and Implementation of Control Barrier Functions
-******************************************************
+######################################################
 
 3Laws has developed the Supervisor as an add-on that can check and augment an existing planner or controller. The Supervisor contains a limited set of vehicle platforms and applications. This document describes the more general possibilities available for the underlying technology known as *Control Barrier Functions* (CBFs). The high-level idea is that CBFs monitor the robot (or other vehicle's) state and next motion commands in real-time. If the model predicts that the system will experience undesirable behavior (based on the commands and system dynamics), then the commands will be altered to avoid the undesirable outcome in a minimally disruptive way. The modification might be to slow the vehicle or to turn it towards a more desirable direction.
 
@@ -12,13 +12,13 @@ Basic Architecture
 
 From an operational standpoint, a CBF (when used for collision avoidance) sits between the planning layer and the hardware control layer. "Hardware control" typically refers to a speed or attitude controller for a vehicle or a joint attitude/speed controller for an articulated robot.
 
-.. image:: data/supervisor_architecture_1.png
+.. image:: ../data/supervisor_architecture_1.png
    :width: 700px
    :alt: Architecture showing inputs and outputs from a typical CBF
 
 The CBF will evaluate the likelihood of a collision (or other undesirable behavior) and will only modify the desired input from the planner when a collision is predicted within the estimation window.
 
-.. image:: data/supervisor_architecture_1b.png
+.. image:: ../data/supervisor_architecture_1b.png
    :width: 700px
    :alt: Architecture showing inputs and outputs from a typical setup
 
@@ -64,7 +64,7 @@ obstacles in the space, CBFs can modify pre-planned paths to avoid potential col
 
 **GeoFencing**: CBFs can also be inserted into the autonomy stack at different locations based on the needs for time-criticality. The approach is most often deployed between the planner and the inner-loop controller, but it can also be deployed between the inner-loop controller and the hardware for cases where the vehicle, like a racing copter, is going to approach undesirable configurations at rates that the high-level planner is able to replan-for, or if the system is being controlled by a human (or automated planner) that is not aware of the position of the drone relative to the keep-out area.
 
-.. image:: data/supervisor_architecture_1c.png
+.. image:: ../data/supervisor_architecture_1c.png
    :width: 700px
    :alt: Alternate placements in the autonomy stack
 
