@@ -6,7 +6,7 @@ Getting started
 Installation
 ***************
 
-The 3Laws Robotics Supervisor currently requires that the robot uses the Robot Operating System (`ROS <http://www.ros.org>`_).
+The 3Laws **Supervisor** requires Robot Operating System (`ROS <http://www.ros.org>`_) for proper communication with the base platform.
 
 Multiple ROS version are supported:
 
@@ -18,16 +18,15 @@ Multiple ROS version are supported:
 |        20.04          |     Noetic   |     Galactic/Foxy   |
 +-----------------------+--------------+---------------------+
 
-Supervisor is available for x86_64 and ARM-64 processor architectures. Other architectures
-may be available upon request.
+Supervisor is available for x86_64 and ARM-64 processor architectures. Other architectures may be available upon request.
 
-To install Supervisor on your system, open a terminal and run the following command:
+To install Supervisor on the system, open a terminal and run the following command:
 
 .. code-block:: bash
 
   bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install.sh)
 
-This script will download a package from github and will begin the installation. Note that the package name starts with "lll-supervisor". The "lll" represents 3Laws. As the script proceeds it will try to determine your system's configuration so that the appropriate components are installed. The script will prompt you for help with configuration if it is unable to find your computer's ROS distribution or architecture.
+This script will download a package from github and will begin the installation. Note that the package name starts with "lll-supervisor". The "lll" represents 3Laws. As the script proceeds it will try to determine the system's configuration so that the appropriate components are installed. The script will prompt for help with configuration if it is unable to find the computer's ROS distribution or architecture.
 
 During the execution of the script, several questions will be asked:
 
@@ -37,7 +36,7 @@ During the execution of the script, several questions will be asked:
 
 #. A *sudo* permission may be ask to run APT and install the software.
 
-The script will add components to the global ROS installation. These new components will not be available until the ROS setup script is source. If your configuration automatically runs the ROS setup script when a new shell is started, please close the terminal and open a new one. Otherwise, please run the following command:
+The script will add components to the global ROS installation. These new components will not be available until the ROS setup script is source. If the configuration automatically runs the ROS setup script when a new shell is started, please close the terminal and open a new one. Otherwise, please run the following command:
 
 .. code-block:: bash
 
@@ -61,19 +60,19 @@ Run the following command to see the available commands:
 
   3laws --help-all
 
-After installation you can use the CLI to start the Control Panel:
+After installation the command-line interface (CLI) can be used to start the Control Panel:
 
 .. code-block:: bash
 
   3laws control-panel run
 
-If you prefer using a service to run the Control Panel in the background, you can use the following command:
+If a service is preferred for running the Control Panel in the background, use the following command:
 
 .. code-block:: bash
 
   3laws control-panel autostart enable
 
-This will create a user service. This one will be started automatically when the system boots up. The Control Panel will be available at `http://localhost:8080`. If you want to change the port, you can use the following command:
+This will create a user service. This one will be started automatically when the system boots up. The Control Panel will be available at `http://localhost:8080`. To change the communication port, use the following command:
 
 .. code-block:: bash
 
@@ -86,7 +85,7 @@ To turn off the service so that the Control Panel service is removed from the sy
    3laws control-panel autostart disable
 
 The Control Panel can also display a summary of operational conditions, but this capability requires a rosbridge server. To install and start a rosbridge
-server (where <rosdistro> is replaced with the version of ROS on your system):
+server (where <rosdistro> is replaced with the version of ROS on the system):
 
 .. code-block:: bash
 
@@ -104,7 +103,7 @@ The navigation bar of the control panel will show the status of the rosbridge se
 Configuration through the Control Panel visual interface
 ************************************************************
 
-The 3Laws Supervisor is able to support several types of robots, but needs to connect to your system's data sources and sinks. The configuration process aims to specify this type of information. The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.
+The 3Laws Supervisor is able to support several types of robots, but needs to connect to the system's data sources and sinks. The configuration process aims to specify this type of information. The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.
 
 
 The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as **Credentials**, **Robot Model**, **Supervisor**, **Localization**, and **Perception**. The details of the contents of each of these pages are linked below.
@@ -131,7 +130,7 @@ The initial view of the Control Panel is the "Configuration" page, which consist
 Launch
 *********
 
-Before starting the supervisor be sure to have your ROS environment correctly set up and sourced.
+Before starting the supervisor be sure to correctly set up/source the ROS environment.
 
 .. code-block:: bash
 
@@ -209,9 +208,9 @@ The lower section of the panel is showing strip charts. The categories that are 
 Version Update
 *****************
 
-To update the Supervisor, you can use the same command as for the installation.
+To update the Supervisor, use the same command as for the installation.
 
-The supervisor will be updated to the latest version available for your distribution, **Existing configurations will not be modified**, but if new variables need to be configured, you will be advised during the installation.
+The supervisor will be updated to the latest version available for the system's distribution. The **existing configurations will not be modified**, but if new variables need to be configured, advisories will be given during the installation.
 
 .. code-block:: bash
 

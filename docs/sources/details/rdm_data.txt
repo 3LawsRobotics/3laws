@@ -1,0 +1,34 @@
+robot_diagnostic_module:  
+  active: true
+  diagnostic:  
+    max_signals_delay: 0.1s
+    timeout_factor: 2
+  metric_modules:  
+    clock_health:
+      active: true
+    control_tracking:
+      active: false
+    dynamic_consistency:
+      active: true
+    feedback_loop_characterization:
+      active: false
+    finite_state:
+      active: false
+    incidents_log:
+      active: true
+    metric_passthrough:
+      active: false
+    node_health:
+      active: true
+    planning_consistency:
+      active: false
+    sensor_characterization:
+      active: true
+    signal_health:
+      active: true
+    systems_health:
+      active: true
+    text_log:
+      active: false
+
+

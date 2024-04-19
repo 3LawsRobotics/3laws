@@ -53,8 +53,8 @@ The metrics are also summarized and optionally sent to a cloud database for disp
 
 .. _user_guide/control_panel:
 
-Control Panel
-=============
+Signal Remapping
+================
 
 The most straightforward way to insert Supervisor into an existing command chain is to use the ROS remapping feature as illustrated in the figure below. There is no need to make any changes to the signals published or subscribed-to by the existing components. In the example below, the **/cmd_vel** signal represents the output of the Planner and the input to the Controller. At launch time, the Planner's signal can be remapped to an alternate name like **/cmd_vel_plan**.
 

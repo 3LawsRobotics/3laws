@@ -1,3 +1,5 @@
+.. _published topics:
+
 Supervisor ROS topics
 *********************
 
@@ -24,10 +26,19 @@ When the CoPilot/Run-time assurance capability is enabled, the following additio
 
 The following topics are published by the Supervisor's diagnostics:
 
-- ``/lll/rdm/clock_health``: Statistics reporting variations in the synchronization of the robot clock and Universal time.
-- ``/lll/rdm/dynamic_consistency``: If a dynamical model has been added to the configuration, this topic will compare the predicted model behavior to the current behavior and provide discrepancy metrics.
-- ``/lll/rdm/node_health``: Node health gives a general view of the health of the robot components likes localization, perception, inputs, and states.
-- ``/lll/rdm/sensor_characterization``: This metric presents statistics on the noise characteristics, data dropouts, anomalies, and potential obstructions of the sensors.
-- ``/lll/rdm/systems_health``: Detailed information about the system resource usage (CPU, RAM, etc.) is provided through this channel.
-- ``/lll/rdm/signal_health``: All Supervisor input signals (state, commands, perception) are treated as signals with a specific frequency. This metric gives information about the signal health (timeout, delays, invalid data) based on the configured expected signal rates.
+
+- ``/lll/rdm/clock_health_utc``: Statistics reporting variations in the synchronization of the robot clock and Universal time. This presents the current UTC time and real-time-clock value in nanoseconds since 1970, presenting the offset between the two.
+- ``/lll/rdm/domain_status``: The summary of the condition of the vehicle is presented in the following fields: system_status, behavior_status, hardware_status, perception_status, and control_status.  When everything is working properly, a status of OK is reported for each. 
+- ``/lll/rdm/dynamic_consistency``: If a dynamical model has been added to the configuration, this topic will compare the predicted model behavior to the current behavior and provide discrepancy metrics.  Several values including differences in speeds between the platform and the model, and statistics on these differences are provided.  Time since last input and time since last state message are also provided (in nanoseconds).
+- ``/lll/rdm/incidents_log``: As events are detected in the system, they are published through this channel as text messages.  The "tags" area of the message includes discrete-value key-value pairs for severity and type of issue.
+- ``/lll/rdm/node_health``: Node health provides the status messages from various nodes. For example, the sensor_node provides details of the laserscan including the time since the last message, and average/min/max sending rates, receipt rates, and delays.
+- ``/lll/rdm/sensor_noise``: This metric presents statistics on the noise characteristics for the sensors including: average error, maximum error, maximum angle error, and percentage of sigma.  Each data set is tagged with the sensor it corresponds to.
+- ``/lll/rdm/sensor_obstruction``: If the monitor detects that the laserscan appears to be obstructed in certain angular sectors, the information about the amount of osbtruction is published through this channel.
+- ``/lll/rdm/signal_health``: Monitor is constantly checking to see if inputs to the system are reasonable (e.g. are finite, numerical values). If values such as Not-a-Number (nan), purely zero, or infinity are received, the occurrences are reported.
+- ``/lll/rdm/systems_health``: Detailed information about the system resource usage is provided through this channel: system_id, cpu_load, ram_usage, disk_usage, network_read, network_write, cpu_nb (core count), and procs_nb (process count).
+
+More precise control can be obtained by editing the *supervisor.yaml* file under the *robot_diagnostics_module* area. The default settings are shown below.
+
+.. literalinclude:: rdm_data.txt
+
 
