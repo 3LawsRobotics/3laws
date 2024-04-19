@@ -212,6 +212,6 @@ The supervisor will be updated to the latest version available for your distribu
 
 .. code-block:: bash
 
-  bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/rdm/install.sh)
+  bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install.sh)
 
 

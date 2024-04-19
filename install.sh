@@ -373,6 +373,12 @@ else
   fi
 fi
 
+# Check Write permission
+if [ ! -w . ]; then
+  cerr "No write permission in current directory, please run this script in a writable directory"
+  exit 1
+fi
+
 # Check args validity
 check_values
 
