@@ -9,6 +9,12 @@ srcDir="$(
   pwd -P
 )"
 version="latest"
+
+# Clean output directory
+rm -rf "$srcDir/.gh-pages"
+rm -rf "$srcDir/build"
+
+# Create output directory
 mkdir -p "$srcDir/.gh-pages"
 outDir="$srcDir/.gh-pages"
 buildDir="$srcDir/build"
@@ -39,8 +45,6 @@ cp -R "$srcDir/sources" "$workDir/sources"
 cp -R "$srcDir/index.rst" "$workDir/index.rst"
 
 sphinx-build -b html -d "$workDir/_build" "$workDir" "$outDir/en/$version"
-sphinx-build -b rinoh -d "$workDir/_build/" "$workDir" "$workDir/_build/pdf"
-cp "$workDir/_build/pdf/3laws.pdf" "$outDir/en/$version/3laws_manual.pdf"
 
 # Copy and update main index.html
 

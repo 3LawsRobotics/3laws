@@ -3,20 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to 3Laws's documentation!
+Welcome to 3Laws Supervisor
 =================================
 
-Table of Contents:
+The 3Laws Supervisor is a tool that runs on your robot(s) and can optionally
+transmit data to a cloud-based dashboard. 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
 
    sources/introduction
-   sources/getting_started
-   sources/installation_update
-   sources/control_panel/index
+   sources/usage
    sources/visualization/index
-
+   sources/theory
+   sources/copyrights
+   sources/dpa
 
 
 
