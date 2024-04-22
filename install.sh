@@ -216,7 +216,7 @@ valid_args() {
 show_help() {
   cat <<EOF
 Usage: ${0##*/} [-hyf] [-r <ROS_DISTRO>] [-a <ARCH>] [-v <UBUNTU_VERSION>]
-Install 3Laws Robot Diagnostic Module
+Install 3Laws Supervisor
    -h                 show this help menu
    -y                 answer yes to all yes/no questions
    -r                 Optional: ROS distribution
@@ -298,7 +298,7 @@ done
 shift "$((OPTIND - 1))"
 
 # Main
-ctitle "3Laws Robot Diagnostic Module Installer (v$SCRIPT_VERSION)"
+ctitle "3Laws Supervisor Installer (v$SCRIPT_VERSION)"
 
 if [ "$FORCE" == 1 ] && { [ -z "$WANTED_ARCH" ] || [ -z "$WANTED_ROS" ] || [ -z "$WANTED_UBUNTU" ]; }; then
   cerr "The force arg requires all information to be provided, arch, ros and ubuntu version"
