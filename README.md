@@ -19,7 +19,7 @@
 ## Introduction
 
 This repository purpose is to offer an easy access to the binary files of the 3Laws Robotics products.
-The first public release of the [**Robot Diagnostic Module**](#Robot-diagnostic-module-installation)
+The first public release of the [**Supervisor**](#Robot-diagnostic-module-installation)
 is already available at a beta state. To get more information about this product, please contact [support@3lawsrobotics.com](support@3lawsrobotics.com)
 
 Documentation and Tutorial will soon be available.
@@ -33,7 +33,7 @@ Issues, questions, announcements and general discussions can be created and foun
 Release changelog and files can be found at: [https://github.com/3LawsRobotics/3laws/releases](https://github.com/3LawsRobotics/3laws/releases).
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), although API compatibility is only guaranteed from version `1.0.0` onward.
 
-## Robot diagnostic module installation
+## Supervisor installation
 
 ### Interactive Package installation
 
@@ -83,18 +83,12 @@ As an example:
 sudo ./install.sh -yf -r foxy -a arm64 -v 20.04
 ```
 
-## Robot diagnostic module uninstall:
+## Supervisor uninstall:
 
-#### For Ros2:
-
-```bash
-sudo dpkg --remove "lll-supervisor-full-$ROS_DISTRO"
-```
-
-#### For Ros1:
+This command will fully remove supervisor from your computer
 
 ```bash
-sudo dpkg --remove "lll-supervisor-full-$(rosversion)"
+bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/uninstall.sh)
 ```
 
 ## Repo maintainer

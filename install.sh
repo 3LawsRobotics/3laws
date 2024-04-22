@@ -480,9 +480,10 @@ if [[ -f "$ASSET_NAME" ]]; then
     cout "Creating 3laws config directory..."
     mkdir -p "$HOME/.3laws/config"
 
-    cout "Success installation!"
-    cout "Remove artifacts"
+    cout "Removing artifacts..."
     rm "$ASSET_NAME"
+
+    cout "Success installation!"
   fi
 else
   cout "Package not found...If you encounter any issues, please contact: support@3lawsrobotics.com"
