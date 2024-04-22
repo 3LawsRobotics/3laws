@@ -33,6 +33,45 @@ ctitle() {
   echo -e "${BWhite}${On_Green}${1}${NC}"
 }
 
+# Local functions
+promptYesNo() {
+  local REPLY=${2}
+  local TXT="[y/n]"
+
+  if [[ "$REPLY" == 1 ]]; then
+    TXT="[Y/n]"
+  elif [[ "$REPLY" == 0 ]]; then
+    TXT="[y/N]"
+  else
+    REPLY=""
+  fi
+
+  while true; do
+    local color=$'\033[1;37m\033[46m'
+    local noColor=$'\033[0m'
+    read -r -e -p "$color${1} $TXT?$noColor " yn
+
+    case $yn in
+    y | Y | Yes | yes | YES)
+      REPLY=1
+      break
+      ;;
+    n | N | No | no | NO)
+      REPLY=0
+      break
+      ;;
+    "")
+      if [ -n "$REPLY" ]; then
+        break
+      fi
+      ;;
+    *) ;;
+    esac
+  done
+
+  echo "$REPLY"
+}
+
 cout "Removing cleanly lll-supervisor"
 
 # Check if the service exists and remove it
@@ -58,3 +97,12 @@ if [ -d "$launch_cache_folder" ]; then
   echo "Deleting folder cache $launch_cache_folder"
   rm -rf "$launch_cache_folder"
 fi || true
+
+config_folder=$HOME/.3laws
+DELETE_FOLDER=$(promptYesNo "Do you want to remove 3laws config directory \$HOME/.3laws ?" 1)
+if [ -d "$config_folder" ] && [ "$DELETE_FOLDER" ]; then
+  echo "Deleting config folder $config_folder"
+  rm -rf "$config_folder"
+fi || true
+
+cout "lll-supervisor has been removed"
