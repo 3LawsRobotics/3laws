@@ -473,7 +473,13 @@ if [[ -f "$ASSET_NAME" ]]; then
     fi
 
     # Install package
+    cout "Installing package..."
     $SUDO apt install -f ./"$ASSET_NAME" -y --no-install-recommends
+
+    # Create 3laws directory
+    cout "Creating 3laws config directory..."
+    mkdir -p "$HOME/.3laws/config"
+
     cout "Success installation!"
     cout "Remove artifacts"
     rm "$ASSET_NAME"
