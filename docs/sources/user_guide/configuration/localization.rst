@@ -3,8 +3,9 @@ Localization
 
 Dialogs to connect to the state information provided for the robot and for configuring alerts based on state are on the Configuration > Localization page. contains configuration entries for both the monitoring and input filtering components.
 
-.. image:: ../data/cpanel4.png
+.. image:: ../../data/cpanel4.png
    :width: 800px
+   :align: center
    :alt: Configuration > Localization page where monitoring of the vehicles location/state is configured.
 
 

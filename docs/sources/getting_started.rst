@@ -1,14 +1,18 @@
 Getting started
 #####################################
 
-.. _Installation:
+In its current instantiation, **3Laws Supervisor** supports ground-based mobile platforms (wheeled or legged) with the following movement modalities:
 
-Installation
-***************
+ * Differential-drive
+ * Front-wheel steering
+ * Omni-directional
 
-The 3Laws **Supervisor** requires Robot Operating System (`ROS <http://www.ros.org>`_) for proper communication with the base platform.
+For perception, **3Laws Supervisor** currently supports:
 
-Multiple ROS version are supported:
+ * Raw 2D laserscan data
+ * Pre-processed map of obstacles with their locations and shapes
+
+The **3Laws Supervisor** software is a `ROS <http://www.ros.org>`_ node available on x86_64 and ARM-64 processor architectures for multiple OS/ROS combinations:
 
 +-----------------------+--------------+---------------------+
 | Ubuntu Distribution   | ROS1 version |    ROS2 version     |
@@ -18,7 +22,10 @@ Multiple ROS version are supported:
 |        20.04          |     Noetic   |     Galactic/Foxy   |
 +-----------------------+--------------+---------------------+
 
-Supervisor is available for x86_64 and ARM-64 processor architectures. Other architectures may be available upon request.
+.. _Installation:
+
+1. Install
+**********
 
 To install Supervisor on the system, open a terminal and run the following command:
 
@@ -26,192 +33,184 @@ To install Supervisor on the system, open a terminal and run the following comma
 
   bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install.sh)
 
-This script will download a package from github and will begin the installation. Note that the package name starts with "lll-supervisor". The "lll" represents 3Laws. As the script proceeds it will try to determine the system's configuration so that the appropriate components are installed. The script will prompt for help with configuration if it is unable to find the computer's ROS distribution or architecture.
+This will run a script to auto-detect the system achitecture, install any missing dependencies, download the right binary, and give you through any necessary configuration steps.
 
-During the execution of the script, several questions will be asked:
+.. important::
 
-#. A request to confirm the desire package to download.
+  A *sudo* permission may be asked to run APT and install the software.
 
-#. Confirmation to install the package.
+.. note::
 
-#. A *sudo* permission may be ask to run APT and install the software.
-
-The script will add components to the global ROS installation. These new components will not be available until the ROS setup script is source. If the configuration automatically runs the ROS setup script when a new shell is started, please close the terminal and open a new one. Otherwise, please run the following command:
-
-.. code-block:: bash
-
-  source /opt/ros/<DISTRO>/setup.sh
-
-At this point, the Supervisor is installed on the system, but needs a configuration file (*~/.3laws/config/supervisor.yaml*).  The configuration file can be built using the browser-based **Control Panel** visual interface discussed below.
-
-Command Line Interface (CLI) for the Control Panel
-******************************************************
-
-The Supervisor package provides a CLI that can be used to interact with the Supervisor.
-
-The command for the CLI is `3laws`. It can be used to start, stop, and restart the control panel service used for the configuration of the Supervisor.
-
-The CLI provides also a command to check for updates of the Supervisor. (These updates still have to be installed manually. See: `Version Update`_)
+  The ROS packages are installed into the global ROS installation directory. You may have to source the ROS setup script to make the new components available in the current terminal: ``source /opt/ros/<DISTRO>/setup.sh``.
 
 
-Run the following command to see the available commands:
+2. Start the control Panel
+**************************
+Before the Supervisor can be started, in must be configured. In order to configure it, a web-based Control Panel is provided.
 
-.. code-block:: bash
-
-  3laws --help-all
-
-After installation the command-line interface (CLI) can be used to start the Control Panel:
-
-.. code-block:: bash
-
-  3laws control-panel run
-
-If a service is preferred for running the Control Panel in the background, use the following command:
+To enable the Control Panel backend service, open a terminal and run the following command:
 
 .. code-block:: bash
 
   3laws control-panel autostart enable
 
-This will create a user service. This one will be started automatically when the system boots up. The Control Panel will be available at `http://localhost:8080`. To change the communication port, use the following command:
+.. note::
+  See :doc:`CLI reference <user_guide/cli>` for more options to start the control panel.
 
-.. code-block:: bash
+3. Configure the Supervisor
+***************************
 
-  3laws control-panel autostart enable --port <PORT>
+Now that the Control Panel backend is up and running, you can access the control panel from any machine on the same network as the robot by opening a web browser and navigating to the following URL: ``http://<IP_ADDRESS_OF_THE_ROBOT>:8080/``.
 
-To turn off the service so that the Control Panel service is removed from the system:
+The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as **Credentials**, **Robot Model**, **Supervisor**, **Localization**, and **Perception**.
 
-.. code-block:: bash
+.. warning::
 
-   3laws control-panel autostart disable
-
-The Control Panel can also display a summary of operational conditions, but this capability requires a rosbridge server. To install and start a rosbridge
-server (where <rosdistro> is replaced with the version of ROS on the system):
-
-.. code-block:: bash
-
-  sudo apt-get install ros-<rosdistro>-rosbridge-server
-  ros2 run rosbridge_server rosbridge_websocket
-
-This will provide a websocket server at **`ws://localhost:9090`** that the control panel can connect to in order to retrieve topics and services information.
-
-The navigation bar of the control panel will show the status of the rosbridge server connection:
-
-.. image:: data/navigation_bar_rosbridge.png
-   :width: 800px
-   :alt: Control Panel NavBar with ros bridge connected.
-
-Configuration through the Control Panel visual interface
-************************************************************
-
-The 3Laws Supervisor is able to support several types of robots, but needs to connect to the system's data sources and sinks. The configuration process aims to specify this type of information. The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.
-
-
-The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as **Credentials**, **Robot Model**, **Supervisor**, **Localization**, and **Perception**. The details of the contents of each of these pages are linked below.
-
-
-.. toctree::
-
-   1. License key and Robot Name <configuration/credentials>
-   2. Robot Shape/Kinematics and Command Inputs <configuration/robot_model>
-   3. Copilot tuning and Additional States to Monitor <configuration/supervisor>
-   4. Localization state and Constraints on State <configuration/localization>
-   5. Sensor Configuration for Collision Avoidance <configuration/perception>
-
-
-.. important::
-
-  The entire configuration needs to be completed before starting the Supervisor software.
-
-.. important::
-
-  Remember to save each page after updating the data.
-
-
-Launch
-*********
-
-Before starting the supervisor be sure to correctly set up/source the ROS environment.
-
-.. code-block:: bash
-
-  source /opt/ros/<DISTRO>/setup.sh
-
-To launch the Supervisor, use the following command:
-
-.. code-block:: bash
-
-  ros2 launch lll_supervisor supervisor.launch.py
-
-Remapping of the supervisor output signal can be done by adding (for example) the highlighted lines to the */opt/ros/<ros-distro>/share/lll_supervisor/launch/supervisor.launch.py* file:
-
-.. code-block:: python
-   :emphasize-lines: 18,19,20
-
-    launchdesc.add_action(
-        Node(
-            package=PACKAGE_NAME,
-            namespace=NAMESPACE,
-            executable=EXECUTABLE,
-            output=OUTPUT,
-            emulate_tty=True,
-            parameters=[
-                {
-                    "use_sim_time": LaunchConfiguration("use_sim_time"),
-                    "config_filepath": LaunchConfiguration("config_filepath"),
-                    "robot_id": LaunchConfiguration("robot_id"),
-                    "log_level": LaunchConfiguration("log_level"),
-                    "dry_run": LaunchConfiguration("dry_run"),
-                    "log_filepath": LaunchConfiguration("log_filepath"),
-                },
-            ],
-            remappings=[
-              ('/lll/ram/filtered_input', '/cmd_vel'),
-            ],
-            arguments=["--ros-args", "--disable-stdout-logs"],
-        )
-    )
-
-Additional topics published by Supervisor
-********************************************
-
-The Supervisor publishes a number of topics that can be used to visualize the data that it is collecting.
-published via ROS this topic can be visualized using RViz or directly from the shell.
-A detailed list of the topics published by the Supervisor can be found here:
-
-.. toctree::
-
-    details/topics
+  The entire configuration needs to be completed before starting the Supervisor software. If a part of the configuration is missing, the associated tab will be orange in color. Once the configuration is complete all tabs should be white.
 
 .. note::
 
-  The topics are published in the namespace `/lll`.
+  See :ref:`Control Panel reference <control_panel_config>` for more details on the configuration options.
 
-Operations
-*************
 
-If the websocket (rosbridge) is running along with the supervisor, the Control Panel's *Operations* tab can be used to obtain a quick overview of the status of the copilot.
+.. note::
 
-.. image:: data/cpanel6.png
-   :width: 800px
+  The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.
+
+
+4. Interface with your stack
+*****************************
+
+In order to perform collision avoidance maneuvers, the Supervisor must be able to send commands to your robot actuators. These commands will be published on the ``/lll/ram/filtered_input`` topic.
+
+Your low-level controller therefore need to subscribe to this topic and apply the commands to your robot:
+
+.. image:: data/ram_interfacing.png
+   :align: center
+   :width: 600px
    :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
-In the image above, the Supervisor is operational and all the Copilot is configured to be active as indicated by the arrows between them. When data is not yet available (e.g. rosbridge connection is not operational) the boxes appear as golden. If the component has not yet initialized, the background for the box is blue, while if there is a detected error, the box is red. Proper operation is indicated by a green-colored box.
+5. Launch
+*********
 
-The lower section of the panel is showing strip charts. The categories that are currently displayed represent:
+To launch the Supervisor directly, use the following command:
 
-* the State Safeness - the barrier function value. When this value goes to zero or below zero, the system is evaluated as being in a collision state.
+.. tabs::
+    .. tab:: ROS1
+      .. code-block:: bash
 
-* the Input Modification status - When this value is zero, the copilot is not modifying the input from the autonomy stack. That is, the filtering is in passive mode. When this value is non-zero, it means that the copilot is actively modifying the commanded input.
+        roslaunch lll_supervisor supervisor.launch
 
-* Latest logs - shows the most recently detected events.
+    .. tab:: ROS2
+      .. code-block:: bash
 
-Version Update
-*****************
+        ros2 launch lll_supervisor supervisor.launch.py
 
-To update the Supervisor, use the same command as for the installation.
 
-The supervisor will be updated to the latest version available for the system's distribution. The **existing configurations will not be modified**, but if new variables need to be configured, advisories will be given during the installation.
+To include the Supervisor as part of your launch file, use the following code snippets:
+
+.. tabs::
+    .. tab:: ROS1
+      .. code-block:: xml
+
+        <include file="$(find lll_supervisor)/launch/supervisor.launch">
+          <arg name="log_level" value="info"/>
+        </include>"
+
+    .. tab:: ROS2
+      .. code-block:: python
+
+        from launch.actions import IncludeLaunchDescription
+        from launch.launch_description_sources import PythonLaunchDescriptionSource
+        from launch.substitutions import PathJoinSubstitution
+
+        # launchDesc = LaunchDescription()
+
+        launchDesc.add_action(
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    PathJoinSubstitution(
+                        [
+                            get_package_share_directory("lll_supervisor"),
+                            "launch",
+                            "supervisor.launch.py",
+                        ]
+                    )
+                ),
+                launch_arguments={
+                    "log_level": "info",
+                }.items(),
+            )
+        )
+
+
+6. Monitor your system (optional)
+*********************************
+
+The control panel provides an "Operation" page that can be used to monitor the status of the Supervisor working alongside your stack.
+
+.. image:: data/cpanel6.png
+   :align: center
+   :width: 600px
+   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
+
+|
+
+For that to work, the Supervisor and the Control Panel backend must both be running, and a `rosbridge websocket <https://github.com/RobotWebTools/rosbridge_suite>`_ must be running on the same network as the Supervisor.
+
+To install the rosbridge suite, run the following command:
+
+.. code-block:: bash
+
+  sudo apt-get install ros-<DISTRO>-rosbridge-suite
+
+To start the rosbridge websocket, run the following command:
+
+.. tabs::
+    .. tab:: ROS1
+      .. code-block:: bash
+
+        roslaunch rosbridge_server rosbridge_websocket.launch
+
+    .. tab:: ROS2
+      .. code-block:: bash
+
+        ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+
+.. important::
+
+  Make sure to specify the rosbridge websocket IP address and port in the control panel:
+
+  .. image:: data/cpanel7.png
+    :align: center
+    :width: 600px
+    :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
+
+.. note::
+
+  See :ref:`Control Panel reference <control_panel_ops>` for more details on the operation page.
+
+
+7. Update (optional)
+********************
+
+You can check for updates to the Supervisor by running the following command:
+
+.. code-block:: bash
+
+  3laws check-update
+
+To update the Supervisor, use the same command as for the installation:
 
 .. code-block:: bash
 
   bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install.sh)
+
+.. note::
+
+  The supervisor will be updated to the latest version available for the system's distribution. The **existing configurations will not be modified**, but if new variables need to be configured, advisories will be given during the installation.
+
+8. What's next?
+****************
+
+Next, go read our :doc:`User Guide<user_guide>` to discover everything the supervisor can do for you.

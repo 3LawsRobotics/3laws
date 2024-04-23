@@ -6,13 +6,13 @@
 Welcome to 3Laws Supervisor
 ===========================
 
-Welcome to using the **3Laws Supervisor**, a next-generation sense-and-avoid software module for ground-based mobile platforms including differential-drive, front-steered, and omni-directional wheeled and quadruped vehicles.
+Welcome to using the **3Laws Supervisor**, a next-generation software-based failsafe system providing trustworthy sense-and-avoid capabilities for a variety of robotic platforms.
 
-**Supervisor** requires ROS (Noetic) or ROS2 (Humble/Iron, Galactic/Foxy) for proper operation.  For sensing, **Supervisor** currently supports either a 2D laserscan or a list of obstacles with their locations and shapes.
+.. _contact 3Laws: mailto:sales@3laws.io
 
-.. _contact 3Laws: mailto::sales@3laws.io
+The **3Laws Supervisor** is designed to be an easy-to-use tool for developers to quickly integrate sense-and-avoid capabilities into their robotic platforms. The **3Laws Supervisor** encapsulate only a subset of the technological capabilities offered by **3Laws**.
 
-**3Laws** can build sense-and-avoid or multiple other behaviors for these or other platforms.  Please `contact 3Laws`_ for information on extended and optimized Supervisor capabilities.
+`Contact 3Laws`_ for information on extended and optimized Supervisor capabilities.
 
 Other relevant resources:
 __________________________
@@ -27,7 +27,8 @@ __________________
 
    sources/getting_started
    sources/user_guide
-   sources/knowledge
+   sources/troubleshooting
    sources/faq
+   sources/knowledge
    sources/changelog
    sources/legal

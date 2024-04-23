@@ -2,16 +2,17 @@ Robot Model
 ===========
 The Configuration page for the Robot Model is where the robot's geometry and kinematics are specified.  The model and shape are critical for predicting when collisions may occur and for calculating how to avoid them.
 
-.. image:: ../data/cpanel2.png
+.. image:: ../../data/cpanel2.png
    :width: 800px
+   :align: center
    :alt: Configuration > Robot Model page where the kinematics and geometry are specified.
 
 Throughout this documentation, a red asterisk (*) indicates a *required* field.
 
 - **Kinematics**: **Supervisor** currently supports differential drive, front-steered, and omni-directional mobile platforms. A differential drive vehicle can rotate around a fixed location by driving one wheel forward and its pair in reverse. It can move forward or backwards by driving both wheels in the same direction. A front-steered vehicle operates like a car or bicycle. It can move forwards or backwards, but direction is controlled by steering, and the vehicle has a fixed wheelbase distance between the forward axle and the rear axle. An omni-directional robot is usually implemented using wheels that have a series of smaller wheels mounted at 45 degrees on the outer rim. By moving one axle forward and others backwards, the vehicle can move sideways. Rotation occurs by moving the wheels on one side forwards and the wheels on the other side in reverse.
-  
+
 - **Geometry**: The vehicle's reference coordinate frames and geometry are specified in this section.
-  
+
   * **Shape Details**: The robot's shape is used in order to calculate the distance between the outer boundaries of the robot body and any scan points. Basic shapes that are currently supported include sphere, box, capsule, point, cone and cylinder. The size entries change based on the selected shape. Cylinders and capsules both require length and radius. The difference is that a capsule will have hemispheres on the ends while the cylinder ends are flat. A box frame consists of x-length, y-length, and z-length.
 
   * **Shape Pose in Robot Frame**: The relative orientation of the robot's shape with respect to the base frame needs to be specified. Note that the rotation can be specified either using quaternions or Euler angles. The quaternion order is w, x, y, z. When Supervisor is running, it is a good idea to run rviz (or rviz2) to display the orientations and frames. The coordinate frame convention used here is x: positive forward, y positive to the left, and z positive upwards.  The geometric center and orientation of the shape starts as being centered on the base coordinate frame/orientation of the robot.  The shape should be translated and rotated appropriately if the base coordinate frame does not align with the center.
