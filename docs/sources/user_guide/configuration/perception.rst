@@ -3,11 +3,6 @@ Perception
 
 Collision avoidance uses settings in this dialog to describe the sensors used during operation.
 
-.. image:: ../../data/cpanel5.png
-  :width: 800px
-  :align: center
-  :alt: Configuration > Perception page: The laserscan or list of obstacles is configured here.
-
 - **Laserscan sensor**: The Supervisor processes data points from a single 2-dimensional laser scanner (LIDAR).
 
   * **Display name**: This display name is used when aggregated statistics about the scanner are uploaded to the 3Laws cloud dashboard. This name is chosen by the user to help keep track of the scanner, e.g. "front_lidar".

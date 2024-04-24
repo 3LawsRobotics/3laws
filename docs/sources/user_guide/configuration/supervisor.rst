@@ -8,12 +8,6 @@ Configuration
 
 The Configuration > Supervisor page contains configuration entries for both the monitoring and Copilot components.
 
-.. image:: ../../data/cpanel3.png
-  :width: 800px
-  :align: center
-  :alt: Configuration > Supervisor page where robot diagnostic monitoring thresholds and run-time assurance settings are available.
-
-
 - **Upload log to 3laws robotics cloud**: For debugging purposes, 3Laws creates a log file when Supervisor is started. The file is stored in *~/.3laws/logs*. Enabling this option allows 3Laws to provide better support with troubleshooting if there is a problem.
 
   * **World Frame**: Similar to "base robot frame", the name of the world frame (typically *odom* or *map*) must be specified.
@@ -92,10 +86,12 @@ When the CoPilot/Run-time assurance capability is enabled, the following additio
 - ``/lll/ram/filtered_input``: The filtered velocity command that is sent to the robot's actuators when the Supervisor receives inputs from the planner/upstream.  Note that this signal may be remapped to match the name of the input the downstream systems expects.
 - ``/lll/ram/markers``: Visualization tools such as RVIZ and FoxGlove can subscribe to this signal in order to display the illustrated vectors between the robot and obstacles that the Supervisor uses to make decisions on modifications to the input signal.  The image below shows an rviz2 display where the red box represents the robot, the blue vectors represent the vector between a sensed laser point and the closest point on the robot's boundary, and the green dots represent laser scan points that are being actively monitored by Supervisor. These values are all embedded into the ``/lll/ram/metadata``.  The white dots are the 2D laser scan points that are subscribed-to separately.
 
-.. image:: ../../data/rviz2.png
+.. figure:: ../../data/rviz2.png
   :width: 600px
   :align: center
   :alt: Architecture schema
+
+|
 
 - ``/lll/ram/enable`` is a ROS Bool value that can be use to **command** the activation of the Supervisor.  The Copilot portion of the Supervisor needs to be Activated in order to use this signal.  Setting it to False will deactivate the Copilot filter.
 
