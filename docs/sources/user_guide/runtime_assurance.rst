@@ -36,15 +36,15 @@ The following configurations of robot platform and operational objective are
 currently available in the Supervisor. Other platforms/applications are available as custom developments.
 
 +---------------------+---------------------+----------------+
-| Robot Configuration | Collision Avoidance | GeoFencing     |
+| Robot Configuration | Collision Avoidance |   GeoFencing   |
 +=====================+=====================+================+
-| Unicycle            |     +               |                |
+|       Unicycle      |          Yes        |       No       |
 +---------------------+---------------------+----------------+
-| Omnidirectional     |     +               |                |
+|   Omnidirectional   |          Yes        |       No       |
 +---------------------+---------------------+----------------+
-| Bicycle             |     +               |                |
+|       Bicycle       |          Yes        |       No       |
 +---------------------+---------------------+----------------+
-| Copter Drone        |    in development   | in development |
+|     Copter Drone    |    in development   | in development |
 +---------------------+---------------------+----------------+
 
 In terms of handling the objects in the space, these routines support laser scans and list of obstacles (with geometries). Using lists of perceived obstacles typically results in lower computational loads.

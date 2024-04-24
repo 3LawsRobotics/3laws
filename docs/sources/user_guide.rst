@@ -14,7 +14,7 @@ The 3Laws Robotics Supervisor is a software package that provides a control filt
 Supervisor Modules
 ******************
 
-The Supervisor has 3 main modules:
+The Supervisor has 4 main modules:
 
 - :ref:`Run-time assurance<user_guide/runtime_assurance>`: The core of the collision avoidance capability in the Supervisor is a filter that operates at the controller level to ensures that the directional commands sent to the robot do not violate proximity constraints relative to laserscan data. This component runs in near-real-time on the robot.
 - :ref:`Robot Diagnostic<user_guide/diagnostics>`: The Robot Diagnostic Monitor is a collection of metrics calculated to indicate the robot health and safety. Data is aggregated on the robot by this module and is then published for use by other ROS nodes. Optionally, these metrics can be published to a cloud dashboard that 3Laws can set up.
