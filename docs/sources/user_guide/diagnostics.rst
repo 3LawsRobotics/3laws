@@ -8,6 +8,6 @@ The supervisor has a diagnostic component that monitor signals and compute relev
 
 This signals metadata and computed metrics are then published on ros in different topics so that the robot can use them to take decisions.
 
-For a detail list of published ros topics, please refer to the :doc:`ros_interface` page.
+For a detail list of published ros topics, please refer to the :ref:`reference_ros_topics` page.
 
 The diagnostic component can only compute data from signals that are describe in the configuration. As for now, only signal directly used by the Run-time Assurance Module are configurable.

@@ -29,7 +29,6 @@ Table of Contents
 =================
 .. toctree::
   :maxdepth: 2
-  :titlesonly:
 
   sources/getting_started
   sources/user_guide

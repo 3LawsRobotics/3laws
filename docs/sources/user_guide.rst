@@ -9,10 +9,7 @@ User Guide
   Robot diagnostics <user_guide/diagnostics>
   Control Panel <user_guide/control_panel>
   CLI <user_guide/cli>
-  ROS Interface <user_guide/ros_interface>
-
-Introduction
-============
+  Reference <user_guide/reference>
 
 The **3Laws Supervisor** is a software-based layer providing reliable and high-performance sense-and-avoid capabilities for a variety of robotic platforms. Its role is to provide a failsafe system that will intervene to prevent collisions when the autonomy stack fails to do so.
 

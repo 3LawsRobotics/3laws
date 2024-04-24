@@ -1,8 +1,9 @@
-ROS interface
+.. _reference_ros_topics:
+
+ROS Topics
 #############
 
-Topics
-======
+
 
 The Supervisor ROS node publishes and subscribes to a number of topics depending on how it is configured. All the topics published by this node are under the namespace ``/lll``.
 
@@ -12,7 +13,7 @@ In particular, the supervisor publishes a heart-beat message on:
 
 
 Run-time Assurance Module
---------------------------
+=========================
 
 When the Run-time Assurance Module is enabled, the following additional topics are published:
 
@@ -20,7 +21,7 @@ When the Run-time Assurance Module is enabled, the following additional topics a
 
 - ``/lll/ram/markers``: Visualization tools such as RVIZ and FoxGlove can subscribe to this signal in order to display the illustrated vectors between the robot and obstacles that the Supervisor uses to make decisions on modifications to the input signal.  The image below shows an rviz2 display where the red box represents the robot, the blue vectors represent the vector between a sensed laser point and the closest point on the robot's boundary, and the green dots represent laser scan points that are being actively monitored by Supervisor. These values are all embedded into the ``/lll/ram/metadata``.  The white dots are the 2D laser scan points that are subscribed-to separately.
 
-.. figure:: ../data/rviz2.png
+.. figure:: ../../data/rviz2.png
   :width: 600px
   :align: center
   :alt: Architecture schema
@@ -33,7 +34,7 @@ When the Run-time Assurance Module is enabled, the following additional topics a
 
 
 Robot Diagnostic Module
------------------------
+=======================
 
 When the Robot Diagnostic Module is enabled, the following additional topics are published:
 
@@ -54,16 +55,3 @@ When the Robot Diagnostic Module is enabled, the following additional topics are
 - ``/lll/rdm/signal_health``: Monitor is constantly checking to see if inputs to the system are reasonable (e.g. are finite, numerical values). If values such as Not-a-Number (nan), purely zero, or infinity are received, the occurrences are reported.
 
 - ``/lll/rdm/systems_health``: Detailed information about the system resource usage is provided through this channel: system_id, cpu_load, ram_usage, disk_usage, network_read, network_write, cpu_nb (core count), and procs_nb (process count).
-
-Launch Parameters
-=================
-
-- ``config_filepath``: The path to the configuration file that the Supervisor should use. The default value is ``~/.3laws/config/supervisor.yaml``.
-
-- ``robot_id``: The ID of the robot that the Supervisor is controlling. This is used to identify the robot in the logs and other messages. The default value is an empty string, in which case the ``robot_id`` field in the config file is used.
-
-- ``log_level``: The log level that the Supervisor should use. This can be one of ``trace``, ``debug``, ``info``, ``warn``, ``err``, ``critical`` or ``off``. The default value is ``info``.
-
-- ``dry_run``: If set to ``true``, the Supervisor will run in dry-run mode, which means that it will start and stop without sending commands to the robot, Use for validating that the configuration is valid. The default value is ``false``.
-
-- ``log_filepath``: The path to the log file that the Supervisor should write to. If empty, the Supervisor won't write a log to disk. The default value is ``~/.3laws/log/supervisor.log``.

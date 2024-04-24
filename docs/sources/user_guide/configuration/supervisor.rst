@@ -47,7 +47,7 @@ This page contains configuration entries for both the monitoring and Run-time As
 
 - **Robot Diagnostic**:
 
-  Supervisor can publish a variety of diagnostic messages related to the health of the system clock, the dynamic consistency of the motion of the platform, individual node health, signal coherency, and summarized system health.  The published messages are discussed in :doc:`Ros Topics <../ros_interface>`.   These messages in the */lll/rdm* domain are only published if the Monitor is set to Active.
+  Supervisor can publish a variety of diagnostic messages related to the health of the system clock, the dynamic consistency of the motion of the platform, individual node health, signal coherency, and summarized system health.  The published messages are discussed in :ref:`Ros Topics <reference_ros_topics>`.   These messages in the */lll/rdm* domain are only published if the Monitor is set to Active.
 
    * **Activate**: Enable publication of the diagnostic messages through the */lll/rdm* domain.  Faults detected in these variables do not cause Run-time Assurance Module to switch to the failsafe mode.
 
