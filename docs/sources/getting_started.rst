@@ -36,7 +36,7 @@ To install Supervisor on the system, open a terminal and run the following comma
 
   bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install.sh)
 
-This will run a script to auto-detect the system achitecture, install any missing dependencies, download the right binary, and give you through any necessary configuration steps.
+This will run a script to auto-detect the system architecture, install any missing dependencies, download the right binary, and give you through any necessary configuration steps.
 
 .. important::
 
