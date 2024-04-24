@@ -42,15 +42,15 @@ How are CBFs implemented in 3Laws Supervisor? What Makes 3Laws Supervisor so per
 - Solution depends on applied actions \\((u)\\) and the system model: :math:`\frac{dx}{dt} = f(x) + g(x)\cdot u`
 - Solution process:
 
-  - Compute the expression for \\(h\\) to give sets of linear constraints.
-  - Solve the constraints (through a `QP`) to produce modified commands that are closest to the original but meet the constraints.
-  - Stopping the vehicle or changing direction are typical optimal solutions.
+   - Compute the expression for \\(h\\) to give sets of linear constraints.
+   - Solve the constraints (through a `QP`) to produce modified commands that are closest to the original but meet the constraints.
+   - Stopping the vehicle or changing direction are typical optimal solutions.
 
 - Expanded Capabilities:
 
-  - Multiple objects/barriers.
-  - Noise and Uncertainties methodically handled.
-  - Aggressive/Conservative Qualities can be adjusted.
+   - Multiple objects/barriers.
+   - Noise and Uncertainties methodically handled.
+   - Aggressive/Conservative Qualities can be adjusted.
 
 - Updates by the planner immediately produce a new, modified \\(u\\).
 
