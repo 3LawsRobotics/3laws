@@ -10,15 +10,16 @@ The **3Laws Supervisor** is designed to be an easy-to-use tool for developers to
 `Contact 3Laws`_ for information on extended and optimized Supervisor capabilities.
 
 Other relevant resources:
-__________________________
+-------------------------
 * `3Laws Website <https://3laws.io>`_: For information about our other products and offerings.
 * `3Laws Github <https://github.com/3LawsRobotics/3laws>`_: For releases and issue tracking.
 
 
 Table of Contents
-__________________
+-----------------
 .. toctree::
   :maxdepth: 2
+  :titlesonly:
 
   sources/getting_started
   sources/user_guide
