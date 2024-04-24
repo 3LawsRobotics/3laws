@@ -1,6 +1,9 @@
 Change Log
 ##########
 
+.. contents::
+  :local:
+
 This project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
 1.0.0 (1st May 2024)
