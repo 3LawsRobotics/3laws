@@ -1,8 +1,3 @@
-.. 3Laws documentation master file, created by
-   sphinx-quickstart on Fri Sep 30 02:43:43 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to 3Laws Supervisor
 ===========================
 
@@ -23,12 +18,12 @@ __________________________
 Table of Contents
 __________________
 .. toctree::
-   :maxdepth: 3
+  :maxdepth: 3
 
-   sources/getting_started
-   sources/user_guide
-   sources/troubleshooting
-   sources/faq
-   sources/knowledge
-   sources/changelog
-   sources/legal
+  sources/getting_started
+  sources/user_guide
+  sources/troubleshooting
+  sources/faq
+  sources/knowledge
+  sources/changelog
+  sources/legal

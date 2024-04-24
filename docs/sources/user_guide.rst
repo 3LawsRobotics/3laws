@@ -2,6 +2,7 @@ User Guide
 ###########
 
 .. toctree::
+  :maxdepth: 2
 
   Run-time assurance <user_guide/runtime_assurance>
   Robot diagnostics <user_guide/diagnostics>
@@ -21,8 +22,8 @@ The Supervisor has 3 main modules:
 - :ref:`CLI<user_guide/cli>`: The Command line interface
 
 .. image:: data/architecture.png
-   :width: 800px
-   :alt: Architecture schema
+  :width: 800px
+  :alt: Architecture schema
 
 
 .. _user_guide/runtime_assurance:
@@ -59,8 +60,8 @@ Signal Remapping
 The most straightforward way to insert Supervisor into an existing command chain is to use the ROS remapping feature as illustrated in the figure below. There is no need to make any changes to the signals published or subscribed-to by the existing components. In the example below, the **/cmd_vel** signal represents the output of the Planner and the input to the Controller. At launch time, the Planner's signal can be remapped to an alternate name like **/cmd_vel_plan**.
 
 .. image:: data/supervisor_insertion_1.png
-   :width: 800px
-   :alt: Architecture schema
+  :width: 800px
+  :alt: Architecture schema
 
 The Supervisor should then be configured (after installation) to subscribe to the **/cmd_vel_plan** signal that is the resulting output from the Planner. The Supervisor's launch file (nominally */opt/ros/<version>/share/lll_supervisor/launch/supervisor.launch.py* should be modified to include the remapping from **/lll/ram/filtered_input** to **/cmd_vel**, which is what the downstream system subscribes to.
 

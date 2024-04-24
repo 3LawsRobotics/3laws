@@ -36,7 +36,7 @@ To turn off the service so that the Control Panel service is removed from the sy
 
 .. code-block:: bash
 
-   3laws control-panel autostart disable
+  3laws control-panel autostart disable
 
 The Control Panel can also display a summary of operational conditions, but this capability requires a rosbridge server. To install and start a rosbridge
 server (where <rosdistro> is replaced with the version of ROS on the system):
@@ -51,5 +51,5 @@ This will provide a websocket server at **`ws://localhost:9090`** that the contr
 The navigation bar of the control panel will show the status of the rosbridge server connection:
 
 .. image:: ../data/navigation_bar_rosbridge.png
-   :width: 800px
-   :alt: Control Panel NavBar with ros bridge connected.
+  :width: 800px
+  :alt: Control Panel NavBar with ros bridge connected.

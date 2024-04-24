@@ -86,9 +86,9 @@ In order to perform collision avoidance maneuvers, the Supervisor must be able t
 Your low-level controller therefore need to subscribe to this topic and apply the commands to your robot:
 
 .. image:: data/ram_interfacing.png
-   :align: center
-   :width: 600px
-   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
+  :align: center
+  :width: 600px
+  :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
 5. Launch
 *********
@@ -96,52 +96,52 @@ Your low-level controller therefore need to subscribe to this topic and apply th
 To launch the Supervisor directly, use the following command:
 
 .. tabs::
-    .. tab:: ROS1
-      .. code-block:: bash
+   .. tab:: ROS1
+     .. code-block:: bash
 
-        roslaunch lll_supervisor supervisor.launch
+       roslaunch lll_supervisor supervisor.launch
 
-    .. tab:: ROS2
-      .. code-block:: bash
+   .. tab:: ROS2
+     .. code-block:: bash
 
-        ros2 launch lll_supervisor supervisor.launch.py
+       ros2 launch lll_supervisor supervisor.launch.py
 
 
 To include the Supervisor as part of your launch file, use the following code snippets:
 
 .. tabs::
-    .. tab:: ROS1
-      .. code-block:: xml
+   .. tab:: ROS1
+     .. code-block:: xml
 
-        <include file="$(find lll_supervisor)/launch/supervisor.launch">
-          <arg name="log_level" value="info"/>
-        </include>"
+       <include file="$(find lll_supervisor)/launch/supervisor.launch">
+         <arg name="log_level" value="info"/>
+       </include>"
 
-    .. tab:: ROS2
-      .. code-block:: python
+   .. tab:: ROS2
+     .. code-block:: python
 
-        from launch.actions import IncludeLaunchDescription
-        from launch.launch_description_sources import PythonLaunchDescriptionSource
-        from launch.substitutions import PathJoinSubstitution
+       from launch.actions import IncludeLaunchDescription
+       from launch.launch_description_sources import PythonLaunchDescriptionSource
+       from launch.substitutions import PathJoinSubstitution
 
-        # launchDesc = LaunchDescription()
+       # launchDesc = LaunchDescription()
 
-        launchDesc.add_action(
-            IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(
-                    PathJoinSubstitution(
-                        [
-                            get_package_share_directory("lll_supervisor"),
-                            "launch",
-                            "supervisor.launch.py",
-                        ]
-                    )
-                ),
-                launch_arguments={
-                    "log_level": "info",
-                }.items(),
-            )
-        )
+       launchDesc.add_action(
+           IncludeLaunchDescription(
+               PythonLaunchDescriptionSource(
+                   PathJoinSubstitution(
+                       [
+                           get_package_share_directory("lll_supervisor"),
+                           "launch",
+                           "supervisor.launch.py",
+                       ]
+                   )
+               ),
+               launch_arguments={
+                   "log_level": "info",
+               }.items(),
+           )
+       )
 
 
 6. Monitor your system (optional)
@@ -150,9 +150,9 @@ To include the Supervisor as part of your launch file, use the following code sn
 The control panel provides an "Operation" page that can be used to monitor the status of the Supervisor working alongside your stack.
 
 .. image:: data/cpanel6.png
-   :align: center
-   :width: 600px
-   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
+  :align: center
+  :width: 600px
+  :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
 |
 
@@ -167,24 +167,24 @@ To install the rosbridge suite, run the following command:
 To start the rosbridge websocket, run the following command:
 
 .. tabs::
-    .. tab:: ROS1
-      .. code-block:: bash
+   .. tab:: ROS1
+     .. code-block:: bash
 
-        roslaunch rosbridge_server rosbridge_websocket.launch
+       roslaunch rosbridge_server rosbridge_websocket.launch
 
-    .. tab:: ROS2
-      .. code-block:: bash
+   .. tab:: ROS2
+     .. code-block:: bash
 
-        ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+       ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 
 .. important::
 
   Make sure to specify the rosbridge websocket IP address and port in the control panel:
 
   .. image:: data/cpanel7.png
-    :align: center
-    :width: 600px
-    :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
+   :align: center
+   :width: 600px
+   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
 .. note::
 

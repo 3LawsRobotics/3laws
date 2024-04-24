@@ -3,9 +3,9 @@ Robot Model
 The Configuration page for the Robot Model is where the robot's geometry and kinematics are specified.  The model and shape are critical for predicting when collisions may occur and for calculating how to avoid them.
 
 .. image:: ../../data/cpanel2.png
-   :width: 800px
-   :align: center
-   :alt: Configuration > Robot Model page where the kinematics and geometry are specified.
+  :width: 800px
+  :align: center
+  :alt: Configuration > Robot Model page where the kinematics and geometry are specified.
 
 Throughout this documentation, a red asterisk (*) indicates a *required* field.
 

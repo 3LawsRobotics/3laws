@@ -44,9 +44,9 @@ The Configuration > Supervisor page contains configuration entries for both the 
 
   * **Fault Management > Failure Command Mode**: The run-time assurance constantly monitors to ensure that it has enough data to determine whether the robot is in a safe condition. The minimum data required is the vehicle state, the laser scan values, and the commanded/desired input. If any of these is missing the RTA can switch to the failure command mode:
 
-    * **Send Zero**:  In this mode the run-time assurance commands zero speed and zero turn/rotation in order to bring the vehicle to a stop.
+   * **Send Zero**:  In this mode the run-time assurance commands zero speed and zero turn/rotation in order to bring the vehicle to a stop.
 
-    * **Do not Publish**:  Another option is to stop publishing values. This option should only be used if the robot has its own mechanism to put itself in a safe condition if it is not receiving commands.
+   * **Do not Publish**:  Another option is to stop publishing values. This option should only be used if the robot has its own mechanism to put itself in a safe condition if it is not receiving commands.
 
   * **Fault Management > Can resume from failure**: With this checkbox filled in, once the input data (control input, laser scan, and state) values start appearing after a failure, the robot will be commanded back into motion (if the desired control input is asking for that). If the box is unchecked once there is a failure, the robot will remain stopped until the Supervisor is restarted.
 
@@ -58,11 +58,11 @@ The Configuration > Supervisor page contains configuration entries for both the 
 
   Supervisor can publish a variety of diagnostic messages related to the health of the system clock, the dyamic consistency of the motion of the platform, individual node health, signal coherency, and summarized system health.  The published messages are discussed in :ref:`published_topics`.   These messages in the */lll/rdm* domain are only published if the Monitor is set to Active.
 
-    * **Activate**: Enable publication of the diagnostic messages through the */lll/rdm* domain.  Faults detected in these variables do not cause CoPilot to switch to the failsafe mode.
+   * **Activate**: Enable publication of the diagnostic messages through the */lll/rdm* domain.  Faults detected in these variables do not cause CoPilot to switch to the failsafe mode.
 
-    * **Timeout Factor**: Allows this many messages at the expected arrival rate to be missed before reporting an error.
+   * **Timeout Factor**: Allows this many messages at the expected arrival rate to be missed before reporting an error.
 
-    * **Maximum Delay (s)**: Maximum amount of time that a message can fail to appear before reporting an error.
+   * **Maximum Delay (s)**: Maximum amount of time that a message can fail to appear before reporting an error.
 
 The bottom section relates to republishing the control commands to the robot that are being sent from the autonomy stack. The values will be published on the *lll/ram/filtered_input* channel if the Copilot is activate or not. However, the values will only be different from the *Desired control input* if the Copilot is active.
 
