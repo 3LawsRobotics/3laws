@@ -1,3 +1,11 @@
+.. Please use:
+.. * ``#``, for page title
+.. * ``=``, for sections
+.. * ``-``, for subsections
+.. * ``^``, for subsubsections
+.. * ``"``, for paragraphs
+.. Please indent the text with 2 spaces.
+
 Welcome to 3Laws Supervisor
 ###########################
 
