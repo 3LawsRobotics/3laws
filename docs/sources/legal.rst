@@ -3,8 +3,6 @@ Legal
 
 The 3Laws Robotics Supervisor is a proprietary, commercial package. This is the 3Laws End User License Agreement
 
-
-
 Software License Agreement
 **************************
 

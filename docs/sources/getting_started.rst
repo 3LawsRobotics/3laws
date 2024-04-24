@@ -1,5 +1,8 @@
 Getting started
-#####################################
+################
+
+.. contents:: Table of Contents
+  :local:
 
 In its current instantiation, **3Laws Supervisor** supports ground-based mobile platforms (wheeled or legged) with the following movement modalities:
 

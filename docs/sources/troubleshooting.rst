@@ -2,7 +2,7 @@ Troubleshooting
 ###############
 
 
-The autocompletion capabilities do not show my topics
+The autocompletion capabilities do not show my topics:
 ======================================================
 
 If the rosbridge web server is connected to the control panel (see :doc:`User guide > Control Panel <user_guide/control_panel>` for installation and connection details), but you still don't see any of your topics (only `rosout` and `client_count`) try the following:
