@@ -11,21 +11,37 @@ User Guide
   Ros Interface <user_guide/ros_interface>
   CLI <user_guide/cli>
 
-The 3Laws Robotics Supervisor is a software package that provides a control filter to add collision avoidance without compromising performance.
+Introduction
+============
 
-Supervisor Modules
-==================
+The **3Laws Supervisor** is a software-based layer providing reliable and high-performance sense-and-avoid capabilities for a variety of robotic platforms. Its role is to provide a failsafe system that will intervene to prevent collisions when the autonomy stack fails to do so.
 
-The Supervisor has 4 main modules:
-
-- :ref:`Run-time assurance<user_guide/runtime_assurance>`: The core of the collision avoidance capability in the Supervisor is a filter that operates at the controller level to ensures that the directional commands sent to the robot do not violate proximity constraints relative to laserscan data. This component runs in near-real-time on the robot.
-- :ref:`Robot Diagnostic<user_guide/diagnostics>`: The Robot Diagnostic Monitor is a collection of metrics calculated to indicate the robot health and safety. Data is aggregated on the robot by this module and is then published for use by other ROS nodes. Optionally, these metrics can be published to a cloud dashboard that 3Laws can set up.
-- :ref:`Control Panel<user_guide/control_panel>`: The Control Panel is an optional web-based application that guides the user through the configuration of the Supervisor and debugging of operations. Based on the data provided by the user, it creates (or updates) a configuration file used by the Supervisor's various capabilities. The Control Panel has some abilities to visualize the robot's safety. This component does not need to be active (or running) during operation of the robot, except as desired for visualizing the metrics available through it.  Once the Supervisor is configured through the Control Panel, turning off the lll_control_panel.service is a reasonable step.
-- :ref:`CLI<user_guide/cli>`: The Command line interface
+The Supervisor is designed to sit between the autonomy stack and the robot's low-level controllers:
 
 .. image:: data/architecture.png
   :width: 800px
   :alt: Architecture schema
+
+Nominally, the Supervisor forwards the desired commands from the autonomy stack to the robot un-altered. However, when the autonomy stack fails in some way, the supervisor will intervene in time and modify these desired commands in a minimally intrusive way to avoid a collision.
+
+The Supervisor is delivered as a single package containing various tools and modules working together toward enabling these sense-and-avoid capabilities:
+
+.. image:: data/architecture_detailed.png
+  :width: 800px
+  :alt: Architecture schema
+
+At the heart of the supervisor is the :ref:`Collision Avoidance Module<user_guide/runtime_assurance>` (CAM). This module is responsible for continuously filtering the desired commands sent by the autonomy stack to the robot in order to prevent unsafe behaviors in a minimally invasive way. In particular, this module is also responsible for the fault management strategy in case a failure of a critical component of the system is detected.
+
+Complementary to the RAM, the supervisor also integrates a :ref:`Robot Diagnostic Module<user_guide/diagnostics>` (RDM). This module is responsible for monitoring the health and safety of various critical sub-systems of the robot. This information is available in the form of metrics being published in real-time on ROS topics. These metrics can be used to better understand the behavior of the robot and to diagnose potential issues.
+
+.. important::
+  Currently, the diagnostic performed by the RDM is solely for information purposes and is not connected to the RAM's fault management system.
+
+
+- :ref:`Control Panel<user_guide/control_panel>`: The Control Panel is an optional web-based application that guides the user through the configuration of the Supervisor and debugging of operations. Based on the data provided by the user, it creates (or updates) a configuration file used by the Supervisor's various capabilities. The Control Panel has some abilities to visualize the robot's safety. This component does not need to be active (or running) during operation of the robot, except as desired for visualizing the metrics available through it.  Once the Supervisor is configured through the Control Panel, turning off the lll_control_panel.service is a reasonable step.
+
+- :ref:`CLI<user_guide/cli>`: The Command line interface
+
 
 
 .. _user_guide/runtime_assurance:
