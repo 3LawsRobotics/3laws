@@ -1,28 +1,27 @@
-Changelog
-#########
+Change Log
+##########
 
-.. contents:: Table of Contents
-  :local:
-
-All notable changes to this project will be documented here.
 This project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 
-1.0.0 (2024-04-22)
-____________________
-**Release highlights:**
+1.0.0 (1st May 2024)
+=====================
 
-- First release of the supervisor package
+This is the first version of the supervisor product.
 
-**New:**
+Added
+------
 
-- Runtime Assurance module
-- Robot diagnostic module
-- ROS1 and ROS2 interface
+- A ROS node that perform out of the box collision avoidance for any simple robot that has a lidar or an obstacle map.
+- A Control Panel as a web server running on the robot to configure the supervisor and provide realtime feedback.
+- A Command Line Client to manage the Control Panel server and check for updates.
+- A documentation available `here <https://3lawsrobotics.github.io/3laws/en/latest/>`_.
 
-**Improvements:**
+Changed
+--------
 
-- N/A
+N/A
 
-**Bug fixes:**
+Removed
+--------
 
-- N/A
+N/A
