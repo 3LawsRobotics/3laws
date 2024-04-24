@@ -3,17 +3,17 @@ User Guide
 
 .. toctree::
   :maxdepth: 2
+  :hidden:
 
   Run-time assurance <user_guide/runtime_assurance>
   Robot diagnostics <user_guide/diagnostics>
   Control Panel <user_guide/control_panel>
   CLI <user_guide/cli>
-  Ros topics <user_guide/ros_interface>
 
 The 3Laws Robotics Supervisor is a software package that provides a control filter to add collision avoidance without compromising performance.
 
 Supervisor Modules
-******************
+==================
 
 The Supervisor has 4 main modules:
 
@@ -30,7 +30,7 @@ The Supervisor has 4 main modules:
 .. _user_guide/runtime_assurance:
 
 Run-time assurance
-==================
+------------------
 
 The run-time assurance capability, also referred to as **Copilot**, is a filter that operates at the control rate. It is designed to ensure that the robot's control commands keep the robot in a user defined safe state. Based on formal mathematical proven methods, the Copilot is able to prevent the robot from colliding while still allowing the robot to reach maximum performance when the system is far from any obstacles **in its current travel direction**.
 
@@ -44,7 +44,7 @@ The Copilot uses basic kinematic and dynamic models for the robot in order to pr
 .. _user_guide/diagnostics:
 
 Robot diagnostics
-=================
+-----------------
 
 The diagnostics that monitors and compute metrics about the robot health and safety. The computed metrics are published on ROS topics that are available locally on the robot. High frequency versions of the metrics can be used to monitor the robot's health and safety in real-time. In other words, these metrics are available to other processes on the robot which can then use the information to make decisions.
 
@@ -56,7 +56,7 @@ The metrics are also summarized and optionally sent to a cloud database for disp
 .. _user_guide/control_panel:
 
 Signal Remapping
-================
+----------------
 
 The most straightforward way to insert Supervisor into an existing command chain is to use the ROS remapping feature as illustrated in the figure below. There is no need to make any changes to the signals published or subscribed-to by the existing components. In the example below, the **/cmd_vel** signal represents the output of the Planner and the input to the Controller. At launch time, the Planner's signal can be remapped to an alternate name like **/cmd_vel_plan**.
 
@@ -76,7 +76,7 @@ The Control Panel also visualizes operation of the Supervisor's Copilot.
 .. _user_guide/cli:
 
 Command Line Interface (CLI)
-============================
+----------------------------
 
 .. important::
   For more details, see :doc:`CLI <user_guide/cli>`

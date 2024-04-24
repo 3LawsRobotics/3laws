@@ -3,7 +3,7 @@ Control Panel
 
 
 Ros bridge connection
-*********************
+=====================
 
 In order to help you at its best, the control panel can be used with a rosbridge server.
 
@@ -34,7 +34,7 @@ The navigation bar of the control panel will show the status of the rosbridge se
 .. _control_panel_config:
 
 Configuration
-*************
+=============
 
 The configurable fields are describe in the following pages.
 
@@ -61,7 +61,7 @@ Each of the following sections corresponds to a tab in the Control Panel. The ta
 .. _control_panel_ops:
 
 Operations
-**********
+==========
 
 .. image:: ../data/cp_operation.png
   :align: center

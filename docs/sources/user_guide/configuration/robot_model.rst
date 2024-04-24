@@ -1,5 +1,6 @@
 Robot Model
-===========
+###########
+
 The Configuration page for the Robot Model is where the robot's geometry and kinematics are specified.  The model and shape are critical for predicting when collisions may occur and for calculating how to avoid them.
 
 Throughout this documentation, a red asterisk (*) indicates a *required* field.
@@ -25,4 +26,3 @@ Throughout this documentation, a red asterisk (*) indicates a *required* field.
 .. important::
 
   Remember to save each page after inputting the data.
-

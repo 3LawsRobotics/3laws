@@ -1,5 +1,5 @@
 Perception
-============
+##########
 
 Collision avoidance uses settings in this dialog to describe the sensors used during operation.
 

@@ -1,10 +1,10 @@
 .. _supervisor activation:
 
 Supervisor
-==========
+###########
 
 Configuration
-*************
+==============
 
 The Configuration > Supervisor page contains configuration entries for both the monitoring and Copilot components.
 
@@ -63,5 +63,3 @@ The bottom section relates to republishing the control commands to the robot tha
 - **Supervisor activation logic**:
 
   * **Finite States** are messages that the Diagnostics can listen to and issue events when the value of the finite state matches a predefined value.
-
-

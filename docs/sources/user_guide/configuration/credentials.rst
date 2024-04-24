@@ -1,5 +1,5 @@
 Credentials
-===========
+###########
 
 The *Credentials* page appears as follows:
 

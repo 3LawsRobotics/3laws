@@ -1,5 +1,5 @@
 Welcome to 3Laws Supervisor
-===========================
+###########################
 
 Welcome to using the **3Laws Supervisor**, a next-generation software-based failsafe system providing trustworthy sense-and-avoid capabilities for a variety of robotic platforms.
 
@@ -10,13 +10,13 @@ The **3Laws Supervisor** is designed to be an easy-to-use tool for developers to
 `Contact 3Laws`_ for information on extended and optimized Supervisor capabilities.
 
 Other relevant resources:
--------------------------
+=========================
 * `3Laws Website <https://3laws.io>`_: For information about our other products and offerings.
 * `3Laws Github <https://github.com/3LawsRobotics/3laws>`_: For releases and issue tracking.
 
 
 Table of Contents
------------------
+=================
 .. toctree::
   :maxdepth: 2
   :titlesonly:

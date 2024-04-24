@@ -1,5 +1,5 @@
 Localization
-============
+############
 
 Dialogs to connect to the state information provided for the robot and for configuring alerts based on state are on the Configuration > Localization page. contains configuration entries for both the monitoring and input filtering components.
 
