@@ -1,5 +1,5 @@
 Runtime Assurance
-#####################################
+#################
 
 3Laws has developed the Supervisor as an add-on that can check and augment an existing planner or controller. The Supervisor contains a limited set of vehicle platforms and applications. This document describes the more general possibilities available for the underlying technology known as *Control Barrier Functions* (CBFs). The high-level idea is that CBFs monitor the robot (or other vehicle's) state and next motion commands in real-time. If the model predicts that the system will experience undesirable behavior (based on the commands and system dynamics), then the commands will be altered to avoid the undesirable outcome in a minimally disruptive way. The modification might be to slow the vehicle or to turn it towards a more desirable direction.
 
