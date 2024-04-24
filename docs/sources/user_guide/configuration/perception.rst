@@ -1,11 +1,7 @@
 Perception
-============
+##########
 
 Collision avoidance uses settings in this dialog to describe the sensors used during operation.
-
-.. image:: ../data/cpanel5.png
-   :width: 800px
-   :alt: Configuration > Perception page: The laserscan or list of obstacles is configured here.
 
 - **Laserscan sensor**: The Supervisor processes data points from a single 2-dimensional laser scanner (LIDAR).
 
@@ -21,8 +17,8 @@ Collision avoidance uses settings in this dialog to describe the sensors used du
 
 .. code::
 
-   std_msgs/Header header
-   Object[] objects
+  std_msgs/Header header
+  Object[] objects
 
 where Object[] is defined by:
 
@@ -53,6 +49,6 @@ where Object[] is defined by:
 
 .. important::
 
-  When using obstacle lists, if the obstacles are in the *world* coordinate frames, the copilot's use of localization must be enabled.
+  When using obstacle lists, if the obstacles are in the *world* coordinate frames, the Run-time Assurance Module's use of localization must be enabled.
 
 \

@@ -1,23 +1,39 @@
-.. 3Laws documentation master file, created by
-   sphinx-quickstart on Fri Sep 30 02:43:43 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. Please use:
+.. * ``#``, for page title
+.. * ``=``, for sections
+.. * ``-``, for subsections
+.. * ``^``, for sub-subsections
+.. * ``"``, for paragraphs
+.. Please indent the text with 2 spaces.
+
+
 
 Welcome to 3Laws Supervisor
-=================================
+###########################
 
-The 3Laws Supervisor is a tool that runs on your robot(s) and can optionally
-transmit data to a cloud-based dashboard. 
+Welcome to using the **3Laws Supervisor**, a next-generation software-based failsafe system providing trustworthy sense-and-avoid capabilities for a variety of robotic platforms.
+
+.. _contact 3Laws: mailto:sales@3laws.io
+
+The **3Laws Supervisor** is designed to be an easy-to-use tool for developers to quickly integrate sense-and-avoid capabilities into their robotic platforms. The **3Laws Supervisor** encapsulate only a subset of the technological capabilities offered by **3Laws**.
+
+`Contact 3Laws`_ for information on extended and optimized Supervisor capabilities.
+
+Other relevant resources:
+=========================
+* `3Laws Website <https://3laws.io>`_: For information about our other products and offerings.
+* `3Laws Github <https://github.com/3LawsRobotics/3laws>`_: For releases and issue tracking.
+
 
 .. toctree::
-   :maxdepth: 3
+  :hidden:
+  :titlesonly:
+  :maxdepth: 3
 
-   sources/introduction
-   sources/usage
-   sources/visualization/index
-   sources/theory
-   sources/copyrights
-   sources/dpa
-
-
-
+  sources/getting_started
+  sources/user_guide
+  sources/troubleshooting
+  sources/faq
+  sources/knowledge
+  sources/changelog
+  sources/legal

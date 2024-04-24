@@ -11,7 +11,7 @@ srcDir="$(
 version="latest"
 
 # Clean output directory
-rm -rf "$srcDir/.gh-pages"
+# rm -rf "$srcDir/.gh-pages"
 rm -rf "$srcDir/build"
 
 # Create output directory

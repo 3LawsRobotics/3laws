@@ -35,7 +35,6 @@ version = current_version
 release = current_version
 html_baseurl = "https://3lawsrobotics.github.io/3laws/"
 
-
 extensions = [
     "sphinx_rtd_theme",
     "sphinx.ext.todo",
@@ -43,9 +42,13 @@ extensions = [
     "sphinx.ext.githubpages",
     "sphinx_sitemap",
     "sphinx_copybutton",
+    "sphinxcontrib.youtube",
+    "sphinx_tabs.tabs",
 ]
 
+html_show_sphinx = False
 html_show_sourcelink = False
+sphinx_tabs_disable_tab_closing = True
 
 templates_path = ["_templates"]
 html_static_path = ["_static"]
