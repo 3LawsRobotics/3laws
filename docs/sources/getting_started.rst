@@ -150,7 +150,7 @@ To include the Supervisor as part of your launch file, use the following code sn
 6. Monitor your system (optional)
 *********************************
 
-The control panel provides an "Operation" page that can be used to monitor the status of the Supervisor working alongside your stack.
+The control panel provides an `Operation` page that can be used to monitor the status of the Supervisor working alongside your stack.
 
 For that to work, the Supervisor and the Control Panel backend must both be running, and a `rosbridge websocket <https://github.com/RobotWebTools/rosbridge_suite>`_ must be running on the same network as the Supervisor.
 

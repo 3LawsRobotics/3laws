@@ -43,12 +43,16 @@ Each of the following sections corresponds to a tab in the Control Panel. The ta
 .. toctree::
   :maxdepth: 1
 
-  1. License key and Robot Name <configuration/credentials>
-  2. Robot Shape/Kinematics and Command Inputs <configuration/robot_model>
-  3. Supervisor tuning and Additional States to Monitor <configuration/supervisor>
-  4. Localization state and Constraints on State <configuration/localization>
-  5. Sensor Configuration for Collision Avoidance <configuration/perception>
+  1. Credentials <configuration/credentials>
+  2. Model <configuration/robot_model>
+  3. Supervisor <configuration/supervisor>
+  4. Localization <configuration/localization>
+  5. Perception <configuration/perception>
 
+
+The **Save** button on each page of the Control Panel should be pressed to save the current page before moving on to another page.
+
+Throughout this documentation, a red asterisk (*) indicates a *required* field.
 
 .. note::
 

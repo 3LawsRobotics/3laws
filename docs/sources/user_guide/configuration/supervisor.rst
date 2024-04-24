@@ -3,28 +3,25 @@
 Supervisor
 ###########
 
-Configuration
-==============
-
-The Configuration > Supervisor page contains configuration entries for both the monitoring and Copilot components.
+This page contains configuration entries for both the monitoring and Run-time Assurance Module components.
 
 - **Upload log to 3laws robotics cloud**: For debugging purposes, 3Laws creates a log file when Supervisor is started. The file is stored in *~/.3laws/logs*. Enabling this option allows 3Laws to provide better support with troubleshooting if there is a problem.
 
   * **World Frame**: Similar to "base robot frame", the name of the world frame (typically *odom* or *map*) must be specified.
 
-  * **Advanced Settings > Project to SE2**: By default, the system is assumed to operate in 3-dimensional space. Projecting to SE2 assumes that the vehicle is traveling on a flat surface or that its travel distance is small enough that earth curvature effects are not significant.  When mapping from 3-dimensional space to 2-dimensional space, the system is assumed to have zero roll and pitch while being placed on the ground. No rotational velocities or acceleration are assumed around roll and pitch, and zero vertical velocity and acceleration are assumed.
+  * **Advanced Settings > Project to SE2**: By default, the system is assumed to operate in 3-dimensional space. Projecting to SE2 assumes that the vehicle is traveling on a flat surface or that its travel distance is small enough that earth curvature effects are not significant.  When mapping from 3-dimensional space to 2-dimensional space, the system is assumed to have zero roll and pitch while being placed on the ground. No rotational velocities or acceleration are assumed around roll and pitch, and zero vertical velocity and acceleration are assumed. This will also map the received state to the SE2 state space. An information modal is available to describe the mapping.
 
   * **Advanced Settings > Process niceness**:  The computational priority of the Supervisor node can be set through the "niceness" parameter, where -20 would set it as very high priority and +19 would be very low priority. A niceness of zero is recommended. (Please review documentation on setting priority in Linux using "nice" for a deeper explanation.)
 
   * **Advanced Settings > Retimestamp policy** is used to add or correct the timestamp on log messages that seem to have an incorrect one. Leaving the timestamp unchanged is also an option.
 
-- **Run-time Assurance**: *Input Redirection* The Copilot enables the run-time assurance capability where desired commands to the robot from the autonomy stack ("desired inputs") are modified in order to avoid collisions, and altered versions are published through a separate message.
+- **Run-time Assurance**: *Input Redirection* The Run-time Assurance Module enables the run-time assurance capability where desired commands to the robot from the autonomy stack ("desired inputs") are modified in order to avoid collisions, and altered versions are published through a separate message.
 
-  * **Desired control input**: This is the set of commands requesting speed and rotation (or speed and steering) that the autonomy stack is publishing. The ROS message type is needed so that Supervisor knows what to monitor in order to calculate the barrier function value. The message quality and receipt rate are monitored as part of the aggregated metrics, and if it fails to arrive within the expected time [1/(signal rate) * Timeout factor], an event will be created and the Copilot will transition to the failure command mode.
+  * **Desired control input**: This is the set of commands requesting speed and rotation (or speed and steering) that the autonomy stack is publishing. The ROS message type is needed so that Supervisor knows what to monitor in order to calculate the barrier function value. The message quality and receipt rate are monitored as part of the aggregated metrics, and if it fails to arrive within the expected time [1/(signal rate) * Timeout factor], an event will be created and the Run-time Assurance Module will transition to the failure command mode.
 
   * **Computed safe control input**: The right side of this area is purely informational. However, if the robot is to be controlled by the run-time assurance signal, it needs to subscribe to the message that is presented here. Alternatively, the launch file for Supervisor can be modified so that */lll/ram/filtered_input* is remapped to the command signal expected by the platform.
 
-  * **Parameters > Activate**: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Copilot will only modify the outputs if the option is activated. If it is not activated, the unmodified "desired control input" will be transmitted on the designated "Computed safe control" message.  Additionally, when activated the CoPilot passes the unmodified desired input through to the platform except when a corrective action is needed.
+  * **Parameters > Activate**: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Run-time Assurance Module will only modify the outputs if the option is activated. If it is not activated, the unmodified "desired control input" will be transmitted on the designated "Computed safe control" message.  Additionally, when activated the Run-time Assurance Module passes the unmodified desired input through to the platform except when a corrective action is needed.
 
   * **Parameters > Collision distance threshold**:  This is one of the most important values to set. This defines the distance between the edge of the robot and the nearest scan at which safety exists. If the measured distance drops below this value, the system is considered to be in an "unsafe" configuration.
 
@@ -52,13 +49,13 @@ The Configuration > Supervisor page contains configuration entries for both the 
 
   Supervisor can publish a variety of diagnostic messages related to the health of the system clock, the dynamic consistency of the motion of the platform, individual node health, signal coherency, and summarized system health.  The published messages are discussed in :doc:`Ros Topics <../ros_interface>`.   These messages in the */lll/rdm* domain are only published if the Monitor is set to Active.
 
-   * **Activate**: Enable publication of the diagnostic messages through the */lll/rdm* domain.  Faults detected in these variables do not cause CoPilot to switch to the failsafe mode.
+   * **Activate**: Enable publication of the diagnostic messages through the */lll/rdm* domain.  Faults detected in these variables do not cause Run-time Assurance Module to switch to the failsafe mode.
 
    * **Timeout Factor**: Allows this many messages at the expected arrival rate to be missed before reporting an error.
 
    * **Maximum Delay (s)**: Maximum amount of time that a message can fail to appear before reporting an error.
 
-The bottom section relates to republishing the control commands to the robot that are being sent from the autonomy stack. The values will be published on the *lll/ram/filtered_input* channel if the Copilot is activate or not. However, the values will only be different from the *Desired control input* if the Copilot is active.
+The bottom section relates to republishing the control commands to the robot that are being sent from the autonomy stack. The values will be published on the *lll/ram/filtered_input* channel if the Run-time Assurance Module is activate or not. However, the values will only be different from the *Desired control input* if the Run-time Assurance Module is active.
 
 - **Supervisor activation logic**:
 

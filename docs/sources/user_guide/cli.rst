@@ -27,7 +27,7 @@ After installation the command-line interface (CLI) can be used to start the Con
   This command will start the Control Panel in the foreground.
 
 Control Panel service
-======================
+=====================
 
 If a service is preferred for running the Control Panel in the background, use the following command:
 
@@ -46,3 +46,16 @@ To turn off the service so that the Control Panel service is removed from the sy
 .. code-block:: bash
 
   3laws control-panel autostart disable
+
+Check for available updates
+===========================
+
+You can check for available updates with the following command (requires an active internet connection):
+
+.. code-block:: bash
+
+  3laws check-update
+
+
+.. warning::
+  The update process is not yet automated. The user has to download the new version and install it manually.
