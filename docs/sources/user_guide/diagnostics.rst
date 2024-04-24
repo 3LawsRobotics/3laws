@@ -1,6 +1,9 @@
 Robot Diagnostic
 ################
 
+.. contents:: Table of Contents
+  :local:
+
 .. warning::
   The Robot Diagnostic Module is currently in **experimental** phase. It is not yet fully implemented and its capabilities are limited.
 

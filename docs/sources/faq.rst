@@ -1,5 +1,8 @@
 FAQ
-#####################################
+###
+
+.. contents:: Table of Contents
+  :local:
 
 How does the 3Laws Supervisor work?
 ===================================

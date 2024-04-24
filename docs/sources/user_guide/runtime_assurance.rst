@@ -1,6 +1,9 @@
 Run-time Assurance
 ####################
 
+.. contents:: Table of Contents
+  :local:
+
 The Run-time Assurance Module (RAM), is a filter that operates at the control rate. It is designed to ensure that the robot's control commands keep the robot in a user defined safe state. Based on formal mathematical proven methods, the CAM is able to prevent the robot from colliding while still allowing the robot to reach maximum performance when the system is far from any obstacles **in its current travel direction**.
 
 This ability allows development of the robot's control and planning algorithms without worrying about collision avoidance.

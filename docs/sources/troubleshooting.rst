@@ -1,6 +1,8 @@
 Troubleshooting
 ###############
 
+.. contents:: Table of Contents
+  :local:
 
 The autocompletion capabilities do not show my topics:
 ======================================================

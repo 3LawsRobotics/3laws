@@ -1,5 +1,8 @@
 Changelog
-#####################################
+#########
+
+.. contents:: Table of Contents
+  :local:
 
 All notable changes to this project will be documented here.
 This project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.

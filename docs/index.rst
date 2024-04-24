@@ -25,10 +25,10 @@ Other relevant resources:
 * `3Laws Github <https://github.com/3LawsRobotics/3laws>`_: For releases and issue tracking.
 
 
-Table of Contents
-=================
 .. toctree::
-  :maxdepth: 2
+  :hidden:
+  :titlesonly:
+  :maxdepth: 3
 
   sources/getting_started
   sources/user_guide

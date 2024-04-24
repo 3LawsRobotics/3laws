@@ -1,6 +1,8 @@
 Control Panel
 ##############
 
+.. contents:: Table of Contents
+  :local:
 
 Ros bridge connection
 =====================
