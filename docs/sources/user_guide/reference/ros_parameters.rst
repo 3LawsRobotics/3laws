@@ -3,6 +3,9 @@
 ROS Parameters
 ##############
 
+.. contents:: Table of Contents
+  :local:
+
 - ``config_filepath``: The path to the configuration file that the Supervisor should use. The default value is ``~/.3laws/config/supervisor.yaml``.
 
 - ``robot_id``: The ID of the robot that the Supervisor is controlling. This is used to identify the robot in the logs and other messages. The default value is an empty string, in which case the ``robot_id`` field in the config file is used.
