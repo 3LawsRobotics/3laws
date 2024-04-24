@@ -5,7 +5,7 @@ User Guide
   :maxdepth: 2
   :hidden:
 
-  Run-time assurance <user_guide/runtime_assurance>
+  Collision Avoidance Module <user_guide/runtime_assurance>
   Robot diagnostics <user_guide/diagnostics>
   Control Panel <user_guide/control_panel>
   Ros Interface <user_guide/ros_interface>

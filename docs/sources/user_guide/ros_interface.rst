@@ -1,8 +1,8 @@
 Supervisor ROS messages
 ########################
 
-Runtime Assurance Module
-------------------------
+Collision Avoidance Module
+--------------------------
 
 The Supervisor publishes a number of messages that can be used to monitor how the Run-time assurance behaves.
 
@@ -12,7 +12,7 @@ The following topics are published by the Supervisor by default:
 
 - ``/lll/supervisor/ping``: A message that is published once per second to indicate that the Supervisor is running. This message contains statistics of the cpu usage, RAM usage, thread count, input/output, network traffic, and logging as used/produced by the Supervisor.
 
-When the CoPilot/Run-time assurance capability is enabled, the following additional signals are published:
+When the Collision Avoidance capability is enabled, the following additional signals are published:
 
 - ``/lll/ram/filtered_input``: The filtered velocity command that is sent to the robot's actuators when the Supervisor receives inputs from the planner/upstream.  Note that this signal may be remapped to match the name of the input the downstream systems expects.
 - ``/lll/ram/markers``: Visualization tools such as RVIZ and FoxGlove can subscribe to this signal in order to display the illustrated vectors between the robot and obstacles that the Supervisor uses to make decisions on modifications to the input signal.  The image below shows an rviz2 display where the red box represents the robot, the blue vectors represent the vector between a sensed laser point and the closest point on the robot's boundary, and the green dots represent laser scan points that are being actively monitored by Supervisor. These values are all embedded into the ``/lll/ram/metadata``.  The white dots are the 2D laser scan points that are subscribed-to separately.
