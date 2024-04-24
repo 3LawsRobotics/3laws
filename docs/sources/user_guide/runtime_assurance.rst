@@ -1,6 +1,13 @@
 Collision Avoidance
 ####################
 
+The Collision Avoidance Module (CAM), is a filter that operates at the control rate. It is designed to ensure that the robot's control commands keep the robot in a user defined safe state. Based on formal mathematical proven methods, the CAM is able to prevent the robot from colliding while still allowing the robot to reach maximum performance when the system is far from any obstacles **in its current travel direction**.
+
+This ability allows development of the robot's control and planning algorithms without worrying about collision avoidance.
+
+The CAM uses basic kinematic and dynamic models for the robot in order to predict potential collisions. Supervisor currently supports differential-drive (able to rotate-in-place and translate), single-track steered, and omni-directional (able to translate sideways in addition to rotations and forward/back motion) vehicles.
+
+
 3Laws has developed the Supervisor as an add-on that can check and augment an existing planner or controller. The Supervisor contains a limited set of vehicle platforms and applications. This document describes the more general possibilities available for the underlying technology known as *Control Barrier Functions* (CBFs). The high-level idea is that CBFs monitor the robot (or other vehicle's) state and next motion commands in real-time. If the model predicts that the system will experience undesirable behavior (based on the commands and system dynamics), then the commands will be altered to avoid the undesirable outcome in a minimally disruptive way. The modification might be to slow the vehicle or to turn it towards a more desirable direction.
 
 The off-the-shelf packaging of Supervisor supports collision avoidance for a selection of robot systems such as unicycle (differential-
@@ -137,3 +144,23 @@ set is described by the collection of multiplying the gradients of the full safe
 
 
 Additional parameters can be added based on the equations of motion for the individual system.
+
+Signal Remapping
+================
+
+The most straightforward way to insert Supervisor into an existing command chain is to use the ROS remapping feature as illustrated in the figure below. There is no need to make any changes to the signals published or subscribed-to by the existing components. In the example below, the **/cmd_vel** signal represents the output of the Planner and the input to the Controller. At launch time, the Planner's signal can be remapped to an alternate name like **/cmd_vel_plan**.
+
+.. image:: ../data/supervisor_insertion_1.png
+  :width: 800px
+  :alt: Architecture schema
+
+The Supervisor should then be configured (after installation) to subscribe to the **/cmd_vel_plan** signal that is the resulting output from the Planner. The Supervisor's launch file (nominally */opt/ros/<version>/share/lll_supervisor/launch/supervisor.launch.py* should be modified to include the remapping from **/lll/ram/filtered_input** to **/cmd_vel**, which is what the downstream system subscribes to.
+
+For effective operation, the Supervisor needs to be configured. Details for this step are presented in :doc:`Using Supervisor <../getting_started>`.
+
+The Control Panel also visualizes operation of the Supervisor's CAM.
+
+.. important::
+  For more details, see :doc:`Control Panel <control_panel>`
+
+.. _user_guide/cli:
