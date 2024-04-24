@@ -49,6 +49,6 @@ where Object[] is defined by:
 
 .. important::
 
-  When using obstacle lists, if the obstacles are in the *world* coordinate frames, the copilot's use of localization must be enabled.
+  When using obstacle lists, if the obstacles are in the *world* coordinate frames, the Run-time Assurance Module's use of localization must be enabled.
 
 \

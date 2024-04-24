@@ -17,7 +17,7 @@ Throughout this documentation, a red asterisk (*) indicates a *required* field.
 
 - **Dynamics**: The Dynamics section has 3 subsections: Input, Parameters, and State.
 
-  * The **Inputs** section supports specification of maximum and minimum limits for the translational and rotational speeds at which the robot can be commanded. For monitoring, if these values are exceeded, a log-event describing the violation will be issued. If the CoPilot component (see :ref:`supervisor activation`) is active, these limits will be applied to the filtered outputs. For steered vehicles, instead of limits on rotational speeds, steering limits are specified.
+  * The **Inputs** section supports specification of maximum and minimum limits for the translational and rotational speeds at which the robot can be commanded. For monitoring, if these values are exceeded, a log-event describing the violation will be issued. If the Run-time Assurance Module (see :ref:`supervisor activation`) is active, these limits will be applied to the filtered outputs. For steered vehicles, instead of limits on rotational speeds, steering limits are specified.
 
   * **Parameters**: The only robot type that has inputs in the parameters section is the steered robot. *wheel_dx* is the wheelbase length for the vehicle. *origin_x* is the distance from the rear axle to the robot base frame.
 

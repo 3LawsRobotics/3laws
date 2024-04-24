@@ -1,7 +1,7 @@
-Collision Avoidance
+Run-time Assurance
 ####################
 
-The Collision Avoidance Module (CAM), is a filter that operates at the control rate. It is designed to ensure that the robot's control commands keep the robot in a user defined safe state. Based on formal mathematical proven methods, the CAM is able to prevent the robot from colliding while still allowing the robot to reach maximum performance when the system is far from any obstacles **in its current travel direction**.
+The Run-time Assurance Module (RAM), is a filter that operates at the control rate. It is designed to ensure that the robot's control commands keep the robot in a user defined safe state. Based on formal mathematical proven methods, the CAM is able to prevent the robot from colliding while still allowing the robot to reach maximum performance when the system is far from any obstacles **in its current travel direction**.
 
 This ability allows development of the robot's control and planning algorithms without worrying about collision avoidance.
 
@@ -12,7 +12,7 @@ The CAM uses basic kinematic and dynamic models for the robot in order to predic
 
 The off-the-shelf packaging of Supervisor supports collision avoidance for a selection of robot systems such as unicycle (differential-
 drive) and bicycle (front-steering) vehicles. Other operational situations like
-geofencing or attitude stabilization can be implemented with CBFs as custom behaviors. Similarly, other operational platforms including articulated robots, aerial and marine vehicles (drones), and specialized devices can also be implemented by 3Laws. CBFs can also be used to alert of the need to change the input commands when an unsafe behavior is predicted - an alarm could be sounded. That capability could be applied to human-controlled systems where CBF does not have access to the actuators.
+geo-fencing or attitude stabilization can be implemented with CBFs as custom behaviors. Similarly, other operational platforms including articulated robots, aerial and marine vehicles (drones), and specialized devices can also be implemented by 3Laws. CBFs can also be used to alert of the need to change the input commands when an unsafe behavior is predicted - an alarm could be sounded. That capability could be applied to human-controlled systems where CBF does not have access to the actuators.
 
 Basic Architecture
 ==================
