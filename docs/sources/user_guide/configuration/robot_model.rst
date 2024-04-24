@@ -24,6 +24,5 @@ Throughout this documentation, a red asterisk (*) indicates a *required* field.
 
 .. important::
 
-  Remember to save each page after inputing the data.
+  Remember to save each page after inputting the data.
 
-\

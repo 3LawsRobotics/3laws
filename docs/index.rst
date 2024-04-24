@@ -18,7 +18,7 @@ __________________________
 Table of Contents
 __________________
 .. toctree::
-  :maxdepth: 3
+  :maxdepth: 2
 
   sources/getting_started
   sources/user_guide

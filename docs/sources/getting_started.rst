@@ -149,13 +149,6 @@ To include the Supervisor as part of your launch file, use the following code sn
 
 The control panel provides an "Operation" page that can be used to monitor the status of the Supervisor working alongside your stack.
 
-.. image:: data/cpanel6.png
-  :align: center
-  :width: 600px
-  :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
-
-|
-
 For that to work, the Supervisor and the Control Panel backend must both be running, and a `rosbridge websocket <https://github.com/RobotWebTools/rosbridge_suite>`_ must be running on the same network as the Supervisor.
 
 To install the rosbridge suite, run the following command:

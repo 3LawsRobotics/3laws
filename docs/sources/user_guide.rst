@@ -8,6 +8,7 @@ User Guide
   Robot diagnostics <user_guide/diagnostics>
   Control Panel <user_guide/control_panel>
   CLI <user_guide/cli>
+  Ros topics <user_guide/ros_interface>
 
 The 3Laws Robotics Supervisor is a software package that provides a control filter to add collision avoidance without compromising performance.
 
