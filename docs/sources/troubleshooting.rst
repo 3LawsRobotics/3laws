@@ -1,8 +1,6 @@
 Troubleshooting
-#####################################
+###############
 
-My supervisor doesn't start?
-=================================
 
 The autocompletion capabilities do not show my topics
 ======================================================

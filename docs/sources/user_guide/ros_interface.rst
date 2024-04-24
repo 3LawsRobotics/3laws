@@ -41,7 +41,7 @@ The following topics are published by the Supervisor's diagnostics:
 - ``/lll/rdm/incidents_log``: As events are detected in the system, they are published through this channel as text messages.  The "tags" area of the message includes discrete-value key-value pairs for severity and type of issue.
 - ``/lll/rdm/node_health``: Node health provides the status messages from various nodes. For example, the sensor_node provides details of the laserscan including the time since the last message, and average/min/max sending rates, receipt rates, and delays.
 - ``/lll/rdm/sensor_noise``: This metric presents statistics on the noise characteristics for the sensors including: average error, maximum error, maximum angle error, and percentage of sigma.  Each data set is tagged with the sensor it corresponds to.
-- ``/lll/rdm/sensor_obstruction``: If the monitor detects that the laserscan appears to be obstructed in certain angular sectors, the information about the amount of osbtruction is published through this channel.
+- ``/lll/rdm/sensor_obstruction``: If the monitor detects that the laserscan appears to be obstructed in certain angular sectors, the information about the amount of obstruction is published through this channel.
 - ``/lll/rdm/signal_health``: Monitor is constantly checking to see if inputs to the system are reasonable (e.g. are finite, numerical values). If values such as Not-a-Number (nan), purely zero, or infinity are received, the occurrences are reported.
 - ``/lll/rdm/systems_health``: Detailed information about the system resource usage is provided through this channel: system_id, cpu_load, ram_usage, disk_usage, network_read, network_write, cpu_nb (core count), and procs_nb (process count).
 
