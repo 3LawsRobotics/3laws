@@ -4,26 +4,33 @@ Control Panel
 .. contents:: Table of Contents
   :local:
 
-Ros bridge connection
+Rosbridge connection
 =====================
 
-In order to help you at its best, the control panel can be used with a rosbridge server.
+The Control Panel is most effective when used with a ROS bridge server.
 
-To install a rosbridge server (where <rosdistro> is replaced with the version of ROS on the system):
-
-.. code-block:: bash
-
-  sudo apt-get install ros-<rosdistro>-rosbridge-server
-
-To run the rosbridge server, use the following command:
+To install a Rosbridge server (where <distro> is replaced with the version of ROS on the system), run:
 
 .. code-block:: bash
 
-  ros2 run rosbridge_server rosbridge_websocket
+  sudo apt-get install ros-<distro>-rosbridge-server
 
-This will provide a websocket server at **`ws://localhost:9090`** that the control panel can connect to in order to retrieve topics and services information.
+The Rosbridge server can be started with the following command:
 
-The navigation bar of the control panel will show the status of the rosbridge server connection:
+.. tabs::
+   .. tab:: ROS1
+     .. code-block:: bash
+
+       roslaunch rosbridge_server rosbridge_websocket.launch
+
+   .. tab:: ROS2
+     .. code-block:: bash
+
+       ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+
+This will provide a websocket server at **`ws://localhost:9090`**. The Control Panel can connect in order to retrieve topic and service information.
+
+The navigation bar of the control panel shows the status of the rosbridge server connection:
 
 .. image:: ../data/navigation_bar_rosbridge.png
   :width: 800px
@@ -31,16 +38,14 @@ The navigation bar of the control panel will show the status of the rosbridge se
 
 .. note::
 
-  The control panel can be used without a rosbridge server, but the autocompletion for topics and the operation tab will not be available.
+  During the configuration process, the Control Panel can be used without a Rosbridge server, but the autocompletion for topics and the operation tab will not be available.
 
 .. _control_panel_config:
 
-Configuration
-=============
+Supervisor Configuration
+========================
 
-The configurable fields are describe in the following pages.
-
-Each of the following sections corresponds to a tab in the Control Panel. The tabs are:
+The Supervisor's configurable fields are available through a series of pages in the Control Panel.  Each of the following sections corresponds to a tab in the Control Panel. The tabs are:
 
 .. toctree::
   :maxdepth: 1
@@ -52,7 +57,7 @@ Each of the following sections corresponds to a tab in the Control Panel. The ta
   5. Perception <configuration/perception>
 
 
-The **Save** button on each page of the Control Panel should be pressed to save the current page before moving on to another page.
+The **Save** button on each page of the Control Panel should be pressed to record the current page in the *supervisor.yaml* file before moving on to another page.
 
 Throughout this documentation, a red asterisk (*) indicates a *required* field.
 
@@ -62,12 +67,12 @@ Throughout this documentation, a red asterisk (*) indicates a *required* field.
 
 .. warning::
 
-  In order to get topic autocompletion from the rosbridge server, your stack needs to be running and publishing topics.
+  The Control Panel has a topic autocompletion capability that depends on the Rosbridge server. The robot's stack (without Supervisor) needs to be running and publishing topics for this feature's proper operation.
 
 .. _control_panel_ops:
 
-Operations
-==========
+Control Panel's Operations Page
+===============================
 
 .. image:: ../data/cp_operation.png
   :align: center
@@ -76,16 +81,16 @@ Operations
 
 |
 
-In the image above, the Supervisor is operational and all the Run-time Assurance Module is configured to be active as indicated by the arrows between them. When data is not yet available (e.g. rosbridge connection is not operational) the boxes appear as golden. If the component has not yet initialized, the background for the box is blue, while if there is a detected error, the box is red. Proper operation is indicated by a green-colored box.
+In the image above, the Supervisor is operational and all the components necessary for proper collision avoidance are configured to be active as indicated by the arrows between them. When data is not yet available to the Control Panel (e.g. Rosbridge connection is not operational) the boxes appear as golden. If Rosbridge is running properly, but the component has not yet initialized, the background for the box is blue, while if there is a detected error, the box is red. Proper operation is indicated by a green-colored box.
 
-The lower section of the panel is showing strip charts. The categories that are currently displayed represent:
-
-* the State Safeness - the barrier function value. When this value goes to zero or below zero, the system is evaluated as being in a collision state.
-
-* the Input Modification status - When this value is zero, the Run-time Assurance Module is not modifying the input from the autonomy stack. That is, the filtering is in passive mode. When this value is non-zero, it means that the Run-time Assurance Module is actively modifying the commanded input.
+The lower section of the panel show logs and strip charts. The categories that are currently displayed include:
 
 * Latest logs - shows the most recently detected events.
 
+* State Safeness: the Barrier Sunction (safety-related metric) value. When this value goes to zero or below zero, the system is evaluated as being in a collision state.
+
+* Input Modification status - When this value is zero, the Run-time Assurance Module is passing the input from the planner through to the lower-level UNchanged. That is, the filtering is in passive mode. When this value is non-zero, the Run-time Assurance Module is actively modifying the commanded input.
+
 .. warning::
 
-  In order to make this page work, the rosbridge server needs to be connected to the control panel.
+  In order to make this page work, the Rosbridge server needs to be active, and the Control Panel must connect to it.

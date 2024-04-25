@@ -11,13 +11,13 @@
 Welcome to 3Laws Supervisor
 ###########################
 
-Welcome to using the **3Laws Supervisor**, a next-generation software-based failsafe system providing trustworthy sense-and-avoid capabilities for a variety of robotic platforms.
+Welcome to the **3Laws Supervisor**, a next-generation software-based failsafe system providing sense-and-avoid capabilities for a variety of dynamic platforms.
 
 .. _contact 3Laws: mailto:sales@3laws.io
 
-The **3Laws Supervisor** is designed to be an easy-to-use tool for developers to quickly integrate sense-and-avoid capabilities into their robotic platforms. The **3Laws Supervisor** encapsulate only a subset of the technological capabilities offered by **3Laws**.
+The **3Laws Supervisor** is designed to be an easy-to-use tool so developers can quickly integrate collision avoidance capabilities into mobile platforms like differential drive, quadruped, and front-steered vehicles. The **3Laws Supervisor** encapsulates a subset of the technological capabilities offered by the **3Laws** technologies.
 
-`Contact 3Laws`_ for information on extended and optimized Supervisor capabilities.
+`Contact 3Laws`_ for information on targeted and optimized Supervisor capabilities.
 
 Other relevant resources:
 =========================
@@ -26,7 +26,7 @@ Other relevant resources:
 
 
 .. toctree::
-  :hidden:
+  :caption: Table of Contents
   :titlesonly:
   :maxdepth: 3
 

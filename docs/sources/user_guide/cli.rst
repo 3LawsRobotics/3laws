@@ -27,7 +27,7 @@ After installation the command-line interface (CLI) can be used to start the Con
   3laws control-panel run
 
 .. important::
-  This command will start the Control Panel in the foreground.
+  This command will start the Control Panel in the foreground.  Appending an ampersand ``&`` can send it to the background freeing up the terminal for other operations.
 
 Control Panel service
 =====================

@@ -148,20 +148,8 @@ set is described by the collection of multiplying the gradients of the full safe
 
 Additional parameters can be added based on the equations of motion for the individual system.
 
-Signal Remapping
-================
 
-The most straightforward way to insert Supervisor into an existing command chain is to use the ROS remapping feature as illustrated in the figure below. There is no need to make any changes to the signals published or subscribed-to by the existing components. In the example below, the **/cmd_vel** signal represents the output of the Planner and the input to the Controller. At launch time, the Planner's signal can be remapped to an alternate name like **/cmd_vel_plan**.
-
-.. image:: ../data/supervisor_insertion_1.png
-  :width: 800px
-  :alt: Architecture schema
-
-The Supervisor should then be configured (after installation) to subscribe to the **/cmd_vel_plan** signal that is the resulting output from the Planner. The Supervisor's launch file (nominally */opt/ros/<version>/share/lll_supervisor/launch/supervisor.launch.py* should be modified to include the remapping from **/lll/ram/filtered_input** to **/cmd_vel**, which is what the downstream system subscribes to.
-
-For effective operation, the Supervisor needs to be configured. Details for this step are presented in :doc:`Using Supervisor <../getting_started>`.
-
-The Control Panel also visualizes operation of the Supervisor's CAM.
+The Control Panel also visualizes operation of the Supervisor's RAM.
 
 .. important::
   For more details, see :doc:`Control Panel <control_panel>`
