@@ -90,7 +90,7 @@ The Control Barrier Functions and models most appropriate to the individual oper
 On what types of systems has 3Laws implemented Supervisor?
 ==========================================================
 
-Supervisor is currently implemented on Autonomous Mobile Robots (AMRs). Supervisor Pro has been implemented on semi trucks, military drones, fighter jets, manipulators, AMRs, inverted pendulums (Segways), speed boats, and quadrupeds.
+Supervisor is currently implemented on Autonomous Mobile Robots (AMRs), quadrupeds, and wheeled vehicles that are differentially-driven, front-steered, or omni--directional. Supervisor Pro has been implemented on semi trucks, military drones, fighter jets, manipulators, AMRs, inverted pendulums (Segways), speed boats, and quadrupeds.
 
 How long has Supervisor been under development?
 ================================================

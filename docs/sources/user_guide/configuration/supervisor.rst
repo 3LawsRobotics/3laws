@@ -5,6 +5,11 @@ Supervisor
 
 This page contains configuration entries for both the monitoring and Run-time Assurance Module components.
 
+.. image:: ../../data/cpanel3.png
+  :align: center
+  :width: 600px
+  :alt: Configuration > Supervisor Tab
+
 - **Upload log to 3laws robotics cloud**: For debugging purposes, 3Laws creates a log file when Supervisor is started. The file is stored in *~/.3laws/logs*. Enabling this option allows 3Laws to provide better support with troubleshooting if there is a problem.
 
   * **World Frame**: Similar to "base robot frame", the name of the world frame (typically *odom* or *map*) must be specified.

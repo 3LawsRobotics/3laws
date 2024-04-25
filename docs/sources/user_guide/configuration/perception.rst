@@ -3,6 +3,11 @@ Perception
 
 Collision avoidance uses settings in this dialog to describe the sensors used during operation.
 
+.. image:: ../../data/cpanel5.png
+  :align: center
+  :width: 600px
+  :alt: Configuration > Perception Tab
+
 - **Laserscan sensor**: The Supervisor processes data points from a single 2-dimensional laser scanner (LIDAR).
 
   * **Display name**: This display name is used when aggregated statistics about the scanner are uploaded to the 3Laws cloud dashboard. This name is chosen by the user to help keep track of the scanner, e.g. "front_lidar".
@@ -49,6 +54,6 @@ where Object[] is defined by:
 
 .. important::
 
-  When using obstacle lists, if the obstacles are in the *world* coordinate frames, the Run-time Assurance Module's use of localization must be enabled.
+  When using obstacle lists, if the obstacles are in the *world* coordinate frames, the Supervisor (Run-time Assurance) use of localization must be enabled in the Supervisor tab.
 
 \

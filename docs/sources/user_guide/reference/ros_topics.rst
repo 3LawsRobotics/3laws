@@ -16,7 +16,7 @@ In particular, the supervisor publishes a heart-beat message on:
 Run-time Assurance Module
 =========================
 
-When the Run-time Assurance Module is enabled, the following additional topics are published:
+When the Supervisor filter (Run-time Assurance Module) is enabled, the following additional topics are published:
 
 - ``/lll/ram/filtered_input``: The filtered velocity command that is sent to the robot's actuators when the Supervisor receives inputs from the planner/upstream.  Note that this signal may be remapped to match the name of the input the downstream systems expects.
 
@@ -25,7 +25,7 @@ When the Run-time Assurance Module is enabled, the following additional topics a
 .. figure:: ../../data/rviz2.png
   :width: 600px
   :align: center
-  :alt: Architecture schema
+  :alt: Visualization using markers published by Supervisor
 
 |
 

@@ -1,5 +1,5 @@
-Knowledge
-#########
+Knowledge Base
+##############
 
 Blogs
 ======
