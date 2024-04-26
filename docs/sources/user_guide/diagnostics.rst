@@ -9,18 +9,18 @@ Robot Diagnostic
 
 
 
-The Supervisor's RDM is a tool for monitoring the health and safety of various critical sub-systems of the robot. It is designed to work in tandem with the Supervisor's Run-time Assurance Module (RAM).
+The Supervisor's RDM is a tool for monitoring the health and safety of various critical robot sub-systems. It is designed to work in tandem with the Supervisor's Run-time Assurance Module (RAM).
 
-As explained :doc:`here <runtime_assurance>`, the RAM relies on various critical robot sub-systems to perform it's collision avoidance and safety functions. The fault Management part of the RAM is able to detect obvious faults in these sub-systems, like timeouts or corrupted messages,
-but it is not able to detect more subtle issues that may arise, like inconsistent localization, or faulty sensor. The RDM is designed to fill this gap by providing a more thorough and holistic monitoring of these critical components for ensuring collision free behavior.
+As explained :doc:`here <runtime_assurance>`, the RAM relies on various critical robot sub-systems to perform collision avoidance and safety functions. The fault Management part of the RAM is able to detect obvious faults in these sub-systems, like timeouts or corrupted messages,
+but it is not able to detect more subtle issues that may arise like inconsistent localization or a faulty sensor. The RDM fills this gap by providing a more thorough and holistic monitoring of critical components to ensure collision-free behavior.
 
 .. warning::
-  At the moment, the diagnostic performed by the RDM is not fed to the RAM's Fault Management system. It is up to the user to decide how to act on the information provided by the RDM.
+  At the moment, the diagnostic performed by the RDM is not used by the RAM's Fault Management system. The user is repsonible for deciding how to use the information provided by the RDM.
 
 
 Configuration
 ==============
-In order for the RDM to perform its analysis, it must be fed data about the system. At the moment, the RDM is only fed the data directly required for the RAM and specified via the control panel. 3Laws is actively working on enabling more data sources to be configured via the Control Panel.
+In order for the RDM to perform its analysis, it must be fed data about the system. At the moment, the RDM only subscribes to data directly required for the RAM and specified via the Control Panel. 3Laws is actively working on enabling more data sources for RDM configured via the Control Panel.
 
 
 Metric Modules
@@ -29,7 +29,7 @@ Metric Modules
 The RDM is composed of a set of **metric modules** each of which responsible for analyzing a specific aspect of the robot's health. Each module then streams a set of **metrics**.
 
 .. important::
-  Please refer to the :ref:`reference_ros_topics` page for the list of ROS topics these metrics are published on.
+  Please refer to the :ref:`reference_ros_topics` page for the list of ROS topics where these metrics are published.
 
 .. _contact 3Laws: mailto:sales@3laws.io
 
@@ -41,7 +41,7 @@ The following modules are currently available:
 Clock Health
 ------------
 
-A properly functioning robot should have a consistent clocks across all its components. The Clock Health module monitors the synchronization between `system clock <https://en.cppreference.com/w/cpp/chrono/system_clock>`_ of the computer the Supervisor is running on and an `NTP server <https://www.ntppool.org/>`_. Inconsistent clocks can lead to a variety of issues, including inaccurate, improper timeout and communication detection by the RAM's Fault Management system.
+A properly functioning robot should have consistent clocks across all its components. The Clock Health module monitors the synchronization between `system clock <https://en.cppreference.com/w/cpp/chrono/system_clock>`_ of the computer the Supervisor is running on and an `NTP server <https://www.ntppool.org/>`_. Inconsistent clocks can lead to a variety of issues, including inaccurate, improper timeout and communication detection by the RAM's Fault Management system.
 
 This module publishes the following metrics:
 
@@ -59,7 +59,7 @@ This module publishes the following metrics:
 Dynamic Consistency
 ----------------------
 
-The RAM (Run-time Assurance Module) relies on a quantitative understanding of the robot's physical behavior and control capabilities (i.e. a `Dynamical Model of the system <https://en.wikipedia.org/wiki/Dynamical_system>`_) to make decisions about the appropriate collision avoidance strategy. The Dynamic Consistency module is responsible for monitoring the consistency between the Dynamical Model of the system and the observed system behavior. Inconsistencies between the two implies the RAM may not be able to make accurate decisions on when to intervene and lead to collisions.
+The RAM (Run-time Assurance Module) relies on a quantitative understanding of the robot's physical behavior and control capabilities (i.e. a `Dynamical Model of the system <https://en.wikipedia.org/wiki/Dynamical_system>`_) to make decisions about the appropriate collision avoidance strategy. The Dynamic Consistency module is responsible for monitoring the consistency between the system's Dynamical Model and the observed system behavior. Inconsistencies between the two implies the RAM may not be able to make accurate decisions regarding when to intervene and might lead to collisions.
 
 This module publishes the following metrics:
 
@@ -75,9 +75,9 @@ This module publishes the following metrics:
 
   - **xdot_difference**: The difference vector between the predicted and observed state derivative.
 
-  - **xdot_difference_pdf_value**: The probability density function value of the xdot_difference vector.
+  - **xdot_difference_pdf_value**: The probability density function (pdf) value of the xdot_difference vector.
 
-  - **xdot_difference_pdf_value_normalized**: The normalized probability density function value of the xdot_difference vector, i.e. equal to 1 when the xdot_difference vector is null.
+  - **xdot_difference_pdf_value_normalized**: The normalized pdf value of the xdot_difference vector, i.e. equal to 1 when the xdot_difference vector is null.
 
   - **xdot_difference_norm_1sigma**: The signed distance from the value of the norm of xdot_difference to the 1sigma level set of the pdf.
 
@@ -88,13 +88,13 @@ This module publishes the following metrics:
   - **system_degradation_probability**: Not available yet.
 
 .. important::
-  Currently, the process covariance matrix used for the statical analysis is the identity matrix. This will be configurable in future versions of the RDM.
+  The process covariance matrix used for the statical analysis is currently the identity matrix.
 
 
 Node Health
 -----------
 
-Typical autonomy stacks are composed of **multiple nodes**, each responsible for a specific task. The Node Health module monitors the health of these nodes by checking if they are running and if they are publishing data properly. This module is useful for detecting issues like node crashes or communication issues between nodes. This is particularly useful for nodes like Localization and Perception that are critical to the RAM's proper operation.
+Typical autonomy stacks are composed of **multiple nodes**, each responsible for a specific task. The Node Health module monitors the health of these nodes by checking if they are running and if they are publishing data properly. This module is useful for detecting issues like node crashes or communication loses between nodes. This is critical for nodes like Localization and Perception that are central to the RAM's proper operation.
 
 A node is defined by the set of topics it publishes. The Node Health module monitors the health of the nodes by checking if the topics are being published and if the data is consistent with the expected values.
 
@@ -106,17 +106,17 @@ This module publishes the following metrics:
 
   - **timeout**: A boolean indicating if all the nodes's topics have timed out.
 
-  - **ok**: A boolean indicating if any of the nodes's topics have timed out.
+  - **ok**: A boolean indicating that none of the nodes's topics have timed out.
 
   - **error_code**: An enum indicating the type of error that occurred. The possible values are: **[ok, some_topics_timeout, out_of_bounds, all_topics_timeout]**
 
-  - **topics**: A list of info for each of the node's topics. Each topic message contains the following important fields:
+  - **topics**: A list of information for each of the node's topics. Each topic message contains the following important fields:
 
-    - **topic_id**: The id of the topic.
+    - **topic_id**: The topic's name/identifier.
 
     - **timeout**: A boolean indicating if the topic has timed out.
 
-    - **has_timestamp**: A boolean indicating if the topic has a non-zero timestamp.
+    - **has_timestamp**: A boolean indicating if the topic's data has a non-zero timestamp.
 
     - **sender_rate**: The average rate at which the topic is being published by the node.
 
@@ -150,27 +150,27 @@ This module publishes the following metrics:
 
 - **sensor_noise**: This metric presents statistics on the noise characteristics for the sensors. The important fields of the associated message are:
 
-  - **average_std_error**: The standard deviation of all the sensor measurements over 1s.
+  - **average_std_error**: The standard deviation of all the sensor measurements over a 1 second window.
 
-  - **max_std_error**: The maximum deviation of all the sensor measurements over 1s.
+  - **max_std_error**: The maximum deviation of all the sensor measurements over a 1 second window.
 
   - **angle_max_error**: The angle at which the maximum deviation occurred.
 
-  - **percent_of_sigma**: Signed distance from the value of the average_std_error to the 1sigma level set of the pdf.
+  - **percent_of_sigma**: Signed distance from the value of the average_std_error to the 1-sigma level set of the pdf.
 
   - **p_value**: The p-value of the sensor noise consistency test.
 
-  - **reject_model**: A boolean indicating if the sensor noise specs are consistent with the observed noise.
+  - **reject_model**: A boolean indicating that the sensor noise statistics are not consistent with the observed noise.
 
 
 .. important::
-  Currently, the expected sensor measurement covariance for 2D laserscans is 1m. This will be configurable in future versions of the RDM.
+  Currently, the expected sensor measurement covariance for 2D laserscans is 1m.
 
 
 Signal Health
 -------------
 
-The signal health module is responsible for monitoring the health of the various signals between the various sub-systems like timeouts, bounds on signals and rates, NaNs, incorrect sizes etc... If critical signals expected by the RAM are not healthy, the RAM may crash which may lead to collisions.
+The signal health module is responsible for monitoring signals between the various sub-systems for issues including timeouts, bounds on signals and rates, NaNs, and incorrect sizes. If critical signals expected by the RAM are not healthy, the RAM may fail. This could lead to collisions.
 
 The associated metric is published at 1hz, and is an aggregate of the signal data received over that period.
 
@@ -196,23 +196,23 @@ This module publishes the following metrics:
 
   - **error_code**: An enum indicating the type of error that occurred. The possible values are: **[ok, bad_values, out_of_bounds, timeout]**
 
-  - **norm_type**: Not available yet.
+  - **norm_type**: Not populated yet.
 
-  - **norm**: Not available yet.
+  - **norm**: Not populated yet.
 
-  - **values**: Not available yet.
+  - **values**: Not populated yet.
 
-  - **rates**: Not available yet.
+  - **rates**: Not populated yet.
 
 
 System Health
 -------------
 
-The RAM needs to make process data in a timely manner to function properly. It is therefore important that the system running the RAM process be healthy. The System Health module is responsible for monitoring the health of the local compute by checking things like CPU and memory usage. High CPU and memory usage can lead to the RAM getting delayed in its publishing of commands, leading to collisions.
+The RAM needs to receive data and compute in a timely manner. The System Health module is responsible for monitoring the health of the local computational resources by checking values related to CPU and memory usage. High CPU and memory usage can lead to delays in RAM publication of commands.
 
 This module publishes the following metrics:
 
-- **system_health**: The health of the system running the RDM. The important fields of the associated message are:
+- **system_health**: The health of the system running the Supervisor. The important fields of the associated message are:
 
   - **cpu_load**: The CPU usage of the system in percentage.
 
@@ -232,9 +232,9 @@ This module publishes the following metrics:
 Incident Diagnostic
 -------------------
 
-The diagnostic module is there to aggregate the information published by the various metric modules and provide a high-level view of the robot's health. This module is useful for detecting issues that may not be apparent when looking at the individual metrics.
+The diagnostic module aggregates information published by the various metric modules and provides a high-level view of the robot's health. This module is useful for detecting issues that may not be apparent when looking at the individual metrics.
 
-This module publishes the following metrics:
+The following metrics are published:
 
 - **domain_status**: The high-level status of the health of the various robot components.
 
@@ -268,4 +268,4 @@ Output modules
 The RDM uses **output modules** to make the metrics available to the user. Currently, the RDM ships with a single output module to publish all metrics to :ref:`reference_ros_topics`.
 
 .. note::
-  The RDM is here again designed to be modular and extensible. For more information on what other types of output modules 3Laws can offer, please `Contact 3Laws`_.
+  The RDM's design is modular and extensible for applications that have more specific monitoring needs. For more information on what other types of output modules 3Laws can offer, please `Contact 3Laws`_.

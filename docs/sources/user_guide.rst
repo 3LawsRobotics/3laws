@@ -6,8 +6,8 @@ User Guide
   :hidden:
 
   Run-time Assurance <user_guide/runtime_assurance>
-  Robot diagnostics <user_guide/diagnostics>
-  Control Panel <user_guide/control_panel>
+  Robot Diagnostics <user_guide/diagnostics>
+  Configuration through Control Panel <user_guide/control_panel>
   CLI <user_guide/cli>
   Reference <user_guide/reference>
 

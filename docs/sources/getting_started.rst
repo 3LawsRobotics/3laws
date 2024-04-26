@@ -27,8 +27,8 @@ The **3Laws Supervisor** software is a `ROS <http://www.ros.org>`_ node availabl
 
 .. _Installation:
 
-1. Installation
-***************
+1. Install Supervisor
+*********************
 
 To install Supervisor on the system, open a terminal (on the target device) and run the following command:
 
@@ -49,7 +49,7 @@ This will run a script to auto-detect the system architecture, install any missi
   As with most ROS setups, adding a line to the startup file (ex. .bashrc) that sources the ROS environment is recommended.
 
 
-2. Start the control Panel
+2. Start the Control Panel
 **************************
 Before the Supervisor can be started, it must be configured. In order to configure it, a web-based :doc:`Control Panel <user_guide/control_panel>` is provided.  The Control Panel creates if needed and modifies the file *~/.3laws/config/supervisor.yaml*.
 
@@ -64,12 +64,21 @@ To enable the Control Panel backend service, open a terminal and run the followi
 .. note::
   See :doc:`CLI reference <user_guide/cli>` for more options to start the control panel.
 
-3. Configure the Supervisor
-***************************
+3. Configure Supervisor
+************************
 
 Now that the Control Panel backend is running, access the control panel from any machine on the same network as the robot by opening a web browser and navigating to the following URL: ``http://<IP_ADDRESS_OF_THE_ROBOT>:8000/``.
 
-The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as **Credentials**, **Robot Model**, **Supervisor**, **Localization**, and **Perception**.
+The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as:
+
+.. toctree::
+  :maxdepth: 1
+
+  1. Credentials <user_guide/configuration/credentials>
+  2. Model <user_guide/configuration/robot_model>
+  3. Supervisor <user_guide/configuration/supervisor>
+  4. Localization <user_guide/configuration/localization>
+  5. Perception <user_guide/configuration/perception>
 
 .. warning::
 
@@ -95,7 +104,47 @@ Your low-level controller therefore needs to subscribe to this topic and apply t
 .. image:: data/ram_interfacing.png
   :align: center
   :width: 600px
-  :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
+  :alt: Signal routes for a typical robot (simplified).
+
+Remapping
+---------
+ROS provides the ability to remap signals that are subscribed-to or published by nodes. The remapping can be specified during the start of the node either through a command line or through a launch file.
+
+.. tabs::
+   .. tab:: ROS1
+
+     .. image:: data/supervisor_remap_ros1.png
+       :align: center
+       :width: 600px
+       :alt: Using ROS remap when configuring and launching Supervisor.
+
+     The following can be added to the launch instructions for the "robot" portion so that it subscribes to ``/lll/ram/filtered_input`` instead of ``/cmd`` (or as appropriate.
+
+     .. code-block:: bash
+
+       <remap from="/cmd" to="/lll/ram/filtered_input"/>
+
+   .. tab:: ROS2
+
+     .. image:: data/supervisor_remap.png
+       :align: center
+       :width: 600px
+       :alt: Using ROS2 remap when configuring and launching Supervisor.
+
+     The following (step 2 above) remaps the output of the autonomy stack so that it produces a new signal that will not conflict with the Robot's subscription.
+
+     .. code-block:: bash
+
+        remappings=[('/cmd', '/cmd_plan'),],
+
+     The Supervisor's default launch file for ROS is installed ``/opt/ros/<DISTRO>/shared/lll_supervisor/launch/supervisor.launch.py`` for ROS2. A remapping as described in step 3 in the image above can be accomplished by adding the following inside the node specification:
+
+     .. code-block:: bash
+
+        remappings=[('/lll/ram/filtered_input', '/cmd'),],
+
+The ``/cmd`` value needs to be set appropriately for the application system.
+
 
 5. Launch
 *********
