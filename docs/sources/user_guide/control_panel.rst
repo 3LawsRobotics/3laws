@@ -7,11 +7,10 @@ Control Panel
 Overview
 =========
 
-The control panel is a web-based configuration and monitoring tool for the Supervisor.
-
-The Control Panel is composed of tow main sections:
+The control panel is a web-based configuration and monitoring tool for the Supervisor. It is composed of two main sections:
 
   - Configuration: This section allows the user to configure the Supervisor's parameters.
+
   - Operations: This section shows the current state of the Supervisor and the robot.
 
 Each section is accessed by clicking on the corresponding tab in the Control Panel:
@@ -32,24 +31,8 @@ A section is also divided into sub-sections, which are accessed by clicking on t
 
 |
 
-In addition, the navigation bar gives you access to the Control Panel's rosbridge connection status:
+In addition, the navigation bar gives you access to other information, namely the documentation, instruction on how to launch the Supervisor ROS node, and a rosbridge connection status.
 
-.. image:: ../data/navigation_bar_rosbridge.png
-  :width: 800px
-  :alt: Control Panel NavBar with ros bridge connected.
-
-|
-
-A green icon indicates that the Control Panel is connected to the Rosbridge server, while a red icon indicates that the Control Panel is not connected.
-
-By clicking on the icon, you can set the IP address and port of the Rosbridge server to which the Control Panel should connect.
-
-.. image:: ../data/rosbridge_connection_modal.png
-  :align: center
-  :width: 800px
-  :alt: Rosbridge connection dialog.
-
-|
 
 Rosbridge connection
 =====================
@@ -83,6 +66,17 @@ The navigation bar of the control panel shows the status of the rosbridge server
   :width: 800px
   :alt: Control Panel NavBar with ros bridge connected.
 
+A **green** status icon indicates that the Control Panel is connected to the Rosbridge server, while a **red** icon indicates that the Control Panel is not connected.
+
+By clicking on the icon, you can set the IP address and port of the Rosbridge server to which the Control Panel should connect.
+
+.. image:: ../data/rosbridge_connection_modal.png
+  :align: center
+  :width: 800px
+  :alt: Rosbridge connection dialog.
+
+|
+
 .. note::
 
   During the configuration process, the Control Panel can be used without a Rosbridge server, but the autocompletion for topics and the operation tab will not be available.
@@ -94,6 +88,10 @@ Supervisor Configuration
 
 The Supervisor's configurable fields are available through a series of pages in the Control Panel.  Each of the following sections corresponds to a tab in the Control Panel. The tabs are:
 
+The **Save** button on each page of the Control Panel should be pressed to record the current page in the *supervisor.yaml* file before moving on to another page.
+
+Throughout this documentation, a red asterisk (*) indicates a *required* field.
+
 .. toctree::
   :maxdepth: 1
 
@@ -103,10 +101,6 @@ The Supervisor's configurable fields are available through a series of pages in 
   4. Localization <configuration/localization>
   5. Perception <configuration/perception>
 
-
-The **Save** button on each page of the Control Panel should be pressed to record the current page in the *supervisor.yaml* file before moving on to another page.
-
-Throughout this documentation, a red asterisk (*) indicates a *required* field.
 
 .. note::
 
@@ -128,15 +122,29 @@ Control Panel's Operations Page
 
 |
 
-In the image above, the Supervisor is operational and all the components necessary for proper collision avoidance are configured to be active as indicated by the arrows between them. When data is not yet available to the Control Panel (e.g. Rosbridge connection is not operational) the boxes appear as golden. If Rosbridge is running properly, but the component has not yet initialized, the background for the box is blue, while if there is a detected error, the box is red. Proper operation is indicated by a green-colored box.
+In the image above, the Supervisor is operational and all the components necessary for proper collision avoidance are configured to be active as indicated by the arrows between them.
+
+If some of the components are not yet operational, the Control Panel will show the boxes in different colors (orange for warning, red for errors).
+To get additional information about the error, you can check the logs under the diagram or click on the Status on top of the box to get details on the error source.
+
+.. image:: ../data/cp_operation_error.png
+  :align: center
+  :width: 800px
+  :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
+
+
+The above image shows a situation where all components are done. We have clicked on the detail status of the Motion Planner components.
+
+
+A **blue** box indicates that the component is not yet operational and still initializing.
 
 The lower section of the panel show logs and strip charts. The categories that are currently displayed include:
 
-* Latest logs - shows the most recently detected events.
+- **Latest logs**: Shows the most recent event from the RAM's Fault Manager.
 
-* State Safeness: the Barrier Sunction (safety-related metric) value. When this value goes to zero or below zero, the system is evaluated as being in a collision state.
+- **State Safeness**: the Barrier Function (safety-related metric) value. When this value goes to zero or below zero, the system is evaluated as being in a collision state.
 
-* Input Modification status - When this value is zero, the Run-time Assurance Module is passing the input from the planner through to the lower-level UNchanged. That is, the filtering is in passive mode. When this value is non-zero, the Run-time Assurance Module is actively modifying the commanded input.
+- **Input Modification**: When this value is zero, the Run-time Assurance Module is passing the input from the planner through to the lower-level UNchanged. That is, the filtering is in passive mode. When this value is non-zero, the Run-time Assurance Module is actively modifying the commanded input.
 
 .. warning::
 

@@ -4,9 +4,9 @@ Command Line Interface (CLI)
 .. contents:: Table of Contents
   :local:
 
-The Supervisor package provides a CLI that can be used to interact with the Supervisor.
+The Supervisor package provides a **CLI** that can be used to interact with the Supervisor.
 
-The command for the CLI is `3laws`. It can be used to start, stop, and restart the control panel service used for the configuration of the Supervisor.
+The command keyword for the CLI is `3laws`. It can be used to start, stop, and restart the control panel service used for the configuration of the Supervisor.
 
 The CLI provides also a command to check for updates of the Supervisor. These updates still have to be installed manually. See :ref:`Installation` section.
 

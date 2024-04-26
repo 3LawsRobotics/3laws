@@ -26,4 +26,14 @@ Try launching Supervisor from a terminal to see what error messages appear. Supe
 
 Supervisor may also keep the platform stationary if the LIDAR data or the list of obstacles is not delivering data quickly enough.  This design ensures that if Supervisor does not have sufficient information about surrounding collision candidates, it does not allow the platform to proceed.  A good strategy is to start up the Operations tab for Control Panel (with Rosbridge) and see if any of the input blocks (desired input, state, perception) is a color other than green.
 
-Another cause of platform failing to move is that the topic routing is not correct.  The ROS ``rqt`` tool with the Node Graph can visually display the routing well.  Verify that the desired inputs (e.g. cmd_vel_plan) are coming into Supervisor, and that Supervisor's outputs (e.g. /lll/ram/filtered_input) is properly mapped to the signal that the lower layer is expecting (e.g. cmd_vel). 
+Another cause of platform failing to move is that the topic routing is not correct.  The ROS ``rqt`` tool with the Node Graph can visually display the routing well.  Verify that the desired inputs (e.g. cmd_vel_plan) are coming into Supervisor, and that Supervisor's outputs (e.g. /lll/ram/filtered_input) is properly mapped to the signal that the lower layer is expecting (e.g. cmd_vel).
+
+My robot doesn't move when I send a command
+============================================
+
+Make sure in that in the :ref:`Operation <control_panel_ops>` tab of the Control Panel everything is green. If not, check the logs for errors.
+
+The Operation tabs show that everything is OK but the robot still doesn't move
+=================================================================================
+
+Make sure that your robot is receiving the command. You can use rqt_graph to check the topic connections and topic echo to check if the command is being sent.

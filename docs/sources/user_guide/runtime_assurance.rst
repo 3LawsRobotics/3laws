@@ -1,157 +1,150 @@
 Run-time Assurance
 ####################
 
+.. _contact 3Laws: mailto:sales@3laws.io
+
 .. contents:: Table of Contents
   :local:
 
-The Run-time Assurance Module (RAM), is a filter that operates at the control rate. It is designed to ensure that the robot's control commands keep the robot in a user defined safe state. Based on formal mathematical proven methods, the CAM is able to prevent the robot from colliding while still allowing the robot to reach maximum performance when the system is far from any obstacles **in its current travel direction**.
 
-This ability allows development of the robot's control and planning algorithms without worrying about collision avoidance.
+The Run-time Assurance Module (RAM) is the heart of the Supervisor. This module is responsible for determining the appropriate command to send to the robot to stay safe in light of the available information it has about the system. It is broken up into 3 main components:
 
-The CAM uses basic kinematic and dynamic models for the robot in order to predict potential collisions. Supervisor currently supports differential-drive (able to rotate-in-place and translate), single-track steered, and omni-directional (able to translate sideways in addition to rotations and forward/back motion) vehicles.
+.. image:: ../data/ram_architecture.png
+  :width: 800px
+  :align: center
+  :alt: Architecture of the RAM
 
+- **The Kernel Generator**: This component is responsible for determining, based the a Dynamical Model of a system, it's current state, and the current and predicted state of the environment, the set of possible actions that can be taken to keep the system safe. This set of actions is then passed to the input filter.
 
-3Laws has developed the Supervisor as an add-on that can check and augment an existing planner or controller. The Supervisor contains a limited set of vehicle platforms and applications. This document describes the more general possibilities available for the underlying technology known as *Control Barrier Functions* (CBFs). The high-level idea is that CBFs monitor the robot (or other vehicle's) state and next motion commands in real-time. If the model predicts that the system will experience undesirable behavior (based on the commands and system dynamics), then the commands will be altered to avoid the undesirable outcome in a minimally disruptive way. The modification might be to slow the vehicle or to turn it towards a more desirable direction.
+- **The Input Filter**: This component is responsible for selecting out of the set of safe commands one that is a close as possible to the desired command sent by the autonomy stack.
 
-The off-the-shelf packaging of Supervisor supports collision avoidance for a selection of robot systems such as unicycle (differential-
-drive) and bicycle (front-steering) vehicles. Other operational situations like
-geo-fencing or attitude stabilization can be implemented with CBFs as custom behaviors. Similarly, other operational platforms including articulated robots, aerial and marine vehicles (drones), and specialized devices can also be implemented by 3Laws. CBFs can also be used to alert of the need to change the input commands when an unsafe behavior is predicted - an alarm could be sounded. That capability could be applied to human-controlled systems where CBF does not have access to the actuators.
-
-Basic Architecture
-==================
-
-From an operational standpoint, a CBF (when used for collision avoidance) sits between the planning layer and the hardware control layer. "Hardware control" typically refers to a speed or attitude controller for a vehicle or a joint attitude/speed controller for an articulated robot.
-
-.. image:: ../data/supervisor_architecture_1.png
-  :width: 700px
-  :alt: Architecture showing inputs and outputs from a typical CBF
-
-The CBF will evaluate the likelihood of a collision (or other undesirable behavior) and will only modify the desired input from the planner when a collision is predicted within the estimation window.
-
-.. image:: ../data/supervisor_architecture_1b.png
-  :width: 700px
-  :alt: Architecture showing inputs and outputs from a typical setup
-
-There are 2 main steps to integrate a CBF into an existing stack:
-
-  1. Remap the output from the planner (or component that produces commands such as the path to follow, the vehicle speed, or the navigation) and set it as the input to the CBF. Then remap the input of the controller (or component that converts the navigation instructions into hardware/actuator instruction to use the output of CBF. With ROS, for example, the re-mapping can be done in the launch routines.
-
-  2. Start the CBF as part of the stack.
+- **Fault Manager**: This component is responsible for detecting basic fault in the signals sent by the autonomy stack to the RAM, and for implementing a appropriate stopping strategies.
 
 
-Available Configurations in Supervisor
-======================================
+Dynamical Model
+===============
 
-The following configurations of robot platform and operational objective are
-currently available in the Supervisor. Other platforms/applications are available as custom developments.
+In order for the kernel generator to determine the set of safe commands that can be sent to the robot, it must be able to quantify  how the robot will behave when it receives a particular command. This is done through the use of a dynamical model.
 
-+---------------------+---------------------+----------------+
-| Robot Configuration | Collision Avoidance |   GeoFencing   |
-+=====================+=====================+================+
-|       Unicycle      |          Yes        |       No       |
-+---------------------+---------------------+----------------+
-|   Omnidirectional   |          Yes        |       No       |
-+---------------------+---------------------+----------------+
-|       Bicycle       |          Yes        |       No       |
-+---------------------+---------------------+----------------+
-|     Copter Drone    |    in development   | in development |
-+---------------------+---------------------+----------------+
+A dynamical model of a robot is defined by 6 items:
 
-In terms of handling the objects in the space, these routines support laser scans and list of obstacles (with geometries). Using lists of perceived obstacles typically results in lower computational loads.
+- A **state** vector :math:`x \in \mathbb{R}^\text{nx}` representing the set of relevant physical quantities for that robot (like position, orientation, velocity, etc...).
 
-Applications
-============
+- An **input** vector :math:`u \in \mathbb{R}^\text{nu}`  representing the set of relevant cyber-physical quantities for that robot that can be controlled directly (like motor torque, desired velocity, etc...).
 
-**Active Collision Avoidance**: In the collision avoidance use case, a CBF is designed to modify the planner's outputs in order to prevent impacts between the robot and other actors/obstacles in the operational space. A CBF can be used as a redundant system that filters the planner and only injects changes when a collision is predicted. In many cases, this allows for reducing the load on the planner for calculating paths around obstacles or for using the CBF as a redundant component in the stack, allowing improved reliability calculations by having a dissimilar component that can perform obstacle handling as a parallel task.
+- A set of **equations of motion**, of the vectorized form :math:`\dot{x} = f(x,u)` that describe how the state of the robot evolves over time when it receives a particular input. These equations of motions will often be parameterized by known fixed quantities :math:`p \in \mathbb{R}^\text{np}` called **model parameters** (like mass, distance between wheels, etc...),i.e. :math:`\dot{x} = f(x,u,p)`
 
-A sensor system that detects the presence of the obstacles (e.g. LIDAR, RADAR,
-ultra-sonic) is required for collision avoidance. The sensor suite can be
-shared with the stack or can be dedicated. (Supervisor currently only supports 2D Laserscans.)
+- An **input constraints** set :math:`U \subseteq \mathbb{R}^\text{nu}` that represents the set of all possible inputs that can be sent to the robot.
 
-In the case of a human "planner", a CBF can be responsible for avoiding obstacles (assuming they are detected by sensors). Avoidance actions that can be activated in a CBF include stopping, avoiding the obstacle to the left/right, and backing up. Custom actions (such as diverting and parking until a moving obstacle on a known trajectory has passed by) can also be implemented as custom packages.
+- A **state domain** set :math:`X \subseteq \mathbb{R}^\text{nx}` that represents the domain for which the equations of motion are valid, in particular w.r.t the process covariance matrix.
 
-**Repetitive Path Collision Avoidance**: Using a simulation framework with known
-obstacles in the space, CBFs can modify pre-planned paths to avoid potential collisions. The margins between the robot (even for articulated robots) and the obstacles can be adjusted based on estimated uncertainties in the behavior of the robot and of positioning of the fixed objects. The primary use case for this is for systems that perform repetitive tasks.
+- A **process noise covariance matrix**, being the probability distribution of the actual :math:`\dot{x}` around the predicted value by :math:`f(x,u)` for all given :math:`x \in X` and :math:`u \in U`.
 
-**GeoFencing**: CBFs can also be inserted into the autonomy stack at different locations based on the needs for time-criticality. The approach is most often deployed between the planner and the inner-loop controller, but it can also be deployed between the inner-loop controller and the hardware for cases where the vehicle, like a racing copter, is going to approach undesirable configurations at rates that the high-level planner is able to replan-for, or if the system is being controlled by a human (or automated planner) that is not aware of the position of the drone relative to the keep-out area.
+The Supervisor currently ships with 3 supported dynamical models:
 
-.. image:: ../data/supervisor_architecture_1c.png
-  :width: 700px
-  :alt: Alternate placements in the autonomy stack
+Unicycle
+--------
+This model is a 3-states, 2-inputs model that describes the movement of a robot evolving on SE2 (2D planar space with orientation), where one can control it's longitudinal and angular speed directly. This model is particularly well suited for differential drive robots with fast acceleration and deceleration.
 
-**Configuration Bounding**:
-Control Barriers can be designed to control state variables such as position, speed, and accelerations. This means that configuring the theory to avoid situations such as vehicle roll-over because of large lateral accelerations or sliding because of large accelerations can also be implemented as objectives. Please contact 3Laws for discussions on how these objectives can be made available.
+  - Model state: :math:`\left[x,y,\theta \right]`
 
-Platforms
-=========
+  - Model input: :math:`\left[ v_x, \omega \right]`
 
-The following are a few of the most commonly-used platforms.
+  - Model parameters: None
 
-**Unicycle** describes a wheeled-ground-based robot with differential drive for steering and coordinated drive for forward/back motion. The vehicle is able to stop and rotate in-place. Configuration parameters include wheel radius, distance between the wheels, vehicle extents, acceleration limits, and speed limits.
+  - Equations of motion: :math:`\begin{cases} \dot{x} = v_x \cos(\theta) \\ \dot{y} = v_x \sin(\theta) \\ \dot{\theta} = \omega \end{cases}`
 
-**Bicycle** includes vehicles that can be modeled with a single-track rolling model (e.g. car, truck, golf-cart). Current models use front-wheel steering.
-Control consists of speed and steering. Configuration parameters include wheel radius, maximum steering angles, effective wheelbase, vehicle extents, vehicle mass, acceleration limits, speed limits, and for faster vehicles, understeer
-gradient.
+  - State domain: :math:`\mathbb{R}^3`
 
-**Omnidirectional** robots can move longitudinally and laterally, often at
-the same time.
+  - Input constraints: User defined `hyperbox <https://en.wikipedia.org/wiki/Hyperrectangle>`_ in :math:`\mathbb{R}^2`
 
-**Copter:** Flying vehicle that can move and rotate freely in a 3-dimensional
-world, but must be upright most of the time to avoid colliding with the ground.
-Configuration parameters include vehicle extents, mass, moments of inertia,
-acceleration limits, and speed limits.
+  - Process noise covariance matrix: Identity matrix
 
-Theory of Operation
-===================
+Omnidirectional
+---------------
+This model is a 3-states, 3-inputs model that describes the movement of a robot evolving on SE2 (2D planar space with orientation), where one can control it's longitudinal, transverse and angular speed directly. This model is particularly well suited for mobile robots with omni wheels, quadruped, or surface vessels with fast acceleration and deceleration.
 
-A CBF uses theories from *invariant set* math for the states of systems to create a mechanism to keep the devices away from undesired state configurations (e.g. unsafe areas, unstable configurations). For systems that are controlled through feedback or feed-forward, the desirable state is based on the needs of the operation and what sensing/actuation methods are available. The concept of an *invariant set* is that once the system is within the set, it can be kept within that set by the control or planning signals based on system dynamics. For collision avoidance scenarios, the desired set is space where the distance to the nearest object (and relative approach speed) is maintained sufficiently large. In the case of geofencing applications the desired invariant set is anywhere other than the geofenced region. For a system that may fall over, the desired state might be one where it remains upright.
+  - Model state: :math:`\left[x,y,\theta \right]`
 
-Theory and practical uses are described in:
+  - Model input: :math:`\left[ v_x, v_y, \omega \right]`
 
-Ames, Aaron D., et al. "Control barrier function based quadratic programs for safety critical systems." IEEE Transactions on Automatic Control 62.8 (2016): 3861-3876.
+  - Model parameters: None
 
-Chen, Yuxiao, et al. "Backup control barrier functions: Formulation and comparative study." 2021 60th IEEE Conference on Decision and Control (CDC). IEEE, 2021.
+  - Equations of motion: :math:`\begin{cases} \dot{x} = v_x \cos(\theta) - v_y \sin(\theta) \\ \dot{y} = v_x \sin(\theta) + v_y \cos(\theta) \\ \dot{\theta} = \omega \end{cases}`
 
-Gurriet, Thomas. "Applied safety critical control." PhD diss., California Institute of Technology, 2020.
+  - State domain: :math:`\mathbb{R}^3`
 
-Singletary, Andrew, Shishir Kolathaya, and Aaron D. Ames. "Safety-critical kinematic control of robotic systems." IEEE Control Systems Letters 6 (2021): 139-144.
+  - Input constraints: User defined `hyperbox <https://en.wikipedia.org/wiki/Hyperrectangle>`_ in :math:`\mathbb{R}^3`
 
-The basic concept is to use the current state of a dynamical system (robot arm, mobile device, aircraft, marine vessel, etc.) and a predetermined set of possible actions to drive a model of that system to predict when an undesirable condition will occur. Inputs including locations, geometries, speeds, and accelerations of obstacles are also needed when the CBF is designed for collision avoidance. The approach predicts what possible actions would lead to keeping the robot in a desirable configuration (e.g. a desirable input set), and then to modify the currently requested steering/speed/attitude commands to use the closest values in the desirable input set. A CBF modifies inputs to slow or divert the device away from the collision path. The families of possible actions can be built into a CBF by 3Laws based on the objective for the particular deployment.
-
-Set-invariant theories can be used to describe the desired state set (e.g. the "safe" set). It is typically not possible to come up with an explicit expression to describe the desired invariant set, so some alternative approaches to enforce the same concepts have been developed. The CBFs also provide requirements on what conditions the desired inputs must satisfy to keep the system state inside the target space. Those requirement involve combining the derivatives of the CBFs with respect to the state variables and the equations of motion of the original system. The resulting expression is a multi-dimensional inequality which can be solved through Quadratic Programming. The equation of motion of the system is a function (typically nonlinear) of the current system state and of the inputs to the system. Since the possible actions would be used as control commands the system, one can evaluate if a particular choice satisfies the relationships that will result in keeping the state inside the target set/space.
+  - Process noise covariance matrix: Identity matrix
 
 
-CBF Operational Modes
-=====================
+Bicycle (experimental)
+--------------------------
+This model is a 3-states, 2-inputs model that describes the movement of a robot evolving on SE2 (2D planar space with orientation), where one can control it's longitudinal speed and front wheel steering angle directly. This model is particularly well suited for mobile robots with omni wheels, quadruped, or surface vessels with fast acceleration and deceleration.
 
-Understanding of the discussion in this section is not necessary for use of the off-the-shelf configurations that are provided in Supervisor. These operational modes are pre-programmed into a CBF. If the platform or application is not one of the options discussed above the modes below are options that 3Laws will consider when building a new application/platform.
+  - Model state: :math:`\left[x,y,\theta \right]`
 
-Based on the physical system being used and the desired operation conditions, multiple methods often exist to produce solutions determine the best
-fail-safe strategy to use at any time.
+  - Model input: :math:`\left[ v_x, \delta \right]`
 
-**Explicit:**
-For simple physical systems it is possible to construct analytical functions. For example, if the goal is to keep an object within a box that spans x=[-1,1] and y=[-1,1], the barrier function (inequalities) can be x^2-1 >= 0 and y^2 - 1 >= 0. With an explicit barrier function and the equation of motion for the system, various fail-safe strategies can be evaluated for compliance with the needs.
+  - Model parameters:
 
-One can use a (Quadratic Programming) QP solver to find the command that best keeps the vehicle in the desired region.
+    - :math:`wheel_{dx}`: Distance between front and back wheels (m)
 
-A problem with the explicit approach is that if the system reaches the boundary of the safety set, then the desired input from the planner is ignored because the fail-safe is the only strategy that is applied. For example, this might result in a condition where a request to back away from an obstacle is not allowed to happen.
+    - :math:`origin_{dx}`: Position of vehicle origin w.r.t back wheels (m)
 
-**Explicit smart switching** has heuristic-based approaches to avoid the problem of getting stuck. The computation carries along several fail-safe strategies. If one of the strategies can drive the system away from the boundary better than the others, that strategy is applied. Once the system is no longer at the boundary of the safe region, motion requests from the planner are applied instead of being overridden.
+  - Equations of motion: :math:`\begin{cases} \dot{x} = v_x \cos(\theta) \\ \dot{y} = v_x \sin(\theta) \\ \dot{\theta} = v_x * \tan(\delta) * \frac{\cos(\beta)}{wheel_{dx}} \end{cases}` where :math:`\beta = \arctan(\frac{origin_{dx}}{wheel_{dx}}\tan(\delta))`
 
-**Implicit:** Another approach is to create a family of available actions ahead of time. These actions are propagated to develop the set of actions that will keep the device in the desired space and which will not. Next, an optimization is made to find the commands in the desired space that are closest to the desired input commands. Note that if the current desired inputs are already in the desired set, then there will be no changes to those inputs. An interesting feature of this approach is that the approach starts pushing away from the raw desired inputs when the desired inputs  begin to violate the desired objectives. 3Laws won't know how far the robot is from the edge of the control invariant set, but the code can measure the distance to the edge of the original "safety" set.
+  - State domain: :math:`\mathbb{R}^3`
 
-When integrating over the space, the approach also integrates the sensitivity. The sensitivity gives information used to compute the optimally close (to the original) inputs. The sensitivity at each point is the effect of changing the action at the beginning of the integration. The edge of the control invariant safety
-set is described by the collection of multiplying the gradients of the full safety sets times the gradient of the equation of motion times the sensitivity over the horizon of integration. This results in a scalar constraint for each step that must be greater than zero. These work as constraints on a quadratic problem that is searching for the best fail-safe strategy to apply.
+  - Input constraints: User defined `hyperbox <https://en.wikipedia.org/wiki/Hyperrectangle>`_ in :math:`\mathbb{R}^2`. Note that the steering angle must be between :math:`-\frac{\pi}{2}` and :math:`\frac{\pi}{2}`.
 
-**Implicit with switching:** To make the system less prone to getting stuck when using the implicit approach, a larger family of possible actions can be used to calculate the various forward integrations. This ends up being computationally costly, so algorithms have been created to switch between possible modifications to produce a good fail-safe for the current step.
+  - Process noise covariance matrix: Identity matrix
 
 
-Additional parameters can be added based on the equations of motion for the individual system.
+.. note::
+  The Supervisor is able to support many more dynamical models. If you have a dynamical model that you would like to use with the Supervisor, please `contact 3laws`_.
 
 
-The Control Panel also visualizes operation of the Supervisor's RAM.
+Safety Maps
+===========
 
-.. important::
-  For more details, see :doc:`Control Panel <control_panel>`
+The other critical part of configuring the RAM is defining what the robot should avoid. The Supervisor able to enforce any arbitrary non-linear constraint on the robot's state. These set of constraints are organized into what we call **Safety Maps**. A safety map is a function that takes the current state of the robot and returns a vector of values of the constraints to be enforced at that current state, along with information on the gradient of the constraints w.r.t the state.
 
-.. _user_guide/cli:
+The Supervisor currently ships with two safety maps, one for geometric collision constraints, as determined by data from a laserscan sensor, and/or a map of obstacles.
+
+Laserscan
+-----------
+The laserscan Safety Map defines constraints corresponding to the distance between the robot geometry, and a carefully chosen set of capsules centered around consecutive points of the laserscan. The Supervisor will enforce that the robot does not collide with any of these capsules. The size of these capsules can be controlled by the **collision distance threshold** parameter (see :ref:`control panel configuration <config_sup_collision_distance>`).
+
+Obstacles
+-------------
+
+The Obstacles Safety Map defines constraints corresponding to the distance between the robot geometry and the a set of obstacles geometries.
+
+.. note::
+  The Supervisor is able to support many more sensors and constraint representations. Please `contact 3laws`_ to learn more about all the type of constraints we can enforce.
+
+.. Behavior Tuning
+.. ===============
+
+.. .. note::
+..   For more information on mathematics and algorithms behind the RAM, please refer to the :doc:`knowledge section <../knowledge>`.
+
+
+.. Fault Management
+.. ================
+
+
+.. Handling uncertainties and delays
+.. =================================
+
+.. 3 types of uncertainties, sensing, dynamical model, timing.
+.. Effect of each
+
+.. Current, uncertainties and delays are not accounted for explicitly.
+
+.. You can mitigate their effect by tuning beta, alpha, and inflating obstacle size
+
+.. .. note::
+..   The Supervisor is able to account for uncertainty in an explicit and quantitative way. Please `contact 3laws`_ to learn more about the process tailoring Supervisor to account for uncertainties and delays in your system.

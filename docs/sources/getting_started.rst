@@ -7,8 +7,8 @@ Getting started
 The current version of **3Laws Supervisor** supports ground-based mobile platforms (wheeled or legged) with the following movement modalities:
 
  * Differential-drive
- * Front-wheel steering
  * Omni-directional
+ * Front-wheel steering - **experimental**
 
 For perception, **3Laws Supervisor** currently supports:
 
@@ -44,12 +44,16 @@ This will run a script to auto-detect the system architecture, install any missi
 
 .. note::
 
-  The ROS packages are installed into the global ROS installation directory. You will need to source the ROS setup script to make the new components available in the current terminal: ``source /opt/ros/<DISTRO>/setup.sh``.  As with most ROS setups, adding a line to the startup file (ex. .bashrc) that sources the ROS environment is recommended.
+  The ROS packages are installed into the global ROS installation directory. You will need to source the ROS setup script to make the new components available in the current terminal: ``source /opt/ros/<DISTRO>/setup.sh``.
+
+  As with most ROS setups, adding a line to the startup file (ex. .bashrc) that sources the ROS environment is recommended.
 
 
 2. Start the control Panel
 **************************
-Before the Supervisor can be started, in must be configured. In order to configure it, a web-based Control Panel is provided.  The Control Panel creates/modifies the file *~/.3laws/config/supervisor.yaml*.  An existing (or backup) version of this file can be used if it is places in the proper location; however, older versions might no be compatible with new software.  If this file is copied from another device, please update the license.
+Before the Supervisor can be started, it must be configured. In order to configure it, a web-based :doc:`Control Panel <user_guide/control_panel>` is provided.  The Control Panel creates if needed and modifies the file *~/.3laws/config/supervisor.yaml*.
+
+An existing (or backup) version of this file can be used if it is placed in the proper location; however, older versions might no be compatible with new software.  If this file is copied from another device, please update the license.
 
 To enable the Control Panel backend service, open a terminal and run the following command:
 
@@ -78,7 +82,7 @@ The initial view of the Control Panel is the "Configuration" page, which consist
 
 .. note::
 
-  The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated.  However, if the rest of the robot is running during while the Supervisor is being configured, the Control Panel will search for available signals.
+  The Supervisor does not have to run during the configuration step. It loads the configuration file at start-up, so it needs to be started **after** the configuration is created/updated. However, if the rest of the robot is running while the Supervisor is being configured, the Control Panel will pre-filled the configuration with available information.
 
 
 4. Interface with your stack
@@ -92,19 +96,6 @@ Your low-level controller therefore needs to subscribe to this topic and apply t
   :align: center
   :width: 600px
   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
-
-|
-
-Signal Remapping
-----------------
-
-The most straightforward way to insert Supervisor into an existing command chain is to use the ROS remapping feature as illustrated in the figure below. There is no need to make any changes to the signals published or subscribed-to by the existing components. In the example below, the **/cmd_vel** signal represents the output of the Planner and the input to the Controller. At launch time, the Planner's signal can be remapped to an alternate name like **/cmd_vel_plan**.
-
-.. image:: data/supervisor_insertion_1.png
-  :width: 800px
-  :alt: Architecture schema
-
-The Supervisor should then be configured (after installation) to subscribe to the **/cmd_vel_plan** signal that is the resulting output from the Planner. The Supervisor's launch file (nominally */opt/ros/<version>/share/lll_supervisor/launch/supervisor.launch.py* should be modified to include the remapping from **/lll/ram/filtered_input** to **/cmd_vel**, which is what the downstream system subscribes to.
 
 5. Launch
 *********
