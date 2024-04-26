@@ -93,6 +93,8 @@ Your low-level controller therefore needs to subscribe to this topic and apply t
   :width: 600px
   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
+|
+
 Signal Remapping
 ----------------
 

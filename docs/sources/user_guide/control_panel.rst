@@ -4,10 +4,57 @@ Control Panel
 .. contents:: Table of Contents
   :local:
 
+Overview
+=========
+
+The control panel is a web-based configuration and monitoring tool for the Supervisor.
+
+The Control Panel is composed of tow main sections:
+
+  - Configuration: This section allows the user to configure the Supervisor's parameters.
+  - Operations: This section shows the current state of the Supervisor and the robot.
+
+Each section is accessed by clicking on the corresponding tab in the Control Panel:
+
+.. image:: ../data/cp_tabs.png
+  :align: center
+  :width: 800px
+  :alt: Control Panel tabs.
+
+|
+
+A section is also divided into sub-sections, which are accessed by clicking on the corresponding sub-tabs:
+
+.. image:: ../data/cp_subtabs.png
+  :align: center
+  :width: 800px
+  :alt: Control Panel sub-tabs.
+
+|
+
+In addition, the navigation bar gives you access to the Control Panel's rosbridge connection status:
+
+.. image:: ../data/navigation_bar_rosbridge.png
+  :width: 800px
+  :alt: Control Panel NavBar with ros bridge connected.
+
+|
+
+A green icon indicates that the Control Panel is connected to the Rosbridge server, while a red icon indicates that the Control Panel is not connected.
+
+By clicking on the icon, you can set the IP address and port of the Rosbridge server to which the Control Panel should connect.
+
+.. image:: ../data/rosbridge_connection_modal.png
+  :align: center
+  :width: 800px
+  :alt: Rosbridge connection dialog.
+
+|
+
 Rosbridge connection
 =====================
 
-The Control Panel is most effective when used with a ROS bridge server.
+The Control Panel is most effective when used with a ROS bridge server. This server provides a websocket interface to ROS topics. With this interface, the Control Panel can retrieve information about the **available topics** and help you complete the configuration of the Supervisor.
 
 To install a Rosbridge server (where <distro> is replaced with the version of ROS on the system), run:
 
@@ -76,7 +123,7 @@ Control Panel's Operations Page
 
 .. image:: ../data/cp_operation.png
   :align: center
-  :width: 600px
+  :width: 800px
   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
 |
