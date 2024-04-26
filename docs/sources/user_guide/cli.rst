@@ -38,7 +38,7 @@ If a service is preferred for running the Control Panel in the background, use t
 
   3laws control-panel autostart enable
 
-This will create a user service. This one will be started automatically when the system boots up. The Control Panel will be available at `http://localhost:8080`. To change the communication port, use the following command:
+This will create a user service. This one will be started automatically when the system boots up. The Control Panel will be available at `http://localhost:8000`. To change the communication port, use the following command:
 
 .. code-block:: bash
 

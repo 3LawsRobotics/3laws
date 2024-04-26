@@ -44,7 +44,7 @@ This will run a script to auto-detect the system architecture, install any missi
 
 .. note::
 
-  The ROS packages are installed into the global ROS installation directory. You will need to source the ROS setup script to make the new components available in the current terminal: ``source /opt/ros/<DISTRO>/setup.sh``.  As with most ROS setups, adding a line to the startup file (ex. .bashrc) that sources the ROS environment is recommended. 
+  The ROS packages are installed into the global ROS installation directory. You will need to source the ROS setup script to make the new components available in the current terminal: ``source /opt/ros/<DISTRO>/setup.sh``.  As with most ROS setups, adding a line to the startup file (ex. .bashrc) that sources the ROS environment is recommended.
 
 
 2. Start the control Panel
@@ -63,7 +63,7 @@ To enable the Control Panel backend service, open a terminal and run the followi
 3. Configure the Supervisor
 ***************************
 
-Now that the Control Panel backend is running, access the control panel from any machine on the same network as the robot by opening a web browser and navigating to the following URL: ``http://<IP_ADDRESS_OF_THE_ROBOT>:8080/``.
+Now that the Control Panel backend is running, access the control panel from any machine on the same network as the robot by opening a web browser and navigating to the following URL: ``http://<IP_ADDRESS_OF_THE_ROBOT>:8000/``.
 
 The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as **Credentials**, **Robot Model**, **Supervisor**, **Localization**, and **Perception**.
 
