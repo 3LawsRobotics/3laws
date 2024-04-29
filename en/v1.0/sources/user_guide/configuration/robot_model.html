@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Model &mdash; 3Laws v1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+
+  
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/user_guide/configuration/robot_model.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=e160b93e"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Supervisor" href="supervisor.html" />
+    <link rel="prev" title="Credentials" href="credentials.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            3Laws
+          </a>
+              <div class="version">
+                v1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../user_guide.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../runtime_assurance.html">Run-time Assurance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diagnostics.html">Robot Diagnostics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../control_panel.html">Control Panel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="credentials.html">1. Credentials</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2. Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supervisor.html">3. Supervisor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="localization.html">4. Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="perception.html">5. Perception</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../knowledge.html">Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">3Laws</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../getting_started.html">Getting started</a></li>
+      <li class="breadcrumb-item active">Robot Model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="robot-model">
+<h1>Robot Model<a class="headerlink" href="#robot-model" title="Link to this heading"></a></h1>
+<p>The Configuration page for the Robot Model is where the robot’s geometry and kinematics are specified.  The model and shape are critical for predicting when collisions may occur and for calculating how to avoid them.</p>
+<a class="reference internal image-reference" href="../../../_images/cpanel2.png"><img alt="Configuration &gt; Robot Model" class="align-center" src="../../../_images/cpanel2.png" style="width: 600px;" /></a>
+<ul>
+<li><p><strong>Kinematics</strong>: Supervisor currently supports <strong>differential drive</strong>, <strong>front-steered</strong>, and <strong>omni-directional</strong> mobile platforms. A <strong>differential drive</strong> vehicle can rotate around a fixed location by driving one wheel forward and its pair in reverse. It can move forward or backwards by driving both wheels in the same direction. A <strong>front-steered</strong> vehicle operates like a car or bicycle. It can move forwards or backwards, but direction is controlled by steering, and the vehicle has a fixed wheelbase distance between the forward axle and the rear axle. An <strong>omni-directional</strong> robot is usually implemented using wheels that have a series of smaller wheels mounted at 45 degrees on the outer rim. By moving one axle forward and others backwards, the vehicle can move sideways. Rotation occurs by moving the wheels on one side forwards and the wheels on the other side in reverse.</p></li>
+<li><p><strong>Geometry</strong>: The vehicle’s reference coordinate frames and geometry are specified in this section.</p>
+<ul class="simple">
+<li><p><strong>Shape Details</strong>: The robot’s shape is used in order to calculate the distance between the outer boundaries of the robot body and any scan points. Basic shapes that are currently supported include sphere, box, capsule, point, cone and cylinder. The size entries change based on the selected shape. Cylinders and capsules both require length and radius. The difference is that a capsule will have hemispheres on the ends while the cylinder ends are flat. A box frame consists of x-length, y-length, and z-length.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Shape Pose in Robot Frame</strong>: The relative orientation of the robot’s shape with respect to the base frame needs to be specified. Note that the rotation can be specified either using quaternions or Euler angles. The quaternion order is w, x, y, z. When Supervisor is running, it is a good idea to run <strong>rviz</strong> (or <strong>rviz2</strong>) to display the orientations and frames. The <strong>coordinate frame convention</strong> used here is x: positive forward, y positive to the left, and z positive upwards.  The geometric center and orientation of the shape starts as being centered on the base coordinate frame/orientation of the robot.  The shape should be translated and rotated appropriately if the base coordinate frame does not align with the center.</p></li>
+<li><p><strong>Frames</strong>: The name of the robot base coordinate frame must be specified here. The base frame is in robot body-coordinates. It moves in space as the robot does. Additional static frames can be defined by clicking the + icon. The additional frames are static, and will follow the motion of the base robot frame.</p></li>
+</ul>
+</li>
+<li><p><strong>Dynamics</strong>: The Dynamics section has 3 subsections: Input, Parameters, and State.</p>
+<ul class="simple">
+<li><p>The <strong>Inputs</strong> section supports specification of maximum and minimum limits for the translational and rotational speeds at which the robot can be commanded. For monitoring, if these values are exceeded, a log-event describing the violation will be issued. If the Run-time Assurance Module (see <a class="reference internal" href="supervisor.html#supervisor-activation"><span class="std std-ref">Supervisor</span></a>) is active, these limits will be applied to the filtered outputs. For steered vehicles, instead of limits on rotational speeds, steering limits are specified.</p></li>
+<li><p><strong>Parameters</strong>: The only robot type that has a parameters section is the steered robot. <em>wheel_dx</em> is the wheelbase length for the vehicle. <em>origin_x</em> is the distance from the rear axle to the robot base frame.</p></li>
+<li><p><strong>State</strong>: For all robot types, the State category provides the definitions of the variables that are considered as the “states”. These definitions are important when trying to create “masks” to map between the input ROS variable types and the robot states. The first, is considered state 0 (typically x position), the second is state 1 (typically y position) and the third is state 2 (typically yaw).</p></li>
+</ul>
+</li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="credentials.html" class="btn btn-neutral float-left" title="Credentials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="supervisor.html" class="btn btn-neutral float-right" title="Supervisor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, 3Laws Robotics Inc..</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+   
+<div
+  class="rst-versions"
+  data-toggle="rst-versions"
+  role="note"
+  aria-label="versions"
+  style="overflow-y: auto"
+>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Supervisor Docs </span>
+    v: v1.0
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions:</dt>
+       
+        <dd>
+          <a href="/3laws/en/latest/index.html">latest</a>
+        </dd>
+          
+      <strong>
+        
+        <dd>
+          <a href="/3laws/en/v1.0/index.html">v1.0</a>
+        </dd>
+        
+      </strong>
+       
+    </dl>
+    <hr style="margin: 5px" />
+    Continuous documentation hosting provided by
+    <a href="https://pages.github.com/">GitHub Pages</a>.
+  </div>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

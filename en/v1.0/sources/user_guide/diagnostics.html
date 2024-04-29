@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Diagnostic &mdash; 3Laws v1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+
+  
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/user_guide/diagnostics.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=e160b93e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Control Panel" href="control_panel.html" />
+    <link rel="prev" title="Run-time Assurance" href="runtime_assurance.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            3Laws
+          </a>
+              <div class="version">
+                v1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../user_guide.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="runtime_assurance.html">Run-time Assurance</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Robot Diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control_panel.html">Control Panel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../knowledge.html">Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal.html">Legal</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">3Laws</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../user_guide.html">User Guide</a></li>
+      <li class="breadcrumb-item active">Robot Diagnostic</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="robot-diagnostic">
+<h1>Robot Diagnostic<a class="headerlink" href="#robot-diagnostic" title="Link to this heading"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Robot Diagnostic Module (RDM) is currently in <strong>experimental</strong> phase. 3Laws is actively working on expanding and maturing its capabilities.</p>
+</div>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#configuration" id="id1">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#metric-modules" id="id2">Metric Modules</a></p>
+<ul>
+<li><p><a class="reference internal" href="#clock-health" id="id3">Clock Health</a></p></li>
+<li><p><a class="reference internal" href="#dynamic-consistency" id="id4">Dynamic Consistency</a></p></li>
+<li><p><a class="reference internal" href="#node-health" id="id5">Node Health</a></p></li>
+<li><p><a class="reference internal" href="#sensor-characterization" id="id6">Sensor characterization</a></p></li>
+<li><p><a class="reference internal" href="#signal-health" id="id7">Signal Health</a></p></li>
+<li><p><a class="reference internal" href="#system-health" id="id8">System Health</a></p></li>
+<li><p><a class="reference internal" href="#incident-diagnostic" id="id9">Incident Diagnostic</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#output-modules" id="id10">Output modules</a></p></li>
+</ul>
+</nav>
+<p>The Supervisor’s RDM is a tool for monitoring the health and safety of various critical robot sub-systems. It is designed to work in tandem with the Supervisor’s Run-time Assurance Module (RAM).</p>
+<p>As explained <a class="reference internal" href="runtime_assurance.html"><span class="doc">here</span></a>, the RAM relies on various critical robot sub-systems to perform collision avoidance and safety functions. The fault Management part of the RAM is able to detect obvious faults in these sub-systems, like timeouts or corrupted messages,
+but it is not able to detect more subtle issues that may arise like inconsistent localization or a faulty sensor. The RDM fills this gap by providing a more thorough and holistic monitoring of critical components to ensure collision-free behavior.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>At the moment, the diagnostic performed by the RDM is not used by the RAM’s Fault Management system. The user is repsonible for deciding how to use the information provided by the RDM.</p>
+</div>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Configuration</a><a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<p>In order for the RDM to perform its analysis, it must be fed data about the system. At the moment, the RDM only subscribes to data directly required for the RAM and specified via the Control Panel. 3Laws is actively working on enabling more data sources for RDM configured via the Control Panel.</p>
+</section>
+<section id="metric-modules">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Metric Modules</a><a class="headerlink" href="#metric-modules" title="Link to this heading"></a></h2>
+<p>The RDM is composed of a set of <strong>metric modules</strong> each of which responsible for analyzing a specific aspect of the robot’s health. Each module then streams a set of <strong>metrics</strong>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please refer to the <a class="reference internal" href="reference/ros_topics.html#reference-ros-topics"><span class="std std-ref">ROS Topics</span></a> page for the list of ROS topics where these metrics are published.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The RDM is designed to be modular and extensible. For more information on what other modules and metrics 3Laws can offer, please <a class="reference external" href="mailto:sales&#37;&#52;&#48;3laws&#46;io">Contact 3Laws</a>.</p>
+</div>
+<p>The following modules are currently available:</p>
+<section id="clock-health">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Clock Health</a><a class="headerlink" href="#clock-health" title="Link to this heading"></a></h3>
+<p>A properly functioning robot should have consistent clocks across all its components. The Clock Health module monitors the synchronization between <a class="reference external" href="https://en.cppreference.com/w/cpp/chrono/system_clock">system clock</a> of the computer the Supervisor is running on and an <a class="reference external" href="https://www.ntppool.org/">NTP server</a>. Inconsistent clocks can lead to a variety of issues, including inaccurate, improper timeout and communication detection by the RAM’s Fault Management system.</p>
+<p>This module publishes the following metrics:</p>
+<ul class="simple">
+<li><p><strong>clock_health_utc</strong>: The offset between the system clock and the NTP server in seconds. The important fields of the associated message are:</p>
+<ul>
+<li><p><strong>has_utc</strong>: A boolean indicating if the NTP server time is available.</p></li>
+<li><p><strong>utc_time</strong>: The latest time returned by the NTP in nanoseconds since 1970.</p></li>
+<li><p><strong>rtc_time</strong>: The latest time returned by the System Clock in nanoseconds since 1970.</p></li>
+<li><p><strong>offset_from_utc</strong>: The offset between the NTP server and the System Clock in nanoseconds.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="dynamic-consistency">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Dynamic Consistency</a><a class="headerlink" href="#dynamic-consistency" title="Link to this heading"></a></h3>
+<p>The RAM (Run-time Assurance Module) relies on a quantitative understanding of the robot’s physical behavior and control capabilities (i.e. a <a class="reference external" href="https://en.wikipedia.org/wiki/Dynamical_system">Dynamical Model of the system</a>) to make decisions about the appropriate collision avoidance strategy. The Dynamic Consistency module is responsible for monitoring the consistency between the system’s Dynamical Model and the observed system behavior. Inconsistencies between the two implies the RAM may not be able to make accurate decisions regarding when to intervene and might lead to collisions.</p>
+<p>This module publishes the following metrics:</p>
+<ul class="simple">
+<li><p><strong>dynamic_consistency</strong>: Consistency between the Dynamical Model of the system and the observed system behavior. The important fields of the associated message are:</p>
+<ul>
+<li><p><strong>state_timeout</strong>: A boolean indicating if the state information has timed out.</p></li>
+<li><p><strong>input_timeout</strong>: A boolean indicating if the input information has timed out.</p></li>
+<li><p><strong>input_domain_value</strong>: The signed distance from the current input to the boundary of the input constraints set.</p></li>
+<li><p><strong>state_domain_value</strong>: The signed distance from the current state to the boundary of the state domain set.</p></li>
+<li><p><strong>xdot_difference</strong>: The difference vector between the predicted and observed state derivative.</p></li>
+<li><p><strong>xdot_difference_pdf_value</strong>: The probability density function (pdf) value of the xdot_difference vector.</p></li>
+<li><p><strong>xdot_difference_pdf_value_normalized</strong>: The normalized pdf value of the xdot_difference vector, i.e. equal to 1 when the xdot_difference vector is null.</p></li>
+<li><p><strong>xdot_difference_norm_1sigma</strong>: The signed distance from the value of the norm of xdot_difference to the 1sigma level set of the pdf.</p></li>
+<li><p><strong>xdot_difference_norm_2sigma</strong>: The signed distance from the value of the norm of xdot_difference to the 2sigma level set of the pdf.</p></li>
+<li><p><strong>xdot_difference_norm_3sigma</strong>: The signed distance from the value of the norm of xdot_difference to the 3sigma level set of the pdf.</p></li>
+<li><p><strong>system_degradation_probability</strong>: Not available yet.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The process covariance matrix used for the statical analysis is currently the identity matrix.</p>
+</div>
+</section>
+<section id="node-health">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Node Health</a><a class="headerlink" href="#node-health" title="Link to this heading"></a></h3>
+<p>Typical autonomy stacks are composed of <strong>multiple nodes</strong>, each responsible for a specific task. The Node Health module monitors the health of these nodes by checking if they are running and if they are publishing data properly. This module is useful for detecting issues like node crashes or communication loses between nodes. This is critical for nodes like Localization and Perception that are central to the RAM’s proper operation.</p>
+<p>A node is defined by the set of topics it publishes. The Node Health module monitors the health of the nodes by checking if the topics are being published and if the data is consistent with the expected values.</p>
+<p>The associated metric is published at 1hz, and is an aggregate of the signal data received over that period.</p>
+<p>This module publishes the following metrics:</p>
+<ul class="simple">
+<li><p><strong>node_health</strong>: The health of the nodes in the system. The important fields of the associated message are:</p>
+<ul>
+<li><p><strong>timeout</strong>: A boolean indicating if all the nodes’s topics have timed out.</p></li>
+<li><p><strong>ok</strong>: A boolean indicating that none of the nodes’s topics have timed out.</p></li>
+<li><p><strong>error_code</strong>: An enum indicating the type of error that occurred. The possible values are: <strong>[ok, some_topics_timeout, out_of_bounds, all_topics_timeout]</strong></p></li>
+<li><p><strong>topics</strong>: A list of information for each of the node’s topics. Each topic message contains the following important fields:</p>
+<ul>
+<li><p><strong>topic_id</strong>: The topic’s name/identifier.</p></li>
+<li><p><strong>timeout</strong>: A boolean indicating if the topic has timed out.</p></li>
+<li><p><strong>has_timestamp</strong>: A boolean indicating if the topic’s data has a non-zero timestamp.</p></li>
+<li><p><strong>sender_rate</strong>: The average rate at which the topic is being published by the node.</p></li>
+<li><p><strong>receiver_rate</strong>: The average rate at which the topic is being received by the RDM.</p></li>
+<li><p><strong>delay</strong>: The average delay between the time the message was sent and the time it was received.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="sensor-characterization">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Sensor characterization</a><a class="headerlink" href="#sensor-characterization" title="Link to this heading"></a></h3>
+<p>The Sensor Characterization module is responsible for monitoring the health of the robot’s sensors. This module is useful for detecting issues like sensor malfunctions, or calibration issues. The nominal functioning of the robot’s sensors is obviously critical for the RAM’s proper operation. If the sensors are not functioning properly, the RAM will make decision based on improper assumption on obstacles location and may lead to collisions.</p>
+<p>This module publishes the following metrics:</p>
+<ul class="simple">
+<li><p><strong>sensor_obstruction</strong>: The list of sensor obstructions detected for the specified 2D laserscans. An obstruction is detected when a set of rays returns the same distance over time even through the robot is moving. The important fields of the associated message are:</p>
+<ul>
+<li><p><strong>nb_obstructions</strong>: The number of obstructions detected.</p></li>
+<li><p><strong>obstructions</strong>: A list of the detected obstruction clusters. Each obstruction message contains the following important fields:</p>
+<ul>
+<li><p><strong>start_angle</strong>: The start angle of the obstruction in radians in the laserscan frame.</p></li>
+<li><p><strong>end_angle</strong>: The end angle of the obstruction in radians in the laserscan frame.</p></li>
+<li><p><strong>min_dist</strong>: The minimum distance of the rays points in that obstruction cluster in meters.</p></li>
+<li><p><strong>max_dist</strong>: The maximum distance of the rays points in that obstruction cluster in meters.</p></li>
+<li><p><strong>type</strong>: The type of the obstruction. The possible values are: <strong>[near, middle, far]</strong>. Near obstructions are detected when the rays are below the minimum range configured, far obstructions are detected when the rays are beyond the maximum range configured, and middle obstructions are detected in between.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>sensor_noise</strong>: This metric presents statistics on the noise characteristics for the sensors. The important fields of the associated message are:</p>
+<ul>
+<li><p><strong>average_std_error</strong>: The standard deviation of all the sensor measurements over a 1 second window.</p></li>
+<li><p><strong>max_std_error</strong>: The maximum deviation of all the sensor measurements over a 1 second window.</p></li>
+<li><p><strong>angle_max_error</strong>: The angle at which the maximum deviation occurred.</p></li>
+<li><p><strong>percent_of_sigma</strong>: Signed distance from the value of the average_std_error to the 1-sigma level set of the pdf.</p></li>
+<li><p><strong>p_value</strong>: The p-value of the sensor noise consistency test.</p></li>
+<li><p><strong>reject_model</strong>: A boolean indicating that the sensor noise statistics are not consistent with the observed noise.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Currently, the expected sensor measurement covariance for 2D laserscans is 1m.</p>
+</div>
+</section>
+<section id="signal-health">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Signal Health</a><a class="headerlink" href="#signal-health" title="Link to this heading"></a></h3>
+<p>The signal health module is responsible for monitoring signals between the various sub-systems for issues including timeouts, bounds on signals and rates, NaNs, and incorrect sizes. If critical signals expected by the RAM are not healthy, the RAM may fail. This could lead to collisions.</p>
+<p>The associated metric is published at 1hz, and is an aggregate of the signal data received over that period.</p>
+<p>This module publishes the following metrics:</p>
+<ul class="simple">
+<li><p><strong>signal_health</strong>: The health of the signals in the system. The important fields of the associated message are:</p>
+<ul>
+<li><p><strong>timeout</strong>: A boolean indicating if any of the signal has timed out.</p></li>
+<li><p><strong>sample_size</strong>: The number of samples received within the aggregation period.</p></li>
+<li><p><strong>wrong_size</strong>: A boolean indicating if the signal received has an unexpected size.</p></li>
+<li><p><strong>bad_timestamp</strong>: A boolean indicating if the signal received has a bad timestamp, i.e. a timestamp equal to 0.</p></li>
+<li><p><strong>has_nan</strong>: A boolean indicating if the signal received has NaN values.</p></li>
+<li><p><strong>has_infinity</strong>: A boolean indicating if the signal received has infinity values.</p></li>
+<li><p><strong>has_zero</strong>: A boolean indicating if the signal received has values exactly equal to <cite>+0.f</cite></p></li>
+<li><p><strong>has_subnormal</strong>: A boolean indicating if the signal received has subnormal values.</p></li>
+<li><p><strong>error_code</strong>: An enum indicating the type of error that occurred. The possible values are: <strong>[ok, bad_values, out_of_bounds, timeout]</strong></p></li>
+<li><p><strong>norm_type</strong>: Not populated yet.</p></li>
+<li><p><strong>norm</strong>: Not populated yet.</p></li>
+<li><p><strong>values</strong>: Not populated yet.</p></li>
+<li><p><strong>rates</strong>: Not populated yet.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="system-health">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">System Health</a><a class="headerlink" href="#system-health" title="Link to this heading"></a></h3>
+<p>The RAM needs to receive data and compute in a timely manner. The System Health module is responsible for monitoring the health of the local computational resources by checking values related to CPU and memory usage. High CPU and memory usage can lead to delays in RAM publication of commands.</p>
+<p>This module publishes the following metrics:</p>
+<ul class="simple">
+<li><p><strong>system_health</strong>: The health of the system running the Supervisor. The important fields of the associated message are:</p>
+<ul>
+<li><p><strong>cpu_load</strong>: The CPU usage of the system in percentage.</p></li>
+<li><p><strong>ram_usage</strong>: The RAM usage of the system in percentage.</p></li>
+<li><p><strong>disk_usage</strong>: The used disk space of the system in percentage of total capacity.</p></li>
+<li><p><strong>network_read</strong>: The network read usage of the system in bytes/s.</p></li>
+<li><p><strong>network_write</strong>: The network write usage of the system in bytes/s.</p></li>
+<li><p><strong>cpu_nb</strong>: The number of CPUs available on the system.</p></li>
+<li><p><strong>procs_nb</strong>: The number of processes running on the system.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="incident-diagnostic">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Incident Diagnostic</a><a class="headerlink" href="#incident-diagnostic" title="Link to this heading"></a></h3>
+<p>The diagnostic module aggregates information published by the various metric modules and provides a high-level view of the robot’s health. This module is useful for detecting issues that may not be apparent when looking at the individual metrics.</p>
+<p>The following metrics are published:</p>
+<ul class="simple">
+<li><p><strong>domain_status</strong>: The high-level status of the health of the various robot components.</p>
+<ul>
+<li><p><strong>system_status</strong>: The status of the system running the Supervisor. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>behavior_status</strong>: The status of the robot’s behavior, i.e. wether or not the robot is violating its safety constraints. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>hardware_status</strong>: The status of the robot’s hardware, driven currently by the Dynamic Consistency metric. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>perception_status</strong>: The status of the robot’s perception stack. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>control_status</strong>: The status of the robot’s control stack. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+</ul>
+</li>
+<li><p><strong>incidents_log</strong>: A stream of incident logs. The important fields of the associated message are:</p>
+<ul>
+<li><p><strong>name</strong>: The name of the incident.</p></li>
+<li><p><strong>detail</strong>: The details of the incident.</p></li>
+<li><p><strong>in_progress</strong>: A boolean indicating if the incident is still in progress.</p></li>
+<li><p><strong>start_time</strong>: The time the incident started.</p></li>
+<li><p><strong>domain</strong>: The domain of the incident. The possible values are: <strong>[behavior, system, hardware, perception, control]</strong></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="output-modules">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Output modules</a><a class="headerlink" href="#output-modules" title="Link to this heading"></a></h2>
+<p>The RDM uses <strong>output modules</strong> to make the metrics available to the user. Currently, the RDM ships with a single output module to publish all metrics to <a class="reference internal" href="reference/ros_topics.html#reference-ros-topics"><span class="std std-ref">ROS Topics</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The RDM’s design is modular and extensible for applications that have more specific monitoring needs. For more information on what other types of output modules 3Laws can offer, please <a class="reference external" href="mailto:sales&#37;&#52;&#48;3laws&#46;io">Contact 3Laws</a>.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="runtime_assurance.html" class="btn btn-neutral float-left" title="Run-time Assurance" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control_panel.html" class="btn btn-neutral float-right" title="Control Panel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, 3Laws Robotics Inc..</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+   
+<div
+  class="rst-versions"
+  data-toggle="rst-versions"
+  role="note"
+  aria-label="versions"
+  style="overflow-y: auto"
+>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Supervisor Docs </span>
+    v: v1.0
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions:</dt>
+       
+        <dd>
+          <a href="/3laws/en/latest/index.html">latest</a>
+        </dd>
+          
+      <strong>
+        
+        <dd>
+          <a href="/3laws/en/v1.0/index.html">v1.0</a>
+        </dd>
+        
+      </strong>
+       
+    </dl>
+    <hr style="margin: 5px" />
+    Continuous documentation hosting provided by
+    <a href="https://pages.github.com/">GitHub Pages</a>.
+  </div>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
