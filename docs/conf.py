@@ -34,6 +34,7 @@ author = "Thomas Gurriet (tgurriet@3laws.io)"
 version = current_version
 release = current_version
 html_baseurl = "https://3lawsrobotics.github.io/3laws/"
+html_favicon = "sources/data/favicon.png"
 
 extensions = [
     "sphinx_rtd_theme",
