@@ -4,21 +4,21 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Credentials &mdash; 3Laws latest documentation</title>
+  <title>Perception &mdash; 3Laws 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
 
   
-    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/user_guide/configuration/credentials.html" />
+    <link rel="canonical" href="https://3lawsrobotics.github.io/3laws/sources/user_guide/configuration/perception.html" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="../../../_static/documentation_options.js?v=f2a433a1"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -26,8 +26,8 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Robot Model" href="robot_model.html" />
-    <link rel="prev" title="Getting started" href="../../getting_started.html" /> 
+    <link rel="next" title="User Guide" href="../../user_guide.html" />
+    <link rel="prev" title="Localization" href="localization.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,7 +42,7 @@
             3Laws
           </a>
               <div class="version">
-                latest
+                1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -59,11 +59,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../runtime_assurance.html">Run-time Assurance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../diagnostics.html">Robot Diagnostics</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../control_panel.html">Control Panel</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">1. Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="credentials.html">1. Credentials</a></li>
 <li class="toctree-l3"><a class="reference internal" href="robot_model.html">2. Model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="supervisor.html">3. Supervisor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="localization.html">4. Localization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="perception.html">5. Perception</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">5. Perception</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../cli.html">CLI</a></li>
@@ -92,7 +92,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../getting_started.html">Getting started</a></li>
-      <li class="breadcrumb-item active">Credentials</li>
+      <li class="breadcrumb-item active">Perception</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -101,13 +101,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="credentials">
-<h1>Credentials<a class="headerlink" href="#credentials" title="Link to this heading"></a></h1>
-<p>The <em>Credentials</em> page appears as follows:</p>
-<a class="reference internal image-reference" href="../../../_images/cpanel1.png"><img alt="Configuration &gt; Credentials Page" class="align-center" src="../../../_images/cpanel1.png" style="width: 600px;" /></a>
-<ul class="simple">
-<li><p><strong>Credentials</strong>: 3Laws will provide a license key based on the version of Supervisor that has been purchased/downloaded.  The license key incorporates an expiration date. If a trial license was obtained, the expiration date is 60 days from the request date for the trial.</p></li>
-<li><p><strong>Robot Name</strong>: This identifier will be different for each robot where Supervisor is installed. It should contain a name you can use to identify an individual robot. Note that each license of Supervisor is only valid for a single platform/robot.</p></li>
+  <section id="perception">
+<h1>Perception<a class="headerlink" href="#perception" title="Link to this heading"></a></h1>
+<p>Collision avoidance uses settings in this dialog to describe the sensors used during operation.</p>
+<a class="reference internal image-reference" href="../../../_images/cpanel5.png"><img alt="Configuration &gt; Perception Tab" class="align-center" src="../../../_images/cpanel5.png" style="width: 600px;" /></a>
+<ul class="simple" id="config-perception-laserscan">
+<li><p><strong>Laserscan sensor</strong>: The Supervisor processes data points from a single 2-dimensional laser scanner (LIDAR).</p>
+<ul>
+<li><p><strong>Display name</strong>: This display name is used when aggregated statistics about the scanner are uploaded to the 3Laws cloud dashboard. This name is chosen by the user to help keep track of the scanner, e.g. “front_lidar”.</p></li>
+<li><p><strong>ROS Topic</strong>: Supervisor needs to subscribe to the ROS message published by the LIDAR, so this topic name (plus type, quality-of-service, and expected signal rate) need to match the sensor’s output. <em>ros2 topic</em> with options <em>list, info, hz</em> can be useful to obtain this information.</p></li>
+<li><p><strong>Specs</strong>:  The expected number of points per scan along with the first (typically minimum) and last (typically maximum) angle must be specified so that the angular resolution can be calculated for the nominal case. The first and last angle values should normally describe a laser that scans in the clockwise direction, so the first is smaller than the last. However, if the laser scans in the counter-clockwise direction the first angle should be set to be smaller than the last. It is very important that the total range of the laser is less than 2π. The Supervisor does not disambiguate angles if the total field is larger than 2π. The scanner’s range can be set so that readings smaller than the minimum or larger than the maximum are discarded.</p></li>
+<li><p><strong>Laserscan Pose</strong>: The orientation and position of the laserscan relative to the vehicle body or whichever frame is used must be specified. As with the robot’s body position, the user is advised to plot the data in rviz to ensure that the geometry is set correctly.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="config-perception-obstacles">
+<li><p><strong>Obstacle Map</strong>: An existing perception system can be used instead of raw 2D-LIDAR data, but it must provide an ObjectArray that matches the definition for an lll_msgs/ObjectArray (see <a class="reference internal" href="../runtime_assurance.html#rta-obstacles"><span class="std std-ref">Run-time Assurance Module section</span></a>).</p></li>
 </ul>
 </section>
 
@@ -115,8 +124,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../../getting_started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="robot_model.html" class="btn btn-neutral float-right" title="Robot Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="localization.html" class="btn btn-neutral float-left" title="Localization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../user_guide.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
@@ -142,25 +151,25 @@
 >
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Supervisor Docs </span>
-    v: latest
+    v: 1.0
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
     <dl>
       <dt>Versions:</dt>
        
-      <strong>
-        
         <dd>
           <a href="/3laws/en/latest/index.html">latest</a>
         </dd>
-        
-      </strong>
+          
+      <strong>
         
         <dd>
           <a href="/3laws/en/1.0/index.html">1.0</a>
         </dd>
-         
+        
+      </strong>
+       
     </dl>
     <hr style="margin: 5px" />
     Continuous documentation hosting provided by
