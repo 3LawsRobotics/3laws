@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get install -y sed jq git
-          pip install --upgrade sphinx_rtd_theme sphinx docutils sphinx-sitemap sphinxcontrib-spelling sphinx-tabs sphinxcontrib-youtube pygments breathe sphinx-copybutton
+          pip install --upgrade sphinx_rtd_theme myst-parser sphinx docutils sphinx-sitemap sphinxcontrib-spelling sphinx-tabs sphinxcontrib-youtube pygments breathe sphinx-copybutton
 
       - uses: actions/checkout@v3
         with:

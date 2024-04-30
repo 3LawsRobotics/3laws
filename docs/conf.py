@@ -44,6 +44,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinxcontrib.youtube",
     "sphinx_tabs.tabs",
+    "myst_parser"
 ]
 
 html_show_sphinx = False
