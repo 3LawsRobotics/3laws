@@ -115,6 +115,9 @@ Throughout this documentation, a red asterisk (*) indicates a *required* field.
 Control Panel's Operations Page
 ===============================
 
+Status
+------
+
 .. image:: ../data/cp_operation.png
   :align: center
   :width: 800px
@@ -149,3 +152,10 @@ The lower section of the panel show logs and strip charts. The categories that a
 .. warning::
 
   In order to make this page work, the Rosbridge server needs to be active, and the Control Panel must connect to it.
+
+.. _control_panel_viz:
+
+Visualization
+-------------
+
+Visualization of the Runtime Assurance Module (RAM) metadata is available through `Rviz <https://wiki.ros.org/rviz>`_. This tab of the control panel will provide you with a link to download an Rviz configuration file consistent with the current Supervisor configuration.
