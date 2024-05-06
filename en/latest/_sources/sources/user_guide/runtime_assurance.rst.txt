@@ -207,6 +207,7 @@ Localization
 
 The RAM relies on localization to corelate the position of obstacles with the position of the robot, as well as for visualization. If the source of localization is not reliable, one can configure the the RAM to not use :ref:`localization <config_sup_loc>`, in which case, the robot will be assumed to always be at the center of the world, and the obstacles must be located in the robot frame.
 
+
 Handling uncertainties and delays
 =================================
 
@@ -216,3 +217,21 @@ The mathematical formulations used by the RAM rely on an implicit assumption abo
   There exist a fundamental trade-off between conservatism and optimality at the control level. The more certainty one has in things like dynamics, localization, and communication timing, the less conservatism must be introduced to ensure a low probability of collision.
 
   The Supervisor is able to account for uncertainty in an explicit and quantitative way. Please `contact 3laws`_ to learn more about the process of tailoring Supervisor to better handle uncertainties and communication delays in your system.
+
+
+Visualization
+=============
+
+The RAM publishes a set of markers to visualize the processing done in particular by the Kernel Generator in turning the Safety Map information into input level constraints:
+
+.. image:: ../data/ram_viz.png
+  :width: 800px
+  :align: center
+  :alt: RAM visualization
+
+|
+
+This data is published on the **/lll/ram/markers** topic. The :ref:`control panel <control_panel_viz>` can provide an rviz configuration file to visualize this data.
+
+.. important::
+  If the **Use Localization** setting is set to false, make sure to set the :ref:`World Frame <config_sup_world_frame>` parameter to the robot base frame, otherwise, the robot representation will stay still at the center of the world, and the raw laserscan data likely won't line up with the Safety Map markers.

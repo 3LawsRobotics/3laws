@@ -127,7 +127,7 @@
 <ul class="simple">
 <li><p><strong>Upload log to 3laws robotics cloud</strong>: For debugging purposes, 3Laws creates a log file when Supervisor is started. The file is stored in <em>~/.3laws/logs</em>. Enabling this option allows 3Laws to provide better support with troubleshooting if there is a problem.</p></li>
 </ul>
-<ul class="simple">
+<ul class="simple" id="config-sup-world-frame">
 <li><p><strong>World Frame</strong>: Similar to “base robot frame”, the name of the world frame (typically <em>odom</em> or <em>map</em>) must be specified.</p></li>
 <li><p><strong>Advanced Settings &gt; Project to SE2</strong>: By default, the system is assumed to operate in 3-dimensional space. Projecting to SE2 assumes that the vehicle is traveling on a flat surface or that its travel distance is small enough that earth curvature effects are not significant.  When mapping from 3-dimensional space to 2-dimensional space, the system is assumed to have zero roll and pitch while being placed on the ground. No rotational velocities or acceleration are assumed around roll and pitch, and zero vertical velocity and acceleration are assumed. This will also map the received state to the SE2 state space. An information modal is available to describe the mapping.</p></li>
 <li><p><strong>Advanced Settings &gt; Process niceness</strong>:  The computational priority of the Supervisor node can be set through the “niceness” parameter, where -20 would set it as very high priority and +19 would be very low priority. A niceness of zero is recommended. (Please review documentation on setting priority in Linux using “nice” for a deeper explanation.)</p></li>
