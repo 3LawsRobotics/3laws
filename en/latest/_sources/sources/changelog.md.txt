@@ -2,9 +2,25 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.2 (4th May 2024)
+
+Fix objects map perception modality that was not working in certain circumstances.
+
+### Added
+
+- Objects now show up in RAM markers
+
+### Changed
+
+N/A
+
+### Removed
+
+N/A
+
 ## 1.0.1 (1st May 2024)
 
-First patch of this version, fixing documentation coherence
+Fix documentation coherence.
 
 ### Added
 
