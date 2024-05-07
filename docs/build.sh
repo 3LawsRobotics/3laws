@@ -69,3 +69,4 @@ sed -i s/@LATEST_VERSION@/"$versionLatest"/g "$outDir"/index.html
 
 # Create .nojekyll file so that github pages doesn't complain about folders starting with '_'
 touch "$outDir/.nojekyll"
+echo "docs.3laws.io" >"$outDir/CNAME"
