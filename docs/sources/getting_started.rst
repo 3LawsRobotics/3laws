@@ -160,33 +160,40 @@ For that, you can either create an extra dedicated subscriber in your low-level 
 
     When including your low-level control stack launch file into another launch file:
 
-    .. code-block:: bash
+    .. code-block:: python
 
+      from ament_index_python.packages import get_package_share_directory
+      from launch import LaunchDescription
       from launch.actions import GroupAction, IncludeLaunchDescription
       from launch.launch_description_sources import PythonLaunchDescriptionSource
       from launch.substitutions import PathJoinSubstitution
       from launch_ros.actions import SetRemap
 
-      # launchDesc = LaunchDescription()
 
-      launchDesc.add_action(
-          GroupAction(
-              [
-                  SetRemap("/cmd", "/lll/ram/filtered_input"),
-                  IncludeLaunchDescription(
-                      PythonLaunchDescriptionSource(
-                          PathJoinSubstitution(
-                              [
-                                  get_package_share_directory("controller"),
-                                  "launch",
-                                  "controller.py",
-                              ]
+      def generate_launch_description():
+
+          launchDesc = LaunchDescription()
+
+          launchDesc.add_action(
+              GroupAction(
+                  [
+                      SetRemap("/cmd", "/lll/ram/filtered_input"),
+                      IncludeLaunchDescription(
+                          PythonLaunchDescriptionSource(
+                              PathJoinSubstitution(
+                                  [
+                                      get_package_share_directory("controller"),
+                                      "launch",
+                                      "controller.py",
+                                  ]
+                              )
                           )
-                      )
-                  ),
-              ]
+                      ),
+                  ]
+              )
           )
-      )
+
+          return launchDesc
 
 5. Launch
 *********
@@ -218,28 +225,34 @@ To include the Supervisor as part of your launch file, use the following code sn
   .. tab:: ROS2
     .. code-block:: python
 
+      from ament_index_python.packages import get_package_share_directory
+      from launch import LaunchDescription
       from launch.actions import IncludeLaunchDescription
       from launch.launch_description_sources import PythonLaunchDescriptionSource
       from launch.substitutions import PathJoinSubstitution
 
-      # launchDesc = LaunchDescription()
+      def generate_launch_description():
 
-      launchDesc.add_action(
-          IncludeLaunchDescription(
-              PythonLaunchDescriptionSource(
-                  PathJoinSubstitution(
-                      [
-                          get_package_share_directory("lll_supervisor"),
-                          "launch",
-                          "supervisor.launch.py",
-                      ]
-                  )
-              ),
-              launch_arguments={
-                  "log_level": "info",
-              }.items(),
+          launchDesc = LaunchDescription()
+
+          launchDesc.add_action(
+              IncludeLaunchDescription(
+                  PythonLaunchDescriptionSource(
+                      PathJoinSubstitution(
+                          [
+                              get_package_share_directory("lll_supervisor"),
+                              "launch",
+                              "supervisor.launch.py",
+                          ]
+                      )
+                  ),
+                  launch_arguments={
+                      "log_level": "info",
+                  }.items(),
+              )
           )
-      )
+
+          return launchDesc
 
 If ROS is unable to find the ``lll_supervisor``, re-run the source command for the ROS paths.
 
