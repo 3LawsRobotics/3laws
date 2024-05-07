@@ -2,6 +2,22 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.3 (7th May 2024)
+
+Fix omnidirectional dynamics not working when using input mask.
+
+### Added
+
+N/A
+
+### Changed
+
+N/A
+
+### Removed
+
+N/A
+
 ## 1.0.2 (4th May 2024)
 
 Fix objects map perception modality that was not working in certain circumstances.
