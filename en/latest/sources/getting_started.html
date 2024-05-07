@@ -243,31 +243,38 @@
 </pre></div>
 </div>
 <p>When including your low-level control stack launch file into another launch file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>launch.actions<span class="w"> </span>import<span class="w"> </span>GroupAction,<span class="w"> </span>IncludeLaunchDescription
-from<span class="w"> </span>launch.launch_description_sources<span class="w"> </span>import<span class="w"> </span>PythonLaunchDescriptionSource
-from<span class="w"> </span>launch.substitutions<span class="w"> </span>import<span class="w"> </span>PathJoinSubstitution
-from<span class="w"> </span>launch_ros.actions<span class="w"> </span>import<span class="w"> </span>SetRemap
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ament_index_python.packages</span> <span class="kn">import</span> <span class="n">get_package_share_directory</span>
+<span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
+<span class="kn">from</span> <span class="nn">launch.actions</span> <span class="kn">import</span> <span class="n">GroupAction</span><span class="p">,</span> <span class="n">IncludeLaunchDescription</span>
+<span class="kn">from</span> <span class="nn">launch.launch_description_sources</span> <span class="kn">import</span> <span class="n">PythonLaunchDescriptionSource</span>
+<span class="kn">from</span> <span class="nn">launch.substitutions</span> <span class="kn">import</span> <span class="n">PathJoinSubstitution</span>
+<span class="kn">from</span> <span class="nn">launch_ros.actions</span> <span class="kn">import</span> <span class="n">SetRemap</span>
 
-<span class="c1"># launchDesc = LaunchDescription()</span>
 
-launchDesc.add_action<span class="o">(</span>
-<span class="w">    </span>GroupAction<span class="o">(</span>
-<span class="w">        </span><span class="o">[</span>
-<span class="w">            </span>SetRemap<span class="o">(</span><span class="s2">&quot;/cmd&quot;</span>,<span class="w"> </span><span class="s2">&quot;/lll/ram/filtered_input&quot;</span><span class="o">)</span>,
-<span class="w">            </span>IncludeLaunchDescription<span class="o">(</span>
-<span class="w">                </span>PythonLaunchDescriptionSource<span class="o">(</span>
-<span class="w">                    </span>PathJoinSubstitution<span class="o">(</span>
-<span class="w">                        </span><span class="o">[</span>
-<span class="w">                            </span>get_package_share_directory<span class="o">(</span><span class="s2">&quot;controller&quot;</span><span class="o">)</span>,
-<span class="w">                            </span><span class="s2">&quot;launch&quot;</span>,
-<span class="w">                            </span><span class="s2">&quot;controller.py&quot;</span>,
-<span class="w">                        </span><span class="o">]</span>
-<span class="w">                    </span><span class="o">)</span>
-<span class="w">                </span><span class="o">)</span>
-<span class="w">            </span><span class="o">)</span>,
-<span class="w">        </span><span class="o">]</span>
-<span class="w">    </span><span class="o">)</span>
-<span class="o">)</span>
+<span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
+
+    <span class="n">launchDesc</span> <span class="o">=</span> <span class="n">LaunchDescription</span><span class="p">()</span>
+
+    <span class="n">launchDesc</span><span class="o">.</span><span class="n">add_action</span><span class="p">(</span>
+        <span class="n">GroupAction</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">SetRemap</span><span class="p">(</span><span class="s2">&quot;/cmd&quot;</span><span class="p">,</span> <span class="s2">&quot;/lll/ram/filtered_input&quot;</span><span class="p">),</span>
+                <span class="n">IncludeLaunchDescription</span><span class="p">(</span>
+                    <span class="n">PythonLaunchDescriptionSource</span><span class="p">(</span>
+                        <span class="n">PathJoinSubstitution</span><span class="p">(</span>
+                            <span class="p">[</span>
+                                <span class="n">get_package_share_directory</span><span class="p">(</span><span class="s2">&quot;controller&quot;</span><span class="p">),</span>
+                                <span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;controller.py&quot;</span><span class="p">,</span>
+                            <span class="p">]</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">launchDesc</span>
 </pre></div>
 </div>
 </div></div>
@@ -290,28 +297,34 @@ launchDesc.add_action<span class="o">(</span>
 <span class="nt">&lt;/include&gt;</span>&quot;
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">launch.actions</span> <span class="kn">import</span> <span class="n">IncludeLaunchDescription</span>
+</div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ament_index_python.packages</span> <span class="kn">import</span> <span class="n">get_package_share_directory</span>
+<span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
+<span class="kn">from</span> <span class="nn">launch.actions</span> <span class="kn">import</span> <span class="n">IncludeLaunchDescription</span>
 <span class="kn">from</span> <span class="nn">launch.launch_description_sources</span> <span class="kn">import</span> <span class="n">PythonLaunchDescriptionSource</span>
 <span class="kn">from</span> <span class="nn">launch.substitutions</span> <span class="kn">import</span> <span class="n">PathJoinSubstitution</span>
 
-<span class="c1"># launchDesc = LaunchDescription()</span>
+<span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
 
-<span class="n">launchDesc</span><span class="o">.</span><span class="n">add_action</span><span class="p">(</span>
-    <span class="n">IncludeLaunchDescription</span><span class="p">(</span>
-        <span class="n">PythonLaunchDescriptionSource</span><span class="p">(</span>
-            <span class="n">PathJoinSubstitution</span><span class="p">(</span>
-                <span class="p">[</span>
-                    <span class="n">get_package_share_directory</span><span class="p">(</span><span class="s2">&quot;lll_supervisor&quot;</span><span class="p">),</span>
-                    <span class="s2">&quot;launch&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;supervisor.launch.py&quot;</span><span class="p">,</span>
-                <span class="p">]</span>
-            <span class="p">)</span>
-        <span class="p">),</span>
-        <span class="n">launch_arguments</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;log_level&quot;</span><span class="p">:</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span>
-        <span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span>
+    <span class="n">launchDesc</span> <span class="o">=</span> <span class="n">LaunchDescription</span><span class="p">()</span>
+
+    <span class="n">launchDesc</span><span class="o">.</span><span class="n">add_action</span><span class="p">(</span>
+        <span class="n">IncludeLaunchDescription</span><span class="p">(</span>
+            <span class="n">PythonLaunchDescriptionSource</span><span class="p">(</span>
+                <span class="n">PathJoinSubstitution</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">get_package_share_directory</span><span class="p">(</span><span class="s2">&quot;lll_supervisor&quot;</span><span class="p">),</span>
+                        <span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;supervisor.launch.py&quot;</span><span class="p">,</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">launch_arguments</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;log_level&quot;</span><span class="p">:</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span>
+            <span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span>
+        <span class="p">)</span>
     <span class="p">)</span>
-<span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">launchDesc</span>
 </pre></div>
 </div>
 </div></div>
