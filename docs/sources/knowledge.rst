@@ -8,7 +8,7 @@ Blogs
 Papers
 ======
 
-This sections summaries the research contributions made by 3Laws team:
+This section lists some of the research publications produced by the 3Laws team:
 
 * `3D dynamic walking on stepping stones with control barrier functions <http://ames.caltech.edu/3D_Stepping_Stones.pdf>`_
 * `A Barrier-Based Scenario Approach to Verify Safety-Critical Systems <http://ames.caltech.edu/akella2022barrier.pdf>`_
