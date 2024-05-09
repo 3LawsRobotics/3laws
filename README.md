@@ -11,7 +11,7 @@
   <p align="center">
     <a href="https://github.com/3LawsRobotics/3laws/"><strong>Explore the repo»</strong></a>
     <br />
-    <a href="https://3LawsRobotics.github.io/3laws/"><strong>Explore the docs»</strong></a>
+    <a href="https://docs.3laws.io/"><strong>Explore the docs»</strong></a>
     <br />
   </p>
 </p>

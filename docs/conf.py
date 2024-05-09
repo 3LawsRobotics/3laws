@@ -33,7 +33,7 @@ copyright = "2024, 3Laws Robotics Inc."
 author = "Thomas Gurriet (tgurriet@3laws.io)"
 version = current_version
 release = current_version
-html_baseurl = "https://3lawsrobotics.github.io/3laws/"
+html_baseurl = "https://docs.3laws.io/"
 html_favicon = "sources/data/favicon.png"
 
 extensions = [
@@ -45,7 +45,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinxcontrib.youtube",
     "sphinx_tabs.tabs",
-    "myst_parser"
+    "myst_parser",
 ]
 
 html_show_sphinx = False
