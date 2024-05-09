@@ -1,4 +1,4 @@
-# Change Log
+# Changelog
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -61,7 +61,7 @@ This is the first version of the supervisor product.
 - A ROS node that perform out of the box collision avoidance for any simple robot that has a lidar or an obstacle map.
 - A Control Panel as a web server running on the robot to configure the supervisor and provide realtime feedback.
 - A Command Line Client to manage the Control Panel server and check for updates.
-- A documentation available [here](https://3lawsrobotics.github.io/3laws/en/latest/).
+- A documentation available [here](https://docs.3laws.io/).
 
 ### Changed
 
