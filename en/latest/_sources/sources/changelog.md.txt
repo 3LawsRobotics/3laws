@@ -2,6 +2,11 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.4 (13th May 2024)
+
+Test CI, DO NOT download these packages.
+New update available soon !
+
 ## 1.0.3 (7th May 2024)
 
 Fix omnidirectional dynamics not working when using input mask.
