@@ -9,7 +9,7 @@ on:
 
 jobs:
   build_docs:
-    uses: ./.github/workflows/build_docs.yml
+    uses: ./.github/workflows/build_doc.yml
 
   edit_release:
     runs-on: ubuntu-latest
