@@ -97,7 +97,7 @@ The initial view of the Control Panel is the "Configuration" page, which consist
 4. Interface with your stack
 *****************************
 
-In order to perform collision avoidance maneuvers, the Supervisor must be able to send commands to your robot actuators. These commands will be published on the ``/lll/ram/filtered_input`` topic.
+In order to perform collision avoidance maneuvers, the Supervisor must be able to send commands to your robot actuators. These commands will be published by default on the ``/lll/ram/filtered_input`` topic (this is a customizable name via the Control Panel.
 
 Your low-level controller therefore needs to subscribe to this topic and apply the commands to your robot:
 
@@ -106,7 +106,7 @@ Your low-level controller therefore needs to subscribe to this topic and apply t
   :width: 600px
   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
-For that, you can either create an extra dedicated subscriber in your low-level control stack to receive the commands from the Supervisor, or you can use ROS topic remapping feature to remap the low-level controller subscription from ``/cmd`` to ``/lll/ram/filtered_input``:
+For that, you can either create an extra dedicated subscriber in your low-level control stack to receive the commands from the Supervisor, or you can use ROS topic remapping feature to remap the low-level controller subscription from ``/cmd`` to ``/lll/ram/filtered_input`` (default):
 
 .. tabs::
   .. tab:: ROS1
