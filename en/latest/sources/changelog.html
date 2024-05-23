@@ -91,15 +91,40 @@
 <h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading"></a></h1>
 <p>This project adheres to <a class="reference external" href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
 <section id="th-may-2024">
-<h2>1.0.3 (7th May 2024)<a class="headerlink" href="#th-may-2024" title="Link to this heading"></a></h2>
-<p>Fix omnidirectional dynamics not working when using input mask.</p>
+<h2>1.1.0 (20th May 2024)<a class="headerlink" href="#th-may-2024" title="Link to this heading"></a></h2>
+<p>New supported ROS topic types and various bug fix</p>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Node launching in incorrect namespace for ROS1</p></li>
+<li><p>Config file broken for ROS1</p></li>
+<li><p>Opening control panel from operation page not loading entire config</p></li>
+<li><p>Plots in operation tab of control panel not working with ROS1</p></li>
+</ul>
+</section>
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Link to this heading"></a></h3>
-<p>N/A</p>
+<ul class="simple">
+<li><p>Support for new subscription topic types:</p>
+<ul>
+<li><p>Ackerman Steering [Stamped]  <a class="reference external" href="https://wiki.ros.org/ackermann_msgs">see doc here</a></p></li>
+<li><p>Accel [Stamped/withCovariance/withCovarianceStamped]</p></li>
+<li><p>Pose [Stamped/withCovariance/withCovarianceStamped]</p></li>
+<li><p>Twist [Stamped/withCovariance/withCovarianceStamped]</p></li>
+<li><p>Transform [Stamped]</p></li>
+</ul>
+</li>
+<li><p>Customizable filtered input (Runtime Assurance Module output) topic name, type and QoS</p></li>
+</ul>
 </section>
 <section id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Link to this heading"></a></h3>
-<p>N/A</p>
+<ul class="simple">
+<li><p>Shape selection improved with shape visualization.</p></li>
+<li><p>Various bug fixes including loading errors while loading the configuration.</p></li>
+<li><p>Better RAM printing in failure mode</p></li>
+<li><p>Improved contextual documentation in control panel to start rosbridge</p></li>
+</ul>
 </section>
 <section id="removed">
 <h3>Removed<a class="headerlink" href="#removed" title="Link to this heading"></a></h3>
@@ -107,47 +132,85 @@
 </section>
 </section>
 <section id="id1">
-<h2>1.0.2 (4th May 2024)<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
-<p>Fix objects map perception modality that was not working in certain circumstances.</p>
+<h2>1.0.3 (7th May 2024)<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix omnidirectional dynamics.</p></li>
+</ul>
 <section id="id2">
-<h3>Added<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<h3>Fixed<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Omnidirectional dynamics not working when using input mask.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Added<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+<section id="id4">
+<h3>Changed<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+<section id="id5">
+<h3>Removed<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+</section>
+<section id="id6">
+<h2>1.0.2 (4th May 2024)<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>Improve and fix objects map perception modality.</p>
+<section id="id7">
+<h3>Fixed<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Objects map perception modality that was not working in certain circumstances</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>Added<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Objects now show up in RAM markers</p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>Changed<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="id9">
+<h3>Changed<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <p>N/A</p>
 </section>
-<section id="id4">
-<h3>Removed<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id10">
+<h3>Removed<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <p>N/A</p>
 </section>
 </section>
 <section id="st-may-2024">
 <h2>1.0.1 (1st May 2024)<a class="headerlink" href="#st-may-2024" title="Link to this heading"></a></h2>
 <p>Fix documentation coherence.</p>
-<section id="id5">
-<h3>Added<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
-<p>N/A</p>
-</section>
-<section id="id6">
-<h3>Changed<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id11">
+<h3>Fixed<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Renaming Supervisor parameters sections to fit with the documentation. “Copilot” renamed in Run-time Assurance Module</p></li>
 <li><p>Default port set to 8000 for every Control Panel entry point (server and CLI)</p></li>
 </ul>
 </section>
-<section id="id7">
-<h3>Removed<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id12">
+<h3>Added<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+<section id="id13">
+<h3>Changed<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+<section id="id14">
+<h3>Removed<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
 <p>N/A</p>
 </section>
 </section>
-<section id="id8">
-<h2>1.0.0 (1st May 2024)<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<section id="id15">
+<h2>1.0.0 (1st May 2024)<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
 <p>This is the first version of the supervisor product.</p>
-<section id="id9">
-<h3>Added<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="id16">
+<h3>Fixed<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+<section id="id17">
+<h3>Added<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>A ROS node that perform out of the box collision avoidance for any simple robot that has a lidar or an obstacle map.</p></li>
 <li><p>A Control Panel as a web server running on the robot to configure the supervisor and provide realtime feedback.</p></li>
@@ -155,12 +218,12 @@
 <li><p>A documentation available <a class="reference external" href="https://docs.3laws.io/">here</a>.</p></li>
 </ul>
 </section>
-<section id="id10">
-<h3>Changed<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<section id="id18">
+<h3>Changed<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
 <p>N/A</p>
 </section>
-<section id="id11">
-<h3>Removed<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<section id="id19">
+<h3>Removed<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
 <p>N/A</p>
 </section>
 </section>
