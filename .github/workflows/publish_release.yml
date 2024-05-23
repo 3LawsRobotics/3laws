@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build_docs]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Edit release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
