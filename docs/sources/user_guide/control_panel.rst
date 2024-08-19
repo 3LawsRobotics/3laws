@@ -7,11 +7,13 @@ Control Panel
 Overview
 =========
 
-The control panel is a web-based configuration and monitoring tool for the Supervisor. It is composed of two main sections:
+The control panel is a web-based configuration and monitoring tool for the Supervisor. It is composed of three main sections:
 
   - Configuration: This section allows the user to configure the Supervisor's parameters.
 
   - Operations: This section shows the current state of the Supervisor and the robot.
+
+  - Diagnostics: This section provides access to diagnostic visualization tools.
 
 Each section is accessed by clicking on the corresponding tab in the Control Panel:
 
@@ -79,14 +81,14 @@ By clicking on the icon, you can set the IP address and port of the Rosbridge se
 
 .. note::
 
-  During the configuration process, the Control Panel can be used without a Rosbridge server, but the autocompletion for topics and the operation tab will not be available.
+  During the configuration process, the Control Panel can be used without a Rosbridge server, but the autocompletion for topics, the operation tab and some diagnostic tools will not be available.
 
 .. _control_panel_config:
 
 Supervisor Configuration
 ========================
 
-The Supervisor's configurable fields are available through a series of pages in the Control Panel.  Each of the following sections corresponds to a tab in the Control Panel. The tabs are:
+The Supervisor's configurable fields are available through a series of pages in the Control Panel. Each of the following sections corresponds to a tab in the Control Panel. The tabs are:
 
 The **Save** button on each page of the Control Panel should be pressed to record the current page in the *supervisor.yaml* file before moving on to another page.
 
