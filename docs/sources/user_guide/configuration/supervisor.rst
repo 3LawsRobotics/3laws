@@ -38,6 +38,11 @@ This is where you can define the ROS topic that the Supervisor should listen to 
 The output of the filter is published on the Computed Safe Control Input topic. The Supervisor will only modify the control input if the Activate checkbox is checked.
 This topic can either match the entry topic specs or be a compatible type. It's published at the filter rate.
 
+* **Motion planning output signal**: This is the set of commands requesting speed and rotation (or speed and steering) that the autonomy stack is publishing. The ROS message type is needed so that Supervisor knows what to monitor in order to calculate the barrier function value. The message quality and receipt rate are monitored as part of the aggregated metrics, and if it fails to arrive within the expected time [1/(signal rate) * Timeout factor], an event will be created and the Run-time Assurance Module will transition to the failure command mode.
+
+* **Supervisor output signal**: This is the output of the supervisor Run-time Assurance Module. This topic configuration can mirror the Desired control input one or have a different message type and QoS (the rate is set by the :ref:`filter rate <config_sup_filter_rate>`). The message type can be: the same as received on the Desired control input, an equivalent one (You can convert from timestamped message to non timestamped, with or without covariance for example) or a dynamic type like lll_msgs/Float64VectorStamped or std_msgs/Float[32/64]MultiArray. This limitations are due to the fact that converting types to others can lead to loss of message information. ROS has semantic messages and converting message from a type to another can lead to various errors and misinterpretations.
+
+
 Run-time Assurance Module
 =========================
 
@@ -47,10 +52,6 @@ General Parameters
 
 .. image:: ../../data/supervisor_general_parameters.png
    :width: 800px
-
-* **Desired control input**: This is the set of commands requesting speed and rotation (or speed and steering) that the autonomy stack is publishing. The ROS message type is needed so that Supervisor knows what to monitor in order to calculate the barrier function value. The message quality and receipt rate are monitored as part of the aggregated metrics, and if it fails to arrive within the expected time [1/(signal rate) * Timeout factor], an event will be created and the Run-time Assurance Module will transition to the failure command mode.
-
-* **Computed safe control input**: This is the output of the supervisor Run-time Assurance Module. This topic configuration can mirror the Desired control input one or have a different message type and QoS (the rate is set by the :ref:`filter rate <config_sup_filter_rate>`). The message type can be: the same as received on the Desired control input, an equivalent one (You can convert from timestamped message to non timestamped, with or without covariance for example) or a dynamic type like lll_msgs/Float64VectorStamped or std_msgs/Float[32/64]MultiArray. This limitations are due to the fact that converting types to others can lead to loss of message information. ROS has semantic messages and converting message from a type to another can lead to various errors and misinterpretations.
 
 * **Parameters > Activate**: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Run-time Assurance Module will only modify the outputs if the option is activated. If it is not activated, the unmodified "desired control input" will be transmitted on the designated "Computed safe control" message.  Additionally, when activated the Run-time Assurance Module passes the unmodified desired input through to the platform except when a corrective action is needed.
 
@@ -73,9 +74,11 @@ Tuning
 
 * **Tuning > Aggressiveness**: This parameter controls how far from the nearest obstacle the safety filter starts having more effect on the commands and how strongly the safety filter pushes the robot back into the "safe" region if the safety definition has been violated. A larger value means that the control inputs from the planner will start to be modified when the robot is closer to an object/obstacle. That is, a larger value allows the platform to approach objects faster, and get closer.  If it gets too close, the Supervisor will push away from the object harder with a higher value.  A lower value will lead to a more tentative travel that stays farther away from objects.  In general lower values will produce larger margins. Typical values are between 0.5 and 1.0, but values in the range of 1000 might be used in reasonable situations.
 
+* **Tuning > Conservativeness**: This parameter controls how early the filter start to break when approaching an obstacle. Higher value are preferred when the localization and/or the perception are uncertain
+
 * **Tuning > Pointiness**: A rectangular (box) shape has an unintended behavior that if the robot comes towards a narrow object directly in front of it, the closest point calculation will select the center-line of the box as the evaluation point for distance.  If the outer corners get closer to the object, the barrier function will want to increase the distance between the object and the box, so it will tend to center the box relative to the object.  A more desirable behavior is for the box to turn away from the object to be able to get around it.  The *pointiness* parameter is a way of accomplishing this.  If the box has a nose with sharper curvature, the barrier function will push it away from the object laterally, rather than simply trying to increase the measured closest distance between the box and the object.  So increasing the "pointiness" will encourage the vehicle to "turn away" from obstacles that are directly in front.
 
-* **Tuning > Avoidance Behavior**: Similar to pointiness, the alternate behavior can also be selected as choosing to slow down more or choosing to turn away from the object more as the commanded (desired) input drives the platform towards an object.
+* **Tuning > Evasion Aggressiveness**: Balance between keeping momentum or slowing down to avoid obstacles.
 
 
 .. _config_sup_fault_management:
@@ -88,11 +91,18 @@ Fault Management
 
 * **Fault Management > Failure Command Mode**: The run-time assurance constantly monitors to ensure that it has enough data to determine whether the robot is in a safe condition. The minimum data required is the vehicle state, the laser scan values, and the commanded/desired input. If any of these is missing the RTA can switch to the failure command mode:
 
-* **Send Zero**:  In this mode the run-time assurance commands zero speed and zero turn/rotation in order to bring the vehicle to a stop.
+   * **Send Zero**:  In this mode the run-time assurance commands zero speed and zero turn/rotation in order to bring the vehicle to a stop.
 
-* **Do not Publish**:  Another option is to stop publishing values. This option should only be used if the robot has its own mechanism to put itself in a safe condition if it is not receiving commands.
+   * **Do not Publish**:  Another option is to stop publishing values. This option should only be used if the robot has its own mechanism to put itself in a safe condition if it is not receiving commands.
 
 * **Fault Management > Can resume from failure**: With this checkbox filled in, once the input data (control input, laser scan, and state) values start appearing after a failure, the robot will be commanded back into motion (if the desired control input is asking for that). If the box is unchecked once there is a failure, the robot will remain stopped until the Supervisor is restarted.
+
+* **External Fault triggering**: This represent the list of domain that will trigger an error in the RTA stack and fallback to the failure command set above.
+
+* **Timeout Factor**: Allows how much time the RTA can wait before considering the input timed-out. The timeout threshold is calculated as [1/(signal rate)] * Timeout factor.
+
+* **Maximum Delay (s)**: Maximum amount of time that a message can have between send timestamp and receive timestamp before reporting an error.
+
 
 Advanced Settings
 -----------------
@@ -100,7 +110,9 @@ Advanced Settings
 .. image:: ../../data/supervisor_advanced_settings.png
    :width: 800px
 
-* **Advanced Settings > Accept wrong size laserscan**: One of the checks that is made on the incoming data is that the laserscan is delivering the expected number of scan points each frame. However, there are many laser scanners that are not consistent in the number of scan points they deliver. Checking this option allows for laser scanners with non-constant number of scan points reported.
+* **Advanced Settings > Accept laserscan data with varying ray count**: One of the checks that is made on the incoming data is that the laserscan is delivering the expected number of scan points each frame. However, there are many laser scanners that are not consistent in the number of scan points they deliver. Checking this option allows for laser scanners with non-constant number of scan points reported.
+
+* **Advanced Settings > Accept lidar data with varying ray count**: One of the checks that is made on the incoming data is that the lidar is delivering the expected number of scan points each frame. However, there are many laser scanners that are not consistent in the number of scan points they deliver. Checking this option allows for laser scanners with non-constant number of scan points reported.
 
 .. _config_sup_loc:
 
