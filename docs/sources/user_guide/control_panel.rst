@@ -97,11 +97,11 @@ Throughout this documentation, a red asterisk (*) indicates a *required* field.
 .. toctree::
   :maxdepth: 1
 
-  1. Credentials <configuration/credentials>
-  2. Model <configuration/robot_model>
-  3. Supervisor <configuration/supervisor>
-  4. Localization <configuration/localization>
-  5. Perception <configuration/perception>
+  1. Credentials configuration <configuration/credentials>
+  2. Model configuration <configuration/robot_model>
+  3. Supervisor configuration <configuration/supervisor>
+  4. Localization configuration <configuration/localization>
+  5. Perception configuration <configuration/perception>
 
 
 .. note::

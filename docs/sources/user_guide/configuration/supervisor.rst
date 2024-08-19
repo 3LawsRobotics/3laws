@@ -12,11 +12,8 @@ This page contains configuration entries for both the monitoring and Run-time As
 Supervisor Interface
 ====================
 
-.. image:: ../../data/supervisor_parameters.png
+.. image:: ../../data/supervisor_interface.png
    :width: 800px
-
-
-- **Upload log to 3laws robotics cloud**: For debugging purposes, 3Laws creates a log file when Supervisor is started. The file is stored in *~/.3laws/logs*. Enabling this option allows 3Laws to provide better support with troubleshooting if there is a problem.
 
 .. _config_sup_world_frame:
 
@@ -28,9 +25,8 @@ Supervisor Interface
 
 * **Advanced Settings > Retimestamp policy** is used to add or correct the timestamp on log messages that seem to have an incorrect one. Leaving the timestamp unchanged is also an option.
 
+* **Advanced Settings > Upload log to 3laws robotics cloud**: For debugging purposes, 3Laws creates a log file when Supervisor is started. The file is stored in *~/.3laws/logs*. Enabling this option allows 3Laws to provide better support with troubleshooting if there is a problem.
 
-Run-time Assurance Module
-=========================
 
 Desired Control Input and Computed Safe Control Input
 ------------------------------------------------------
@@ -39,6 +35,12 @@ Desired Control Input and Computed Safe Control Input
    :width: 800px
 
 This is where you can define the ROS topic that the Supervisor should listen to for the desired control input. It takes as entries the topic name, its type, Quality of service, signal rate and an optional mask.
+The output of the filter is published on the Computed Safe Control Input topic. The Supervisor will only modify the control input if the Activate checkbox is checked.
+This topic can either match the entry topic specs or be a compatible type. It's published at the filter rate.
+
+Run-time Assurance Module
+=========================
+
 
 General Parameters
 ------------------
