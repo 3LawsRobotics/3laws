@@ -125,10 +125,10 @@ Status
 
 |
 
-In the image above, the Supervisor is operational and all the components necessary for proper collision avoidance are configured to be active as indicated by the arrows between them.
+In the image above, the Supervisor is operational and all the components necessary for proper collision avoidance are configured to be active. The Diagnostic module is also operational and no issue as been detected (RDM pill in green).
 
 If some of the components are not yet operational, the Control Panel will show the boxes in different colors (orange for warning, red for errors).
-To get additional information about the error, you can check the logs under the diagram or click on the Status on top of the box to get details on the error source.
+To get additional information about the error, you can check the logs by clicking on the button above the RDM/RAM pill. You can also click on the Status on top of the box to get details on the error source.
 
 .. image:: ../data/cp_operation_error.png
   :align: center
@@ -136,7 +136,7 @@ To get additional information about the error, you can check the logs under the 
   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
 
-The above image shows a situation where all components are done. We have clicked on the detail status of the Motion Planner components.
+The above image shows a situation where all components are down. We have clicked on the detail status of the Motion Planner components.
 
 
 A **blue** box indicates that the component is not yet operational and still initializing.
