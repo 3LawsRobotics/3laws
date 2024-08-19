@@ -34,7 +34,7 @@ author = "Thomas Gurriet (tgurriet@3laws.io)"
 version = current_version
 release = current_version
 html_baseurl = "https://docs.3laws.io/"
-html_favicon = "sources/data/favicon.png"
+html_favicon = "sources/data/Favicon_dark.svg"
 
 extensions = [
     "sphinx_rtd_theme",

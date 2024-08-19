@@ -15,7 +15,7 @@ The control panel is a web-based configuration and monitoring tool for the Super
 
 Each section is accessed by clicking on the corresponding tab in the Control Panel:
 
-.. image:: ../data/cp_tabs.png
+.. image:: ../data/cp_nav_header.png
   :align: center
   :width: 800px
   :alt: Control Panel tabs.
@@ -24,7 +24,7 @@ Each section is accessed by clicking on the corresponding tab in the Control Pan
 
 A section is also divided into sub-sections, which are accessed by clicking on the corresponding sub-tabs:
 
-.. image:: ../data/cp_subtabs.png
+.. image:: ../data/cp_tabs.png
   :align: center
   :width: 800px
   :alt: Control Panel sub-tabs.
@@ -121,7 +121,7 @@ Status
 .. image:: ../data/cp_operation.png
   :align: center
   :width: 800px
-  :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
+  :alt: Operations page showing a configured robot.
 
 |
 
