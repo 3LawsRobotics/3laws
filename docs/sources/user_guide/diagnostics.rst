@@ -55,6 +55,40 @@ This module publishes the following metrics:
 
   - **offset_from_utc**: The offset between the NTP server and the System Clock in nanoseconds.
 
+Odometry Consistency
+--------------------
+
+The Odometry Consistency module is responsible for monitoring the consistency between the robot's odometries and the robot's localization. Inconsistencies between the two is a sign of a problem in the robot's and can lead to collisions.
+
+This module publishes the following metrics:
+
+- **max_linear_position_difference**: The maximum difference between the robot's odometries and the robot's localizations data in the linear position in meters.
+- **max_angular_position_difference**: The maximum difference between the robot's odometries and the robot's localizations data in the angular position in rad.
+- **max_linear_velocity_difference**: The maximum difference between the robot's odometries and the robot's localizations data in the linear velocity in m/s.
+- **max_angular_velocity_difference**: The maximum difference between the robot's odometries and the robot's localizations data in the angular velocity in rad/s.
+
+- **linear_position_difference_bound**: The maximum allowed difference between the robot's odometries and the robot's localizations data in the linear position.
+- **angular_position_difference_bound**: The maximum allowed difference between the robot's odometries and the robot's localizations data in the angular position.
+- **linear_velocity_difference_bound**: The maximum allowed difference between the robot's odometries and the robot's localizations data in the linear velocity.
+- **angular_velocity_difference_bound**: The maximum allowed difference between the robot's odometries and the robot's localizations data in the angular velocity.
+
+- **odometry_data**: It's the list of detail differences between each robot's odometries and the robot's localizations data.
+  - **odometry_id**: The id of the odometry.
+
+  - **status**: The status of the odometry. The possible values are: **[ok, bad, incomparable, uncertain]**
+
+  - **consistency_score**: The score of the odometry consistency, it's the number of possible configuration where this sensor is in a valid state.
+
+  - **differences**: list of all differences between the odometry and the other comparable localizations data.
+
+  - **max_linear_position_difference**: The maximum difference between the current odometry (see odometry_id) and the other comparable localizations data in the linear position in meters.
+
+  - **max_angular_position_difference**: The maximum difference between the current odometry (see odometry_id) and the other comparable localizations data in the angular position in rad.
+
+  - **max_linear_velocity_difference**: The maximum difference between the current odometry (see odometry_id) and the other comparable localizations data in the linear velocity in m/s.
+
+  - **max_angular_velocity_difference**: The maximum difference between the current odometry (see odometry_id) and the other comparable localizations data in the angular velocity in rad/s.
+
 
 Dynamic Consistency
 ----------------------
