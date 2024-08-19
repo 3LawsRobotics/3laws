@@ -35,7 +35,7 @@ Desired Control Input and Computed Safe Control Input
    :width: 800px
 
 This is where you can define the ROS topic that the Supervisor should listen to for the desired control input. It takes as entries the topic name, its type, Quality of service, signal rate and an optional mask.
-The output of the filter is published on the Computed Safe Control Input topic. The Supervisor will only modify the control input if the Activate checkbox is checked.
+The output of the filter is published on the Computed Safe Control Input topic. The Supervisor will only modify the control input if the Enabled checkbox is checked.
 This topic can either match the entry topic specs or be a compatible type. It's published at the filter rate.
 
 * **Motion planning output signal**: This is the set of commands requesting speed and rotation (or speed and steering) that the autonomy stack is publishing. The ROS message type is needed so that Supervisor knows what to monitor in order to calculate the barrier function value. The message quality and receipt rate are monitored as part of the aggregated metrics, and if it fails to arrive within the expected time [1/(signal rate) * Timeout factor], an event will be created and the Run-time Assurance Module will transition to the failure command mode.
@@ -53,7 +53,7 @@ General Parameters
 .. image:: ../../data/supervisor_general_parameters.png
    :width: 800px
 
-* **Parameters > Activate**: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Run-time Assurance Module will only modify the outputs if the option is activated. If it is not activated, the unmodified "desired control input" will be transmitted on the designated "Computed safe control" message.  Additionally, when activated the Run-time Assurance Module passes the unmodified desired input through to the platform except when a corrective action is needed.
+* **Parameters > Enabled**: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Run-time Assurance Module will only modify the outputs if the option is activated. If it is not activated, the unmodified "desired control input" will be transmitted on the designated "Computed safe control" message.  Additionally, when activated the Run-time Assurance Module passes the unmodified desired input through to the platform except when a corrective action is needed.
 
 .. _config_sup_collision_distance:
 
@@ -127,11 +127,83 @@ Monitoring Module
 
 Supervisor can publish a variety of diagnostic messages related to the health of the system clock, the dynamic consistency of the motion of the platform, individual node health, signal coherency, and summarized system health.  The published messages are discussed in :ref:`Ros Topics <reference_ros_topics>`.   These messages in the */lll/rdm* domain are only published if the Monitor is set to Active.
 
- * **Activate**: Enable publication of the diagnostic messages through the */lll/rdm* domain.  Faults detected in these variables do not cause Run-time Assurance Module to switch to the failsafe mode.
+ * **Enabled**: Enable publication of the diagnostic messages through the */lll/rdm* domain.  Faults detected in these variables do not cause Run-time Assurance Module to switch to the failsafe mode.
 
  * **Timeout Factor**: Allows this many messages at the expected arrival rate to be missed before reporting an error.
 
  * **Maximum Delay (s)**: Maximum amount of time that a message can fail to appear before reporting an error.
+
+Odometry Consistency
+--------------------
+
+.. image:: ../../data/supervisor_odometry_consistency.png
+   :width: 800px
+
+* **Odometry Consistency > Enabled**: Enable the odometry consistency check. This check will compare the odometry data with the laser scan data to ensure that the robot is moving in a consistent manner. If the robot is not moving in a consistent manner, the system will issue a warning.
+
+* **Synchronize Odometries**: Should the odometry be synchronized and check will happen after enough data has been collected to have a time overlap.
+
+* **Publish rate**: The rate at which the odometry consistency check is published.
+
+* **Expected odometry precision**: The expected precision of the linear odometry data. If a comparison between two odometries exceed this value their pair is considered inconsistent.
+
+* **Expected angular odometry precision**: The expected precision of the angular odometry data. If a comparison between two odometries exceed this value their pair is considered inconsistent.
+
+* **Expected linear velocity odometry precision**: The expected precision of the linear velocity odometry data. If a comparison between two odometries exceed this value their pair is considered inconsistent.
+
+* **Expected angular velocity odometry precision**: The expected precision of the angular velocity odometry data. If a comparison between two odometries exceed this value their pair is considered inconsistent.
+
+
+Dynamic Consistency
+-------------------
+
+.. image:: ../../data/supervisor_dynamic_consistency.png
+   :width: 800px
+
+* **Dynamic Consistency > Enabled**: Enable the dynamic consistency check. this check will compare the model and the actual behavior of the robot to detect model errors.
+
+* **Use state signal uncertainty**: If the state signal contains a covariance matrix, the uncertainty will be used to compare the model and the actual behavior of the robot if this box is checked.
+
+* **Publish rate (hz)**: The rate at which the dynamic consistency check is published.
+
+* **Integration window (seconds)**: The time window over which the state is integrate to compare the model and the actual behavior of the robot. This should be smaller than the publish rate
+
+* **Fault parameters > Publish faults**: If this box is checked, the faults detected by the dynamic consistency check will be published as fault for the RTA module.
+
+* **Fault parameters > uncertainty threshold**: The threshold above which the dynamic consistency check will issue a fault.
+
+* **Fault parameters > Max system degradation probability**: The maximum probability of system degradation that the dynamic consistency check will accept before issuing a fault.
+
+Behavior safety
+---------------
+
+.. image:: ../../data/supervisor_behavior_safety.png
+   :width: 800px
+
+* **Behavior safety > Enabled**: Enable the behavior safety check. This check will compare the behavior safety score to a predefined threshold and issue a fault if the behavior safety score is below the threshold.
+
+* **Fault parameters > Publish faults**: If this box is checked, a behavior safety score under the threshold will be published as a fault for the RTA module.
+
+* **Fault parameters > Min safety value (0-1)**: The minimum value of the behavior safety score under which a fault will be issued.
+
+
+System Health
+-------------
+
+.. image:: ../../data/supervisor_system_health.png
+   :width: 800px
+
+* **System Health > Enabled**: Enable the system health check. This check will compare the system health to a predefined threshold and issue a fault if the system health is below the threshold.
+
+* **Fault parameters > Publish faults**: If this box is checked, a system metric above its respective threshold will be published as a fault for the RTA module.
+
+* **Fault parameters > Max ram usage (0-1)**: The maximum percentage of the used RAM above which a fault will be issued.
+
+* **Fault parameters > Max disk usage (0-1)**: The maximum percentage of the used disk above which a fault will be issued.
+
+* **Fault parameters > Max cpu usage (0-1)**: The maximum percentage of the used CPU above which a fault will be issued.
+
+* **Fault parameters > Critical systems**: list of system (hardwareId) that are critical for the robot to operate. If one of these system is not operational a fault will be issued.
 
 
 Supervisor activation logic
