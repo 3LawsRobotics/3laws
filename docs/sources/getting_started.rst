@@ -70,15 +70,11 @@ To enable the Control Panel backend service, open a terminal and run the followi
 Now that the Control Panel backend is running, access the control panel from any machine on the same network as the robot by opening a web browser and navigating to the following URL: ``http://<IP_ADDRESS_OF_THE_ROBOT>:8000/``.
 
 The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as:
-
-.. toctree::
-  :maxdepth: 1
-
-  1. Credentials <user_guide/configuration/credentials>
-  2. Model <user_guide/configuration/robot_model>
-  3. Supervisor <user_guide/configuration/supervisor>
-  4. Localization <user_guide/configuration/localization>
-  5. Perception <user_guide/configuration/perception>
+:doc:`Credentials <user_guide/configuration/credentials>`
+, :doc:`Model <user_guide/configuration/robot_model>`
+, :doc:`Supervisor <user_guide/configuration/supervisor>`
+, :doc:`Localization <user_guide/configuration/localization>`
+, :doc:`Perception <user_guide/configuration/perception>`
 
 .. warning::
 
