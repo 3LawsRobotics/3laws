@@ -196,7 +196,7 @@ The Fault Management part of the RAM is therefore in charge of managing 4 modes 
 Behavior Tuning
 ===============
 
-The RAM algorithm tries to find the best balance between balance between being minimally intrusive and being "smooth" in its interventions. This tradeoff can be modulated with the **Aggressiveness**, **Pointiness**, and **Avoidance Behavior** parameters (see :ref:`control panel configuration <config_sup_tuning>`):
+The RAM algorithm tries to find the best balance between balance between being minimally intrusive and being "smooth" in its interventions. This tradeoff can be modulated with the **Aggressiveness**, **Pointiness**, and **Evasion Aggressiveness** parameters (see :ref:`control panel configuration <config_sup_tuning>`):
 
 .. note::
   The Supervisor can handle more complex and case specific metrics of optimality. Please `contact 3laws`_ to discuss implementations that better suit your application needs.

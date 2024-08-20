@@ -13,9 +13,10 @@ The current version of **3Laws Supervisor** supports ground-based mobile platfor
 For perception, **3Laws Supervisor** currently supports:
 
  * Raw 2D laserscan data
+ * Raw 2D Point Cloud data
  * Pre-processed map of obstacles with their locations and shapes
 
-The **3Laws Supervisor** software is a `ROS <http://www.ros.org>`_ node available on x86_64 and ARM-64 processor architectures for multiple OS/ROS combinations:
+The **3Laws Supervisor** software is a deployed as a `ROS <http://www.ros.org>`_ node available on x86_64 and ARM-64 processor architectures for multiple OS/ROS combinations:
 
 +-----------------------+--------------+---------------------+
 | Ubuntu Distribution   | ROS1 version |    ROS2 version     |
@@ -93,7 +94,7 @@ The initial view of the Control Panel is the "Configuration" page, which consist
 4. Interface with your stack
 *****************************
 
-In order to perform collision avoidance maneuvers, the Supervisor must be able to send commands to your robot actuators. These commands will be published by default on the ``/lll/ram/filtered_input`` topic (this is a customizable name via the Control Panel.
+In order to perform collision avoidance maneuvers, the Supervisor must be able to send commands to your robot actuators. These commands will be published by default on the ``/lll/ram/filtered_input`` topic (this is a customizable name via the Control Panel).
 
 Your low-level controller therefore needs to subscribe to this topic and apply the commands to your robot:
 
@@ -255,9 +256,9 @@ If ROS is unable to find the ``lll_supervisor``, re-run the source command for t
 6. Monitor your system (optional)
 *********************************
 
-The Control Panel provides an `Operation` page that can be used to monitor the status of the Supervisor working with your stack.
+The Control Panel provides an `Operation` page that can be used to monitor the status of the Supervisor working with your stack and a `diagnostic` page to display metrics in realtime.
 
-The Operation page requires that both the Supervisor and the Control Panel backend are running. Additionally, a `rosbridge websocket <https://github.com/RobotWebTools/rosbridge_suite>`_ must be running on the same network as the Supervisor.
+These pages require that both the Supervisor and the Control Panel backend are running. Additionally, a `rosbridge websocket <https://github.com/RobotWebTools/rosbridge_suite>`_ must be running on the same network as the Supervisor.
 
 To install the rosbridge suite, run the following command:
 

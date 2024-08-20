@@ -20,7 +20,7 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 
 Configuration
 ==============
-In order for the RDM to perform its analysis, it must be fed data about the system. At the moment, the RDM only subscribes to data directly required for the RAM and specified via the Control Panel. 3Laws is actively working on enabling more data sources for RDM configured via the Control Panel.
+In order for the RDM to perform its analysis, it must be fed data about the system. The Control Panel allow the user to configure some extra parameters specific to the RDM in addition with the one already used by the RAM (Run-time Assurance Module).
 
 
 Metric Modules
