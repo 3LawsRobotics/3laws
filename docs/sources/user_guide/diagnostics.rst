@@ -107,19 +107,21 @@ This module publishes the following metrics:
 
   - **state_domain_value**: The signed distance from the current state to the boundary of the state domain set.
 
-  - **xdot_difference**: The difference vector between the predicted and observed state derivative.
+  - **time_vector**: The time vector of the integration.
 
-  - **xdot_difference_pdf_value**: The probability density function (pdf) value of the xdot_difference vector.
+  - **state_difference_1sigma**: List of the signed distance from the value of the norm of xdot_difference to the 1sigma level set of the pdf.
 
-  - **xdot_difference_pdf_value_normalized**: The normalized pdf value of the xdot_difference vector, i.e. equal to 1 when the xdot_difference vector is null.
+  - **state_difference_2sigma**: List of the signed distance from the value of the norm of xdot_difference to the 2sigma level set of the pdf.
 
-  - **xdot_difference_norm_1sigma**: The signed distance from the value of the norm of xdot_difference to the 1sigma level set of the pdf.
+  - **state_difference_3sigma**: List of the signed distance from the value of the norm of xdot_difference to the 3sigma level set of the pdf.
 
-  - **xdot_difference_norm_2sigma**: The signed distance from the value of the norm of xdot_difference to the 2sigma level set of the pdf.
+  - **state_difference_matrix**: List of each state difference between computed and actual for each integration time step described in the time_vector
 
-  - **xdot_difference_norm_3sigma**: The signed distance from the value of the norm of xdot_difference to the 3sigma level set of the pdf.
+  - **state_difference_pdf_value**: List of the pdf value of the state difference vector.
 
-  - **system_degradation_probability**: Not available yet.
+  - **state_difference_pdf_value_normalized**: List of the normalized pdf value of the state difference vector.
+
+  - **system_degradation_probability**: The probability of the system degradation (experimental).
 
 .. important::
   The process covariance matrix used for the statical analysis is currently the identity matrix.
@@ -272,15 +274,21 @@ The following metrics are published:
 
 - **domain_status**: The high-level status of the health of the various robot components.
 
-  - **system_status**: The status of the system running the Supervisor. The possible values are: **[ok, minor, severe, critical]**
+  - **overall**: The overall status of the robot. The possible values are: **[ok, minor, severe, critical]**
 
-  - **behavior_status**: The status of the robot's behavior, i.e. wether or not the robot is violating its safety constraints. The possible values are: **[ok, minor, severe, critical]**
+  - **motion_planning**: The status of the robot's motion planning stack. The possible values are: **[ok, minor, severe, critical]**
 
-  - **hardware_status**: The status of the robot's hardware, driven currently by the Dynamic Consistency metric. The possible values are: **[ok, minor, severe, critical]**
+  - **localization**: The status of the robot's localization stack. The possible values are: **[ok, minor, severe, critical]**
 
-  - **perception_status**: The status of the robot's perception stack. The possible values are: **[ok, minor, severe, critical]**
+  - **perception**: The status of the robot's perception stack. The possible values are: **[ok, minor, severe, critical]**
 
-  - **control_status**: The status of the robot's control stack. The possible values are: **[ok, minor, severe, critical]**
+  - **hardware**: The status of the robot's hardware. The possible values are: **[ok, minor, severe, critical]**
+
+  - **compute**: The status of the robot's compute resources. The possible values are: **[ok, minor, severe, critical]**
+
+  - **network**: The status of the robot's network. The possible values are: **[ok, minor, severe, critical]**
+
+  - **sensors**: The status of the robot's sensors. The possible values are: **[ok, minor, severe, critical]**
 
 
 - **incidents_log**: A stream of incident logs. The important fields of the associated message are:
@@ -290,8 +298,6 @@ The following metrics are published:
   - **detail**: The details of the incident.
 
   - **in_progress**: A boolean indicating if the incident is still in progress.
-
-  - **start_time**: The time the incident started.
 
   - **domain**: The domain of the incident. The possible values are: **[behavior, system, hardware, perception, control]**
 
