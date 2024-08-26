@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
 
   
-    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../../_static/Favicon_dark.svg"/>
     <link rel="canonical" href="https://docs.3laws.io/sources/user_guide/diagnostics.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
@@ -108,15 +108,16 @@
 <li><p><a class="reference internal" href="#metric-modules" id="id2">Metric Modules</a></p>
 <ul>
 <li><p><a class="reference internal" href="#clock-health" id="id3">Clock Health</a></p></li>
-<li><p><a class="reference internal" href="#dynamic-consistency" id="id4">Dynamic Consistency</a></p></li>
-<li><p><a class="reference internal" href="#node-health" id="id5">Node Health</a></p></li>
-<li><p><a class="reference internal" href="#sensor-characterization" id="id6">Sensor characterization</a></p></li>
-<li><p><a class="reference internal" href="#signal-health" id="id7">Signal Health</a></p></li>
-<li><p><a class="reference internal" href="#system-health" id="id8">System Health</a></p></li>
-<li><p><a class="reference internal" href="#incident-diagnostic" id="id9">Incident Diagnostic</a></p></li>
+<li><p><a class="reference internal" href="#odometry-consistency" id="id4">Odometry Consistency</a></p></li>
+<li><p><a class="reference internal" href="#dynamic-consistency" id="id5">Dynamic Consistency</a></p></li>
+<li><p><a class="reference internal" href="#node-health" id="id6">Node Health</a></p></li>
+<li><p><a class="reference internal" href="#sensor-characterization" id="id7">Sensor characterization</a></p></li>
+<li><p><a class="reference internal" href="#signal-health" id="id8">Signal Health</a></p></li>
+<li><p><a class="reference internal" href="#system-health" id="id9">System Health</a></p></li>
+<li><p><a class="reference internal" href="#incident-diagnostic" id="id10">Incident Diagnostic</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#output-modules" id="id10">Output modules</a></p></li>
+<li><p><a class="reference internal" href="#output-modules" id="id11">Output modules</a></p></li>
 </ul>
 </nav>
 <p>The Supervisor’s RDM is a tool for monitoring the health and safety of various critical robot sub-systems. It is designed to work in tandem with the Supervisor’s Run-time Assurance Module (RAM).</p>
@@ -128,7 +129,7 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 </div>
 <section id="configuration">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">Configuration</a><a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
-<p>In order for the RDM to perform its analysis, it must be fed data about the system. At the moment, the RDM only subscribes to data directly required for the RAM and specified via the Control Panel. 3Laws is actively working on enabling more data sources for RDM configured via the Control Panel.</p>
+<p>In order for the RDM to perform its analysis, it must be fed data about the system. The Control Panel allow the user to configure some extra parameters specific to the RDM in addition with the one already used by the RAM (Run-time Assurance Module).</p>
 </section>
 <section id="metric-modules">
 <h2><a class="toc-backref" href="#id2" role="doc-backlink">Metric Modules</a><a class="headerlink" href="#metric-modules" title="Link to this heading"></a></h2>
@@ -157,8 +158,35 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 </li>
 </ul>
 </section>
+<section id="odometry-consistency">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Odometry Consistency</a><a class="headerlink" href="#odometry-consistency" title="Link to this heading"></a></h3>
+<p>The Odometry Consistency module is responsible for monitoring the consistency between the robot’s odometries and the robot’s localization. Inconsistencies between the two is a sign of a problem in the robot’s and can lead to collisions.</p>
+<p>This module publishes the following metrics:</p>
+<ul class="simple">
+<li><p><strong>max_linear_position_difference</strong>: The maximum difference between the robot’s odometries and the robot’s localizations data in the linear position in meters.</p></li>
+<li><p><strong>max_angular_position_difference</strong>: The maximum difference between the robot’s odometries and the robot’s localizations data in the angular position in rad.</p></li>
+<li><p><strong>max_linear_velocity_difference</strong>: The maximum difference between the robot’s odometries and the robot’s localizations data in the linear velocity in m/s.</p></li>
+<li><p><strong>max_angular_velocity_difference</strong>: The maximum difference between the robot’s odometries and the robot’s localizations data in the angular velocity in rad/s.</p></li>
+<li><p><strong>linear_position_difference_bound</strong>: The maximum allowed difference between the robot’s odometries and the robot’s localizations data in the linear position.</p></li>
+<li><p><strong>angular_position_difference_bound</strong>: The maximum allowed difference between the robot’s odometries and the robot’s localizations data in the angular position.</p></li>
+<li><p><strong>linear_velocity_difference_bound</strong>: The maximum allowed difference between the robot’s odometries and the robot’s localizations data in the linear velocity.</p></li>
+<li><p><strong>angular_velocity_difference_bound</strong>: The maximum allowed difference between the robot’s odometries and the robot’s localizations data in the angular velocity.</p></li>
+<li><p><strong>odometry_data</strong>: It’s the list of detail differences between each robot’s odometries and the robot’s localizations data.
+- <strong>odometry_id</strong>: The id of the odometry.</p>
+<ul>
+<li><p><strong>status</strong>: The status of the odometry. The possible values are: <strong>[ok, bad, incomparable, uncertain]</strong></p></li>
+<li><p><strong>consistency_score</strong>: The score of the odometry consistency, it’s the number of possible configuration where this sensor is in a valid state.</p></li>
+<li><p><strong>differences</strong>: list of all differences between the odometry and the other comparable localizations data.</p></li>
+<li><p><strong>max_linear_position_difference</strong>: The maximum difference between the current odometry (see odometry_id) and the other comparable localizations data in the linear position in meters.</p></li>
+<li><p><strong>max_angular_position_difference</strong>: The maximum difference between the current odometry (see odometry_id) and the other comparable localizations data in the angular position in rad.</p></li>
+<li><p><strong>max_linear_velocity_difference</strong>: The maximum difference between the current odometry (see odometry_id) and the other comparable localizations data in the linear velocity in m/s.</p></li>
+<li><p><strong>max_angular_velocity_difference</strong>: The maximum difference between the current odometry (see odometry_id) and the other comparable localizations data in the angular velocity in rad/s.</p></li>
+</ul>
+</li>
+</ul>
+</section>
 <section id="dynamic-consistency">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Dynamic Consistency</a><a class="headerlink" href="#dynamic-consistency" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Dynamic Consistency</a><a class="headerlink" href="#dynamic-consistency" title="Link to this heading"></a></h3>
 <p>The RAM (Run-time Assurance Module) relies on a quantitative understanding of the robot’s physical behavior and control capabilities (i.e. a <a class="reference external" href="https://en.wikipedia.org/wiki/Dynamical_system">Dynamical Model of the system</a>) to make decisions about the appropriate collision avoidance strategy. The Dynamic Consistency module is responsible for monitoring the consistency between the system’s Dynamical Model and the observed system behavior. Inconsistencies between the two implies the RAM may not be able to make accurate decisions regarding when to intervene and might lead to collisions.</p>
 <p>This module publishes the following metrics:</p>
 <ul class="simple">
@@ -168,13 +196,14 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 <li><p><strong>input_timeout</strong>: A boolean indicating if the input information has timed out.</p></li>
 <li><p><strong>input_domain_value</strong>: The signed distance from the current input to the boundary of the input constraints set.</p></li>
 <li><p><strong>state_domain_value</strong>: The signed distance from the current state to the boundary of the state domain set.</p></li>
-<li><p><strong>xdot_difference</strong>: The difference vector between the predicted and observed state derivative.</p></li>
-<li><p><strong>xdot_difference_pdf_value</strong>: The probability density function (pdf) value of the xdot_difference vector.</p></li>
-<li><p><strong>xdot_difference_pdf_value_normalized</strong>: The normalized pdf value of the xdot_difference vector, i.e. equal to 1 when the xdot_difference vector is null.</p></li>
-<li><p><strong>xdot_difference_norm_1sigma</strong>: The signed distance from the value of the norm of xdot_difference to the 1sigma level set of the pdf.</p></li>
-<li><p><strong>xdot_difference_norm_2sigma</strong>: The signed distance from the value of the norm of xdot_difference to the 2sigma level set of the pdf.</p></li>
-<li><p><strong>xdot_difference_norm_3sigma</strong>: The signed distance from the value of the norm of xdot_difference to the 3sigma level set of the pdf.</p></li>
-<li><p><strong>system_degradation_probability</strong>: Not available yet.</p></li>
+<li><p><strong>time_vector</strong>: The time vector of the integration.</p></li>
+<li><p><strong>state_difference_1sigma</strong>: List of the signed distance from the value of the norm of xdot_difference to the 1sigma level set of the pdf.</p></li>
+<li><p><strong>state_difference_2sigma</strong>: List of the signed distance from the value of the norm of xdot_difference to the 2sigma level set of the pdf.</p></li>
+<li><p><strong>state_difference_3sigma</strong>: List of the signed distance from the value of the norm of xdot_difference to the 3sigma level set of the pdf.</p></li>
+<li><p><strong>state_difference_matrix</strong>: List of each state difference between computed and actual for each integration time step described in the time_vector</p></li>
+<li><p><strong>state_difference_pdf_value</strong>: List of the pdf value of the state difference vector.</p></li>
+<li><p><strong>state_difference_pdf_value_normalized</strong>: List of the normalized pdf value of the state difference vector.</p></li>
+<li><p><strong>system_degradation_probability</strong>: The probability of the system degradation (experimental).</p></li>
 </ul>
 </li>
 </ul>
@@ -184,7 +213,7 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 </div>
 </section>
 <section id="node-health">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Node Health</a><a class="headerlink" href="#node-health" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Node Health</a><a class="headerlink" href="#node-health" title="Link to this heading"></a></h3>
 <p>Typical autonomy stacks are composed of <strong>multiple nodes</strong>, each responsible for a specific task. The Node Health module monitors the health of these nodes by checking if they are running and if they are publishing data properly. This module is useful for detecting issues like node crashes or communication loses between nodes. This is critical for nodes like Localization and Perception that are central to the RAM’s proper operation.</p>
 <p>A node is defined by the set of topics it publishes. The Node Health module monitors the health of the nodes by checking if the topics are being published and if the data is consistent with the expected values.</p>
 <p>The associated metric is published at 1hz, and is an aggregate of the signal data received over that period.</p>
@@ -210,7 +239,7 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 </ul>
 </section>
 <section id="sensor-characterization">
-<h3><a class="toc-backref" href="#id6" role="doc-backlink">Sensor characterization</a><a class="headerlink" href="#sensor-characterization" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Sensor characterization</a><a class="headerlink" href="#sensor-characterization" title="Link to this heading"></a></h3>
 <p>The Sensor Characterization module is responsible for monitoring the health of the robot’s sensors. This module is useful for detecting issues like sensor malfunctions, or calibration issues. The nominal functioning of the robot’s sensors is obviously critical for the RAM’s proper operation. If the sensors are not functioning properly, the RAM will make decision based on improper assumption on obstacles location and may lead to collisions.</p>
 <p>This module publishes the following metrics:</p>
 <ul class="simple">
@@ -245,7 +274,7 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 </div>
 </section>
 <section id="signal-health">
-<h3><a class="toc-backref" href="#id7" role="doc-backlink">Signal Health</a><a class="headerlink" href="#signal-health" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Signal Health</a><a class="headerlink" href="#signal-health" title="Link to this heading"></a></h3>
 <p>The signal health module is responsible for monitoring signals between the various sub-systems for issues including timeouts, bounds on signals and rates, NaNs, and incorrect sizes. If critical signals expected by the RAM are not healthy, the RAM may fail. This could lead to collisions.</p>
 <p>The associated metric is published at 1hz, and is an aggregate of the signal data received over that period.</p>
 <p>This module publishes the following metrics:</p>
@@ -270,7 +299,7 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 </ul>
 </section>
 <section id="system-health">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">System Health</a><a class="headerlink" href="#system-health" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">System Health</a><a class="headerlink" href="#system-health" title="Link to this heading"></a></h3>
 <p>The RAM needs to receive data and compute in a timely manner. The System Health module is responsible for monitoring the health of the local computational resources by checking values related to CPU and memory usage. High CPU and memory usage can lead to delays in RAM publication of commands.</p>
 <p>This module publishes the following metrics:</p>
 <ul class="simple">
@@ -288,17 +317,20 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 </ul>
 </section>
 <section id="incident-diagnostic">
-<h3><a class="toc-backref" href="#id9" role="doc-backlink">Incident Diagnostic</a><a class="headerlink" href="#incident-diagnostic" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Incident Diagnostic</a><a class="headerlink" href="#incident-diagnostic" title="Link to this heading"></a></h3>
 <p>The diagnostic module aggregates information published by the various metric modules and provides a high-level view of the robot’s health. This module is useful for detecting issues that may not be apparent when looking at the individual metrics.</p>
 <p>The following metrics are published:</p>
 <ul class="simple">
 <li><p><strong>domain_status</strong>: The high-level status of the health of the various robot components.</p>
 <ul>
-<li><p><strong>system_status</strong>: The status of the system running the Supervisor. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
-<li><p><strong>behavior_status</strong>: The status of the robot’s behavior, i.e. wether or not the robot is violating its safety constraints. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
-<li><p><strong>hardware_status</strong>: The status of the robot’s hardware, driven currently by the Dynamic Consistency metric. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
-<li><p><strong>perception_status</strong>: The status of the robot’s perception stack. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
-<li><p><strong>control_status</strong>: The status of the robot’s control stack. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>overall</strong>: The overall status of the robot. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>motion_planning</strong>: The status of the robot’s motion planning stack. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>localization</strong>: The status of the robot’s localization stack. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>perception</strong>: The status of the robot’s perception stack. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>hardware</strong>: The status of the robot’s hardware. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>compute</strong>: The status of the robot’s compute resources. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>network</strong>: The status of the robot’s network. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
+<li><p><strong>sensors</strong>: The status of the robot’s sensors. The possible values are: <strong>[ok, minor, severe, critical]</strong></p></li>
 </ul>
 </li>
 <li><p><strong>incidents_log</strong>: A stream of incident logs. The important fields of the associated message are:</p>
@@ -306,7 +338,6 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 <li><p><strong>name</strong>: The name of the incident.</p></li>
 <li><p><strong>detail</strong>: The details of the incident.</p></li>
 <li><p><strong>in_progress</strong>: A boolean indicating if the incident is still in progress.</p></li>
-<li><p><strong>start_time</strong>: The time the incident started.</p></li>
 <li><p><strong>domain</strong>: The domain of the incident. The possible values are: <strong>[behavior, system, hardware, perception, control]</strong></p></li>
 </ul>
 </li>
@@ -314,7 +345,7 @@ but it is not able to detect more subtle issues that may arise like inconsistent
 </section>
 </section>
 <section id="output-modules">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Output modules</a><a class="headerlink" href="#output-modules" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Output modules</a><a class="headerlink" href="#output-modules" title="Link to this heading"></a></h2>
 <p>The RDM uses <strong>output modules</strong> to make the metrics available to the user. Currently, the RDM ships with a single output module to publish all metrics to <a class="reference internal" href="reference/ros_topics.html#reference-ros-topics"><span class="std std-ref">ROS Topics</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

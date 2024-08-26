@@ -7,15 +7,17 @@ Control Panel
 Overview
 =========
 
-The control panel is a web-based configuration and monitoring tool for the Supervisor. It is composed of two main sections:
+The control panel is a web-based configuration and monitoring tool for the Supervisor. It is composed of three main sections:
 
   - Configuration: This section allows the user to configure the Supervisor's parameters.
 
   - Operations: This section shows the current state of the Supervisor and the robot.
 
+  - Diagnostics: This section provides access to diagnostic visualization tools.
+
 Each section is accessed by clicking on the corresponding tab in the Control Panel:
 
-.. image:: ../data/cp_tabs.png
+.. image:: ../data/cp_nav_header.png
   :align: center
   :width: 800px
   :alt: Control Panel tabs.
@@ -24,7 +26,7 @@ Each section is accessed by clicking on the corresponding tab in the Control Pan
 
 A section is also divided into sub-sections, which are accessed by clicking on the corresponding sub-tabs:
 
-.. image:: ../data/cp_subtabs.png
+.. image:: ../data/cp_tabs.png
   :align: center
   :width: 800px
   :alt: Control Panel sub-tabs.
@@ -79,14 +81,14 @@ By clicking on the icon, you can set the IP address and port of the Rosbridge se
 
 .. note::
 
-  During the configuration process, the Control Panel can be used without a Rosbridge server, but the autocompletion for topics and the operation tab will not be available.
+  During the configuration process, the Control Panel can be used without a Rosbridge server, but the autocompletion for topics, the operation tab and some diagnostic tools will not be available.
 
 .. _control_panel_config:
 
 Supervisor Configuration
 ========================
 
-The Supervisor's configurable fields are available through a series of pages in the Control Panel.  Each of the following sections corresponds to a tab in the Control Panel. The tabs are:
+The Supervisor's configurable fields are available through a series of pages in the Control Panel. Each of the following sections corresponds to a tab in the Control Panel. The tabs are:
 
 The **Save** button on each page of the Control Panel should be pressed to record the current page in the *supervisor.yaml* file before moving on to another page.
 
@@ -95,11 +97,11 @@ Throughout this documentation, a red asterisk (*) indicates a *required* field.
 .. toctree::
   :maxdepth: 1
 
-  1. Credentials <configuration/credentials>
-  2. Model <configuration/robot_model>
-  3. Supervisor <configuration/supervisor>
-  4. Localization <configuration/localization>
-  5. Perception <configuration/perception>
+  1. Credentials configuration <configuration/credentials>
+  2. Model configuration <configuration/robot_model>
+  3. Supervisor configuration <configuration/supervisor>
+  4. Localization configuration <configuration/localization>
+  5. Perception configuration <configuration/perception>
 
 
 .. note::
@@ -121,14 +123,14 @@ Status
 .. image:: ../data/cp_operation.png
   :align: center
   :width: 800px
-  :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
+  :alt: Operations page showing a configured robot.
 
 |
 
-In the image above, the Supervisor is operational and all the components necessary for proper collision avoidance are configured to be active as indicated by the arrows between them.
+In the image above, the Supervisor is operational and all the components necessary for proper collision avoidance are configured to be active. The Diagnostic module is also operational and no issue as been detected (RDM pill in green).
 
 If some of the components are not yet operational, the Control Panel will show the boxes in different colors (orange for warning, red for errors).
-To get additional information about the error, you can check the logs under the diagram or click on the Status on top of the box to get details on the error source.
+To get additional information about the error, you can check the logs by clicking on the button above the RDM/RAM pill. You can also click on the Status on top of the box to get details on the error source.
 
 .. image:: ../data/cp_operation_error.png
   :align: center
@@ -136,7 +138,7 @@ To get additional information about the error, you can check the logs under the 
   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
 
 
-The above image shows a situation where all components are done. We have clicked on the detail status of the Motion Planner components.
+The above image shows a situation where all components are down. We have clicked on the detail status of the Motion Planner components.
 
 
 A **blue** box indicates that the component is not yet operational and still initializing.
@@ -159,3 +161,69 @@ Visualization
 -------------
 
 Visualization of the Runtime Assurance Module (RAM) metadata is available through `Rviz <https://wiki.ros.org/rviz>`_. This tab of the control panel will provide you with a link to download an Rviz configuration file consistent with the current Supervisor configuration.
+
+
+Control Panel's Diagnostic Page
+===============================
+
+The Diagnostic page provides a summary of the diagnostic metrics computed by the Supervisor. Presented as plots or status timeline, these metrics are useful for debugging and tuning the Supervisor's parameters.
+Divided into sections, the Diagnostic page shows the following metrics:
+
+- System metrics
+- Odometry metrics
+- Dynamics metrics
+
+System Metrics
+--------------
+
+.. image:: ../data/cp_system_diagnostic.png
+  :align: center
+  :width: 800px
+  :alt: Diagnostic page showing the Supervisor's system diagnostic metrics.
+
+|
+
+The System Metrics section shows the following metrics:
+
+- **CPU load**.
+- **Memory usage**.
+- **Disk usage**.
+- **Network usage**.
+- **Process counts**.
+
+Odometry Metrics
+----------------
+
+.. image:: ../data/cp_odometry_diagnostic.png
+  :align: center
+  :width: 800px
+  :alt: Diagnostic page showing the Supervisor's odometry diagnostic metrics.
+
+|
+
+The Odometry Metrics section shows the following metrics if configured:
+
+- **Odometry General**: This let you visualize a component of the odometry across all available ROS odometry topics.
+- **Diagnostic**: This let you visualize a timeline of the status of each odometry. The timeline can have 3 colors RED for inconsistent, YELLOW for uncertain, and GREEN for consistent. A real-time consistency is also displayed
+
+Dynamics Metrics
+----------------
+
+.. image:: ../data/cp_dynamics_diagnostic.png
+  :align: center
+  :width: 800px
+  :alt: Diagnostic page showing the Supervisor's dynamics diagnostic metrics.
+
+|
+
+The Dynamics Metrics section shows the following metrics if configured:
+
+- **Input Domain signed distance**: This let you visualize the signed distance of the input domain to it's boundaries.
+
+- **State Domain signed distance**: This let you visualize the signed distance derivative of the state domain to it's boundaries.
+
+- **Degradation probability**: This let you visualize the probability of the system being in a degraded state based on the distance between computed and measured state evolution.
+
+- **Simulated vs measured state difference**: This let you visualize the difference between the simulated and measured state at during the last integration period.
+
+- **Dynamic Consistency**: This let you visualize the consistency score of the dynamics model with the measured state in the last integration period.

@@ -45,6 +45,8 @@ When the Robot Diagnostic Module is enabled, the following additional topics are
 
 - ``/lll/rdm/dynamic_consistency``: If a dynamical model has been added to the configuration, this topic will compare the predicted model behavior to the current behavior and provide discrepancy metrics.  Several values including differences in speeds between the platform and the model, and statistics on these differences are provided.  Time since last input and time since last state message are also provided (in nanoseconds).
 
+- ``/lll/rdm/odometry_consistency``: This topic will publish aggregated and detailed information about the difference between each available odometries and offer a status for each odometry that goes from OK to INCOHERENT.
+
 - ``/lll/rdm/incidents_log``: As events are detected in the system, they are published through this channel as text messages.  The "tags" area of the message includes discrete-value key-value pairs for severity and type of issue.
 
 - ``/lll/rdm/node_health``: Node health provides the status messages from various nodes. For example, the sensor_node provides details of the laserscan including the time since the last message, and average/min/max sending rates, receipt rates, and delays.

@@ -2,6 +2,81 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.2.0 (19th August 2024)
+
+Diagnostic and Visualization tools added!
+
+### Fixed
+
+- Remove plot flickering that could appear due to variable update rate
+- Fix ROS1 subscriber in control panel
+- Fixed actuator signal used by RDM which was wrong when RAM was active.
+
+### Added
+
+- Supervisor logs are now published over ROS
+- RDM can now trigger RAM faults based on some metrics
+- RAM faults can now be triggered externally via ROS topic
+- Can now load mesh for all the formats supported by [assimp](https://github.com/assimp/assimp/blob/master/doc/Fileformats.md) library
+
+#### Control Panel:
+Configuration:
+- License expiration and detail available
+- Odometry consistency
+- Dynamic consistency
+- System heath (CPU load, RAM load and Read/Write rate)
+
+Operation:
+- Generic Logs journal with level selection
+- Filter compute time
+- Minimap with safety margin visualization
+- RAM enable/disable button
+
+Diagnostic:
+- Odometry consistency plots and status timeline
+- System health plots
+- Dynamic consistency plots
+
+Misc:
+- Stop button on plots to stop the moving time frame
+
+#### Robot Diagnostic Module
+
+- Odometry consistency metric
+
+#### Runtime Assurance Module
+
+- Added option for simple downsampling of laserscan data
+
+### Changed
+
+- Copilot status is replaced by RDM and RAM status in operation tab
+- The behavior preference for the RAM has been simplified, now you don't have to choose between slowing down or turning, it will pick based on commanded velocities
+- Dynamic consistency metric module is now based on integration instead of numerical differentiation. Makes for more intuitive metric values
+
+### Removed
+
+N/A
+
+
+
+## 1.1.1 (20th May 2024)
+
+New supported ROS topic types and various bug fix
+
+### Fixed
+
+
+### Added
+
+- Support for mesh shape type configuration and visualization
+
+### Changed
+
+### Removed
+
+N/A
+
 
 ## 1.1.0 (20th May 2024)
 

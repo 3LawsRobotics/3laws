@@ -2,8 +2,9 @@ Credentials
 ###########
 
 The *Credentials* page appears as follows:
+When entering a license key, meta information about the license will be displayed. This information includes the expiration date, issue date, and the cloud option associated with the license. If the license key is invalid, an error message will be displayed.
 
-.. image:: ../../data/cpanel1.png
+.. image:: ../../data/credentials_tab.png
   :align: center
   :width: 600px
   :alt: Configuration > Credentials Page

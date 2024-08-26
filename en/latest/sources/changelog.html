@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
 
   
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../_static/Favicon_dark.svg"/>
     <link rel="canonical" href="https://docs.3laws.io/sources/changelog.html" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -90,11 +90,103 @@
   <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading"></a></h1>
 <p>This project adheres to <a class="reference external" href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<section id="th-may-2024">
-<h2>1.1.0 (20th May 2024)<a class="headerlink" href="#th-may-2024" title="Link to this heading"></a></h2>
-<p>New supported ROS topic types and various bug fix</p>
+<section id="th-august-2024">
+<h2>1.2.0 (19th August 2024)<a class="headerlink" href="#th-august-2024" title="Link to this heading"></a></h2>
+<p>Diagnostic and Visualization tools added!</p>
 <section id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Remove plot flickering that could appear due to variable update rate</p></li>
+<li><p>Fix ROS1 subscriber in control panel</p></li>
+<li><p>Fixed actuator signal used by RDM which was wrong when RAM was active.</p></li>
+</ul>
+</section>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Supervisor logs are now published over ROS</p></li>
+<li><p>RDM can now trigger RAM faults based on some metrics</p></li>
+<li><p>RAM faults can now be triggered externally via ROS topic</p></li>
+<li><p>Can now load mesh for all the formats supported by <a class="reference external" href="https://github.com/assimp/assimp/blob/master/doc/Fileformats.md">assimp</a> library</p></li>
+</ul>
+<section id="control-panel">
+<h4>Control Panel:<a class="headerlink" href="#control-panel" title="Link to this heading"></a></h4>
+<p>Configuration:</p>
+<ul class="simple">
+<li><p>License expiration and detail available</p></li>
+<li><p>Odometry consistency</p></li>
+<li><p>Dynamic consistency</p></li>
+<li><p>System heath (CPU load, RAM load and Read/Write rate)</p></li>
+</ul>
+<p>Operation:</p>
+<ul class="simple">
+<li><p>Generic Logs journal with level selection</p></li>
+<li><p>Filter compute time</p></li>
+<li><p>Minimap with safety margin visualization</p></li>
+<li><p>RAM enable/disable button</p></li>
+</ul>
+<p>Diagnostic:</p>
+<ul class="simple">
+<li><p>Odometry consistency plots and status timeline</p></li>
+<li><p>System health plots</p></li>
+<li><p>Dynamic consistency plots</p></li>
+</ul>
+<p>Misc:</p>
+<ul class="simple">
+<li><p>Stop button on plots to stop the moving time frame</p></li>
+</ul>
+</section>
+<section id="robot-diagnostic-module">
+<h4>Robot Diagnostic Module<a class="headerlink" href="#robot-diagnostic-module" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Odometry consistency metric</p></li>
+</ul>
+</section>
+<section id="runtime-assurance-module">
+<h4>Runtime Assurance Module<a class="headerlink" href="#runtime-assurance-module" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Added option for simple downsampling of laserscan data</p></li>
+</ul>
+</section>
+</section>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Copilot status is replaced by RDM and RAM status in operation tab</p></li>
+<li><p>The behavior preference for the RAM has been simplified, now you don’t have to choose between slowing down or turning, it will pick based on commanded velocities</p></li>
+<li><p>Dynamic consistency metric module is now based on integration instead of numerical differentiation. Makes for more intuitive metric values</p></li>
+</ul>
+</section>
+<section id="removed">
+<h3>Removed<a class="headerlink" href="#removed" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+</section>
+<section id="th-may-2024">
+<h2>1.1.1 (20th May 2024)<a class="headerlink" href="#th-may-2024" title="Link to this heading"></a></h2>
+<p>New supported ROS topic types and various bug fix</p>
+<section id="id1">
+<h3>Fixed<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+</section>
+<section id="id2">
+<h3>Added<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Support for mesh shape type configuration and visualization</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Changed<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+</section>
+<section id="id4">
+<h3>Removed<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+</section>
+<section id="id5">
+<h2>1.1.0 (20th May 2024)<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>New supported ROS topic types and various bug fix</p>
+<section id="id6">
+<h3>Fixed<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Node launching in incorrect namespace for ROS1</p></li>
 <li><p>Config file broken for ROS1</p></li>
@@ -102,8 +194,8 @@
 <li><p>Plots in operation tab of control panel not working with ROS1</p></li>
 </ul>
 </section>
-<section id="added">
-<h3>Added<a class="headerlink" href="#added" title="Link to this heading"></a></h3>
+<section id="id7">
+<h3>Added<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Support for new subscription topic types:</p>
 <ul>
@@ -117,8 +209,8 @@
 <li><p>Customizable filtered input (Runtime Assurance Module output) topic name, type and QoS</p></li>
 </ul>
 </section>
-<section id="changed">
-<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading"></a></h3>
+<section id="id8">
+<h3>Changed<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Shape selection improved with shape visualization.</p></li>
 <li><p>Various bug fixes including loading errors while loading the configuration.</p></li>
@@ -126,67 +218,20 @@
 <li><p>Improved contextual documentation in control panel to start rosbridge</p></li>
 </ul>
 </section>
-<section id="removed">
-<h3>Removed<a class="headerlink" href="#removed" title="Link to this heading"></a></h3>
+<section id="id9">
+<h3>Removed<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <p>N/A</p>
 </section>
 </section>
-<section id="id1">
-<h2>1.0.3 (7th May 2024)<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="id10">
+<h2>1.0.3 (7th May 2024)<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Fix omnidirectional dynamics.</p></li>
 </ul>
-<section id="id2">
-<h3>Fixed<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Omnidirectional dynamics not working when using input mask.</p></li>
-</ul>
-</section>
-<section id="id3">
-<h3>Added<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
-<p>N/A</p>
-</section>
-<section id="id4">
-<h3>Changed<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
-<p>N/A</p>
-</section>
-<section id="id5">
-<h3>Removed<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
-<p>N/A</p>
-</section>
-</section>
-<section id="id6">
-<h2>1.0.2 (4th May 2024)<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
-<p>Improve and fix objects map perception modality.</p>
-<section id="id7">
-<h3>Fixed<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Objects map perception modality that was not working in certain circumstances</p></li>
-</ul>
-</section>
-<section id="id8">
-<h3>Added<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Objects now show up in RAM markers</p></li>
-</ul>
-</section>
-<section id="id9">
-<h3>Changed<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
-<p>N/A</p>
-</section>
-<section id="id10">
-<h3>Removed<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
-<p>N/A</p>
-</section>
-</section>
-<section id="st-may-2024">
-<h2>1.0.1 (1st May 2024)<a class="headerlink" href="#st-may-2024" title="Link to this heading"></a></h2>
-<p>Fix documentation coherence.</p>
 <section id="id11">
 <h3>Fixed<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Renaming Supervisor parameters sections to fit with the documentation. “Copilot” renamed in Run-time Assurance Module</p></li>
-<li><p>Default port set to 8000 for every Control Panel entry point (server and CLI)</p></li>
+<li><p>Omnidirectional dynamics not working when using input mask.</p></li>
 </ul>
 </section>
 <section id="id12">
@@ -203,19 +248,18 @@
 </section>
 </section>
 <section id="id15">
-<h2>1.0.0 (1st May 2024)<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
-<p>This is the first version of the supervisor product.</p>
+<h2>1.0.2 (4th May 2024)<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<p>Improve and fix objects map perception modality.</p>
 <section id="id16">
 <h3>Fixed<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
-<p>N/A</p>
+<ul class="simple">
+<li><p>Objects map perception modality that was not working in certain circumstances</p></li>
+</ul>
 </section>
 <section id="id17">
 <h3>Added<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>A ROS node that perform out of the box collision avoidance for any simple robot that has a lidar or an obstacle map.</p></li>
-<li><p>A Control Panel as a web server running on the robot to configure the supervisor and provide realtime feedback.</p></li>
-<li><p>A Command Line Client to manage the Control Panel server and check for updates.</p></li>
-<li><p>A documentation available <a class="reference external" href="https://docs.3laws.io/">here</a>.</p></li>
+<li><p>Objects now show up in RAM markers</p></li>
 </ul>
 </section>
 <section id="id18">
@@ -224,6 +268,54 @@
 </section>
 <section id="id19">
 <h3>Removed<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+</section>
+<section id="st-may-2024">
+<h2>1.0.1 (1st May 2024)<a class="headerlink" href="#st-may-2024" title="Link to this heading"></a></h2>
+<p>Fix documentation coherence.</p>
+<section id="id20">
+<h3>Fixed<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Renaming Supervisor parameters sections to fit with the documentation. “Copilot” renamed in Run-time Assurance Module</p></li>
+<li><p>Default port set to 8000 for every Control Panel entry point (server and CLI)</p></li>
+</ul>
+</section>
+<section id="id21">
+<h3>Added<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+<section id="id22">
+<h3>Changed<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+<section id="id23">
+<h3>Removed<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+</section>
+<section id="id24">
+<h2>1.0.0 (1st May 2024)<a class="headerlink" href="#id24" title="Link to this heading"></a></h2>
+<p>This is the first version of the supervisor product.</p>
+<section id="id25">
+<h3>Fixed<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+<section id="id26">
+<h3>Added<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>A ROS node that perform out of the box collision avoidance for any simple robot that has a lidar or an obstacle map.</p></li>
+<li><p>A Control Panel as a web server running on the robot to configure the supervisor and provide realtime feedback.</p></li>
+<li><p>A Command Line Client to manage the Control Panel server and check for updates.</p></li>
+<li><p>A documentation available <a class="reference external" href="https://docs.3laws.io/">here</a>.</p></li>
+</ul>
+</section>
+<section id="id27">
+<h3>Changed<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<p>N/A</p>
+</section>
+<section id="id28">
+<h3>Removed<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
 <p>N/A</p>
 </section>
 </section>

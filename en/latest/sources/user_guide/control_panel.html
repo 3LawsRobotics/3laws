@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
 
   
-    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../../_static/Favicon_dark.svg"/>
     <link rel="canonical" href="https://docs.3laws.io/sources/user_guide/control_panel.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
@@ -28,7 +28,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Command Line Interface (CLI)" href="cli.html" />
+    <link rel="next" title="Credentials" href="configuration/credentials.html" />
     <link rel="prev" title="Robot Diagnostic" href="diagnostics.html" /> 
 </head>
 
@@ -61,11 +61,11 @@
 <li class="toctree-l2"><a class="reference internal" href="runtime_assurance.html">Run-time Assurance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html">Robot Diagnostics</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Control Panel</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="configuration/credentials.html">1. Credentials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configuration/robot_model.html">2. Model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configuration/supervisor.html">3. Supervisor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configuration/localization.html">4. Localization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configuration/perception.html">5. Perception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration/credentials.html">1. Credentials configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration/robot_model.html">2. Model configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration/supervisor.html">3. Supervisor configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration/localization.html">4. Localization configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration/perception.html">5. Perception configuration</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cli.html">CLI</a></li>
@@ -117,24 +117,32 @@
 <li><p><a class="reference internal" href="#visualization" id="id6">Visualization</a></p></li>
 </ul>
 </li>
+<li><p><a class="reference internal" href="#control-panel-s-diagnostic-page" id="id7">Control Panel’s Diagnostic Page</a></p>
+<ul>
+<li><p><a class="reference internal" href="#system-metrics" id="id8">System Metrics</a></p></li>
+<li><p><a class="reference internal" href="#odometry-metrics" id="id9">Odometry Metrics</a></p></li>
+<li><p><a class="reference internal" href="#dynamics-metrics" id="id10">Dynamics Metrics</a></p></li>
+</ul>
+</li>
 </ul>
 </nav>
 <section id="overview">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>The control panel is a web-based configuration and monitoring tool for the Supervisor. It is composed of two main sections:</p>
+<p>The control panel is a web-based configuration and monitoring tool for the Supervisor. It is composed of three main sections:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Configuration: This section allows the user to configure the Supervisor’s parameters.</p></li>
 <li><p>Operations: This section shows the current state of the Supervisor and the robot.</p></li>
+<li><p>Diagnostics: This section provides access to diagnostic visualization tools.</p></li>
 </ul>
 </div></blockquote>
 <p>Each section is accessed by clicking on the corresponding tab in the Control Panel:</p>
-<a class="reference internal image-reference" href="../../_images/cp_tabs.png"><img alt="Control Panel tabs." class="align-center" src="../../_images/cp_tabs.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../_images/cp_nav_header.png"><img alt="Control Panel tabs." class="align-center" src="../../_images/cp_nav_header.png" style="width: 800px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>A section is also divided into sub-sections, which are accessed by clicking on the corresponding sub-tabs:</p>
-<a class="reference internal image-reference" href="../../_images/cp_subtabs.png"><img alt="Control Panel sub-tabs." class="align-center" src="../../_images/cp_subtabs.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../_images/cp_tabs.png"><img alt="Control Panel sub-tabs." class="align-center" src="../../_images/cp_tabs.png" style="width: 800px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -167,21 +175,21 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>During the configuration process, the Control Panel can be used without a Rosbridge server, but the autocompletion for topics and the operation tab will not be available.</p>
+<p>During the configuration process, the Control Panel can be used without a Rosbridge server, but the autocompletion for topics, the operation tab and some diagnostic tools will not be available.</p>
 </div>
 </section>
 <section id="supervisor-configuration">
 <span id="control-panel-config"></span><h2><a class="toc-backref" href="#id3" role="doc-backlink">Supervisor Configuration</a><a class="headerlink" href="#supervisor-configuration" title="Link to this heading"></a></h2>
-<p>The Supervisor’s configurable fields are available through a series of pages in the Control Panel.  Each of the following sections corresponds to a tab in the Control Panel. The tabs are:</p>
+<p>The Supervisor’s configurable fields are available through a series of pages in the Control Panel. Each of the following sections corresponds to a tab in the Control Panel. The tabs are:</p>
 <p>The <strong>Save</strong> button on each page of the Control Panel should be pressed to record the current page in the <em>supervisor.yaml</em> file before moving on to another page.</p>
 <p>Throughout this documentation, a red asterisk (*) indicates a <em>required</em> field.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="configuration/credentials.html">1. Credentials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration/robot_model.html">2. Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration/supervisor.html">3. Supervisor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration/localization.html">4. Localization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration/perception.html">5. Perception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/credentials.html">1. Credentials configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/robot_model.html">2. Model configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/supervisor.html">3. Supervisor configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/localization.html">4. Localization configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/perception.html">5. Perception configuration</a></li>
 </ul>
 </div>
 <div class="admonition note">
@@ -197,15 +205,15 @@
 <span id="control-panel-ops"></span><h2><a class="toc-backref" href="#id4" role="doc-backlink">Control Panel’s Operations Page</a><a class="headerlink" href="#control-panel-s-operations-page" title="Link to this heading"></a></h2>
 <section id="status">
 <h3><a class="toc-backref" href="#id5" role="doc-backlink">Status</a><a class="headerlink" href="#status" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../_images/cp_operation.png"><img alt="Operations page showing a configured robot that does not yet have sensor or planning data." class="align-center" src="../../_images/cp_operation.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../_images/cp_operation.png"><img alt="Operations page showing a configured robot." class="align-center" src="../../_images/cp_operation.png" style="width: 800px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>In the image above, the Supervisor is operational and all the components necessary for proper collision avoidance are configured to be active as indicated by the arrows between them.</p>
+<p>In the image above, the Supervisor is operational and all the components necessary for proper collision avoidance are configured to be active. The Diagnostic module is also operational and no issue as been detected (RDM pill in green).</p>
 <p>If some of the components are not yet operational, the Control Panel will show the boxes in different colors (orange for warning, red for errors).
-To get additional information about the error, you can check the logs under the diagram or click on the Status on top of the box to get details on the error source.</p>
+To get additional information about the error, you can check the logs by clicking on the button above the RDM/RAM pill. You can also click on the Status on top of the box to get details on the error source.</p>
 <a class="reference internal image-reference" href="../../_images/cp_operation_error.png"><img alt="Operations page showing a configured robot that does not yet have sensor or planning data." class="align-center" src="../../_images/cp_operation_error.png" style="width: 800px;" /></a>
-<p>The above image shows a situation where all components are done. We have clicked on the detail status of the Motion Planner components.</p>
+<p>The above image shows a situation where all components are down. We have clicked on the detail status of the Motion Planner components.</p>
 <p>A <strong>blue</strong> box indicates that the component is not yet operational and still initializing.</p>
 <p>The lower section of the panel show logs and strip charts. The categories that are currently displayed include:</p>
 <ul class="simple">
@@ -223,6 +231,58 @@ To get additional information about the error, you can check the logs under the 
 <p>Visualization of the Runtime Assurance Module (RAM) metadata is available through <a class="reference external" href="https://wiki.ros.org/rviz">Rviz</a>. This tab of the control panel will provide you with a link to download an Rviz configuration file consistent with the current Supervisor configuration.</p>
 </section>
 </section>
+<section id="control-panel-s-diagnostic-page">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Control Panel’s Diagnostic Page</a><a class="headerlink" href="#control-panel-s-diagnostic-page" title="Link to this heading"></a></h2>
+<p>The Diagnostic page provides a summary of the diagnostic metrics computed by the Supervisor. Presented as plots or status timeline, these metrics are useful for debugging and tuning the Supervisor’s parameters.
+Divided into sections, the Diagnostic page shows the following metrics:</p>
+<ul class="simple">
+<li><p>System metrics</p></li>
+<li><p>Odometry metrics</p></li>
+<li><p>Dynamics metrics</p></li>
+</ul>
+<section id="system-metrics">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">System Metrics</a><a class="headerlink" href="#system-metrics" title="Link to this heading"></a></h3>
+<a class="reference internal image-reference" href="../../_images/cp_system_diagnostic.png"><img alt="Diagnostic page showing the Supervisor's system diagnostic metrics." class="align-center" src="../../_images/cp_system_diagnostic.png" style="width: 800px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The System Metrics section shows the following metrics:</p>
+<ul class="simple">
+<li><p><strong>CPU load</strong>.</p></li>
+<li><p><strong>Memory usage</strong>.</p></li>
+<li><p><strong>Disk usage</strong>.</p></li>
+<li><p><strong>Network usage</strong>.</p></li>
+<li><p><strong>Process counts</strong>.</p></li>
+</ul>
+</section>
+<section id="odometry-metrics">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Odometry Metrics</a><a class="headerlink" href="#odometry-metrics" title="Link to this heading"></a></h3>
+<a class="reference internal image-reference" href="../../_images/cp_odometry_diagnostic.png"><img alt="Diagnostic page showing the Supervisor's odometry diagnostic metrics." class="align-center" src="../../_images/cp_odometry_diagnostic.png" style="width: 800px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The Odometry Metrics section shows the following metrics if configured:</p>
+<ul class="simple">
+<li><p><strong>Odometry General</strong>: This let you visualize a component of the odometry across all available ROS odometry topics.</p></li>
+<li><p><strong>Diagnostic</strong>: This let you visualize a timeline of the status of each odometry. The timeline can have 3 colors RED for inconsistent, YELLOW for uncertain, and GREEN for consistent. A real-time consistency is also displayed</p></li>
+</ul>
+</section>
+<section id="dynamics-metrics">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Dynamics Metrics</a><a class="headerlink" href="#dynamics-metrics" title="Link to this heading"></a></h3>
+<a class="reference internal image-reference" href="../../_images/cp_dynamics_diagnostic.png"><img alt="Diagnostic page showing the Supervisor's dynamics diagnostic metrics." class="align-center" src="../../_images/cp_dynamics_diagnostic.png" style="width: 800px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The Dynamics Metrics section shows the following metrics if configured:</p>
+<ul class="simple">
+<li><p><strong>Input Domain signed distance</strong>: This let you visualize the signed distance of the input domain to it’s boundaries.</p></li>
+<li><p><strong>State Domain signed distance</strong>: This let you visualize the signed distance derivative of the state domain to it’s boundaries.</p></li>
+<li><p><strong>Degradation probability</strong>: This let you visualize the probability of the system being in a degraded state based on the distance between computed and measured state evolution.</p></li>
+<li><p><strong>Simulated vs measured state difference</strong>: This let you visualize the difference between the simulated and measured state at during the last integration period.</p></li>
+<li><p><strong>Dynamic Consistency</strong>: This let you visualize the consistency score of the dynamics model with the measured state in the last integration period.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
 
@@ -230,7 +290,7 @@ To get additional information about the error, you can check the logs under the 
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="diagnostics.html" class="btn btn-neutral float-left" title="Robot Diagnostic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cli.html" class="btn btn-neutral float-right" title="Command Line Interface (CLI)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="configuration/credentials.html" class="btn btn-neutral float-right" title="Credentials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

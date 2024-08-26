@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
 
   
-    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../../../_static/Favicon_dark.svg"/>
     <link rel="canonical" href="https://docs.3laws.io/sources/user_guide/reference/ros_topics.html" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
@@ -139,6 +139,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">/lll/rdm/clock_health_utc</span></code>: Statistics reporting variations in the synchronization of the robot clock and Universal time. This presents the current UTC time and real-time-clock value in nanoseconds since 1970, presenting the offset between the two.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/lll/rdm/domain_status</span></code>: The summary of the condition of the vehicle is presented in the following fields: system_status, behavior_status, hardware_status, perception_status, and control_status.  When everything is working properly, a status of OK is reported for each.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/lll/rdm/dynamic_consistency</span></code>: If a dynamical model has been added to the configuration, this topic will compare the predicted model behavior to the current behavior and provide discrepancy metrics.  Several values including differences in speeds between the platform and the model, and statistics on these differences are provided.  Time since last input and time since last state message are also provided (in nanoseconds).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/lll/rdm/odometry_consistency</span></code>: This topic will publish aggregated and detailed information about the difference between each available odometries and offer a status for each odometry that goes from OK to INCOHERENT.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/lll/rdm/incidents_log</span></code>: As events are detected in the system, they are published through this channel as text messages.  The “tags” area of the message includes discrete-value key-value pairs for severity and type of issue.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/lll/rdm/node_health</span></code>: Node health provides the status messages from various nodes. For example, the sensor_node provides details of the laserscan including the time since the last message, and average/min/max sending rates, receipt rates, and delays.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/lll/rdm/sensor_noise</span></code>: This metric presents statistics on the noise characteristics for the sensors including: average error, maximum error, maximum angle error, and percentage of sigma.  Each data set is tagged with the sensor it corresponds to.</p></li>

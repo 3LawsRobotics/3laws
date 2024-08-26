@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
 
   
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../_static/Favicon_dark.svg"/>
     <link rel="canonical" href="https://docs.3laws.io/sources/getting_started.html" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -28,7 +28,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Credentials" href="user_guide/configuration/credentials.html" />
+    <link rel="next" title="User Guide" href="user_guide.html" />
     <link rel="prev" title="Welcome to 3Laws Supervisor" href="../index.html" /> 
 </head>
 
@@ -56,14 +56,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/configuration/credentials.html">1. Credentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/configuration/robot_model.html">2. Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/configuration/supervisor.html">3. Supervisor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/configuration/localization.html">4. Localization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/configuration/perception.html">5. Perception</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
@@ -122,10 +115,11 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Raw 2D laserscan data</p></li>
+<li><p>Raw 2D Point Cloud data</p></li>
 <li><p>Pre-processed map of obstacles with their locations and shapes</p></li>
 </ul>
 </div></blockquote>
-<p>The <strong>3Laws Supervisor</strong> software is a <a class="reference external" href="http://www.ros.org">ROS</a> node available on x86_64 and ARM-64 processor architectures for multiple OS/ROS combinations:</p>
+<p>The <strong>3Laws Supervisor</strong> software is a deployed as a <a class="reference external" href="http://www.ros.org">ROS</a> node available on x86_64 and ARM-64 processor architectures for multiple OS/ROS combinations:</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Ubuntu Distribution</p></th>
@@ -177,16 +171,12 @@
 <section id="configure-supervisor">
 <h2><a class="toc-backref" href="#id3" role="doc-backlink">3. Configure Supervisor</a><a class="headerlink" href="#configure-supervisor" title="Link to this heading"></a></h2>
 <p>Now that the Control Panel backend is running, access the control panel from any machine on the same network as the robot by opening a web browser and navigating to the following URL: <code class="docutils literal notranslate"><span class="pre">http://&lt;IP_ADDRESS_OF_THE_ROBOT&gt;:8000/</span></code>.</p>
-<p>The initial view of the Control Panel is the “Configuration” page, which consists of sections (tabs) listed as:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/configuration/credentials.html">1. Credentials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/configuration/robot_model.html">2. Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/configuration/supervisor.html">3. Supervisor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/configuration/localization.html">4. Localization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/configuration/perception.html">5. Perception</a></li>
-</ul>
-</div>
+<p>The initial view of the Control Panel is the “Configuration” page, which consists of sections (tabs) listed as:
+<a class="reference internal" href="user_guide/configuration/credentials.html"><span class="doc">Credentials</span></a>
+, <a class="reference internal" href="user_guide/configuration/robot_model.html"><span class="doc">Model</span></a>
+, <a class="reference internal" href="user_guide/configuration/supervisor.html"><span class="doc">Supervisor</span></a>
+, <a class="reference internal" href="user_guide/configuration/localization.html"><span class="doc">Localization</span></a>
+, <a class="reference internal" href="user_guide/configuration/perception.html"><span class="doc">Perception</span></a></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The entire configuration process needs to be completed before starting the Supervisor software. If a part of the configuration is missing, the associated tab will be orange in color. Once the configuration is complete all tabs should be white.</p>
@@ -202,7 +192,7 @@
 </section>
 <section id="interface-with-your-stack">
 <h2><a class="toc-backref" href="#id4" role="doc-backlink">4. Interface with your stack</a><a class="headerlink" href="#interface-with-your-stack" title="Link to this heading"></a></h2>
-<p>In order to perform collision avoidance maneuvers, the Supervisor must be able to send commands to your robot actuators. These commands will be published by default on the <code class="docutils literal notranslate"><span class="pre">/lll/ram/filtered_input</span></code> topic (this is a customizable name via the Control Panel.</p>
+<p>In order to perform collision avoidance maneuvers, the Supervisor must be able to send commands to your robot actuators. These commands will be published by default on the <code class="docutils literal notranslate"><span class="pre">/lll/ram/filtered_input</span></code> topic (this is a customizable name via the Control Panel).</p>
 <p>Your low-level controller therefore needs to subscribe to this topic and apply the commands to your robot:</p>
 <a class="reference internal image-reference" href="../_images/ram_interfacing.png"><img alt="Operations page showing a configured robot that does not yet have sensor or planning data." class="align-center" src="../_images/ram_interfacing.png" style="width: 600px;" /></a>
 <p>For that, you can either create an extra dedicated subscriber in your low-level control stack to receive the commands from the Supervisor, or you can use ROS topic remapping feature to remap the low-level controller subscription from <code class="docutils literal notranslate"><span class="pre">/cmd</span></code> to <code class="docutils literal notranslate"><span class="pre">/lll/ram/filtered_input</span></code> (default):</p>
@@ -332,8 +322,8 @@
 </section>
 <section id="monitor-your-system-optional">
 <h2><a class="toc-backref" href="#id6" role="doc-backlink">6. Monitor your system (optional)</a><a class="headerlink" href="#monitor-your-system-optional" title="Link to this heading"></a></h2>
-<p>The Control Panel provides an <cite>Operation</cite> page that can be used to monitor the status of the Supervisor working with your stack.</p>
-<p>The Operation page requires that both the Supervisor and the Control Panel backend are running. Additionally, a <a class="reference external" href="https://github.com/RobotWebTools/rosbridge_suite">rosbridge websocket</a> must be running on the same network as the Supervisor.</p>
+<p>The Control Panel provides an <cite>Operation</cite> page that can be used to monitor the status of the Supervisor working with your stack and a <cite>diagnostic</cite> page to display metrics in realtime.</p>
+<p>These pages require that both the Supervisor and the Control Panel backend are running. Additionally, a <a class="reference external" href="https://github.com/RobotWebTools/rosbridge_suite">rosbridge websocket</a> must be running on the same network as the Supervisor.</p>
 <p>To install the rosbridge suite, run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>ros-&lt;DISTRO&gt;-rosbridge-suite
 </pre></div>
@@ -383,7 +373,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to 3Laws Supervisor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="user_guide/configuration/credentials.html" class="btn btn-neutral float-right" title="Credentials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="user_guide.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

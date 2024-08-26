@@ -196,7 +196,7 @@ The Fault Management part of the RAM is therefore in charge of managing 4 modes 
 Behavior Tuning
 ===============
 
-The RAM algorithm tries to find the best balance between balance between being minimally intrusive and being "smooth" in its interventions. This tradeoff can be modulated with the **Aggressiveness**, **Pointiness**, and **Avoidance Behavior** parameters (see :ref:`control panel configuration <config_sup_tuning>`):
+The RAM algorithm tries to find the best balance between balance between being minimally intrusive and being "smooth" in its interventions. This tradeoff can be modulated with the **Aggressiveness**, **Pointiness**, and **Evasion Aggressiveness** parameters (see :ref:`control panel configuration <config_sup_tuning>`):
 
 .. note::
   The Supervisor can handle more complex and case specific metrics of optimality. Please `contact 3laws`_ to discuss implementations that better suit your application needs.
@@ -222,12 +222,25 @@ The mathematical formulations used by the RAM rely on an implicit assumption abo
 Visualization
 =============
 
-The RAM publishes a set of markers to visualize the processing done in particular by the Kernel Generator in turning the Safety Map information into input level constraints:
+**With the Control Panel**
+
+The Control Panel offers a Minimap of the robot viewed from the Run-time Assurance Module's perspective. This visualization is updated in real-time with the latest data from the RAM and display safety margins, computed backup trajectory if available and closest point to the trajectory.
+
+.. image:: ../data/RAM_viz_minimap.png
+  :width: 800px
+  :align: center
+  :alt: RAM operation tab visualization
+
+|
+
+**With RViz**
+
+In addition The RAM publishes a set of markers to visualize the processing done in particular by the Kernel Generator in turning the Safety Map information into input level constraints:
 
 .. image:: ../data/ram_viz.png
   :width: 800px
   :align: center
-  :alt: RAM visualization
+  :alt: RAM rviz visualization
 
 |
 
