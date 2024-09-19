@@ -2,6 +2,27 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.2.2 (19th September 2024)
+
+Error handling hotfix
+
+### Fixed
+
+- Error returned by the control panel backend in case of a bad License key is now intelligible
+
+### Added
+
+N/A
+
+### Changed
+
+N/A
+
+### Removed
+
+N/A
+
+
 ## 1.2.1 (2nd September 2024)
 
 Diagnostic and Visualization tools added!
