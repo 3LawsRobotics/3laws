@@ -1,12 +1,12 @@
-# 3Laws Robotics Repository
+# 3Laws Repository
 
 <br>
 <p align="center">
   <a href="https://github.com/3LawsRobotics/3laws">
-    <img src="media/logo.png" alt="Logo" width="639" height="301">
+    <img src="media/logo.png" alt="Logo" width="640" height="139">
   </a>
 
-  <h3 align="center">3Laws Robotics' Public Repo</h3>
+  <h3 align="center">3Laws' Public Repo</h3>
 
   <p align="center">
     <a href="https://github.com/3LawsRobotics/3laws/"><strong>Explore the repo»</strong></a>
@@ -18,7 +18,7 @@
 
 ## Introduction
 
-This repository purpose is to offer an easy access to the binary files of the 3Laws Robotics products.
+This repository purpose is to offer an easy access to the binary files of the 3Laws products.
 The first public release of the [**Supervisor**](#Robot-diagnostic-module-installation)
 is already available at a beta state. To get more information about this product, please contact [support@3lawsrobotics.com](support@3lawsrobotics.com)
 
