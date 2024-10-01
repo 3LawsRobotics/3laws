@@ -52,7 +52,7 @@ This will run a script to auto-detect the system architecture, install any missi
 
 2. Start the Control Panel
 **************************
-Before the Supervisor can be started, it must be configured. In order to configure it, a web-based :doc:`Control Panel <user_guide/control_panel>` is provided.  The Control Panel creates if needed and modifies the file *~/.3laws/config/supervisor.yaml*.
+Before the Supervisor can be started, it must be configured. In order to configure it, a web-based :doc:`Control Panel <user_guide/control_panel>` is provided.  The Control Panel creates and modifies the file *~/.3laws/config/supervisor.yaml*.
 
 An existing (or backup) version of this file can be used if it is placed in the proper location; however, older versions might no be compatible with new software.  If this file is copied from another device, please update the license.
 
