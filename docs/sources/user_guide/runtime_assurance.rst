@@ -117,15 +117,16 @@ This model is a 3-state, 2-input model that describes the movement of a robot ev
 Safety Maps
 ===========
 
-The other critical RAM component is the definition of what the robot should avoid. The Supervisor technology is able to enforce any arbitrary non-linear constraint on the robot's state. These constraints are organized into what 3Laws calls **Safety Maps**. A safety map is an object defining a set of robot state constraints. It can be updated when new information about the robot environment is available. The constraints to be enforced can then be evaluated at a given robot state robot and return a vector of the values at that state, along with information on the gradient of the constraints w.r.t variations in state.
+The other critical RAM component is the definition of what the robot should avoid. The Supervisor technology is able to enforce any arbitrary non-linear constraint on the robot's state. These constraints are organized into what 3Laws calls **Safety Maps**. A safety map is an object defining a set of robot state constraints. It can be updated when new information about the robot environment is available. The constraints to be enforced can then be evaluated at a given robot state and return a vector of the values at that state, along with information on the gradient of the constraints w.r.t variations in state.
 
-The Supervisor ships with two safety maps:
-  - geometric collision constraints as determined by data from a laserscan sensor, and
-  - a list of obstacles with absolute locations.
+The Supervisor ships with three safety maps:
+  - One based on 2D laserscan points that define discrete number of constraints in a 2D space.
+  - One based on 3D lidar that define discrete constraints in a 3D space.
+  - One last based on a list of obstacles with absolute locations.
 
-Laserscan
------------
-The laserscan Safety Map defines constraints corresponding to the distance between the robot geometry and a carefully chosen set of `capsules <https://en.wikipedia.org/wiki/Capsule_(geometry)>`_ capturing the critical points in the laserscan. The Supervisor enforces a constraint that the robot does not collide (intersect) with any of these capsules. The capsule sizes are defined through the **collision distance threshold** parameter (see :ref:`control panel configuration <config_sup_collision_distance>`).
+Laserscan and Lidar
+---------------------
+The laserscan and lidar safety maps defines constraints corresponding to the distance between the robot geometry and a carefully chosen set of `capsules <https://en.wikipedia.org/wiki/Capsule_(geometry)>`_ capturing the critical points in the laserscan or lidar. The Supervisor enforces a constraint that the robot does not collide (intersect) with any of these capsules. The capsule sizes are defined through the **collision distance threshold** parameter (see :ref:`control panel configuration <config_sup_collision_distance>`).
 
 This safety map gets updated every time a new scan gets received on the specified topic (see :ref:`control panel configuration <config_perception_laserscan>`).
 
@@ -134,11 +135,11 @@ This safety map gets updated every time a new scan gets received on the specifie
 Obstacles
 ---------
 
-The Obstacle Safety Map defines constraint equations corresponding to the distance between the robot geometry and a list of obstacles geometries.
+The obstacle safety map defines constraint equations corresponding to the distance between the robot geometry and a list of obstacles geometries.
 
 This safety map gets updated every time a new list of obstacles is received on the specified topic (see :ref:`control panel configuration <config_perception_obstacles>`).
 
- This list of obstacles is a topic of type ``lll_msgs/ObjectArray``:
+This list of obstacles is a topic of type ``lll_msgs/ObjectArray``:
 
 .. code:: text
 
@@ -161,7 +162,7 @@ where the following fields of Object must be specified:
   geometry_msgs/PoseWithCovariance pose
 
 .. note::
-  The Supervisor technology supports many more sensors and constraint representations. Please `contact 3laws`_ to learn more about all the type of constraints that can be implemented to satisfy other applications' needs.
+  The Supervisor core technology supports many more sensors and constraint representations. Please `contact 3laws`_ to learn more about all the type of constraints that can be implemented to satisfy other applications' needs.
 
 
 Operations and Fault Management
@@ -175,13 +176,13 @@ The RAM performs its computations at regular intervals, whose rate is specified 
 
 The Fault Management part of the RAM is therefore in charge of managing 4 modes of operation with configurable behaviors (see :ref:`control panel configuration <config_sup_fault_management>`):
 
-- **Passthrough**: The RAM publishes the latest desired input message it received un-altered. It won't publish anything until a first message has been received. This mode can be transition in-to and out-of at any time by publishing a boolean to the **/lll/ram/enable** topic (true to enter Passthrough mode, false to exit Passthrough mode).
+- **Passthrough**: The RAM publishes the latest desired input message it received un-altered. It won't publish anything until a first message has been received. This mode can be transition in-to and out-of at any time by publishing a boolean to the **/lll/ram/enable** topic (false to enter Passthrough mode, true to exit Passthrough mode).
 
 - **Initialization**: Waiting to receive a first message from one of the 3 critical sources of data.
 
 - **Nominal operation**: The RAM is publishing the best "safe" input command based on the latest data received.
 
-- **Fault**: The RAM is not able to perform its function, and realizes the configured **Failure Command Mode**:
+- **Fault**: The RAM is not able to perform its function due to an internal error or an external timeout, and realizes the configured **Failure Command Mode**:
 
   * Send Zero: An input of 0 is published.
 
@@ -190,7 +191,7 @@ The Fault Management part of the RAM is therefore in charge of managing 4 modes 
   * Passthrough: The latest desired command is published. This option must be used with care as it will give the planning stack (and particularly human drivers) a false sense of the RAM being functional when it actually isn't.
 
 .. important::
-  Whether or not the RAM is allowed to leave a Fault mode if it can is configurable inside the :ref:`control panel <config_sup_fault_management>`.
+  Whether or not the RAM is allowed to leave a Fault mode and recover from it is configurable inside the :ref:`control panel <config_sup_fault_management>`.
 
 
 Behavior Tuning

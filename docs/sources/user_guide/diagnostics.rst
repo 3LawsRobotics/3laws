@@ -127,38 +127,95 @@ This module publishes the following metrics:
   The process covariance matrix used for the statical analysis is currently the identity matrix.
 
 
-Node Health
------------
+System Health
+---------------
 
-Typical autonomy stacks are composed of **multiple nodes**, each responsible for a specific task. The Node Health module monitors the health of these nodes by checking if they are running and if they are publishing data properly. This module is useful for detecting issues like node crashes or communication loses between nodes. This is critical for nodes like Localization and Perception that are central to the RAM's proper operation.
+Typical autonomy stacks are composed of **multiple Systems** (One per computer) than run **nodes** (One per process), each responsible for a specific task than each can publish data on different topics (One per data type). The System Health module monitors the health of this tree by checking a number of information. This module is useful for detecting issues like node crashes or communication loses between nodes. This is critical for nodes like Localization and Perception that are central to the RAM's proper operation.
 
-A node is defined by the set of topics it publishes. The Node Health module monitors the health of the nodes by checking if the topics are being published and if the data is consistent with the expected values.
+.. warning::
+  The current version of the Supervisor support monitoring of only one system (with any number of nodes).
+
+A node is defined by the set of topics it publishes and eventually a process ID (OS pid or command line string). The Node Health module monitors the health of the nodes by checking if the topics are being published and if the data is consistent with the expected rate and values.
 
 The associated metric is published at 1hz, and is an aggregate of the signal data received over that period.
 
 This module publishes the following metrics:
 
-- **node_health**: The health of the nodes in the system. The important fields of the associated message are:
+- **system_health**: The health of the system running the Supervisor. The important fields of the associated message are:
 
-  - **timeout**: A boolean indicating if all the nodes's topics have timed out.
+  - **cpu_load**: The CPU usage of the system in percentage.
 
-  - **ok**: A boolean indicating that none of the nodes's topics have timed out.
+  - **ram_usage**: The RAM usage of the system in percentage.
 
-  - **error_code**: An enum indicating the type of error that occurred. The possible values are: **[ok, some_topics_timeout, out_of_bounds, all_topics_timeout]**
+  - **disk_usage**: The used disk space of the system in percentage of total capacity.
 
-  - **topics**: A list of information for each of the node's topics. Each topic message contains the following important fields:
+  - **network_read**: The network read usage of the system in bytes/s.
 
-    - **topic_id**: The topic's name/identifier.
+  - **network_write**: The network write usage of the system in bytes/s.
 
-    - **timeout**: A boolean indicating if the topic has timed out.
+  - **cpu_nb**: The number of CPUs available on the system.
 
-    - **has_timestamp**: A boolean indicating if the topic's data has a non-zero timestamp.
+  - **procs_nb**: The number of processes running on the system.
 
-    - **sender_rate**: The average rate at which the topic is being published by the node.
+  - **nodes**: The health of the nodes in a list in the system. The important fields of the associated message are:
 
-    - **receiver_rate**: The average rate at which the topic is being received by the RDM.
+    - **timeout**: A boolean indicating if all the nodes's topics have timed out.
 
-    - **delay**: The average delay between the time the message was sent and the time it was received.
+    - **ok**: A boolean indicating that none of the nodes's topics have timed out.
+
+    - **error_code**: An enum indicating the type of error that occurred. The possible values are: **[ok, some_topics_timeout, out_of_bounds, all_topics_timeout]**
+
+    - **process**: Process related data:
+
+      - **status**: The status of the process. The possible values are: **[AMBIGUOUS, RUNNING, DEAD]** (AMBIGUOUS means that the process is not found or multiple are found based on the provided string).
+
+      - **cpu_usage**: The CPU usage of the process in percentage.
+
+      - **cpu_usage_total**: The total CPU usage of the process in percentage.
+
+      - **ram_usage**: The RAM usage of the process in percentage.
+
+      - **n_threads**: The number of threads of the process.
+
+      - **process_up_time**: The time the process has been up (CPU time used) in seconds.
+
+      - **process_run_time**: The time the process has been running in seconds.
+
+      - **io_total_read**: The total read IO of the process in bytes.
+
+      - **io_total_write**: The total write IO of the process in bytes.
+
+      - **io_disk_read**: The disk read IO of the process in bytes.
+
+      - **io_disk_write**: The disk write IO of the process in bytes.
+
+    - **topics**: A list of information for each of the node's topics. Each topic message contains the following important fields:
+
+      - **topic_id**: The topic's name/identifier.
+
+      - **timeout**: A boolean indicating if the topic has timed out.
+
+      - **has_timestamp**: A boolean indicating if the topic's data has a non-zero timestamp.
+
+      - **sender_rate**: The average rate at which the topic is being published by the node.
+
+      - **receiver_rate**: The average rate at which the topic is being received by the RDM.
+
+      - **delay**: The average delay between the time the message was sent and the time it was received.
+
+      - **sample_size**: The number of samples received within the aggregation period.
+
+      - **wrong_size**: A boolean indicating if the signal received has an unexpected size.
+
+      - **bad_timestamp**: A boolean indicating if the signal received has a bad timestamp, i.e. a timestamp equal to 0.
+
+      - **has_nan**: A boolean indicating if the signal received has NaN values.
+
+      - **has_infinity**: A boolean indicating if the signal received has infinity values.
+
+      - **has_zero**: A boolean indicating if the signal received has values exactly equal to `+0.f`
+
+      - **has_subnormal**: A boolean indicating if the signal received has subnormal values.
 
 
 Sensor characterization
@@ -202,67 +259,6 @@ This module publishes the following metrics:
 .. important::
   Currently, the expected sensor measurement covariance for 2D laserscans is 1m.
 
-
-Signal Health
--------------
-
-The signal health module is responsible for monitoring signals between the various sub-systems for issues including timeouts, bounds on signals and rates, NaNs, and incorrect sizes. If critical signals expected by the RAM are not healthy, the RAM may fail. This could lead to collisions.
-
-The associated metric is published at 1hz, and is an aggregate of the signal data received over that period.
-
-This module publishes the following metrics:
-
-- **signal_health**: The health of the signals in the system. The important fields of the associated message are:
-
-  - **timeout**: A boolean indicating if any of the signal has timed out.
-
-  - **sample_size**: The number of samples received within the aggregation period.
-
-  - **wrong_size**: A boolean indicating if the signal received has an unexpected size.
-
-  - **bad_timestamp**: A boolean indicating if the signal received has a bad timestamp, i.e. a timestamp equal to 0.
-
-  - **has_nan**: A boolean indicating if the signal received has NaN values.
-
-  - **has_infinity**: A boolean indicating if the signal received has infinity values.
-
-  - **has_zero**: A boolean indicating if the signal received has values exactly equal to `+0.f`
-
-  - **has_subnormal**: A boolean indicating if the signal received has subnormal values.
-
-  - **error_code**: An enum indicating the type of error that occurred. The possible values are: **[ok, bad_values, out_of_bounds, timeout]**
-
-  - **norm_type**: Not populated yet.
-
-  - **norm**: Not populated yet.
-
-  - **values**: Not populated yet.
-
-  - **rates**: Not populated yet.
-
-
-System Health
--------------
-
-The RAM needs to receive data and compute in a timely manner. The System Health module is responsible for monitoring the health of the local computational resources by checking values related to CPU and memory usage. High CPU and memory usage can lead to delays in RAM publication of commands.
-
-This module publishes the following metrics:
-
-- **system_health**: The health of the system running the Supervisor. The important fields of the associated message are:
-
-  - **cpu_load**: The CPU usage of the system in percentage.
-
-  - **ram_usage**: The RAM usage of the system in percentage.
-
-  - **disk_usage**: The used disk space of the system in percentage of total capacity.
-
-  - **network_read**: The network read usage of the system in bytes/s.
-
-  - **network_write**: The network write usage of the system in bytes/s.
-
-  - **cpu_nb**: The number of CPUs available on the system.
-
-  - **procs_nb**: The number of processes running on the system.
 
 
 Incident Diagnostic

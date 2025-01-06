@@ -33,10 +33,6 @@ The Supervisor's core functionality is the :doc:`Runtime Assurance Module<user_g
 
 Complementary to the RAM, the Supervisor integrates a :doc:`Robot Diagnostic Module<user_guide/diagnostics>` (RDM). This module is responsible for monitoring the health and safety of these critical sub-systems more holistically. The monitoring results are available as metrics that are published in real-time on ROS topics. These metrics can be used to better understand the behavior of the robot and to trigger alternative actions.
 
-.. warning::
-
-  The RDM is currently in **experimental** phase, and the diagnostic performed by the RDM is not fed to the RAM's Fault Management system.
-
 In order for the RAM and RDM to work effectively, they need to be configured based on the robot's characteristics. This is done through the :doc:`Control Panel<user_guide/control_panel>` (CP), a web-based application that guides the user through the Supervisor configuration. CP also provides a way to visualize the robot's safety metrics in real time.
 
 The Supervisor package also includes a :doc:`Command Line Interface<user_guide/cli>` (CLI) for managing the Control Panel execution and Supervisor software updates from a terminal.

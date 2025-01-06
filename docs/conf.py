@@ -54,7 +54,7 @@ sphinx_tabs_disable_tab_closing = True
 
 templates_path = ["_templates"]
 html_static_path = ["_static"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+exclude_patterns = ["_build", "build", "Thumbs.db", ".DS_Store"]
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -68,3 +68,11 @@ html_theme = "sphinx_rtd_theme"
 
 # The master toctree document.
 master_doc = "index"
+
+rst_prolog = """
+.. include:: special.rst
+"""
+
+html_css_files = [
+    "css/text.css",
+]

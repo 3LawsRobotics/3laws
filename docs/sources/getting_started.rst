@@ -37,7 +37,7 @@ To install Supervisor on the system, open a terminal (on the target device) and 
 
   bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install.sh)
 
-This will run a script to auto-detect the system architecture, install any missing dependencies, download the right binary, and guide you through any necessary configuration steps.
+This will run a script to auto-detect the system architecture, install any missing dependencies, download the binaries, and guide you through any necessary configuration steps.
 
 .. important::
 
@@ -54,7 +54,7 @@ This will run a script to auto-detect the system architecture, install any missi
 **************************
 Before the Supervisor can be started, it must be configured. In order to configure it, a web-based :doc:`Control Panel <user_guide/control_panel>` is provided.  The Control Panel creates and modifies the file *~/.3laws/config/supervisor.yaml*.
 
-An existing (or backup) version of this file can be used if it is placed in the proper location; however, older versions might no be compatible with new software.  If this file is copied from another device, please update the license.
+An existing (or backup) version of this file can be used if it is placed in the proper location; however, older versions might no be compatible with new software.  If this file is copied from another device, the license key have to be changed.
 
 To enable the Control Panel backend service, open a terminal and run the following command:
 
@@ -79,7 +79,7 @@ The initial view of the Control Panel is the "Configuration" page, which consist
 
 .. warning::
 
-  The entire configuration process needs to be completed before starting the Supervisor software. If a part of the configuration is missing, the associated tab will be orange in color. Once the configuration is complete all tabs should be white.
+  The entire configuration process needs to be completed before starting the Supervisor software. If a part of the configuration is missing, the associated tab will be :bg_orange:`orange` in color. Once the configuration is complete all tabs should be white.
 
 .. note::
 
@@ -94,7 +94,7 @@ The initial view of the Control Panel is the "Configuration" page, which consist
 4. Interface with your stack
 *****************************
 
-In order to perform collision avoidance maneuvers, the Supervisor must be able to send commands to your robot actuators. These commands will be published by default on the ``/lll/ram/filtered_input`` topic (this is a customizable name via the Control Panel).
+In order to perform collision avoidance maneuvers, the Supervisor must be able to send commands to your robot actuators. These commands will be published by default on the ``/lll/ram/filtered_input`` topic *(Customizable name via the Control Panel)*.
 
 Your low-level controller therefore needs to subscribe to this topic and apply the commands to your robot:
 
@@ -253,8 +253,8 @@ To include the Supervisor as part of your launch file, use the following code sn
 
 If ROS is unable to find the ``lll_supervisor``, re-run the source command for the ROS paths.
 
-6. Monitor your system (optional)
-*********************************
+6. Monitor your system
+***********************
 
 The Control Panel provides an `Operation` page that can be used to monitor the status of the Supervisor working with your stack and a `diagnostic` page to display metrics in realtime.
 
@@ -293,8 +293,8 @@ To start the rosbridge websocket, run the following command:
   See :ref:`Control Panel reference <control_panel_ops>` for more details on the operation page.
 
 
-7. Update (optional)
-********************
+7. Update
+*********
 
 You can check for updates to the Supervisor by running the following command:
 
