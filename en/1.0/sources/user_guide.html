@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -5,25 +7,21 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Guide &mdash; 3Laws 1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/text.css" />
 
   
     <link rel="canonical" href="https://docs.3laws.io/sources/user_guide.html" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -42,9 +40,6 @@
           <a href="../index.html" class="icon icon-home">
             3Laws
           </a>
-              <div class="version">
-                1.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -100,10 +95,12 @@
 </div>
 <p>The <strong>3Laws Supervisor</strong> is a software-based layer providing reliable and high-performance sense-and-avoid capabilities for a variety of <strong>dynamic platforms</strong>. It intervenes to prevent collisions when the autonomy stack or human command layer fails to do so.</p>
 <p>The Supervisor is designed to sit between the autonomy stack and the robot’s low-level controllers:</p>
-<a class="reference internal image-reference" href="../_images/architecture.png"><img alt="Architecture schema" class="align-center" src="../_images/architecture.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../_images/architecture.png"><img alt="Architecture schema" class="align-center" src="../_images/architecture.png" style="width: 600px;" />
+</a>
 <p>Nominally, the Supervisor forwards <strong>un-altered</strong> the desired commands from the autonomy/planning stack to the robot. However, when the commands appear to drive the vehicle towards a collision or fail in some way, the Supervisor can intervene by modifying the desired commands in a <strong>minimally intrusive</strong> way to avoid a collision.</p>
 <p>The Supervisor is delivered as a single package containing various tools and modules working together toward enabling these <strong>sense-and-avoid capabilities</strong>:</p>
-<a class="reference internal image-reference" href="../_images/architecture_detailed.png"><img alt="Detailed architecture schema" class="align-center" src="../_images/architecture_detailed.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../_images/architecture_detailed.png"><img alt="Detailed architecture schema" class="align-center" src="../_images/architecture_detailed.png" style="width: 800px;" />
+</a>
 <p>The Supervisor’s core functionality is the <a class="reference internal" href="user_guide/runtime_assurance.html"><span class="doc">Runtime Assurance Module</span></a> (RAM). This module is responsible for continuously filtering the desired commands sent by the planner to the vehicle in order to prevent unsafe behaviors in a minimally invasive way. This module is also responsible for implementing the fault management strategy in case a failure of a critical component of the system is detected.</p>
 <p>Complementary to the RAM, the Supervisor integrates a <a class="reference internal" href="user_guide/diagnostics.html"><span class="doc">Robot Diagnostic Module</span></a> (RDM). This module is responsible for monitoring the health and safety of these critical sub-systems more holistically. The monitoring results are available as metrics that are published in real-time on ROS topics. These metrics can be used to better understand the behavior of the robot and to trigger alternative actions.</p>
 <div class="admonition warning">

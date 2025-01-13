@@ -2,6 +2,39 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.3.0 (13th January 2025)
+
+### Highlight
+
+- New system description
+- Support for remote computer diagnostics (Compute, Clock, Delay)
+- Diagnostics visualization in Control Panel
+
+### Fixed
+
+- Various UI bugs
+- Improved minimap performance with large laserscan point number
+- Supervisor timeout is caught by the operation tab of the control panel
+
+### Added
+
+- Support for root ROS namespace
+- Controller tracking metric
+- Systems health visualization
+- Add resume from failure cooldown option
+
+### Changed
+
+- rename actuators into control_commands in configuration
+- Systems health metric -> System tree with systems, nodes and topic
+- Improved carousel UI
+- New 3Laws Theme
+
+
+### Removed
+
+- Front Wheel steering robot model support
+
 ## 1.2.2 (19th September 2024)
 
 Error handling hotfix

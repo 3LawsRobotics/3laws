@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
@@ -5,30 +7,26 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Localization &mdash; 3Laws latest documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/text.css?v=1a5bfd83" />
 
   
     <link rel="shortcut icon" href="../../../_static/Favicon_dark.svg"/>
     <link rel="canonical" href="https://docs.3laws.io/sources/user_guide/configuration/localization.html" />
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Perception" href="perception.html" />
-    <link rel="prev" title="Supervisor" href="supervisor.html" /> 
+    <link rel="prev" title="Robot Model" href="robot_model.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,9 +40,6 @@
           <a href="../../../index.html" class="icon icon-home">
             3Laws
           </a>
-              <div class="version">
-                latest
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -60,11 +55,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../runtime_assurance.html">Run-time Assurance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../diagnostics.html">Robot Diagnostics</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../control_panel.html">Control Panel</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="credentials.html">1. Credentials configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="credentials.html">1. General configuration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="robot_model.html">2. Model configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="supervisor.html">3. Supervisor configuration</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">4. Localization configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="perception.html">5. Perception configuration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">3. Localization configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="perception.html">4. Perception configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.html">5. Control configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supervisor.html">6. Supervisor configuration</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../cli.html">CLI</a></li>
@@ -108,7 +104,8 @@
 <section id="localization-topic">
 <h2>Localization topic<a class="headerlink" href="#localization-topic" title="Link to this heading"></a></h2>
 <p>Dialogs to connect to the state information provided for the robot are on the <strong>Configuration &gt; Localization page</strong>.</p>
-<a class="reference internal image-reference" href="../../../_images/cpanel4.png"><img alt="Configuration &gt; Localization Tab" class="align-center" src="../../../_images/cpanel4.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/cpanel4.png"><img alt="Configuration &gt; Localization Tab" class="align-center" src="../../../_images/cpanel4.png" style="width: 600px;" />
+</a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -119,7 +116,8 @@
 <section id="state-measurement-covariance">
 <h2>State measurement covariance<a class="headerlink" href="#state-measurement-covariance" title="Link to this heading"></a></h2>
 <p>This section allows you to specify the uncertainty of the state. This will be used both by the diagnostic module and the run-time assurance module to integrate into the filtering the uncertainty of the measure.</p>
-<a class="reference internal image-reference" href="../../../_images/state_cov.png"><img alt="Configuration &gt; Localization Tab" class="align-center" src="../../../_images/state_cov.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/state_cov.png"><img alt="Configuration &gt; Localization Tab" class="align-center" src="../../../_images/state_cov.png" style="width: 600px;" />
+</a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -129,7 +127,8 @@
 <h2>Odometry parameters<a class="headerlink" href="#odometry-parameters" title="Link to this heading"></a></h2>
 <p>This section allows you to specify the odometries end point and their respective parameters.</p>
 <p>Multiple odometries can be specified.</p>
-<a class="reference internal image-reference" href="../../../_images/odometry_config.png"><img alt="Configuration &gt; Localization Tab" class="align-center" src="../../../_images/odometry_config.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/odometry_config.png"><img alt="Configuration &gt; Localization Tab" class="align-center" src="../../../_images/odometry_config.png" style="width: 600px;" />
+</a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -155,7 +154,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="supervisor.html" class="btn btn-neutral float-left" title="Supervisor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="robot_model.html" class="btn btn-neutral float-left" title="Robot Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="perception.html" class="btn btn-neutral float-right" title="Perception" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

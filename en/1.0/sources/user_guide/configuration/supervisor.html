@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
@@ -5,24 +7,20 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Supervisor &mdash; 3Laws 1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/text.css" />
 
   
     <link rel="canonical" href="https://docs.3laws.io/sources/user_guide/configuration/supervisor.html" />
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=f2a433a1"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -41,9 +39,6 @@
           <a href="../../../index.html" class="icon icon-home">
             3Laws
           </a>
-              <div class="version">
-                1.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -123,7 +118,8 @@
 <p>This page contains configuration entries for both the monitoring and Run-time Assurance Module components.</p>
 <section id="supervisor-interface">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">Supervisor Interface</a><a class="headerlink" href="#supervisor-interface" title="Link to this heading"></a></h2>
-<a class="reference internal image-reference" href="../../../_images/supervisor_parameters.png"><img alt="../../../_images/supervisor_parameters.png" src="../../../_images/supervisor_parameters.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_parameters.png"><img alt="../../../_images/supervisor_parameters.png" src="../../../_images/supervisor_parameters.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Upload log to 3laws robotics cloud</strong>: For debugging purposes, 3Laws creates a log file when Supervisor is started. The file is stored in <em>~/.3laws/logs</em>. Enabling this option allows 3Laws to provide better support with troubleshooting if there is a problem.</p></li>
 </ul>
@@ -138,12 +134,14 @@
 <h2><a class="toc-backref" href="#id2" role="doc-backlink">Run-time Assurance Module</a><a class="headerlink" href="#run-time-assurance-module" title="Link to this heading"></a></h2>
 <section id="desired-control-input-and-computed-safe-control-input">
 <h3><a class="toc-backref" href="#id3" role="doc-backlink">Desired Control Input and Computed Safe Control Input</a><a class="headerlink" href="#desired-control-input-and-computed-safe-control-input" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_desired_control_input.png"><img alt="../../../_images/supervisor_desired_control_input.png" src="../../../_images/supervisor_desired_control_input.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_desired_control_input.png"><img alt="../../../_images/supervisor_desired_control_input.png" src="../../../_images/supervisor_desired_control_input.png" style="width: 800px;" />
+</a>
 <p>This is where you can define the ROS topic that the Supervisor should listen to for the desired control input. It takes as entries the topic name, its type, Quality of service, signal rate and an optional mask.</p>
 </section>
 <section id="general-parameters">
 <h3><a class="toc-backref" href="#id4" role="doc-backlink">General Parameters</a><a class="headerlink" href="#general-parameters" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_general_parameters.png"><img alt="../../../_images/supervisor_general_parameters.png" src="../../../_images/supervisor_general_parameters.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_general_parameters.png"><img alt="../../../_images/supervisor_general_parameters.png" src="../../../_images/supervisor_general_parameters.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Desired control input</strong>: This is the set of commands requesting speed and rotation (or speed and steering) that the autonomy stack is publishing. The ROS message type is needed so that Supervisor knows what to monitor in order to calculate the barrier function value. The message quality and receipt rate are monitored as part of the aggregated metrics, and if it fails to arrive within the expected time [1/(signal rate) * Timeout factor], an event will be created and the Run-time Assurance Module will transition to the failure command mode.</p></li>
 <li><p><strong>Computed safe control input</strong>: The right side of this area is purely informational. However, if the robot is to be controlled by the run-time assurance signal, it needs to subscribe to the message that is presented here. Alternatively, the launch file for Supervisor can be modified so that <em>/lll/ram/filtered_input</em> is remapped to the command signal expected by the platform.</p></li>
@@ -158,7 +156,8 @@
 </section>
 <section id="tuning">
 <span id="config-sup-tuning"></span><h3><a class="toc-backref" href="#id5" role="doc-backlink">Tuning</a><a class="headerlink" href="#tuning" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_tuning.png"><img alt="../../../_images/supervisor_tuning.png" src="../../../_images/supervisor_tuning.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_tuning.png"><img alt="../../../_images/supervisor_tuning.png" src="../../../_images/supervisor_tuning.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Tuning &gt; Aggressiveness</strong>: This parameter controls how far from the nearest obstacle the safety filter starts having more effect on the commands and how strongly the safety filter pushes the robot back into the “safe” region if the safety definition has been violated. A larger value means that the control inputs from the planner will start to be modified when the robot is closer to an object/obstacle. That is, a larger value allows the platform to approach objects faster, and get closer.  If it gets too close, the Supervisor will push away from the object harder with a higher value.  A lower value will lead to a more tentative travel that stays farther away from objects.  In general lower values will produce larger margins. Typical values are between 0.5 and 1.0, but values in the range of 1000 might be used in reasonable situations.</p></li>
 <li><p><strong>Tuning &gt; Pointiness</strong>: A rectangular (box) shape has an unintended behavior that if the robot comes towards a narrow object directly in front of it, the closest point calculation will select the center-line of the box as the evaluation point for distance.  If the outer corners get closer to the object, the barrier function will want to increase the distance between the object and the box, so it will tend to center the box relative to the object.  A more desirable behavior is for the box to turn away from the object to be able to get around it.  The <em>pointiness</em> parameter is a way of accomplishing this.  If the box has a nose with sharper curvature, the barrier function will push it away from the object laterally, rather than simply trying to increase the measured closest distance between the box and the object.  So increasing the “pointiness” will encourage the vehicle to “turn away” from obstacles that are directly in front.</p></li>
@@ -167,7 +166,8 @@
 </section>
 <section id="fault-management">
 <span id="config-sup-fault-management"></span><h3><a class="toc-backref" href="#id6" role="doc-backlink">Fault Management</a><a class="headerlink" href="#fault-management" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_fault_management.png"><img alt="../../../_images/supervisor_fault_management.png" src="../../../_images/supervisor_fault_management.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_fault_management.png"><img alt="../../../_images/supervisor_fault_management.png" src="../../../_images/supervisor_fault_management.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Fault Management &gt; Failure Command Mode</strong>: The run-time assurance constantly monitors to ensure that it has enough data to determine whether the robot is in a safe condition. The minimum data required is the vehicle state, the laser scan values, and the commanded/desired input. If any of these is missing the RTA can switch to the failure command mode:</p></li>
 <li><p><strong>Send Zero</strong>:  In this mode the run-time assurance commands zero speed and zero turn/rotation in order to bring the vehicle to a stop.</p></li>
@@ -177,7 +177,8 @@
 </section>
 <section id="advanced-settings">
 <h3><a class="toc-backref" href="#id7" role="doc-backlink">Advanced Settings</a><a class="headerlink" href="#advanced-settings" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_advanced_settings.png"><img alt="../../../_images/supervisor_advanced_settings.png" src="../../../_images/supervisor_advanced_settings.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_advanced_settings.png"><img alt="../../../_images/supervisor_advanced_settings.png" src="../../../_images/supervisor_advanced_settings.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Advanced Settings &gt; Accept wrong size laserscan</strong>: One of the checks that is made on the incoming data is that the laserscan is delivering the expected number of scan points each frame. However, there are many laser scanners that are not consistent in the number of scan points they deliver. Checking this option allows for laser scanners with non-constant number of scan points reported.</p></li>
 </ul>
@@ -188,7 +189,8 @@
 </section>
 <section id="monitoring-module">
 <h2><a class="toc-backref" href="#id8" role="doc-backlink">Monitoring Module</a><a class="headerlink" href="#monitoring-module" title="Link to this heading"></a></h2>
-<a class="reference internal image-reference" href="../../../_images/supervisor_monitoring_module.png"><img alt="../../../_images/supervisor_monitoring_module.png" src="../../../_images/supervisor_monitoring_module.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_monitoring_module.png"><img alt="../../../_images/supervisor_monitoring_module.png" src="../../../_images/supervisor_monitoring_module.png" style="width: 800px;" />
+</a>
 <p>Supervisor can publish a variety of diagnostic messages related to the health of the system clock, the dynamic consistency of the motion of the platform, individual node health, signal coherency, and summarized system health.  The published messages are discussed in <a class="reference internal" href="../reference/ros_topics.html#reference-ros-topics"><span class="std std-ref">Ros Topics</span></a>.   These messages in the <em>/lll/rdm</em> domain are only published if the Monitor is set to Active.</p>
 <blockquote>
 <div><ul class="simple">
@@ -200,7 +202,8 @@
 </section>
 <section id="supervisor-activation-logic">
 <h2><a class="toc-backref" href="#id9" role="doc-backlink">Supervisor activation logic</a><a class="headerlink" href="#supervisor-activation-logic" title="Link to this heading"></a></h2>
-<a class="reference internal image-reference" href="../../../_images/supervisor_activation_logic.png"><img alt="../../../_images/supervisor_activation_logic.png" src="../../../_images/supervisor_activation_logic.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_activation_logic.png"><img alt="../../../_images/supervisor_activation_logic.png" src="../../../_images/supervisor_activation_logic.png" style="width: 800px;" />
+</a>
 <p>The bottom section relates to republishing the control commands to the robot that are being sent from the autonomy stack. The values will be published on the <em>lll/ram/filtered_input</em> channel if the Run-time Assurance Module is activate or not. However, the values will only be different from the <em>Desired control input</em> if the Run-time Assurance Module is active.</p>
 <ul class="simple">
 <li><p><strong>Finite States</strong> are messages that the Diagnostics can listen to and issue events when the value of the finite state matches a predefined value.</p></li>

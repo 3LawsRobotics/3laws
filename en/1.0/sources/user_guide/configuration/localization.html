@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
@@ -5,24 +7,20 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Localization &mdash; 3Laws 1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/text.css" />
 
   
     <link rel="canonical" href="https://docs.3laws.io/sources/user_guide/configuration/localization.html" />
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=f2a433a1"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -41,9 +39,6 @@
           <a href="../../../index.html" class="icon icon-home">
             3Laws
           </a>
-              <div class="version">
-                1.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -104,7 +99,8 @@
   <section id="localization">
 <h1>Localization<a class="headerlink" href="#localization" title="Link to this heading"></a></h1>
 <p>Dialogs to connect to the state information provided for the robot are on the <strong>Configuration &gt; Localization page</strong>.</p>
-<a class="reference internal image-reference" href="../../../_images/cpanel4.png"><img alt="Configuration &gt; Localization Tab" class="align-center" src="../../../_images/cpanel4.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/cpanel4.png"><img alt="Configuration &gt; Localization Tab" class="align-center" src="../../../_images/cpanel4.png" style="width: 600px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Localization topic</strong>: The connection to the ROS state topic is configured in this area. As with input commands, the message topic name, message topic type, expected message topic quality, and expected message rates are specified. If the message quality fails or the message receipt rate is not met, the monitor will issue alerts, and the Superisor (Run-time Assurance) will switch to the Failsafe strategy. The mask needs to be customized if the localization topic does not respect the standard ROS message. The index mapping from the input vector to the expected states (x-position, y-position, yaw) needs to be set.  The primary use of the localization message is to provide a MarkerArray for visualization mapped to a global/odom frame rather than providing just the base-frame view where the frame stays still and the outside world moves relative to it.</p></li>
 </ul>

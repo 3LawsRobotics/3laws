@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
@@ -5,30 +7,26 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Supervisor &mdash; 3Laws latest documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/text.css?v=1a5bfd83" />
 
   
     <link rel="shortcut icon" href="../../../_static/Favicon_dark.svg"/>
     <link rel="canonical" href="https://docs.3laws.io/sources/user_guide/configuration/supervisor.html" />
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
-        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Localization" href="localization.html" />
-    <link rel="prev" title="Robot Model" href="robot_model.html" /> 
+    <link rel="next" title="Command Line Interface (CLI)" href="../cli.html" />
+    <link rel="prev" title="Control" href="control.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,9 +40,6 @@
           <a href="../../../index.html" class="icon icon-home">
             3Laws
           </a>
-              <div class="version">
-                latest
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -60,11 +55,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../runtime_assurance.html">Run-time Assurance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../diagnostics.html">Robot Diagnostics</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../control_panel.html">Control Panel</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="credentials.html">1. Credentials configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="credentials.html">1. General configuration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="robot_model.html">2. Model configuration</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">3. Supervisor configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="localization.html">4. Localization configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="perception.html">5. Perception configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="localization.html">3. Localization configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="perception.html">4. Perception configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.html">5. Control configuration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">6. Supervisor configuration</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../cli.html">CLI</a></li>
@@ -127,25 +123,21 @@
 <li><p><a class="reference internal" href="#dynamic-consistency" id="id10">Dynamic Consistency</a></p></li>
 <li><p><a class="reference internal" href="#behavior-safety" id="id11">Behavior safety</a></p></li>
 <li><p><a class="reference internal" href="#system-health" id="id12">System Health</a></p></li>
+<li><p><a class="reference internal" href="#extra-stack-info" id="id13">Extra stack info</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#supervisor-activation-logic" id="id13">Supervisor activation logic</a></p></li>
+<li><p><a class="reference internal" href="#supervisor-activation-logic" id="id14">Supervisor activation logic</a></p></li>
 </ul>
 </nav>
 <p>This page contains configuration entries for both the monitoring and Run-time Assurance Module components.</p>
 <section id="supervisor-interface">
 <h2><a class="toc-backref" href="#id1" role="doc-backlink">Supervisor Interface</a><a class="headerlink" href="#supervisor-interface" title="Link to this heading"></a></h2>
-<a class="reference internal image-reference" href="../../../_images/supervisor_interface.png"><img alt="../../../_images/supervisor_interface.png" src="../../../_images/supervisor_interface.png" style="width: 800px;" /></a>
-<ul class="simple" id="config-sup-world-frame">
-<li><p><strong>World Frame</strong>: Similar to “base robot frame”, the name of the world frame (typically <em>odom</em> or <em>map</em>) must be specified.</p></li>
-<li><p><strong>Advanced Settings &gt; Project to SE2</strong>: By default, the system is assumed to operate in 3-dimensional space. Projecting to SE2 assumes that the vehicle is traveling on a flat surface or that its travel distance is small enough that earth curvature effects are not significant.  When mapping from 3-dimensional space to 2-dimensional space, the system is assumed to have zero roll and pitch while being placed on the ground. No rotational velocities or acceleration are assumed around roll and pitch, and zero vertical velocity and acceleration are assumed. This will also map the received state to the SE2 state space. An information modal is available to describe the mapping.</p></li>
-<li><p><strong>Advanced Settings &gt; Process niceness</strong>:  The computational priority of the Supervisor node can be set through the “niceness” parameter, where -20 would set it as very high priority and +19 would be very low priority. A niceness of zero is recommended. (Please review documentation on setting priority in Linux using “nice” for a deeper explanation.)</p></li>
-<li><p><strong>Advanced Settings &gt; Retimestamp policy</strong> is used to add or correct the timestamp on log messages that seem to have an incorrect one. Leaving the timestamp unchanged is also an option.</p></li>
-<li><p><strong>Advanced Settings &gt; Upload log to 3laws robotics cloud</strong>: For debugging purposes, 3Laws creates a log file when Supervisor is started. The file is stored in <em>~/.3laws/logs</em>. Enabling this option allows 3Laws to provide better support with troubleshooting if there is a problem.</p></li>
-</ul>
+<a class="reference internal image-reference" href="../../../_images/supervisor_interface.png"><img alt="../../../_images/supervisor_interface.png" src="../../../_images/supervisor_interface.png" style="width: 800px;" />
+</a>
 <section id="desired-control-input-and-computed-safe-control-input">
-<h3><a class="toc-backref" href="#id2" role="doc-backlink">Desired Control Input and Computed Safe Control Input</a><a class="headerlink" href="#desired-control-input-and-computed-safe-control-input" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_desired_control_input.png"><img alt="../../../_images/supervisor_desired_control_input.png" src="../../../_images/supervisor_desired_control_input.png" style="width: 800px;" /></a>
+<span id="config-sup-world-frame"></span><h3><a class="toc-backref" href="#id2" role="doc-backlink">Desired Control Input and Computed Safe Control Input</a><a class="headerlink" href="#desired-control-input-and-computed-safe-control-input" title="Link to this heading"></a></h3>
+<a class="reference internal image-reference" href="../../../_images/supervisor_desired_control_input.png"><img alt="../../../_images/supervisor_desired_control_input.png" src="../../../_images/supervisor_desired_control_input.png" style="width: 800px;" />
+</a>
 <p>This is where you can define the ROS topic that the Supervisor should listen to for the desired control input. It takes as entries the topic name, its type, Quality of service, signal rate and an optional mask.
 The output of the filter is published on the Computed Safe Control Input topic. The Supervisor will only modify the control input if the Enabled checkbox is checked.
 This topic can either match the entry topic specs or be a compatible type. It’s published at the filter rate.</p>
@@ -159,7 +151,8 @@ This topic can either match the entry topic specs or be a compatible type. It’
 <h2><a class="toc-backref" href="#id3" role="doc-backlink">Run-time Assurance Module</a><a class="headerlink" href="#run-time-assurance-module" title="Link to this heading"></a></h2>
 <section id="general-parameters">
 <h3><a class="toc-backref" href="#id4" role="doc-backlink">General Parameters</a><a class="headerlink" href="#general-parameters" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_general_parameters.png"><img alt="../../../_images/supervisor_general_parameters.png" src="../../../_images/supervisor_general_parameters.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_general_parameters.png"><img alt="../../../_images/supervisor_general_parameters.png" src="../../../_images/supervisor_general_parameters.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Parameters &gt; Enabled</strong>: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Run-time Assurance Module will only modify the outputs if the option is activated. If it is not activated, the unmodified “desired control input” will be transmitted on the designated “Computed safe control” message.  Additionally, when activated the Run-time Assurance Module passes the unmodified desired input through to the platform except when a corrective action is needed.</p></li>
 </ul>
@@ -172,7 +165,8 @@ This topic can either match the entry topic specs or be a compatible type. It’
 </section>
 <section id="tuning">
 <span id="config-sup-tuning"></span><h3><a class="toc-backref" href="#id5" role="doc-backlink">Tuning</a><a class="headerlink" href="#tuning" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_tuning.png"><img alt="../../../_images/supervisor_tuning.png" src="../../../_images/supervisor_tuning.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_tuning.png"><img alt="../../../_images/supervisor_tuning.png" src="../../../_images/supervisor_tuning.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Tuning &gt; Aggressiveness</strong>: This parameter controls how far from the nearest obstacle the safety filter starts having more effect on the commands and how strongly the safety filter pushes the robot back into the “safe” region if the safety definition has been violated. A larger value means that the control inputs from the planner will start to be modified when the robot is closer to an object/obstacle. That is, a larger value allows the platform to approach objects faster, and get closer.  If it gets too close, the Supervisor will push away from the object harder with a higher value.  A lower value will lead to a more tentative travel that stays farther away from objects.  In general lower values will produce larger margins. Typical values are between 0.5 and 1.0, but values in the range of 1000 might be used in reasonable situations.</p></li>
 <li><p><strong>Tuning &gt; Conservativeness</strong>: This parameter controls how early the filter start to break when approaching an obstacle. Higher value are preferred when the localization and/or the perception are uncertain</p></li>
@@ -182,7 +176,8 @@ This topic can either match the entry topic specs or be a compatible type. It’
 </section>
 <section id="fault-management">
 <span id="config-sup-fault-management"></span><h3><a class="toc-backref" href="#id6" role="doc-backlink">Fault Management</a><a class="headerlink" href="#fault-management" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_fault_management.png"><img alt="../../../_images/supervisor_fault_management.png" src="../../../_images/supervisor_fault_management.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_fault_management.png"><img alt="../../../_images/supervisor_fault_management.png" src="../../../_images/supervisor_fault_management.png" style="width: 800px;" />
+</a>
 <ul>
 <li><p><strong>Fault Management &gt; Failure Command Mode</strong>: The run-time assurance constantly monitors to ensure that it has enough data to determine whether the robot is in a safe condition. The minimum data required is the vehicle state, the laser scan values, and the commanded/desired input. If any of these is missing the RTA can switch to the failure command mode:</p>
 <blockquote>
@@ -200,7 +195,8 @@ This topic can either match the entry topic specs or be a compatible type. It’
 </section>
 <section id="advanced-settings">
 <h3><a class="toc-backref" href="#id7" role="doc-backlink">Advanced Settings</a><a class="headerlink" href="#advanced-settings" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_advanced_settings.png"><img alt="../../../_images/supervisor_advanced_settings.png" src="../../../_images/supervisor_advanced_settings.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_advanced_settings.png"><img alt="../../../_images/supervisor_advanced_settings.png" src="../../../_images/supervisor_advanced_settings.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Advanced Settings &gt; Accept laserscan data with varying ray count</strong>: One of the checks that is made on the incoming data is that the laserscan is delivering the expected number of scan points each frame. However, there are many laser scanners that are not consistent in the number of scan points they deliver. Checking this option allows for laser scanners with non-constant number of scan points reported.</p></li>
 <li><p><strong>Advanced Settings &gt; Accept lidar data with varying ray count</strong>: One of the checks that is made on the incoming data is that the lidar is delivering the expected number of scan points each frame. However, there are many laser scanners that are not consistent in the number of scan points they deliver. Checking this option allows for laser scanners with non-constant number of scan points reported.</p></li>
@@ -212,7 +208,8 @@ This topic can either match the entry topic specs or be a compatible type. It’
 </section>
 <section id="monitoring-module">
 <h2><a class="toc-backref" href="#id8" role="doc-backlink">Monitoring Module</a><a class="headerlink" href="#monitoring-module" title="Link to this heading"></a></h2>
-<a class="reference internal image-reference" href="../../../_images/supervisor_monitoring_module.png"><img alt="../../../_images/supervisor_monitoring_module.png" src="../../../_images/supervisor_monitoring_module.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_monitoring_module.png"><img alt="../../../_images/supervisor_monitoring_module.png" src="../../../_images/supervisor_monitoring_module.png" style="width: 800px;" />
+</a>
 <p>Supervisor can publish a variety of diagnostic messages related to the health of the system clock, the dynamic consistency of the motion of the platform, individual node health, signal coherency, and summarized system health.  The published messages are discussed in <a class="reference internal" href="../reference/ros_topics.html#reference-ros-topics"><span class="std std-ref">Ros Topics</span></a>.   These messages in the <em>/lll/rdm</em> domain are only published if the Monitor is set to Active.</p>
 <blockquote>
 <div><ul class="simple">
@@ -223,7 +220,8 @@ This topic can either match the entry topic specs or be a compatible type. It’
 </div></blockquote>
 <section id="odometry-consistency">
 <h3><a class="toc-backref" href="#id9" role="doc-backlink">Odometry Consistency</a><a class="headerlink" href="#odometry-consistency" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_odometry_consistency.png"><img alt="../../../_images/supervisor_odometry_consistency.png" src="../../../_images/supervisor_odometry_consistency.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_odometry_consistency.png"><img alt="../../../_images/supervisor_odometry_consistency.png" src="../../../_images/supervisor_odometry_consistency.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Odometry Consistency &gt; Enabled</strong>: Enable the odometry consistency check. This check will compare the odometry data with the laser scan data to ensure that the robot is moving in a consistent manner. If the robot is not moving in a consistent manner, the system will issue a warning.</p></li>
 <li><p><strong>Synchronize Odometries</strong>: Should the odometry be synchronized and check will happen after enough data has been collected to have a time overlap.</p></li>
@@ -236,7 +234,8 @@ This topic can either match the entry topic specs or be a compatible type. It’
 </section>
 <section id="dynamic-consistency">
 <h3><a class="toc-backref" href="#id10" role="doc-backlink">Dynamic Consistency</a><a class="headerlink" href="#dynamic-consistency" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_dynamic_consistency.png"><img alt="../../../_images/supervisor_dynamic_consistency.png" src="../../../_images/supervisor_dynamic_consistency.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_dynamic_consistency.png"><img alt="../../../_images/supervisor_dynamic_consistency.png" src="../../../_images/supervisor_dynamic_consistency.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Dynamic Consistency &gt; Enabled</strong>: Enable the dynamic consistency check. this check will compare the model and the actual behavior of the robot to detect model errors.</p></li>
 <li><p><strong>Use state signal uncertainty</strong>: If the state signal contains a covariance matrix, the uncertainty will be used to compare the model and the actual behavior of the robot if this box is checked.</p></li>
@@ -249,7 +248,8 @@ This topic can either match the entry topic specs or be a compatible type. It’
 </section>
 <section id="behavior-safety">
 <h3><a class="toc-backref" href="#id11" role="doc-backlink">Behavior safety</a><a class="headerlink" href="#behavior-safety" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_behavior_safety.png"><img alt="../../../_images/supervisor_behavior_safety.png" src="../../../_images/supervisor_behavior_safety.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_behavior_safety.png"><img alt="../../../_images/supervisor_behavior_safety.png" src="../../../_images/supervisor_behavior_safety.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>Behavior safety &gt; Enabled</strong>: Enable the behavior safety check. This check will compare the behavior safety score to a predefined threshold and issue a fault if the behavior safety score is below the threshold.</p></li>
 <li><p><strong>Fault parameters &gt; Publish faults</strong>: If this box is checked, a behavior safety score under the threshold will be published as a fault for the RTA module.</p></li>
@@ -258,7 +258,8 @@ This topic can either match the entry topic specs or be a compatible type. It’
 </section>
 <section id="system-health">
 <h3><a class="toc-backref" href="#id12" role="doc-backlink">System Health</a><a class="headerlink" href="#system-health" title="Link to this heading"></a></h3>
-<a class="reference internal image-reference" href="../../../_images/supervisor_system_health.png"><img alt="../../../_images/supervisor_system_health.png" src="../../../_images/supervisor_system_health.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/supervisor_system_health.png"><img alt="../../../_images/supervisor_system_health.png" src="../../../_images/supervisor_system_health.png" style="width: 800px;" />
+</a>
 <ul class="simple">
 <li><p><strong>System Health &gt; Enabled</strong>: Enable the system health check. This check will compare the system health to a predefined threshold and issue a fault if the system health is below the threshold.</p></li>
 <li><p><strong>Fault parameters &gt; Publish faults</strong>: If this box is checked, a system metric above its respective threshold will be published as a fault for the RTA module.</p></li>
@@ -268,10 +269,17 @@ This topic can either match the entry topic specs or be a compatible type. It’
 <li><p><strong>Fault parameters &gt; Critical systems</strong>: list of system (hardwareId) that are critical for the robot to operate. If one of these system is not operational a fault will be issued.</p></li>
 </ul>
 </section>
+<section id="extra-stack-info">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Extra stack info</a><a class="headerlink" href="#extra-stack-info" title="Link to this heading"></a></h3>
+<a class="reference internal image-reference" href="../../../_images/supervisor_extra_stack_info.png"><img alt="../../../_images/supervisor_extra_stack_info.png" src="../../../_images/supervisor_extra_stack_info.png" style="width: 800px;" />
+</a>
+<p>This section allows you to add extra topic and node outside of those already define by the mandatory configuration. It let you also map the defined topic of the mandatory configuration to a node.</p>
+</section>
 </section>
 <section id="supervisor-activation-logic">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink">Supervisor activation logic</a><a class="headerlink" href="#supervisor-activation-logic" title="Link to this heading"></a></h2>
-<a class="reference internal image-reference" href="../../../_images/supervisor_activation_logic.png"><img alt="../../../_images/supervisor_activation_logic.png" src="../../../_images/supervisor_activation_logic.png" style="width: 800px;" /></a>
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Supervisor activation logic</a><a class="headerlink" href="#supervisor-activation-logic" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="../../../_images/supervisor_activation_logic.png"><img alt="../../../_images/supervisor_activation_logic.png" src="../../../_images/supervisor_activation_logic.png" style="width: 800px;" />
+</a>
 <p>The bottom section relates to republishing the control commands to the robot that are being sent from the autonomy stack. The values will be published on the <em>lll/ram/filtered_input</em> (default topic name, can be customized) channel  if the Run-time Assurance Module is activate or not. However, the values will only be different from the <em>Desired control input</em> if the Run-time Assurance Module is active.</p>
 <ul class="simple">
 <li><p><strong>Finite States</strong> are messages that the Diagnostics can listen to and issue events when the value of the finite state matches a predefined value.</p></li>
@@ -283,8 +291,8 @@ This topic can either match the entry topic specs or be a compatible type. It’
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="robot_model.html" class="btn btn-neutral float-left" title="Robot Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="localization.html" class="btn btn-neutral float-right" title="Localization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="control.html" class="btn btn-neutral float-left" title="Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../cli.html" class="btn btn-neutral float-right" title="Command Line Interface (CLI)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -16,7 +16,12 @@ Collision avoidance uses settings in this dialog to describe the sensors used du
 
   * **ROS Topic**: Supervisor needs to subscribe to the ROS message published by the laserscan, so this topic name (plus type, quality-of-service, and expected signal rate) need to match the sensor's output. *ros2 topic* with options *list, info, hz* can be useful to obtain this information.
 
-  * **Specs**:  The expected number of points per scan along with the first (typically minimum) and last (typically maximum) angle must be specified so that the angular resolution can be calculated for the nominal case. The first and last angle values should normally describe a laser that scans in the clockwise direction, so the first is smaller than the last. However, if the laser scans in the counter-clockwise direction the first angle should be set to be smaller than the last. It is very important that the total range of the laser is less than 2π. The Supervisor does not disambiguate angles if the total field is larger than 2π. The scanner's range can be set so that readings smaller than the minimum or larger than the maximum are discarded.
+  * **Specs**:
+
+    * **Number of rays**: The expected number of points per scan
+    * **Angle**: The first (typically minimum) and last (typically maximum) angle to calculate the angular resolution for the nominal case. The first and last angle values should normally describe a laser that scans in the clockwise direction, so the first is smaller than the last. However, if the laser scans in the counter-clockwise direction the first angle should be set to be smaller than the last. It is very important that the total range of the laser is less than 2π. The Supervisor does not disambiguate angles if the total field is larger than 2π.
+    * **Range**:  The scanner's range can be set so that readings smaller than the minimum or larger than the maximum are discarded.
+    * **Scanning direction**: The scanning direction of the laserscan (clockwise or counter-clockwise).
 
   * **Laserscan Pose**: The orientation and position of the laserscan relative to the vehicle body or whichever frame is used must be specified. As with the robot's body position, the user is advised to plot the data in rviz to ensure that the geometry is set correctly.
 

@@ -1,0 +1,238 @@
+/*
+ * CSS hacks and small modification for my Sphinx website
+ * :copyright: Copyright 2013-2016 Lilian Besson
+ * :license: GPLv3, see LICENSE for details.
+ */
+
+
+/* Colors and text decoration.
+ For example, :black:`text in black` or :blink:`text blinking` in rST. */
+
+ .black {
+  color: black;
+}
+
+.gray {
+  color: gray;
+}
+
+.grey {
+  color: gray;
+}
+
+.silver {
+  color: silver;
+}
+
+.white {
+  color: white;
+}
+
+.maroon {
+  color: maroon;
+}
+
+.red {
+  color: red;
+}
+
+.magenta {
+  color: magenta;
+}
+
+.fuchsia {
+  color: fuchsia;
+}
+
+.pink {
+  color: pink;
+}
+
+.orange {
+  color: orange;
+}
+
+.yellow {
+  color: yellow;
+}
+
+.lime {
+  color: lime;
+}
+
+.green {
+  color: green;
+}
+
+.olive {
+  color: olive;
+}
+
+.teal {
+  color: teal;
+}
+
+.cyan {
+  color: cyan;
+}
+
+.aqua {
+  color: aqua;
+}
+
+.blue {
+  color: blue;
+}
+
+.navy {
+  color: navy;
+}
+
+.purple {
+  color: purple;
+}
+
+.lll-green{
+  color: #00BC00
+}
+
+/* --------- */
+
+.bg-black {
+  background: black;
+}
+
+.bg-gray {
+  background: gray;
+}
+
+.bg-grey {
+  background: gray;
+}
+
+.bg-silver {
+  background: silver;
+}
+
+.bg-white {
+  background: white;
+}
+
+.bg-maroon {
+  background: maroon;
+}
+
+.bg-red {
+  background: red;
+  color:white
+}
+
+.bg-magenta {
+  background: magenta;
+  color:white
+}
+
+.bg-fuchsia {
+  background: fuchsia;
+  color:white
+}
+
+.bg-pink {
+  background: pink;
+}
+
+.bg-orange {
+  background: orange;
+  color:white
+}
+
+.bg-yellow {
+  background: yellow;
+}
+
+.bg-lime {
+  background: lime;
+}
+
+.bg-green {
+  background: green;
+  color:white
+}
+
+.bg-olive {
+  background: olive;
+}
+
+.bg-teal {
+  background: teal;
+}
+
+.bg-cyan {
+  background: cyan;
+}
+
+.bg-aqua {
+  background: aqua;
+}
+
+.bg-blue {
+  background: blue;
+  color:white
+}
+
+.bg-navy {
+  background: navy;
+  color:white
+}
+
+.bg-purple {
+  background: purple;
+  color:white
+}
+
+.bg-lll-green{
+  background: #00BC00;
+  color:white
+}
+
+.under {
+  text-decoration: underline;
+}
+
+.over {
+  text-decoration: overline;
+}
+
+.blink {
+  text-decoration: blink;
+}
+
+.line {
+  text-decoration: line-through;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.it {
+  font-style: italic;
+}
+
+.ob {
+  font-style: oblique;
+}
+
+.small {
+  font-size: small;
+}
+
+.large {
+  font-size: large;
+}
+
+.smallpar {
+  font-size: small;
+}
+
+

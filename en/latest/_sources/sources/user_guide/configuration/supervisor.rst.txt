@@ -17,15 +17,6 @@ Supervisor Interface
 
 .. _config_sup_world_frame:
 
-* **World Frame**: Similar to "base robot frame", the name of the world frame (typically *odom* or *map*) must be specified.
-
-* **Advanced Settings > Project to SE2**: By default, the system is assumed to operate in 3-dimensional space. Projecting to SE2 assumes that the vehicle is traveling on a flat surface or that its travel distance is small enough that earth curvature effects are not significant.  When mapping from 3-dimensional space to 2-dimensional space, the system is assumed to have zero roll and pitch while being placed on the ground. No rotational velocities or acceleration are assumed around roll and pitch, and zero vertical velocity and acceleration are assumed. This will also map the received state to the SE2 state space. An information modal is available to describe the mapping.
-
-* **Advanced Settings > Process niceness**:  The computational priority of the Supervisor node can be set through the "niceness" parameter, where -20 would set it as very high priority and +19 would be very low priority. A niceness of zero is recommended. (Please review documentation on setting priority in Linux using "nice" for a deeper explanation.)
-
-* **Advanced Settings > Retimestamp policy** is used to add or correct the timestamp on log messages that seem to have an incorrect one. Leaving the timestamp unchanged is also an option.
-
-* **Advanced Settings > Upload log to 3laws robotics cloud**: For debugging purposes, 3Laws creates a log file when Supervisor is started. The file is stored in *~/.3laws/logs*. Enabling this option allows 3Laws to provide better support with troubleshooting if there is a problem.
 
 
 Desired Control Input and Computed Safe Control Input
@@ -205,6 +196,13 @@ System Health
 
 * **Fault parameters > Critical systems**: list of system (hardwareId) that are critical for the robot to operate. If one of these system is not operational a fault will be issued.
 
+Extra stack info
+----------------
+
+.. image:: ../../data/supervisor_extra_stack_info.png
+   :width: 800px
+
+This section allows you to add extra topic and node outside of those already define by the mandatory configuration. It let you also map the defined topic of the mandatory configuration to a node.
 
 Supervisor activation logic
 ===========================

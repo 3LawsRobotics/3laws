@@ -74,7 +74,7 @@ By clicking on the icon, you can set the IP address and port of the Rosbridge se
 
 .. image:: ../data/rosbridge_connection_modal.png
   :align: center
-  :width: 800px
+  :width: 600px
   :alt: Rosbridge connection dialog.
 
 |
@@ -97,11 +97,12 @@ Throughout this documentation, a red asterisk (*) indicates a *required* field.
 .. toctree::
   :maxdepth: 1
 
-  1. Credentials configuration <configuration/credentials>
+  1. General configuration <configuration/credentials>
   2. Model configuration <configuration/robot_model>
-  3. Supervisor configuration <configuration/supervisor>
-  4. Localization configuration <configuration/localization>
-  5. Perception configuration <configuration/perception>
+  3. Localization configuration <configuration/localization>
+  4. Perception configuration <configuration/perception>
+  5. Control configuration <configuration/control>
+  6. Supervisor configuration <configuration/supervisor>
 
 
 .. note::
@@ -173,8 +174,8 @@ Divided into sections, the Diagnostic page shows the following metrics:
 - Odometry metrics
 - Dynamics metrics
 
-System Metrics
---------------
+System Health metrics
+---------------------
 
 .. image:: ../data/cp_system_diagnostic.png
   :align: center
@@ -185,11 +186,24 @@ System Metrics
 
 The System Metrics section shows the following metrics:
 
-- **CPU load**.
-- **Memory usage**.
-- **Disk usage**.
-- **Network usage**.
-- **Process counts**.
+- **System health tree**
+- **CPU load**
+- **Memory usage**
+- **Disk usage**
+- **Network usage**
+- **Process counts**
+
+Control tracking health metrics
+-------------------------------
+
+.. image:: ../data/cp_diagnostic_control_tracking.png
+  :align: center
+  :width: 800px
+  :alt: Diagnostic page showing the Supervisor's system diagnostic metrics.
+
+|
+
+This tab show for each controller the tracking error as a norm and per component (if bounds are specified)
 
 Odometry Metrics
 ----------------
