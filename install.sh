@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-SCRIPT_VERSION="1.0.0"
+SCRIPT_VERSION="2.0.0"
 
 # Exit on errors
 set -e
@@ -110,8 +110,12 @@ promptChoiceUbuntuDistro() {
     exit 1
   fi
   local REPLY=""
-  select which in "22.04" "20.04" "18.04"; do
+  select which in "24.04" "22.04" "20.04"; do
     case $which in
+    "24.04")
+      REPLY="24.04"
+      break
+      ;;
     "22.04")
       REPLY="22.04"
       break
@@ -120,19 +124,15 @@ promptChoiceUbuntuDistro() {
       REPLY="20.04"
       break
       ;;
-    "18.04")
-      REPLY="18.04"
-      break
-      ;;
     *) ;;
     esac
   done
   echo "$REPLY"
 }
 
+NOBLE_ROS=("jazzy")
 JAMMY_ROS=("iron" "humble")
-FOCAL_ROS=("foxy" "noetic" "galactic")
-BIONIC_ROS=("melodic")
+FOCAL_ROS=("galactic" "foxy")
 
 promptChoiceROSDistro() {
   if [[ $ALWAYS_YES == 1 ]]; then
@@ -142,8 +142,13 @@ promptChoiceROSDistro() {
   fi
   local REPLY=""
   if [ -z "$UBUNTU_DISTRO" ]; then
-    local ros_list=("iron" "humble" "foxy" "galactic" "noetic" "melodic")
+    local ros_list=("jazzy" "iron" "humble" "galactic" "foxy")
   fi
+
+  if [[ $UBUNTU_DISTRO == "24.04" ]]; then
+    local ros_list=("${NOBLE_ROS[@]}")
+  fi
+
   if [[ $UBUNTU_DISTRO == "22.04" ]]; then
     local ros_list=("${JAMMY_ROS[@]}")
   fi
@@ -152,12 +157,12 @@ promptChoiceROSDistro() {
     local ros_list=("${FOCAL_ROS[@]}")
   fi
 
-  if [[ $UBUNTU_DISTRO == "18.04" ]]; then
-    local ros_list=("${BIONIC_ROS[@]}")
-  fi
-
   select which in "${ros_list[@]}"; do
     case $which in
+    "jazzy")
+      REPLY="jazzy"
+      break
+      ;;
     "iron")
       REPLY="iron"
       break
@@ -166,20 +171,12 @@ promptChoiceROSDistro() {
       REPLY="humble"
       break
       ;;
-    "foxy")
-      REPLY="foxy"
-      break
-      ;;
     "galactic")
       REPLY="galactic"
       break
       ;;
-    "noetic")
-      REPLY="noetic"
-      break
-      ;;
-    "melodic")
-      REPLY="melodic"
+    "foxy")
+      REPLY="foxy"
       break
       ;;
     *) ;;
@@ -188,76 +185,108 @@ promptChoiceROSDistro() {
   echo "$REPLY"
 }
 
-valid_args() {
+promptChoiceTagRelease() {
+  local SELECTED_TAG=""
+  select choice in "${VALID_TAGS[@]}"; do
+    if [[ -n "$choice" ]]; then
+      SELECTED_TAG="$choice"
+      break
+    fi
+  done
+  echo "$SELECTED_TAG"
+}
+
+valid_ros_ubuntu_match() {
+  if [[ $UBUNTU_DISTRO == "24.04" ]]; then
+    for value in "${NOBLE_ROS[@]}"; do
+      [[ $value == "$QUERY_ROS_DISTRO" ]] && return 0
+    done
+    return 1
+  fi
+
   if [[ $UBUNTU_DISTRO == "22.04" ]]; then
     for value in "${JAMMY_ROS[@]}"; do
-      [[ $value == "$QUERY_DISTRO" ]] && return 0
+      [[ $value == "$QUERY_ROS_DISTRO" ]] && return 0
     done
     return 1
   fi
 
   if [[ $UBUNTU_DISTRO == "20.04" ]]; then
     for value in "${FOCAL_ROS[@]}"; do
-      [[ $value == "$QUERY_DISTRO" ]] && return 0
+      [[ $value == "$QUERY_ROS_DISTRO" ]] && return 0
     done
     return 1
   fi
+}
 
-  if [[ $UBUNTU_DISTRO == "18.04" ]]; then
-    for value in "${BIONIC_ROS[@]}"; do
-      [[ $value == "$QUERY_DISTRO" ]] && return 0
-    done
-    return 1
+valid_tag_release() {
+  MATCHED_TAG=$(printf "%s\n" "${VALID_TAGS[@]}" | grep -x "$WANTED_RELEASE_TAG")
+
+  if [[ -n "$MATCHED_TAG" ]]; then
+    return 0
   fi
+  return 1
 }
 
 # Usage info
 show_help() {
   cat <<EOF
-Usage: ${0##*/} [-hyf] [-r <ROS_DISTRO>] [-a <ARCH>] [-v <UBUNTU_VERSION>]
+Usage: ${0##*/} [-hyf] [-r <ROS_DISTRO>] [-a <ARCH>] [-v <UBUNTU_VERSION>] [-t <Release Tag>]
 Install 3Laws Supervisor
    -h                 show this help menu
    -y                 answer yes to all yes/no questions
-   -r                 Optional: ROS distribution
    -f                 Force install, specify all arguments
+   -r                 Optional: ROS distribution
    -a                 CPU architecture (arm64v8|amd64)
-   -v                 Ubuntu version (22.04|20.04|18.04)
+   -v                 Ubuntu version (24.04|22.04|20.04)
+   -t                 Optional: release tag version
 EOF
 }
 
 check_values() {
+  # No variable should be empty
   if [[ -z $ARCH ]]; then
     cerr "Architecture not found, specify amd64|arm64"
     ARCH=$(promptChoiceArch)
   fi
   if [[ -z $UBUNTU_DISTRO ]]; then
-    cerr "Ubuntu distro not found, specify 22.04|20.04|18.04"
+    cerr "Ubuntu distribution not found, specify 24.04|22.04|20.04"
     UBUNTU_DISTRO=$(promptChoiceUbuntuDistro)
   fi
-  if [[ -z $QUERY_DISTRO ]]; then
-    cerr "ROS distro not found, specify iron|humble|foxy|galactic|noetic|melodic"
-    QUERY_DISTRO=$(promptChoiceROSDistro)
+  if [[ -z $QUERY_ROS_DISTRO ]]; then
+    cerr "ROS distribution not found, specify jazzy|iron|humble|galactic|foxy"
+    QUERY_ROS_DISTRO=$(promptChoiceROSDistro)
+  fi
+  if [[ -z $WANTED_RELEASE_TAG ]]; then
+    cerr "Release tag not found, specify a valid tag"
+    WANTED_RELEASE_TAG=$(promptChoiceTagRelease)
   fi
 
-  if ! valid_args; then
+  # Check if the specified ROS distribution is compatible with the selected Ubuntu version
+  if ! valid_ros_ubuntu_match; then
+    cwarn "Specified ROS distribution not compatible with Ubuntu \"$UBUNTU_DISTRO\""
+    echo "24.04: jazzy"
+    echo "22.04: iron | humble"
+    echo "20.04: galactic | foxy"
     if [ "$FORCE" == 1 ]; then
-      cerr "ROS distro not compatible with your ubuntu distribution"
-      echo "22.04: iron | humble"
-      echo "20.04: noetic | galactic | foxy"
-      echo "18.04: melodic"
       cout "Retry with other arguments"
       exit 1
     fi
-    cerr "ROS distro not compatible with your ubuntu distribution"
-    echo "22.04: iron | humble"
-    echo "20.04: noetic | galactic | foxy"
-    echo "18.04: melodic"
-    cout "Specify iron|humble|foxy|galactic|noetic|melodic"
-
-    QUERY_DISTRO=$(promptChoiceROSDistro)
+    cout "Select option number:"
+    QUERY_ROS_DISTRO=$(promptChoiceROSDistro)
   fi
 
-  cout "The Supervisor package for ubuntu $UBUNTU_DISTRO $ARCH and Ros $QUERY_DISTRO will be downloaded"
+  # Check if the specified release tag is valid
+  if ! valid_tag_release; then
+    cwarn "Specified release tag is not a valid option."
+    cout "Available options are: ${VALID_TAGS[*]}"
+    if [ "$FORCE" == 1 ]; then
+      cout "Retry with other arguments"
+      exit 1
+    fi
+    cout "Select option number:"
+    WANTED_RELEASE_TAG=$(promptChoiceTagRelease)
+  fi
 }
 
 # Script Options
@@ -266,8 +295,29 @@ FORCE=0
 WANTED_ROS=""
 WANTED_ARCH=""
 WANTED_UBUNTU=""
+WANTED_RELEASE_TAG=""
 
-while getopts hyfr:a:v: opt; do
+# Define GIT variables and check connection
+GH_API="https://api.github.com"
+GH_REPO="$GH_API/repos/3LawsRobotics/3laws"
+curl -o /dev/null -s $GH_REPO || {
+  cerr "Error: Invalid repo, token or network issue!"
+  exit 1
+}
+
+# Create a list of valid tags
+VALID_TAGS=()
+mapfile -t VALID_TAGS < <(curl -s "$GH_REPO/tags" |
+  jq -r '.[].name' |
+  sed 's/^supervisor_//')
+VALID_TAGS=("latest" "${VALID_TAGS[@]}")
+
+if [ "${#VALID_TAGS[@]}" -eq 0 ]; then
+  cerr "No tags found in the repository. Please contact support@3lawsrobotics.com"
+  exit 1
+fi
+
+while getopts hyfr:a:v:t: opt; do
   case $opt in
   h)
     show_help
@@ -288,6 +338,9 @@ while getopts hyfr:a:v: opt; do
   v)
     WANTED_UBUNTU="$OPTARG"
     ;;
+  t)
+    WANTED_RELEASE_TAG="$OPTARG"
+    ;;
   *)
     show_help >&2
     exit 1
@@ -299,25 +352,21 @@ shift "$((OPTIND - 1))"
 # Main
 ctitle "3Laws Supervisor Installer (v$SCRIPT_VERSION)"
 
-if [ "$FORCE" == 1 ] && { [ -z "$WANTED_ARCH" ] || [ -z "$WANTED_ROS" ] || [ -z "$WANTED_UBUNTU" ]; }; then
-  cerr "The force arg requires all information to be provided, arch, ros and ubuntu version"
+if [ "$FORCE" == 1 ] && { [ -z "$WANTED_ARCH" ] || [ -z "$WANTED_ROS" ] || [ -z "$WANTED_UBUNTU" ] || [ -z "$WANTED_RELEASE_TAG" ]; }; then
+  cerr "The force arg requires all information to be provided, arch, ros, ubuntu version, and release tag"
   exit 1
 fi
 
-HAS_ROS1=0
-if command -v roscore &>/dev/null; then
-  HAS_ROS1=1
-  ROS1_DISTRO=$(rosversion -d)
-  QUERY_DISTRO=$ROS1_DISTRO
-fi
-
+cout "Fetching system information..."
 HAS_ROS2=0
 if command -v ros2 &>/dev/null; then
   HAS_ROS2=1
-  QUERY_DISTRO=$ROS_DISTRO
+  QUERY_ROS_DISTRO=$ROS_DISTRO
+  cout "\t Detected existing ROS2 distribution \"$QUERY_ROS_DISTRO\""
 fi
 
 UBUNTU_DISTRO=$(cat /etc/*-release | grep VERSION_ID | grep -oE "[0-9]{2}.[0-9]{2}")
+cout "\t Detected Ubuntu version \"$UBUNTU_DISTRO\""
 
 ARCH=amd64
 case "$(uname -i)" in
@@ -325,50 +374,59 @@ arm* | aarch*)
   ARCH=arm64
   ;;
 esac
+cout "\t Detected architecture \"$ARCH\""
 
 if [ $FORCE == 0 ]; then
 
+  # If an Ubuntu version is specified and it does not match the detected one, prompt for confirmation
   if [ -n "$WANTED_UBUNTU" ]; then
     if [ "$UBUNTU_DISTRO" != "$WANTED_UBUNTU" ]; then
-      cwarn "Specified Ubuntu version does not match the detected one, select your version:"
+      cwarn "Specified Ubuntu version does not match the detected one. Please confirm your choice by selecting option number:"
       UBUNTU_DISTRO=$(promptChoiceUbuntuDistro)
     fi
   fi
 
+  # If an architecture is specified and it does not match the detected one, prompt for confirmation
   if [ -n "$WANTED_ARCH" ]; then
     if [[ $ARCH != "$WANTED_ARCH" ]]; then
-      cwarn "Specified Architecture does not match the detected one, select your version:"
+      cwarn "Specified Architecture does not match the detected one. Please confirm your choice by selecting option number:"
       ARCH=$(promptChoiceArch)
     fi
   fi
 
+  # If a ROS distribution is specified and it does not match the detected one, prompt for confirmation
   if [ -n "$WANTED_ROS" ]; then
-    if [ "$QUERY_DISTRO" != "$WANTED_ROS" ]; then
-      cwarn "Specified ROS version does not match the detected one, select your version:"
-      QUERY_DISTRO=$(promptChoiceROSDistro)
+    if [ "$QUERY_ROS_DISTRO" != "$WANTED_ROS" ]; then
+      cwarn "Specified ROS version does not match the selected one. Please confirm your choice by selecting option number:"
+      QUERY_ROS_DISTRO=$(promptChoiceROSDistro)
     fi
   fi
 
-  if [ $HAS_ROS1 == "$HAS_ROS2" ]; then
-    cwarn "Unable to select a ROS distribution, select your version:"
-    QUERY_DISTRO=$(promptChoiceROSDistro)
+  if [ $HAS_ROS2 == 0 ]; then
+    cwarn "Unable to select a ROS distribution, select desired version:"
+    QUERY_ROS_DISTRO=$(promptChoiceROSDistro)
+  fi
+
+  if [ -z "$WANTED_RELEASE_TAG" ]; then
+    # Using default "latest" tag
+    WANTED_RELEASE_TAG="latest"
   fi
 
 else
 
   if [[ $UBUNTU_DISTRO != "$WANTED_UBUNTU" ]]; then
-    cwarn "Specified Ubuntu version does not match the detected one, continue with $WANTED_UBUNTU"
+    cwarn "Specified Ubuntu version does not match the detected one, continuing with $WANTED_UBUNTU"
     UBUNTU_DISTRO=$WANTED_UBUNTU
   fi
 
   if [[ $ARCH != "$WANTED_ARCH" ]]; then
-    cwarn "Specified Architecture does not match the detected one, continue with $WANTED_ARCH"
+    cwarn "Specified Architecture does not match the detected one, continuing with $WANTED_ARCH"
     ARCH=$WANTED_ARCH
   fi
 
-  if [[ $QUERY_DISTRO != "$WANTED_ROS" ]]; then
-    cwarn "Specified ROS version does not match the detected one, continue with $WANTED_ROS"
-    QUERY_DISTRO=$WANTED_ROS
+  if [[ $QUERY_ROS_DISTRO != "$WANTED_ROS" ]]; then
+    cwarn "Specified ROS version does not match the detected one, continuing with $WANTED_ROS"
+    QUERY_ROS_DISTRO=$WANTED_ROS
   fi
 fi
 
@@ -381,18 +439,17 @@ fi
 # Check args validity
 check_values
 
-# Define variables.
-GH_API="https://api.github.com"
-GH_REPO="$GH_API/repos/3LawsRobotics/3laws"
-GH_TAGS="$GH_REPO/releases/latest"
+# Confirm package to be downloaded
+cout "The Supervisor package with tag \"$WANTED_RELEASE_TAG\" for Ubuntu $UBUNTU_DISTRO $ARCH and ROS $QUERY_ROS_DISTRO will be downloaded"
+
+# Assemble the URL based on the selected release tag
+if [[ $WANTED_RELEASE_TAG != "latest" ]]; then
+  WANTED_RELEASE_TAG="tags/supervisor_$WANTED_RELEASE_TAG"
+fi
+GH_TAGS="$GH_REPO/releases/$WANTED_RELEASE_TAG"
+
 CURL_ARGS="-LJO#"
-
-curl -o /dev/null -s $GH_REPO || {
-  echo "Error: Invalid repo, token or network issue!"
-  exit 1
-}
-
-PACKAGE_NAME="lll-supervisor-full-${QUERY_DISTRO}"
+PACKAGE_NAME="lll-supervisor-full-${QUERY_ROS_DISTRO}"
 REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+_$ARCH"
 
 # Read asset tags.
@@ -431,6 +488,7 @@ if [[ $DOWNLOAD == 1 ]]; then
   cout "Package $ASSET_NAME has been downloaded."
 else
   cwarn "Package not downloaded."
+  exit 0
 fi
 
 if [[ -f "$ASSET_NAME" ]]; then
