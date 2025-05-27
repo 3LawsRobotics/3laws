@@ -1,0 +1,36 @@
+div.admonition.to-remove {
+  background-color: #f0f0f0; /* light gray background */
+  border: 1px dashed #999;   /* optional dashed border */
+  color: #666;               /* gray text */
+  padding: 10px;
+  border-radius: 6px;
+}
+
+/* Whole TODO box */
+div.admonition-todo {
+  border: 2px dashed #ff5555;
+  background-color: #fdcfcf !important;
+  padding: 10px;
+  margin: 20px 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Title bar */
+div.admonition-todo > p.admonition-title {
+  font-size: 1.2em;
+  background-color: #f88d8d !important;
+  color: white;
+  padding: 6px 10px;
+  margin: -10px -10px 10px -10px; /* Pull title over the edges */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border: 2px solid red;
+  border-radius: 8px;
+}
+
+div.admonition-todo > p.admonition-title::before {
+  content: "🚧 ";
+}

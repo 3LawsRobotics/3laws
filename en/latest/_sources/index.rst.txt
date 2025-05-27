@@ -31,7 +31,9 @@ Other relevant resources:
   :maxdepth: 3
 
   sources/getting_started
-  sources/user_guide
+  sources/first_time_use
+  sources/application_guides
+  sources/core_components
   sources/troubleshooting
   sources/faq
   sources/knowledge

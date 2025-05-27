@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>General Configuration &mdash; 3Laws latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=1b94733b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/text.css?v=f20bb1b1" />
+
+  
+    <link rel="shortcut icon" href="../../_static/Favicon_dark.svg"/>
+    <link rel="canonical" href="https://docs.3laws.io/sources/configuration/general.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Robot Model" href="robot_model.html" />
+    <link rel="prev" title="First Time Use" href="../first_time_use.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            3Laws
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../first_time_use.html">First Time Use</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">General configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot_model.html">Robot Model configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="localization.html">Localization configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="perception.html">Perception configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Control configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="supervisor.html">Supervisor configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.html">Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html">Diagnostics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../application_guides.html">Application Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_components.html">Core components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../knowledge.html">Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal.html">Legal</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">3Laws</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../first_time_use.html">First Time Use</a></li>
+      <li class="breadcrumb-item active">General Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="general-configuration">
+<span id="control-panel-config"></span><h1>General Configuration<a class="headerlink" href="#general-configuration" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Throughout this documentation, a red asterisk (*) indicates a <em>required</em> field.</p>
+</div>
+<section id="external-connections">
+<span id="rosbridge-connection"></span><h2>External Connections<a class="headerlink" href="#external-connections" title="Link to this heading"></a></h2>
+<p>The right top side of the navigation bar has two buttons to configure connections to the Supervisor and to the ROS <code class="docutils literal notranslate"><span class="pre">rosbridge-websocket</span></code>.</p>
+<a class="reference internal image-reference" href="../../_images/navigation_bar_rosbridge_sup.png"><img alt="Control Panel NavBar with ros bridge connected." src="../../_images/navigation_bar_rosbridge_sup.png" style="width: 800px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="supervisor-connection">
+<h3>Supervisor connection<a class="headerlink" href="#supervisor-connection" title="Link to this heading"></a></h3>
+<p>Click on the left antenna icon to open the configuration page for the Supervisor connection. In order for the connection to be established, you have to configure the IP address and port to the same value defined in the advanced section of the general configuration page.</p>
+<a class="reference internal image-reference" href="../../_images/supervisor_connection_modal.png"><img alt="Supervisor connection dialog." class="align-center" src="../../_images/supervisor_connection_modal.png" style="width: 600px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This connection allow for all panel in the Operation tab to receive live data stream. A <strong>green</strong> status icon indicates that the Supervisor is connected to the Control Panel, while a <strong>red</strong> icon indicates that the connection was not successful.</p>
+</section>
+<section id="id1">
+<h3>Rosbridge Connection<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>The Control Panel supports a topic autocompletion capability when paired with a <code class="docutils literal notranslate"><span class="pre">rosbridge</span> <span class="pre">server</span></code> (see <a class="reference external" href="https://github.com/RobotWebTools/rosbridge_suite">rosbridge documentation</a> for more details). The robot’s ROS stack (without Supervisor) needs to be running and publishing topics for this feature’s proper operation. With this interface, the Control Panel can retrieve information about the available topics and help you complete the configuration of the Supervisor. This is not required and will be deactivated by default.</p>
+<p>First, install the rosbridge suite by running the following command (where &lt;distro&gt; is replaced with the ROS distribution in use on the system):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>ros-&lt;DISTRO&gt;-rosbridge-suite
+</pre></div>
+</div>
+</div></blockquote>
+<p>Then, run the following command to start the rosbridge websocket:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>rosbridge_server<span class="w"> </span>rosbridge_websocket_launch.xml
+</pre></div>
+</div>
+</div></blockquote>
+<p>This will provide a websocket server at <strong>`ws://localhost:9090`</strong>.</p>
+<p>The Control Panel can connect to this websocket in order to retrieve topics and services information. In order to configure the connection, click on the left antenna icon. From the configuration window, you can set the IP address and port of the Rosbridge server to which the Control Panel should connect to.</p>
+<a class="reference internal image-reference" href="../../_images/rosbridge_connection_modal.png"><img alt="Rosbridge connection dialog." class="align-center" src="../../_images/rosbridge_connection_modal.png" style="width: 600px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>In addition if you launch the supervisor in a global namespace you can specify it there so that the predefined RVIZ configuration take this namespace in consideration.</p>
+<p>A <strong>green</strong> status icon indicates that the Control Panel is connected to the Rosbridge server, while a <strong>red</strong> icon indicates that the Control Panel is not connected.</p>
+</section>
+</section>
+<section id="credentials">
+<h2>Credentials<a class="headerlink" href="#credentials" title="Link to this heading"></a></h2>
+<p>The <em>Credentials</em> page appears as follows:
+When entering a license key, meta information about the license will be displayed. This information includes the expiration date, issue date, and the cloud option associated with the license. If the license key is invalid, an error message will be displayed.</p>
+<a class="reference internal image-reference" href="../../_images/credentials_tab.png"><img alt="Configuration &gt; Credentials Page" class="align-center" src="../../_images/credentials_tab.png" style="width: 700px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p><strong>Credentials</strong>: 3Laws will provide a license key based on the version of Supervisor that has been purchased/downloaded.  The license key incorporates an expiration date. If a trial license was obtained, the expiration date is 60 days from the request date for the trial.</p></li>
+<li><p><strong>Robot Name</strong>: This identifier will be different for each robot where Supervisor is installed. It should contain a name you can use to identify an individual robot. Note that each license of Supervisor is only valid for a single platform/robot.</p></li>
+</ul>
+</section>
+<section id="misc">
+<h2>Misc<a class="headerlink" href="#misc" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="../../_images/misc_tab.png"><img alt="Configuration &gt; Misc Page" class="align-center" src="../../_images/misc_tab.png" style="width: 700px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p><strong>ROS TF worldframe</strong>: This is the name of world frame used by the robot. It is used to transform the robot’s pose to the world frame.</p></li>
+<li><p><strong>Advanced Settings &gt; Project to SE2</strong>: By default, the system is assumed to operate in a 3D space. Projecting to SE2 (2D special Euclidean group) means that instead of considering a full 3D robot’s pose (position and orientation), we only consider it as a 2D object on a plane. This is acceptable if the vehicle is traveling on a flat surface and its traveled distance is small enough that earth curvature effects are not significant. In practice, when mapping from 3D space to 2D space, the system is assumed to have zero roll and pitch while being placed on the ground. No rotational velocities or acceleration are assumed around roll and pitch, and zero vertical velocity and acceleration are assumed. This will also map the received state to the SE2 state space. A helper window is available to describe the mapping.</p></li>
+<li><p><strong>Advanced Settings &gt; Process niceness</strong>:  The computational priority of the Supervisor node application on the host operating system can be set through the “niceness” parameter (-20 for very high priority, +19 for very low priority). A niceness of zero is recommended. (Please review documentation on setting priority in Linux using “nice” for a deeper explanation.)</p></li>
+<li><p><strong>Advanced Settings &gt; Retimestamp policy</strong>: control whether the Supervisor will re-stamp the messages it receives from the robot’s stack. This is useful when the robot’s stack is not providing a timestamp on the messages it publishes. The Supervisor will use the current time as the timestamp for these messages. The re-stamping policy can be set to “if-zero”, “always”, or “never”. The “if-zero” option will only re-stamp the messages if the timestamp is missing.</p></li>
+<li><p><strong>Advanced Settings &gt; Upload log to 3laws robotics cloud</strong>: For debugging purposes, 3Laws creates a log file when Supervisor is started. The file is stored in <em>~/.3laws/logs</em>. Enabling this option allows 3Laws to provide better support with troubleshooting if there is a problem.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../first_time_use.html" class="btn btn-neutral float-left" title="First Time Use" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="robot_model.html" class="btn btn-neutral float-right" title="Robot Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, 3Laws Robotics Inc..</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+   
+<div
+  class="rst-versions"
+  data-toggle="rst-versions"
+  role="note"
+  aria-label="versions"
+  style="overflow-y: auto"
+>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Supervisor Docs </span>
+    v: latest
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions:</dt>
+       
+      <strong>
+        
+        <dd>
+          <a href="/en/latest/index.html">latest</a>
+        </dd>
+        
+      </strong>
+        
+        <dd>
+          <a href="/en/1.0/index.html">1.0</a>
+        </dd>
+         
+    </dl>
+    <hr style="margin: 5px" />
+    Continuous documentation hosting provided by
+    <a href="https://pages.github.com/">GitHub Pages</a>.
+  </div>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

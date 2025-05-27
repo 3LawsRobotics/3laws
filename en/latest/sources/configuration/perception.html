@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perception &mdash; 3Laws latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=1b94733b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/text.css?v=f20bb1b1" />
+
+  
+    <link rel="shortcut icon" href="../../_static/Favicon_dark.svg"/>
+    <link rel="canonical" href="https://docs.3laws.io/sources/configuration/perception.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Control" href="control.html" />
+    <link rel="prev" title="Localization" href="localization.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            3Laws
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../first_time_use.html">First Time Use</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="general.html">General configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot_model.html">Robot Model configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="localization.html">Localization configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Perception configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Control configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="supervisor.html">Supervisor configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.html">Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html">Diagnostics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../application_guides.html">Application Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_components.html">Core components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../knowledge.html">Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal.html">Legal</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">3Laws</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../first_time_use.html">First Time Use</a></li>
+      <li class="breadcrumb-item active">Perception</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="perception">
+<h1>Perception<a class="headerlink" href="#perception" title="Link to this heading"></a></h1>
+<p>The Supervisor uses settings in this page to interface sensors’ data, configure safety maps, and eventually understand the environment at run-time. The Supervisor uses information about the environment in the form of 2D laserscans and/or 3D LIDARs data or an object map, or a combination of them.</p>
+<a class="reference internal image-reference" href="../../_images/laserscan_tab.png"><img alt="Configuration &gt; Laserscan Tab" class="align-center" src="../../_images/laserscan_tab.png" style="width: 600px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="laserscan-sensor">
+<span id="config-perception-laserscan"></span><h2>Laserscan sensor<a class="headerlink" href="#laserscan-sensor" title="Link to this heading"></a></h2>
+<p>The Supervisor can process data from multiple laserscans, but each of them must be configured separately. Use the <strong>+</strong> icon to add a new laserscan configuration tab.</p>
+<ul class="simple">
+<li><p><strong>Display name</strong>: This display name is used when aggregated statistics about the scanner are uploaded to the 3Laws cloud dashboard. This name is chosen by the user to help keep track of the scanner, e.g. “front_laser”.</p></li>
+<li><p><strong>ROS Topic</strong>: The information entered in this panel needs to match the details on the ROS topic containing the laserscan data to be consumed by the Supervisor. <em>ros2 topic</em> with options <em>list, info, hz</em> can be useful to obtain this information.</p></li>
+<li><p><strong>Specs</strong>:</p>
+<ul>
+<li><p><strong>Number of rays</strong>: The number of points per scan contained in a single message.</p></li>
+<li><p><strong>Angle</strong>: The first (typically minimum) and last (typically maximum) angle to calculate the angular resolution for the nominal case. The first and last angle values should describe a laser that scans in the clockwise direction, so the first is smaller than the last. However, if the laser scans in the counter-clockwise direction the first angle should be set to be smaller than the last. Make sure the total range of the laser is less than 2π. The Supervisor does not disambiguate angles if the total field is larger than 2π.</p></li>
+<li><p><strong>Range</strong>:  The scanner’s range can be set so that readings smaller than the minimum or larger than the maximum are discarded. Setting this value incorrectly will result in valid laserscan data being discarded.</p></li>
+<li><p><strong>Scanning direction</strong>: The scanning direction of the laserscan (clockwise or counter-clockwise).</p></li>
+</ul>
+</li>
+<li><p><strong>Safety Map</strong> Here you can configure how the raw data received from the laserscan is processed before being consumed by the Supervisor. See <a class="reference internal" href="../core_components/runtime_assurance.html#safety-maps"><span class="std std-ref">Safety Map</span></a> for more details on how the safety map is used by the Supervisor. The following parameters are available:</p>
+<ul>
+<li><p><strong>Max points</strong>: The maximum number of laserscan points that are going to be used by the Supervisor. If the number of points after downsampling (see next line) is less, this value is ignored.</p></li>
+<li><p><strong>Downsample factor</strong>: The downsample factor is used to reduce the number of points in the laserscan. The Supervisor will take every nth point from the laserscan, where n is the downsample factor. For example, if the downsample factor is 2, every second point will be taken from the laserscan. The minimum value between the number of points after downsampling and <strong>Max points</strong> will be actual number of safety constraints enforced by the Supervisor.</p></li>
+<li><p><strong>Min distance mode</strong>: This controls the rule applied to the points that are closer than the minimum range (as defined in <strong>Specs</strong>). The options are:
+* <strong>Clamp at min</strong>: Replace actual distance with set minimum distance value.
+* <strong>Set at max</strong>: Replace actual distance with set maximum distance value.
+* <strong>Set at infinity</strong>: Replace actual distance with infinity (this effectively ignores the point from the scan).</p></li>
+</ul>
+</li>
+<li><p><strong>Laserscan Pose</strong>: The orientation and position of the laserscan relative to the vehicle body or whichever frame is used must be specified. As with the robot’s body position, the user is advised to plot the data in rviz to ensure that the geometry is set correctly.</p></li>
+</ul>
+<section id="safety-maps-advanced-params">
+<h3>Safety maps advanced params<a class="headerlink" href="#safety-maps-advanced-params" title="Link to this heading"></a></h3>
+<a class="reference internal image-reference" href="../../_images/safety_map_advanced.png"><img alt="Configuration &gt; Safety Map Advanced Tab" class="align-center" src="../../_images/safety_map_advanced.png" style="width: 600px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p id="config-advanced-lidar"><strong>Min nearest points</strong>: The number of points closest to the robot to be considered. The actual number of nearest points can be more than the selected value, if this and the number of <strong>max uniform points</strong> (see below) does not add up to the total number of safety constraints we selected.</p>
+<p><strong>Max uniform points</strong>: Number of uniformly sampled points to be considered.</p>
+</section>
+</section>
+<section id="lidar-sensor">
+<h2>Lidar sensor<a class="headerlink" href="#lidar-sensor" title="Link to this heading"></a></h2>
+<p>The Supervisor can processes data points from multiple 3D lidar.</p>
+<a class="reference internal image-reference" href="../../_images/lidar_tab.png"><img alt="Configuration &gt; Lidar Tab" class="align-center" src="../../_images/lidar_tab.png" style="width: 600px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple" id="config-perception-lidar">
+<li><p><strong>Display name</strong>: This display name is used when aggregated statistics about the scanner are uploaded to the 3Laws cloud dashboard. This name is chosen by the user to help keep track of the scanner, e.g. “front_lidar”.</p></li>
+<li><p><strong>ROS Topic</strong>: Supervisor needs to subscribe to the ROS message published by the LIDAR, so this topic name (plus type, quality-of-service, and expected signal rate) need to match the sensor’s output. <em>ros2 topic</em> with options <em>list, info, hz</em> can be useful to obtain this information.</p></li>
+<li><p><strong>Specs</strong>:</p>
+<ul>
+<li><p><strong>Number of rays</strong>: The number of rays emitted by the LIDAR (point number).</p></li>
+<li><p><strong>Range</strong>: The maximum range of the LIDAR in meter.</p></li>
+</ul>
+</li>
+<li><p><strong>Lidar Pose</strong>: The orientation and position of the laserscan relative to the vehicle body or whichever frame is used must be specified. As with the robot’s body position, the user is advised to plot the data in rviz to ensure that the geometry is set correctly.</p></li>
+</ul>
+</section>
+<section id="obstacle-map">
+<span id="config-perception-obstacles"></span><h2>Obstacle Map<a class="headerlink" href="#obstacle-map" title="Link to this heading"></a></h2>
+<p>An existing perception system can be used instead of raw 2D-LIDAR data, but it must provide an ObjectArray that matches the definition for an lll_msgs/ObjectArray (see <a class="reference internal" href="../core_components/runtime_assurance.html#rta-obstacles"><span class="std std-ref">Run-time Assurance Module section</span></a>).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="localization.html" class="btn btn-neutral float-left" title="Localization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.html" class="btn btn-neutral float-right" title="Control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, 3Laws Robotics Inc..</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+   
+<div
+  class="rst-versions"
+  data-toggle="rst-versions"
+  role="note"
+  aria-label="versions"
+  style="overflow-y: auto"
+>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Supervisor Docs </span>
+    v: latest
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions:</dt>
+       
+      <strong>
+        
+        <dd>
+          <a href="/en/latest/index.html">latest</a>
+        </dd>
+        
+      </strong>
+        
+        <dd>
+          <a href="/en/1.0/index.html">1.0</a>
+        </dd>
+         
+    </dl>
+    <hr style="margin: 5px" />
+    Continuous documentation hosting provided by
+    <a href="https://pages.github.com/">GitHub Pages</a>.
+  </div>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

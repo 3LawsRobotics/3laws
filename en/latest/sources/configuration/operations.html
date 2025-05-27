@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operations &mdash; 3Laws latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=1b94733b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/text.css?v=f20bb1b1" />
+
+  
+    <link rel="shortcut icon" href="../../_static/Favicon_dark.svg"/>
+    <link rel="canonical" href="https://docs.3laws.io/sources/configuration/operations.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Diagnostics Page" href="diagnostics.html" />
+    <link rel="prev" title="Supervisor" href="supervisor.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            3Laws
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../first_time_use.html">First Time Use</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="general.html">General configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot_model.html">Robot Model configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="localization.html">Localization configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="perception.html">Perception configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Control configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="supervisor.html">Supervisor configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html">Diagnostics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../application_guides.html">Application Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_components.html">Core components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../knowledge.html">Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal.html">Legal</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">3Laws</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../first_time_use.html">First Time Use</a></li>
+      <li class="breadcrumb-item active">Operations</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="operations">
+<span id="control-panel-ops"></span><h1>Operations<a class="headerlink" href="#operations" title="Link to this heading"></a></h1>
+<section id="status">
+<h2>Status<a class="headerlink" href="#status" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="../../_images/cp_operation.png"><img alt="Operations page showing a configured robot." class="align-center" src="../../_images/cp_operation.png" style="width: 800px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>In the image above, the Supervisor is operational and all the components necessary for proper collision avoidance are configured to be active. The Diagnostic module is also operational and no issue as been detected (RDM pill in green).</p>
+<p>If some of the components are not yet operational, the Control Panel will show the boxes in different colors (orange for warning, red for errors).
+To get additional information about the error, you can check the logs by clicking on the button above the RDM/RAM pill. You can also click on the Status on top of the box to get details on the error source.</p>
+<a class="reference internal image-reference" href="../../_images/cp_operation_error.png"><img alt="Operations page showing a configured robot that does not yet have sensor or planning data." class="align-center" src="../../_images/cp_operation_error.png" style="width: 800px;" />
+</a>
+<p>The above image shows a situation where all components are down. We have clicked on the detail status of the Motion Planner components.</p>
+<p>A <strong>blue</strong> box indicates that the component is not yet operational and still initializing.</p>
+<p>The lower section of the panel show logs and strip charts. The categories that are currently displayed include:</p>
+<ul class="simple">
+<li><p><strong>Latest logs</strong>: Shows the most recent event from the RAM’s Fault Manager.</p></li>
+<li><p><strong>State Safeness</strong>: the Barrier Function (safety-related metric) value. When this value goes to zero or below zero, the system is evaluated as being in a collision state.</p></li>
+<li><p><strong>Input Modification</strong>: When this value is zero, the Run-time Assurance Module is passing the input from the planner through to the lower-level UNchanged. That is, the filtering is in passive mode. When this value is non-zero, the Run-time Assurance Module is actively modifying the commanded input.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In order to make this page work, the Rosbridge server needs to be active, and the Control Panel must connect to it.</p>
+</div>
+</section>
+<section id="visualization">
+<span id="control-panel-viz"></span><h2>Visualization<a class="headerlink" href="#visualization" title="Link to this heading"></a></h2>
+<p>Visualization of the Runtime Assurance Module (RAM) metadata is available through <a class="reference external" href="https://wiki.ros.org/rviz">Rviz</a>. This tab of the control panel will provide you with a link to download an Rviz configuration file consistent with the current Supervisor configuration.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="supervisor.html" class="btn btn-neutral float-left" title="Supervisor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="diagnostics.html" class="btn btn-neutral float-right" title="Diagnostics Page" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, 3Laws Robotics Inc..</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+   
+<div
+  class="rst-versions"
+  data-toggle="rst-versions"
+  role="note"
+  aria-label="versions"
+  style="overflow-y: auto"
+>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Supervisor Docs </span>
+    v: latest
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Versions:</dt>
+       
+      <strong>
+        
+        <dd>
+          <a href="/en/latest/index.html">latest</a>
+        </dd>
+        
+      </strong>
+        
+        <dd>
+          <a href="/en/1.0/index.html">1.0</a>
+        </dd>
+         
+    </dl>
+    <hr style="margin: 5px" />
+    Continuous documentation hosting provided by
+    <a href="https://pages.github.com/">GitHub Pages</a>.
+  </div>
+</div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

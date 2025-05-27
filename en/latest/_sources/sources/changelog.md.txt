@@ -2,6 +2,36 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.4.0 (23th May 2025)
+
+### Highlight
+
+- ROS websocket bridge is no longer required for diagnostics and operation visualizations
+- Added support for additional perception parameters, including but not limited to:
+  - Maximum number of points to consider
+  - How to handle point outside of hardware specification range
+  - Downsample factor
+- Added metric and dashboard to monitor ISO3691-4 defined metrics (C1, C1, C3, max allowed speed, etc. )
+
+### Fixed
+
+- Various broken views
+
+### Added
+
+- Support for multiple laserscan and 3D lidars
+- Detailed safety plots in the operation tab
+- 6 states OmniDirectional model support
+
+### Changed
+
+- Connection navbar now support params for direct connection to the supervisor and legacy connection to ros-websocket bridge
+
+### Removed
+
+- N/A
+
+
 ## 1.3.0 (13th January 2025)
 
 ### Highlight
