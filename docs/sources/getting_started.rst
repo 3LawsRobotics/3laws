@@ -80,7 +80,7 @@ The initial view of the Control Panel is the "Configuration" page, which consist
 
 .. warning::
 
-  The entire configuration process needs to be completed before starting the Supervisor software. If a part of the configuration is missing, the associated tab will be :lll_orange:`orange` in color. Once the configuration is complete all tabs should be white.
+  The entire configuration process needs to be completed before starting the Supervisor software. If a part of the configuration is missing, the associated tab will be orange in color. Once the configuration is complete all tabs should be white.
 
 .. note::
 

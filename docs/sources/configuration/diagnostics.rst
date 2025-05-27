@@ -5,6 +5,7 @@ The Diagnostic page provides a summary of the diagnostic metrics computed by the
 Divided into sections, the Diagnostic page shows the following metrics:
 
 - System metrics
+- Controller metrics
 - Odometry metrics
 - Dynamics metrics
 
@@ -37,7 +38,7 @@ Control tracking health metrics
 
 |
 
-This tab show for each controller the tracking error as a norm and per component (if bounds are specified)
+This tab show for each controller the tracking error margin. Maximum tracking error needs to be defined for this tab to be populated. The tracking error margin is computed as the ratio between the actual tracking error and the maximum tracking error defined in the controller configuration. A value of 1 means that the controller is at its maximum tracking error, while a value of 0 means perfect tracking.
 
 Odometry Metrics
 ----------------

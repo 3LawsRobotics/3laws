@@ -9,17 +9,6 @@
 import json
 import os
 
-from docutils import nodes
-from docutils.parsers.rst import roles
-
-
-def orange_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
-    node = nodes.inline(rawtext, text, classes=["lll_orange"])
-    return [node], []
-
-
-roles.register_local_role("lll_orange", orange_role)
-
 # Load version json
 dir_path = os.path.dirname(os.path.realpath(__file__))
 versionPath = os.path.join(dir_path, "metadata", "versions.json")
@@ -89,5 +78,4 @@ html_css_files = [
 
 
 def setup(app):
-    app.add_css_file("custom.css")
     app.add_css_file("custom.css")

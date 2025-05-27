@@ -28,7 +28,13 @@ Whenever the desired commands from the autonomy/planning stack will not violate 
 Configuration via Control Panel
 ===============================
 
-In order for the Supervisor to work effectively, it needs to be configured based on the robot's characteristics. This configuration is done through a web-based application called the **Control Panel**, provided along with the main Supervisor application. The Control Panel also serves as a tuning/monitoring tool for the Supervisor. It is composed of three main sections:
+In order for the Supervisor to work effectively, it needs to be configured based on the robot's characteristics. This configuration is done through a web-based application called the **Control Panel**, provided along with the main Supervisor application. To launch the Control Panel, you can use the following command:
+
+.. code-block:: bash
+
+  3laws control-panel run
+
+then navigate via a web browser to the following URL: ``http://<IP_ADDRESS_OF_THE_ROBOT>:8000/``. The Control Panel is designed to be user-friendly and intuitive, allowing users to configure the Supervisor without needing extensive technical knowledge. The Control Panel also serves monitoring tool for the Supervisor and it is composed of three main sections:
 
   - Configuration: This section allows the user to configure the Supervisor's parameters.
 

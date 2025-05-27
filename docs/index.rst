@@ -11,8 +11,6 @@
 Welcome to 3Laws Supervisor
 ###########################
 
-.. todolist::
-
 Welcome to the **3Laws Supervisor**, a next-generation software-based failsafe system providing sense-and-avoid capabilities for a variety of dynamic platforms.
 
 .. _contact 3Laws: mailto:sales@3laws.io

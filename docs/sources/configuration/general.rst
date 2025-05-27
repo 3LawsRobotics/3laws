@@ -36,7 +36,7 @@ This connection allow for all panel in the Operation tab to receive live data st
 Rosbridge Connection
 --------------------
 
-The Control Panel supports a topic autocompletion capability when paired with a ``rosbridge server``. The robot's ROS stack (without Supervisor) needs to be running and publishing topics for this feature's proper operation. With this interface, the Control Panel can retrieve information about the available topics and help you complete the configuration of the Supervisor. This is not required and will be deactivated by default.
+The Control Panel supports a topic autocompletion capability when paired with a ``rosbridge server`` (see `rosbridge documentation <https://github.com/RobotWebTools/rosbridge_suite>`_ for more details). The robot's ROS stack (without Supervisor) needs to be running and publishing topics for this feature's proper operation. With this interface, the Control Panel can retrieve information about the available topics and help you complete the configuration of the Supervisor. This is not required and will be deactivated by default.
 
 First, install the rosbridge suite by running the following command (where <distro> is replaced with the ROS distribution in use on the system):
 
