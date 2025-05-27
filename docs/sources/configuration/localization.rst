@@ -6,7 +6,7 @@ Localization topic
 
 Dialogs to connect to the state information provided for the robot are on the **Configuration > Localization page**.
 
-.. image:: ../../data/cpanel4.png
+.. image:: ../data/cpanel4.png
   :align: center
   :width: 600px
   :alt: Configuration > Localization Tab
@@ -21,7 +21,7 @@ State measurement covariance
 
 This section allows you to specify the uncertainty of the state. This will be used both by the diagnostic module and the run-time assurance module to integrate into the filtering the uncertainty of the measure.
 
-.. image:: ../../data/state_cov.png
+.. image:: ../data/state_cov.png
   :align: center
   :width: 600px
   :alt: Configuration > Localization Tab
@@ -37,7 +37,7 @@ This section allows you to specify the odometries end point and their respective
 
 Multiple odometries can be specified.
 
-.. image:: ../../data/odometry_config.png
+.. image:: ../data/odometry_config.png
   :align: center
   :width: 600px
   :alt: Configuration > Localization Tab
@@ -60,5 +60,3 @@ Multiple odometries can be specified.
   * **Parent Frame**: The parent frame of the odometry.
   * **Position**: The position of the odometry in it's parent frame.
   * **Rotation**: The rotation of the odometry relative to it's parent frame.
-
-

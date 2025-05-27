@@ -7,7 +7,7 @@ Troubleshooting
 The autocompletion capabilities fails to find topics:
 ======================================================
 
-If the Rosbridge web server is connected to the control panel (see :doc:`User guide > Control Panel <user_guide/control_panel>` for installation and connection details), topics don't appear (only `rosout` and `client_count`) try the following:
+If the Rosbridge web server is connected to the control panel (see :doc:`User guide > Control Panel <first_time_use>` for installation and connection details), topics don't appear (only `rosout` and `client_count`) try the following:
 
 - Check if the Rosbridge web server is connected to the control panel. You can do this by checking top right corner of the control panel. If the Rosbridge web server is connected, you should see a green icon.
 - Click on the reload button in the top right corner of the topic form (green circular arrow).

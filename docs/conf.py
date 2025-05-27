@@ -9,6 +9,17 @@
 import json
 import os
 
+from docutils import nodes
+from docutils.parsers.rst import roles
+
+
+def orange_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    node = nodes.inline(rawtext, text, classes=["lll_orange"])
+    return [node], []
+
+
+roles.register_local_role("lll_orange", orange_role)
+
 # Load version json
 dir_path = os.path.dirname(os.path.realpath(__file__))
 versionPath = os.path.join(dir_path, "metadata", "versions.json")
@@ -52,6 +63,9 @@ html_show_sphinx = False
 html_show_sourcelink = False
 sphinx_tabs_disable_tab_closing = True
 
+todo_include_todos = True
+todo_emit_warnings = True
+
 templates_path = ["_templates"]
 html_static_path = ["_static"]
 exclude_patterns = ["_build", "build", "Thumbs.db", ".DS_Store"]
@@ -69,10 +83,11 @@ html_theme = "sphinx_rtd_theme"
 # The master toctree document.
 master_doc = "index"
 
-rst_prolog = """
-.. include:: special.rst
-"""
-
 html_css_files = [
     "css/text.css",
 ]
+
+
+def setup(app):
+    app.add_css_file("custom.css")
+    app.add_css_file("custom.css")

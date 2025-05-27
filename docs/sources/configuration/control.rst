@@ -1,7 +1,7 @@
 Control
-###########
+#######
 
-.. image:: ../../data/control_tab.png
+.. image:: ../data/control_tab.png
   :align: center
   :width: 600px
   :alt: Configuration > Control Tab

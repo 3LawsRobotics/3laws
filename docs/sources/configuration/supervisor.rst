@@ -12,7 +12,7 @@ This page contains configuration entries for both the monitoring and Run-time As
 Supervisor Interface
 ====================
 
-.. image:: ../../data/supervisor_interface.png
+.. image:: ../data/supervisor_interface.png
    :width: 800px
 
 .. _config_sup_world_frame:
@@ -22,7 +22,7 @@ Supervisor Interface
 Desired Control Input and Computed Safe Control Input
 ------------------------------------------------------
 
-.. image:: ../../data/supervisor_desired_control_input.png
+.. image:: ../data/supervisor_desired_control_input.png
    :width: 800px
 
 This is where you can define the ROS topic that the Supervisor should listen to for the desired control input. It takes as entries the topic name, its type, Quality of service, signal rate and an optional mask.
@@ -41,7 +41,7 @@ Run-time Assurance Module
 General Parameters
 ------------------
 
-.. image:: ../../data/supervisor_general_parameters.png
+.. image:: ../data/supervisor_general_parameters.png
    :width: 800px
 
 * **Parameters > Enabled**: This checkbox controls whether the run-time assurance intercepts and modifies commands from the planner/trajectory generator and forwards modified versions to the vehicle. The Run-time Assurance Module will only modify the outputs if the option is activated. If it is not activated, the unmodified "desired control input" will be transmitted on the designated "Computed safe control" message.  Additionally, when activated the Run-time Assurance Module passes the unmodified desired input through to the platform except when a corrective action is needed.
@@ -60,7 +60,7 @@ General Parameters
 Tuning
 --------
 
-.. image:: ../../data/supervisor_tuning.png
+.. image:: ../data/supervisor_tuning.png
    :width: 800px
 
 * **Tuning > Aggressiveness**: This parameter controls how far from the nearest obstacle the safety filter starts having more effect on the commands and how strongly the safety filter pushes the robot back into the "safe" region if the safety definition has been violated. A larger value means that the control inputs from the planner will start to be modified when the robot is closer to an object/obstacle. That is, a larger value allows the platform to approach objects faster, and get closer.  If it gets too close, the Supervisor will push away from the object harder with a higher value.  A lower value will lead to a more tentative travel that stays farther away from objects.  In general lower values will produce larger margins. Typical values are between 0.5 and 1.0, but values in the range of 1000 might be used in reasonable situations.
@@ -77,7 +77,7 @@ Tuning
 Fault Management
 ----------------
 
-.. image:: ../../data/supervisor_fault_management.png
+.. image:: ../data/supervisor_fault_management.png
    :width: 800px
 
 * **Fault Management > Failure Command Mode**: The run-time assurance constantly monitors to ensure that it has enough data to determine whether the robot is in a safe condition. The minimum data required is the vehicle state, the laser scan values, and the commanded/desired input. If any of these is missing the RTA can switch to the failure command mode:
@@ -98,7 +98,7 @@ Fault Management
 Advanced Settings
 -----------------
 
-.. image:: ../../data/supervisor_advanced_settings.png
+.. image:: ../data/supervisor_advanced_settings.png
    :width: 800px
 
 * **Advanced Settings > Accept laserscan data with varying ray count**: One of the checks that is made on the incoming data is that the laserscan is delivering the expected number of scan points each frame. However, there are many laser scanners that are not consistent in the number of scan points they deliver. Checking this option allows for laser scanners with non-constant number of scan points reported.
@@ -113,7 +113,7 @@ Advanced Settings
 Monitoring Module
 ==================
 
-.. image:: ../../data/supervisor_monitoring_module.png
+.. image:: ../data/supervisor_monitoring_module.png
    :width: 800px
 
 Supervisor can publish a variety of diagnostic messages related to the health of the system clock, the dynamic consistency of the motion of the platform, individual node health, signal coherency, and summarized system health.  The published messages are discussed in :ref:`Ros Topics <reference_ros_topics>`.   These messages in the */lll/rdm* domain are only published if the Monitor is set to Active.
@@ -127,7 +127,7 @@ Supervisor can publish a variety of diagnostic messages related to the health of
 Odometry Consistency
 --------------------
 
-.. image:: ../../data/supervisor_odometry_consistency.png
+.. image:: ../data/supervisor_odometry_consistency.png
    :width: 800px
 
 * **Odometry Consistency > Enabled**: Enable the odometry consistency check. This check will compare the odometry data with the laser scan data to ensure that the robot is moving in a consistent manner. If the robot is not moving in a consistent manner, the system will issue a warning.
@@ -148,7 +148,7 @@ Odometry Consistency
 Dynamic Consistency
 -------------------
 
-.. image:: ../../data/supervisor_dynamic_consistency.png
+.. image:: ../data/supervisor_dynamic_consistency.png
    :width: 800px
 
 * **Dynamic Consistency > Enabled**: Enable the dynamic consistency check. this check will compare the model and the actual behavior of the robot to detect model errors.
@@ -168,7 +168,7 @@ Dynamic Consistency
 Behavior safety
 ---------------
 
-.. image:: ../../data/supervisor_behavior_safety.png
+.. image:: ../data/supervisor_behavior_safety.png
    :width: 800px
 
 * **Behavior safety > Enabled**: Enable the behavior safety check. This check will compare the behavior safety score to a predefined threshold and issue a fault if the behavior safety score is below the threshold.
@@ -181,7 +181,7 @@ Behavior safety
 System Health
 -------------
 
-.. image:: ../../data/supervisor_system_health.png
+.. image:: ../data/supervisor_system_health.png
    :width: 800px
 
 * **System Health > Enabled**: Enable the system health check. This check will compare the system health to a predefined threshold and issue a fault if the system health is below the threshold.
@@ -199,7 +199,7 @@ System Health
 Extra stack info
 ----------------
 
-.. image:: ../../data/supervisor_extra_stack_info.png
+.. image:: ../data/supervisor_extra_stack_info.png
    :width: 800px
 
 This section allows you to add extra topic and node outside of those already define by the mandatory configuration. It let you also map the defined topic of the mandatory configuration to a node.
@@ -207,7 +207,7 @@ This section allows you to add extra topic and node outside of those already def
 Supervisor activation logic
 ===========================
 
-.. image:: ../../data/supervisor_activation_logic.png
+.. image:: ../data/supervisor_activation_logic.png
    :width: 800px
 
 The bottom section relates to republishing the control commands to the robot that are being sent from the autonomy stack. The values will be published on the *lll/ram/filtered_input* (default topic name, can be customized) channel  if the Run-time Assurance Module is activate or not. However, the values will only be different from the *Desired control input* if the Run-time Assurance Module is active.

@@ -14,6 +14,8 @@ The Run-time Assurance Module (RAM) is the heart of the Supervisor. This module 
   :align: center
   :alt: Architecture of the RAM
 
+|
+
 - **The Kernel Generator** uses
     - an appropriate dynamical system Model,
     - the system's current state,
@@ -113,11 +115,12 @@ This model is a 3-state, 2-input model that describes the movement of a robot ev
 .. note::
   The Supervisor technology is able to support a wide variety of dynamical models with multiple levels of complexity. Use of a more accurate dynamical model allows for smaller margins and higher performance from the system. Please `contact 3laws`_ to discuss implementation of more tailored versions of Supervisor to meet different application needs.
 
+.. _safety_maps:
 
 Safety Maps
 ===========
 
-The other critical RAM component is the definition of what the robot should avoid. The Supervisor technology is able to enforce any arbitrary non-linear constraint on the robot's state. These constraints are organized into what 3Laws calls **Safety Maps**. A safety map is an object defining a set of robot state constraints. It can be updated when new information about the robot environment is available. The constraints to be enforced can then be evaluated at a given robot state and return a vector of the values at that state, along with information on the gradient of the constraints w.r.t variations in state.
+The other critical RAM component is the definition of what the robot should avoid. Although the Supervisor's core technology is able to enforce any arbitrary non-linear constraint on the robot's state, in the current implementation we focus on separation constraints (i.e., at all times, there should exist a minimum separation between the robots and its surrounding obstacles). These constraints are organized into what we call **Safety Maps**. A safety map is an object defining a set of robot state constraints. It can be updated when new information about the robot environment is available. The constraints to be enforced can then be evaluated at a given robot state and return a vector of the values at that state, along with information on the gradient of the constraints w.r.t variations in state.
 
 The Supervisor ships with three safety maps:
   - One based on 2D laserscan points that define discrete number of constraints in a 2D space.
@@ -125,7 +128,7 @@ The Supervisor ships with three safety maps:
   - One last based on a list of obstacles with absolute locations.
 
 Laserscan and Lidar
----------------------
+-------------------
 The laserscan and lidar safety maps defines constraints corresponding to the distance between the robot geometry and a carefully chosen set of `capsules <https://en.wikipedia.org/wiki/Capsule_(geometry)>`_ capturing the critical points in the laserscan or lidar. The Supervisor enforces a constraint that the robot does not collide (intersect) with any of these capsules. The capsule sizes are defined through the **collision distance threshold** parameter (see :ref:`control panel configuration <config_sup_collision_distance>`).
 
 This safety map gets updated every time a new scan gets received on the specified topic (see :ref:`control panel configuration <config_perception_laserscan>`).
