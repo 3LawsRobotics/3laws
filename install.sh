@@ -376,6 +376,7 @@ arm* | aarch*)
 esac
 cout "\t Detected architecture \"$ARCH\""
 
+####### Check if the user has provided valid arguments #######
 if [ $FORCE == 0 ]; then
 
   # If an Ubuntu version is specified and it does not match the detected one, prompt for confirmation
@@ -430,14 +431,17 @@ else
   fi
 fi
 
-# Check Write permission
+####### Check if permission to write in current folder are granted #######
 if [ ! -w . ]; then
   cerr "No write permission in current directory, please run this script in a writable directory"
   exit 1
 fi
 
-# Check args validity
+######## Check if the user has provided valid arguments #######
 check_values
+
+
+####### Download package #######
 
 # Confirm package to be downloaded
 cout "The Supervisor package with tag \"$WANTED_RELEASE_TAG\" for Ubuntu $UBUNTU_VERSION $ARCH and ROS $QUERY_ROS_DISTRO will be downloaded"
@@ -491,8 +495,15 @@ else
   exit 0
 fi
 
+
+####### Install package #######
 if [[ -f "$ASSET_NAME" ]]; then
-  INSTALL=$(promptYesNo "Do you want to install $ASSET_NAME and its dependency (libstd++13) ?" 1)
+
+  QUESTION=$( [[ "$UBUNTU_VERSION" == "24.04" ]] \
+  && echo "Do you want to install $ASSET_NAME?" \
+  || echo "Do you want to install $ASSET_NAME and its dependency (libstd++13) ?" )
+
+  INSTALL=$(promptYesNo "$QUESTION" 1)
 
   if [ "$INSTALL" == 0 ]; then
     cout "Package downloaded but not installed, if you choose to install manually, be sure to have libstd++13 on your system"
@@ -502,31 +513,34 @@ if [[ -f "$ASSET_NAME" ]]; then
       cwarn "To install the supervisor automatically some commands must be run as sudo"
       SUDO="sudo "
     fi
-    # Install dependencies
-    STDLIB=libstdc++-13-dev
-    STDLIB_INSTALLED=0
-    dpkg -l $STDLIB &>/dev/null && STDLIB_INSTALLED=1
 
-    if [[ $STDLIB_INSTALLED == 0 ]]; then
-      cout "Installing dependencies..."
-      $SUDO apt-get update &>/dev/null
-    fi
+    # Install dependencies if needed
+    if [[ "$UBUNTU_VERSION" != "24.04" ]]; then
+      STDLIB=libstdc++-13-dev
+      STDLIB_INSTALLED=0
+      dpkg -l $STDLIB &>/dev/null && STDLIB_INSTALLED=1
 
-    if [[ $STDLIB_INSTALLED == 0 ]]; then
-      {
+      if [[ $STDLIB_INSTALLED == 0 ]]; then
+        cout "Installing dependencies..."
+        $SUDO apt-get update &>/dev/null
+      fi
+
+      if [[ $STDLIB_INSTALLED == 0 ]]; then
         {
-          $SUDO apt-get install -y --no-install-recommends $STDLIB &>/dev/null
+          {
+            $SUDO apt-get install -y --no-install-recommends $STDLIB &>/dev/null
+          } || {
+            $SUDO apt-get install -y --no-install-recommends software-properties-common &>/dev/null
+            $SUDO add-apt-repository -y "ppa:ubuntu-toolchain-r/test" &>/dev/null
+            cwarn "Added 'ppa:ubuntu-toolchain-r/test' to apt sources!"
+            $SUDO apt-get install -y --no-install-recommends $STDLIB &>/dev/null
+          }
+          cwarn "Installed '$STDLIB' on system!"
         } || {
-          $SUDO apt-get install -y --no-install-recommends software-properties-common &>/dev/null
-          $SUDO add-apt-repository -y "ppa:ubuntu-toolchain-r/test" &>/dev/null
-          cwarn "Added 'ppa:ubuntu-toolchain-r/test' to apt sources!"
-          $SUDO apt-get install -y --no-install-recommends $STDLIB &>/dev/null
+          cerr "Failed to install '$STDLIB' dependency!"
+          exit 65
         }
-        cwarn "Installed '$STDLIB' on system!"
-      } || {
-        cerr "Failed to install '$STDLIB' dependency!"
-        exit 65
-      }
+      fi
     fi
 
     # Install package
@@ -535,10 +549,14 @@ if [[ -f "$ASSET_NAME" ]]; then
 
     # Create 3laws directory
     cout "Creating 3laws config directory..."
-    mkdir -p "$HOME/.3laws/config"
+    mkdir -p "$HOME/.3laws/config" || {
+      cerr "Failed to create 3laws config directory, please check permissions or create it manually at $HOME/.3laws/config"
+    }
 
     cout "Removing artifacts..."
-    rm "$ASSET_NAME"
+    rm "$ASSET_NAME" || {
+      cerr "Failed to remove $ASSET_NAME, please check permissions or remove it manually"
+    }
 
     cout "Success installation!"
   fi
