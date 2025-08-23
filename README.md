@@ -91,6 +91,7 @@ This command will fully remove supervisor from your computer
 bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/uninstall.sh)
 ```
 
+<<<<<<< HEAD
 ## ROS2 install from source
 
 For distributions without available ROS2 packages (like debian), you can use the following scrip to build and install ROS2 in a way that is compatible with 3Laws Supervisor: [install_ros2.sh](https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install_ros2.sh).
@@ -135,6 +136,48 @@ You can then download and run the script:
 ```bash
 bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install_ros2.sh)
 ```
+=======
+## Docker runtime environment
+
+A sample Docker project is provided to assist users who prefer to install and execute Supervisor within a controlled environment. The project is not designed to meet any production-grade requirements, but rather to provide a starting point for further development.
+
+From the root directory, run `./docker/build_docker.bash <ROS_DISTRO>` to create the Docker image. Replace `<ROS_DISTRO>` with either `humble` or `jazzy`. When the building is complete, run `./docker/run_docker.bash <ROS_DISTRO>` to start the container.
+
+The start script creates a local directory (default at `~/.3laws`) and mounted in the container at (default) `/home/3laws/.3laws`. The shared volume is used to store Supervisor configurations so that all savings and progresses persists across restarts of the container.
+
+In alternative to manually starting the container via the provided script, it is possible to call the script directly from a ROS 2 launch file:
+
+```python
+import os
+
+from ament_index_python.packages import get_package_share_directory
+from launch import LaunchDescription
+from launch.actions import ExecuteProcess
+
+
+def generate_launch_description():
+    DOCKER_RUN_SCRIPT = os.path.join(
+        <path/to/3laws/docker>,
+        "run_docker.bash",
+    )
+
+    launchdesc = LaunchDescription(
+        [
+            ExecuteProcess(
+                cmd=[DOCKER_RUN_SCRIPT],
+                shell=True,
+                output="screen",
+                name="lll_supervisor_docker",
+            )
+        ]
+    )
+
+    return launchdesc
+
+```
+
+IMPORTANT: When running the container for the first time, the Supervisor node will fail as no configuration file exists yet. Configure Supervisor through the Control Panel and restart the container.
+>>>>>>> 30ee0c7 (Sample project for creating humble/jazzy supervisor runtime dockers)
 
 ## Repo maintainer
 
