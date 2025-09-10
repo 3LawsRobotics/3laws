@@ -170,12 +170,14 @@ promptChoiceROSDistro() {
 	local REPLY=""
 
 	# If OS_VERSION is set, filter ros_list accordingly
-	if [[ $OS_VERSION == "24.04" ]]; then
+	if [[ $OS_VERSION == "ubuntu24.04" ]]; then
 		ros_list=("${NOBLE_ROS[@]}")
-	elif [[ $OS_VERSION == "22.04" ]]; then
+	elif [[ $OS_VERSION == "ubuntu22.04" ]]; then
 		ros_list=("${JAMMY_ROS[@]}")
-	elif [[ $OS_VERSION == "20.04" ]]; then
+	elif [[ $OS_VERSION == "ubuntu20.04" ]]; then
 		ros_list=("${FOCAL_ROS[@]}")
+	elif [[ $OS_VERSION == "debian12.11" ]]; then
+		ros_list=("${DEBIAN_ROS[@]}")
 	fi
 
 	select which in "${ros_list[@]}"; do
@@ -527,33 +529,40 @@ if [[ -f "$ASSET_NAME" ]]; then
 			SUDO="sudo "
 		fi
 
-		# Install dependencies if needed
-		if [[ "$OS_VERSION" != "24.04" ]]; then
+		STDLIB=libstdc++-12-dev
+
+		# Install libstdc++-13-dev dependency for Ubuntu 20.04
+		if [[ "$OS_VERSION" == "20.04" ]]; then
 			STDLIB=libstdc++-13-dev
-			STDLIB_INSTALLED=0
-			dpkg -l $STDLIB &>/dev/null && STDLIB_INSTALLED=1
+		fi
 
-			if [[ $STDLIB_INSTALLED == 0 ]]; then
-				cout "Installing dependencies..."
-				$SUDO apt-get update &>/dev/null
-			fi
+		STDLIB_INSTALLED=0
+		dpkg -l $STDLIB &>/dev/null && STDLIB_INSTALLED=1
 
-			if [[ $STDLIB_INSTALLED == 0 ]]; then
+		if [[ $STDLIB_INSTALLED == 0 ]]; then
+			if [[ "$OS_VERSION" == "ubuntu20.04" ]]; then
 				{
-					{
-						$SUDO apt-get install -y --no-install-recommends $STDLIB &>/dev/null
-					} || {
-						$SUDO apt-get install -y --no-install-recommends software-properties-common &>/dev/null
-						$SUDO add-apt-repository -y "ppa:ubuntu-toolchain-r/test" &>/dev/null
-						cwarn "Added 'ppa:ubuntu-toolchain-r/test' to apt sources!"
-						$SUDO apt-get install -y --no-install-recommends $STDLIB &>/dev/null
-					}
+					$SUDO apt-get install -y --no-install-recommends software-properties-common &>/dev/null
+					$SUDO add-apt-repository -y "ppa:ubuntu-toolchain-r/test" &>/dev/null
+					cwarn "Added 'ppa:ubuntu-toolchain-r/test' to apt sources!"
+					$SUDO apt-get update &>/dev/null
+					$SUDO apt-get install -y --no-install-recommends $STDLIB &>/dev/null
+					cwarn "Installed '$STDLIB' on system!"
+				} || {
+					cerr "Failed to install '$STDLIB' dependency!"
+					exit 65
+				}
+			else
+				{
+					$SUDO apt-get install -y --no-install-recommends $STDLIB &>/dev/null
 					cwarn "Installed '$STDLIB' on system!"
 				} || {
 					cerr "Failed to install '$STDLIB' dependency!"
 					exit 65
 				}
 			fi
+		else
+			cout "'$STDLIB' dependency already installed!"
 		fi
 
 		# Install package
