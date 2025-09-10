@@ -79,10 +79,36 @@ promptYesNo() {
 	echo "$REPLY"
 }
 
+detectOSVersion() {
+	local id version_id deb_ver
+
+	# Extract ID and VERSION_ID directly (no sourcing)
+	id=$(grep -E '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"')
+	version_id=$(grep -E '^VERSION_ID=' /etc/os-release | cut -d= -f2 | tr -d '"')
+
+	case "$id" in
+	ubuntu)
+		case "$version_id" in
+		"24.04") echo "ubuntu24.04" ;;
+		"22.04") echo "ubuntu22.04" ;;
+		"20.04") echo "ubuntu20.04" ;;
+		esac
+		;;
+	debian)
+		if [ "$version_id" = "12" ] && [ -f /etc/debian_version ]; then
+			deb_ver=$(cat /etc/debian_version | tr -d ' \t\n')
+			case "$deb_ver" in
+			12.11) echo "debian12.11" ;;
+			esac
+		fi
+		;;
+	esac
+}
+
 promptChoiceArch() {
 	if [[ $ALWAYS_YES == 1 ]]; then
 		cerr "Always Yes selected but a multichoices question has been raised"
-		cerr "Use -f -r <ROS_DISTRO> -a <ARCH> -v <UBUNTU_VERSION> to force an install"
+		cerr "Use -f -r <ROS_DISTRO> -a <ARCH> -v <OS_VERSION> to force an install"
 		exit 1
 	fi
 
@@ -103,84 +129,62 @@ promptChoiceArch() {
 	echo "$REPLY"
 }
 
-promptChoiceUbuntuVersion() {
+ALL_OS=("ubuntu24.04" "ubuntu22.04" "ubuntu20.04" "debian12.11")
+promptChoiceOSVersion() {
 	if [[ $ALWAYS_YES == 1 ]]; then
 		cerr "Always Yes selected but a multichoices question has been raised"
-		cerr "Use -f -r <ROS_DISTRO> -a <ARCH> -v <UBUNTU_VERSION> to force an install"
+		cerr "Use -f -r <ROS_DISTRO> -a <ARCH> -v <OS> to force an install"
 		exit 1
 	fi
 	local REPLY=""
-	select which in "24.04" "22.04" "20.04"; do
-		case $which in
-		"24.04")
-			REPLY="24.04"
-			break
-			;;
-		"22.04")
-			REPLY="22.04"
-			break
-			;;
-		"20.04")
-			REPLY="20.04"
-			break
-			;;
-		*) ;;
-		esac
+
+	select which in "${ALL_OS[@]}"; do
+		for os in "${ALL_ROS[@]}"; do
+			if [[ "$which" == "$os" ]]; then
+				REPLY="$os"
+				break 2
+			fi
+		done
 	done
 	echo "$REPLY"
 }
 
-NOBLE_ROS=("jazzy")
+NOBLE_ROS=("jazzy" "kilted")
 JAMMY_ROS=("iron" "humble")
-FOCAL_ROS=("galactic" "foxy")
+FOCAL_ROS=("foxy")
+
+DEBIAN_ROS=("jazzy")
+
+ALL_ROS=()
+ALL_ROS+=("${NOBLE_ROS[@]}")
+ALL_ROS+=("${JAMMY_ROS[@]}")
+ALL_ROS+=("${FOCAL_ROS[@]}")
 
 promptChoiceROSDistro() {
 	if [[ $ALWAYS_YES == 1 ]]; then
 		cerr "Always Yes selected but a multichoices question has been raised"
-		cerr "Use -f -r <ROS_DISTRO> -a <ARCH> -v <UBUNTU_VERSION> to force an install"
+		cerr "Use -f -r <ROS_DISTRO> -a <ARCH> -v <OS_VERSION> to force an install"
 		exit 1
 	fi
+	local ros_list=("${ALL_ROS[@]}")
 	local REPLY=""
-	if [ -z "$UBUNTU_VERSION" ]; then
-		local ros_list=("jazzy" "iron" "humble" "galactic" "foxy")
-	fi
 
-	if [[ $UBUNTU_VERSION == "24.04" ]]; then
-		local ros_list=("${NOBLE_ROS[@]}")
-	fi
-
-	if [[ $UBUNTU_VERSION == "22.04" ]]; then
-		local ros_list=("${JAMMY_ROS[@]}")
-	fi
-
-	if [[ $UBUNTU_VERSION == "20.04" ]]; then
-		local ros_list=("${FOCAL_ROS[@]}")
+	# If OS_VERSION is set, filter ros_list accordingly
+	if [[ $OS_VERSION == "24.04" ]]; then
+		ros_list=("${NOBLE_ROS[@]}")
+	elif [[ $OS_VERSION == "22.04" ]]; then
+		ros_list=("${JAMMY_ROS[@]}")
+	elif [[ $OS_VERSION == "20.04" ]]; then
+		ros_list=("${FOCAL_ROS[@]}")
 	fi
 
 	select which in "${ros_list[@]}"; do
-		case $which in
-		"jazzy")
-			REPLY="jazzy"
-			break
-			;;
-		"iron")
-			REPLY="iron"
-			break
-			;;
-		"humble")
-			REPLY="humble"
-			break
-			;;
-		"galactic")
-			REPLY="galactic"
-			break
-			;;
-		"foxy")
-			REPLY="foxy"
-			break
-			;;
-		*) ;;
-		esac
+		for ros in "${ALL_ROS[@]}"; do
+			if [[ "$which" == "$ros" ]]; then
+				REPLY="$ros"
+				break 2
+			fi
+		done
 	done
 	echo "$REPLY"
 }
@@ -196,23 +200,30 @@ promptChoiceTagRelease() {
 	echo "$SELECTED_TAG"
 }
 
-valid_ros_ubuntu_match() {
-	if [[ $UBUNTU_VERSION == "24.04" ]]; then
+checkOSAndRosMatch() {
+	if [[ $OS_VERSION == "ubuntu24.04" ]]; then
 		for value in "${NOBLE_ROS[@]}"; do
 			[[ $value == "$QUERY_ROS_DISTRO" ]] && return 0
 		done
 		return 1
 	fi
 
-	if [[ $UBUNTU_VERSION == "22.04" ]]; then
+	if [[ $OS_VERSION == "ubuntu22.04" ]]; then
 		for value in "${JAMMY_ROS[@]}"; do
 			[[ $value == "$QUERY_ROS_DISTRO" ]] && return 0
 		done
 		return 1
 	fi
 
-	if [[ $UBUNTU_VERSION == "20.04" ]]; then
+	if [[ $OS_VERSION == "ubuntu20.04" ]]; then
 		for value in "${FOCAL_ROS[@]}"; do
+			[[ $value == "$QUERY_ROS_DISTRO" ]] && return 0
+		done
+		return 1
+	fi
+
+	if [[ $OS_VERSION == "debian12.11" ]]; then
+		for value in "${DEBIAN_ROS[@]}"; do
 			[[ $value == "$QUERY_ROS_DISTRO" ]] && return 0
 		done
 		return 1
@@ -231,14 +242,14 @@ valid_tag_release() {
 # Usage info
 show_help() {
 	cat <<EOF
-Usage: ${0##*/} [-hyf] [-r <ROS_DISTRO>] [-a <ARCH>] [-v <UBUNTU_VERSION>] [-t <RELEASE_TAG>]
+Usage: ${0##*/} [-hyf] [-r <ROS_DISTRO>] [-a <ARCH>] [-v <OS>] [-t <RELEASE_TAG>]
 Install 3Laws Supervisor
    -h                 show this help menu
    -y                 answer yes to all yes/no questions
    -f                 Force install, specify all arguments
    -r                 Optional: ROS distribution
    -a                 CPU architecture (arm64v8|amd64)
-   -v                 Ubuntu version (24.04|22.04|20.04)
+   -v                 OS version (ubuntu24.04|ubuntu22.04|ubuntu20.04|debian12.11)
    -t                 Optional: release tag
 EOF
 }
@@ -249,9 +260,9 @@ check_values() {
 		cerr "Architecture not found, specify amd64|arm64"
 		ARCH=$(promptChoiceArch)
 	fi
-	if [[ -z $UBUNTU_VERSION ]]; then
-		cerr "Ubuntu version not found, specify 24.04|22.04|20.04"
-		UBUNTU_VERSION=$(promptChoiceUbuntuVersion)
+	if [[ -z $OS_VERSION ]]; then
+		cerr "OS version not found, specify ubuntu24.04|ubuntu22.04|ubuntu20.04|debian12.11"
+		OS_VERSION=$(promptChoiceOSVersion)
 	fi
 	if [[ -z $QUERY_ROS_DISTRO ]]; then
 		cerr "ROS distribution not found, specify jazzy|iron|humble|galactic|foxy"
@@ -262,12 +273,13 @@ check_values() {
 		WANTED_RELEASE_TAG=$(promptChoiceTagRelease)
 	fi
 
-	# Check if the specified ROS distribution is compatible with the selected Ubuntu version
-	if ! valid_ros_ubuntu_match; then
-		cwarn "Specified ROS distribution not compatible with Ubuntu \"$UBUNTU_VERSION\""
-		echo "24.04: jazzy"
-		echo "22.04: iron | humble"
-		echo "20.04: galactic | foxy"
+	# Check if the specified ROS distribution is compatible with the selected OS version
+	if ! checkOSAndRosMatch; then
+		cwarn "Specified ROS distribution not compatible with \"$OS_VERSION\""
+		echo "ubuntu24.04: jazzy | kilted"
+		echo "ubuntu22.04: iron | humble"
+		echo "ubuntu20.04: galactic | foxy"
+		echo "debian12.11: jazzy"
 		if [ "$FORCE" == 1 ]; then
 			cout "Retry with other arguments"
 			exit 1
@@ -294,7 +306,7 @@ ALWAYS_YES=0
 FORCE=0
 WANTED_ROS=""
 WANTED_ARCH=""
-WANTED_UBUNTU=""
+WANTED_OS_VERSION=""
 WANTED_RELEASE_TAG=""
 
 # Define GIT variables and check connection
@@ -336,7 +348,7 @@ while getopts hyfr:a:v:t: opt; do
 		WANTED_ARCH="$OPTARG"
 		;;
 	v)
-		WANTED_UBUNTU="$OPTARG"
+		WANTED_OS_VERSION="$OPTARG"
 		;;
 	t)
 		WANTED_RELEASE_TAG="$OPTARG"
@@ -352,8 +364,8 @@ shift "$((OPTIND - 1))"
 # Main
 ctitle "3Laws Supervisor Installer (v$SCRIPT_VERSION)"
 
-if [ "$FORCE" == 1 ] && { [ -z "$WANTED_ARCH" ] || [ -z "$WANTED_ROS" ] || [ -z "$WANTED_UBUNTU" ] || [ -z "$WANTED_RELEASE_TAG" ]; }; then
-	cerr "The force arg requires all information to be provided, arch, ROS, Ubuntu version, and release tag"
+if [ "$FORCE" == 1 ] && { [ -z "$WANTED_ARCH" ] || [ -z "$WANTED_ROS" ] || [ -z "$WANTED_OS_VERSION" ] || [ -z "$WANTED_RELEASE_TAG" ]; }; then
+	cerr "The force arg requires all information to be provided, arch, ROS, OS version, and release tag"
 	exit 1
 fi
 
@@ -365,8 +377,8 @@ if command -v ros2 &>/dev/null; then
 	cout "\t Detected existing ROS2 distribution \"$QUERY_ROS_DISTRO\""
 fi
 
-UBUNTU_VERSION=$(cat /etc/*-release | grep VERSION_ID | grep -oE "[0-9]{2}.[0-9]{2}")
-cout "\t Detected Ubuntu version \"$UBUNTU_VERSION\""
+OS_VERSION=$(detectOSVersion)
+cout "\t Detected OS version \"$OS_VERSION\""
 
 ARCH=amd64
 case "$(uname -i)" in
@@ -379,11 +391,11 @@ cout "\t Detected architecture \"$ARCH\""
 ####### Check if the user has provided valid arguments #######
 if [ $FORCE == 0 ]; then
 
-	# If an Ubuntu version is specified and it does not match the detected one, prompt for confirmation
-	if [ -n "$WANTED_UBUNTU" ]; then
-		if [ "$UBUNTU_VERSION" != "$WANTED_UBUNTU" ]; then
-			cwarn "Specified Ubuntu version does not match the detected one. Please confirm your choice by selecting option number:"
-			UBUNTU_VERSION=$(promptChoiceUbuntuVersion)
+	# If an OS version is specified and it does not match the detected one, prompt for confirmation
+	if [ -n "$WANTED_OS_VERSION" ]; then
+		if [ "$OS_VERSION" != "$WANTED_OS_VERSION" ]; then
+			cwarn "Specified OS version does not match the detected one. Please confirm your choice by selecting option number:"
+			OS_VERSION=$(promptChoiceOSVersion)
 		fi
 	fi
 
@@ -415,9 +427,9 @@ if [ $FORCE == 0 ]; then
 
 else
 
-	if [[ $UBUNTU_VERSION != "$WANTED_UBUNTU" ]]; then
-		cwarn "Specified Ubuntu version does not match the detected one, continuing with $WANTED_UBUNTU"
-		UBUNTU_VERSION=$WANTED_UBUNTU
+	if [[ $OS_VERSION != "$WANTED_OS_VERSION" ]]; then
+		cwarn "Specified OS version does not match the detected one, continuing with $WANTED_OS_VERSION"
+		OS_VERSION=$WANTED_OS_VERSION
 	fi
 
 	if [[ $ARCH != "$WANTED_ARCH" ]]; then
@@ -443,7 +455,7 @@ check_values
 ####### Download package #######
 
 # Confirm package to be downloaded
-cout "The Supervisor package with tag \"$WANTED_RELEASE_TAG\" for Ubuntu $UBUNTU_VERSION $ARCH and ROS $QUERY_ROS_DISTRO will be downloaded"
+cout "The Supervisor package with tag \"$WANTED_RELEASE_TAG\" for OS $OS_VERSION $ARCH and ROS $QUERY_ROS_DISTRO will be downloaded"
 
 # Assemble the URL based on the selected release tag
 if [[ $WANTED_RELEASE_TAG != "latest" ]]; then
@@ -453,7 +465,7 @@ GH_TAGS="$GH_REPO/releases/$WANTED_RELEASE_TAG"
 
 CURL_ARGS="-LJO#"
 PACKAGE_NAME="lll-supervisor-full-${QUERY_ROS_DISTRO}"
-REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+_$ARCH"
+REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+_${ARCH}_${OS_VERSION}"
 
 # Read asset tags.
 RESPONSE=$(curl -s -H "application/vnd.github+json" $GH_TAGS)
@@ -497,7 +509,7 @@ fi
 ####### Install package #######
 if [[ -f "$ASSET_NAME" ]]; then
 
-	QUESTION=$([[ "$UBUNTU_VERSION" == "20.04" ]] && "Do you want to install $ASSET_NAME and its dependency (libstd++13) ?") ||
+	QUESTION=$([[ "$OS_VERSION" == "20.04" ]] && "Do you want to install $ASSET_NAME and its dependency (libstd++13) ?") ||
 		echo "Do you want to install $ASSET_NAME?"
 
 	INSTALL=$(promptYesNo "$QUESTION" 1)
@@ -513,7 +525,7 @@ if [[ -f "$ASSET_NAME" ]]; then
 		fi
 
 		# Install dependencies if needed
-		if [[ "$UBUNTU_VERSION" != "24.04" ]]; then
+		if [[ "$OS_VERSION" != "24.04" ]]; then
 			STDLIB=libstdc++-13-dev
 			STDLIB_INSTALLED=0
 			dpkg -l $STDLIB &>/dev/null && STDLIB_INSTALLED=1
