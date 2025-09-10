@@ -487,7 +487,7 @@ GH_ASSET="$GH_REPO/releases/assets/$ASSET_ID"
 DOWNLOAD=0
 if [ -f "$ASSET_NAME" ]; then
 	cwarn "$ASSET_NAME already in your directory."
-	OVERWRITE=$(promptYesNo "Do you want to overwrite $ASSET_NAME in the current directory ?" 1)
+	OVERWRITE=$(promptYesNo "Do you want to overwrite $ASSET_NAME in the current directory?" 1)
 	if [ "$OVERWRITE" -eq 1 ]; then
 		cwarn "Removing $ASSET_NAME"
 		rm "$ASSET_NAME"
@@ -509,10 +509,13 @@ fi
 ####### Install package #######
 if [[ -f "$ASSET_NAME" ]]; then
 
-	QUESTION=$([[ "$OS_VERSION" == "20.04" ]] && "Do you want to install $ASSET_NAME and its dependency (libstd++13) ?") ||
-		echo "Do you want to install $ASSET_NAME?"
+	if [[ "$OS_VERSION" == "20.04" ]]; then
+		QUESTION="Do you want to install $ASSET_NAME and its dependency (libstdc++-13)?"
+	else
+		QUESTION="Do you want to install $ASSET_NAME?"
+	fi
 
-	INSTALL=$(promptYesNo "$QUESTION" 1)
+	INSTALL=$(promptYesNo "${QUESTION}" 1)
 
 	if [ "$INSTALL" == 0 ]; then
 		cout "Package downloaded but not installed, you can install it manually with: 'sudo apt install -f ./$ASSET_NAME'"
