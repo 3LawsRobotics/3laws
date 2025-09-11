@@ -1,0 +1,17 @@
+root = true
+
+[*.sh]
+indent_style = space
+indent_size = 2
+
+[*.bash]
+indent_style = space
+indent_size = 2
+
+[*.bashrc]
+indent_style = space
+indent_size = 2
+
+[*.bash_aliases]
+indent_style = space
+indent_size = 2
