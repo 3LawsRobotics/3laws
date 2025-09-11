@@ -110,6 +110,24 @@ Advanced Settings
 * **Advanced Settings > Use localization**:  Supervisor provides a MarkerArray that displays the robot's bounding box and rays to the closest obstacles. If "Use Localization" is set, the display is created relative to the world frame. In situations where the localization may be less reliable, this checkbox can be deselected, and the visualization will be based on the current robot base frame. Localization is also very useful if the control rate is low (e.g. longer times between commands) or there are delays between sensing and actuating. If the robot's motion is large during the time period of the control calculation, the model will account for it as long as localization is accurate.
 
 
+Post Process filter
+===================
+
+.. image:: ../data/post_process_filter.png
+   :width: 800px
+
+Supervisor can after filtering apply two type of filter in series, a rate limiter and/or a first order filter. These two filter can be configured here.
+
+The rate limiter takes as parameters an absolute rate limit per component of the input vector. The First order filter takes a time constant per component of the input. This time constant correspond to how long it takes for the filter to reach the desired filtered input.
+
+The First order filter will be disabled if 0 is set for each parameters.
+
+.. warning::
+
+  Turning on these filters will effectively delay the robot response to moving object. To compensate for that, it is recommended to increase the filter conservativeness.
+
+
+
 Monitoring Module
 ==================
 

@@ -2,6 +2,38 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.5.0 (9th September 2025)
+
+### Highlight
+
+- Support for Mobile manipulator robot
+- Support for safety zones awareness (Separate license)
+- Better streaming performance from the supervisor to the control panel
+
+### Fixed
+
+- ISO 3691-4 metric and visualization now support correctly multiple laserscans
+- Fixed Status printing of Runtime Assurance Module
+- Various corner case fixing
+
+### Added
+
+- Support for Mobile Manipulator
+- Add Default QOS option
+- log size and log files number can be chosen from the launch file
+- Support for safety zones awareness (Separate license)
+- Package for Debian 12 available (Partial support only)
+
+## Changed
+
+- Breaking change in License format. Old licenses will no longer be usable
+- Refactor of dynamic consistency metric
+- Build with gcc-12 in ubuntu 22.04 (gcc-13 dependency no longer required)
+
+## Removed
+
+- Deprecated support for ubuntu 20.04
+
 ## 1.4.0 (23th May 2025)
 
 ### Highlight

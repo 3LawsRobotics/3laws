@@ -3,14 +3,14 @@ Robot Model
 
 The Configuration page for the Robot Model is where the robot's geometry and kinematics are specified.  The model and shape are critical for predicting when collisions may occur and for calculating how to avoid them.
 
-.. image:: ../data/kinematic_model.png
+.. image:: ../data/model_library.png
   :align: center
   :width: 600px
   :alt: Configuration > Robot Model
 
 |
 
-- **Kinematics**: Supervisor currently supports **differential drive** and **omni-directional** mobile platforms. A **differential drive** vehicle can rotate around a fixed location by driving one wheel forward and its pair in reverse. It can move forward or backwards by driving both wheels in the same direction. An **omni-directional** robot is usually implemented using wheels that have a series of smaller wheels mounted at 45 degrees on the outer rim. By moving one axle forward and others backwards, the vehicle can move sideways. Rotation occurs by moving the wheels on one side forwards and the wheels on the other side in reverse.
+- **Models**: Supervisor currently supports **differential drive**, **omni-directional** and **mobile manipulator** platforms. A **differential drive** vehicle can rotate around a fixed location by driving one wheel forward and its pair in reverse. It can move forward or backwards by driving both wheels in the same direction. An **omni-directional** robot is usually implemented using wheels that have a series of smaller wheels mounted at 45 degrees on the outer rim. By moving one axle forward and others backwards, the vehicle can move sideways. Rotation occurs by moving the wheels on one side forwards and the wheels on the other side in reverse. Finally a **mobile manipulator** is an omni-directional base coupled with a robotic arm attached to it. Supervisor enforce collision avoidance of the whole body by taking into account the joint state of the arm and the shape of the base.
 
 .. image:: ../data/robot_geometry.png
   :align: center
@@ -37,7 +37,5 @@ The Configuration page for the Robot Model is where the robot's geometry and kin
   * The **Inputs** section supports specification of maximum and minimum limits for the translational and rotational speeds at which the robot can be commanded. For monitoring, if these values are exceeded, a log-event describing the violation will be issued. If the Run-time Assurance Module (see :ref:`supervisor activation`) is active, these limits will be applied to the filtered outputs. For steered vehicles, instead of limits on rotational speeds, steering limits are specified.
 
   * **Parameters**: The only robot type that has a parameters section is the steered robot. *wheel_dx* is the wheelbase length for the vehicle. *origin_x* is the distance from the rear axle to the robot base frame.
-
-  * **Process Noise Covariance**: This let the user specify the diagonal of the state uncertainty covariance matrix. This is used when integrating forward the robot state.
 
   * **State**: For all robot types, the State category provides the definitions of the variables that are considered as the "states". These definitions are important when trying to create "masks" to map between the input ROS variable types and the robot states. The first, is considered state 0 (typically x position), the second is state 1 (typically y position) and the third is state 2 (typically yaw).
