@@ -80,10 +80,9 @@ promptYesNo() {
 }
 
 detectOSVersion() {
-  local id version_id deb_ver
+  local version_id
 
   # Extract ID and VERSION_ID directly (no sourcing)
-  id=$(grep -E '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"')
   version_id=$(grep -E '^VERSION_ID=' /etc/os-release | cut -d= -f2 | tr -d '"')
 
   case "$id" in
@@ -95,12 +94,9 @@ detectOSVersion() {
     esac
     ;;
   debian)
-    if [ "$version_id" = "12" ] && [ -f /etc/debian_version ]; then
-      deb_ver=$(cat /etc/debian_version | tr -d ' \t\n')
-      case "$deb_ver" in
-      12.11) echo "debian12.11" ;;
-      esac
-    fi
+    case "$version_id" in
+    "12") echo "debian12" ;;
+    esac
     ;;
   esac
 }
@@ -129,7 +125,7 @@ promptChoiceArch() {
   echo "$REPLY"
 }
 
-ALL_OS=("ubuntu24.04" "ubuntu22.04" "ubuntu20.04" "debian12.11")
+ALL_OS=("ubuntu24.04" "ubuntu22.04" "ubuntu20.04" "debian12")
 promptChoiceOSVersion() {
   if [[ $ALWAYS_YES == 1 ]]; then
     cerr "Always Yes selected but a multichoices question has been raised"
@@ -176,7 +172,7 @@ promptChoiceROSDistro() {
     ros_list=("${JAMMY_ROS[@]}")
   elif [[ $OS_VERSION == "ubuntu20.04" ]]; then
     ros_list=("${FOCAL_ROS[@]}")
-  elif [[ $OS_VERSION == "debian12.11" ]]; then
+  elif [[ $OS_VERSION == "debian12" ]]; then
     ros_list=("${DEBIAN_ROS[@]}")
   fi
 
@@ -224,7 +220,7 @@ checkOSAndRosMatch() {
     return 1
   fi
 
-  if [[ $OS_VERSION == "debian12.11" ]]; then
+  if [[ $OS_VERSION == "debian12" ]]; then
     for value in "${DEBIAN_ROS[@]}"; do
       [[ $value == "$QUERY_ROS_DISTRO" ]] && return 0
     done
@@ -251,7 +247,7 @@ Install 3Laws Supervisor
    -f                 Force install, specify all arguments
    -r                 Optional: ROS distribution
    -a                 CPU architecture (arm64v8|amd64)
-   -v                 OS version (ubuntu24.04|ubuntu22.04|ubuntu20.04|debian12.11)
+   -v                 OS version (ubuntu24.04|ubuntu22.04|ubuntu20.04|debian12)
    -t                 Optional: release tag
 EOF
 }
@@ -263,7 +259,7 @@ check_values() {
     ARCH=$(promptChoiceArch)
   fi
   if [[ -z $OS_VERSION ]]; then
-    cerr "OS version not found, specify ubuntu24.04|ubuntu22.04|ubuntu20.04|debian12.11"
+    cerr "OS version not found, specify ubuntu24.04|ubuntu22.04|ubuntu20.04|debian12"
     OS_VERSION=$(promptChoiceOSVersion)
   fi
   if [[ -z $QUERY_ROS_DISTRO ]]; then
@@ -281,7 +277,7 @@ check_values() {
     echo "ubuntu24.04: jazzy | kilted"
     echo "ubuntu22.04: iron | humble"
     echo "ubuntu20.04: galactic | foxy"
-    echo "debian12.11: jazzy"
+    echo "debian12: jazzy"
     if [ "$FORCE" == 1 ]; then
       cout "Retry with other arguments"
       exit 1
