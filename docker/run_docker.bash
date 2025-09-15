@@ -17,11 +17,8 @@ else
     exit 1
 fi
 
-
-LOCAL_USER_HOME=/home/$USER
-LOCAL_LLL_CONFIG_DIR="$LOCAL_USER_HOME/.3laws"
-DOCKER_HOME=/home/3laws
-DOCKER_LLL_CONFIG_DIR="$DOCKER_HOME/.3laws"
+DOCKER_HOME=/
+DOCKER_LLL_CONFIG_DIR="$DOCKER_HOME/.3laws/config"
 IMAGE_NAME="lll-supervisor-runtime"
 
 # Check if Docker image exists
@@ -30,16 +27,9 @@ if ! docker image inspect $IMAGE_NAME:$IMAGE_TAG >/dev/null 2>&1; then
   exit 1
 fi
 
-# Check if local ~/.3laws directory exists, if not create it
-if [ ! -d "$LOCAL_LLL_CONFIG_DIR" ]; then
-  mkdir -p "$LOCAL_LLL_CONFIG_DIR"
-  chown -R "$(id -u)":"$(id -u)" "$LOCAL_LLL_CONFIG_DIR"
-  chmod -R u+rwX "$LOCAL_LLL_CONFIG_DIR"
-  echo "Created directory $LOCAL_LLL_CONFIG_DIR"
-fi
-
+docker volume create lll_supervisor_config
 docker run --privileged --rm -it \
   --name lll-supervisor \
   --net=host \
-  -v "$LOCAL_LLL_CONFIG_DIR":"$DOCKER_LLL_CONFIG_DIR" \
-  $IMAGE_NAME:$IMAGE_TAG
+  -v lll_supervisor_config:/$DOCKER_LLL_CONFIG_DIR/ \
+  "$IMAGE_NAME":"$IMAGE_TAG" bash
