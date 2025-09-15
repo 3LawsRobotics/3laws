@@ -91,6 +91,51 @@ This command will fully remove supervisor from your computer
 bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/uninstall.sh)
 ```
 
+## ROS2 install from source
+
+For distributions without available ROS2 packages (like debian), you can use the following scrip to build and install ROS2 in a way that is compatible with 3Laws Supervisor: [install_ros2.sh](https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install_ros2.sh).
+
+To use it, you must first install a couple of dependencies:
+```bash
+sudo apt-get update && sudo apt-get install -y --no-install-recommends \
+  apt-transport-https \
+  apt-utils \
+  ca-certificates \
+  curl \
+  gnupg2 \
+  lsb-release \
+  software-properties-common \
+  wget
+curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /etc/apt/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
+sudo apt-get update && sudo apt-get install -y --no-install-recommends \
+  build-essential \
+  git \
+  git-lfs
+  python3-colcon-common-extensions \
+  python3-colcon-mixin \
+  python3-colcon-zsh \
+  python3-dev \
+  python3-flake8 \
+  python3-matplotlib \
+  python3-pip \
+  python3-pytest-cov \
+  python3-rosdep \
+  python3-setuptools \
+  python3-vcstool
+colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
+colcon mixin update
+colcon metadata add default https://raw.githubusercontent.com/colcon/colcon-metadata-repository/master/index.yaml
+colcon metadata update
+sudo rosdep init
+rosdep update
+```
+
+You can then download and run the script:
+```bash
+bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install_ros2.sh)
+```
+
 ## Repo maintainer
 
 Thomas Gurriet - tgurriet@3laws.io
