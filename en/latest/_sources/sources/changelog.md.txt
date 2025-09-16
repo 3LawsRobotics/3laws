@@ -2,6 +2,30 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.5.1 (15th September 2025)
+
+### Highlight
+
+- Fix for post process rate and first order filter
+
+### Fixed
+
+- Fix control panel preventing collapsing Post process form input even if post process filtering was disabled
+- Fix supervisor not applying mask for the post process filter
+
+### Added
+
+- N/A
+
+## Changed
+
+- Partial support for Debian12 in general (no more restriction to 12.11)
+
+## Removed
+
+- N/A
+
+
 ## 1.5.0 (9th September 2025)
 
 ### Highlight
