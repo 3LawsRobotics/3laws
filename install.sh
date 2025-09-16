@@ -92,6 +92,16 @@ detectOSVersion() {
   esac
 }
 
+detectArch() {
+  local arch
+  arch=$(uname -m)
+  case "$arch" in
+  x86_64) echo "amd64" ;;
+  aarch64 | armv8* | arm64*) echo "arm64" ;;
+  *) echo "unknown" ;;
+  esac
+}
+
 promptChoiceArch() {
   if [[ $ALWAYS_YES == 1 ]]; then
     cerr "Always Yes selected but a multichoices question has been raised"
@@ -369,12 +379,7 @@ fi
 OS_VERSION=$(detectOSVersion)
 cout "\t Detected OS version \"$OS_VERSION\""
 
-ARCH=amd64
-case "$(uname -i)" in
-arm* | aarch*)
-  ARCH=arm64
-  ;;
-esac
+ARCH=$(detectArch)
 cout "\t Detected architecture \"$ARCH\""
 
 ####### Check if the user has provided valid arguments #######
@@ -554,7 +559,12 @@ if [[ -f "$ASSET_NAME" ]]; then
 
     # Install package
     cout "Installing package..."
-    $SUDO apt install -f ./"$ASSET_NAME" -y --no-install-recommends
+    if [[ "$OS_VERSION" == "debian12" ]]; then
+      cwarn "On Debian, dependencies 'ros-$QUERY_ROS_DISTRO-ros-core' and 'ros-$QUERY_ROS_DISTRO-ackermann-msgs' must be installed manually."
+      $SUDO dpkg --ignore-depends="ros-$QUERY_ROS_DISTRO-ros-core,ros-$QUERY_ROS_DISTRO-ackermann-msgs" -i ./"$ASSET_NAME"
+    else
+      $SUDO apt install ./"$ASSET_NAME" -y --no-install-recommends
+    fi
 
     # Create 3laws directory
     cout "Creating 3laws config directory..."
