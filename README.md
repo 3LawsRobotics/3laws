@@ -91,7 +91,6 @@ This command will fully remove supervisor from your computer
 bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/uninstall.sh)
 ```
 
-<<<<<<< HEAD
 ## ROS2 install from source
 
 For distributions without available ROS2 packages (like debian), you can use the following scrip to build and install ROS2 in a way that is compatible with 3Laws Supervisor: [install_ros2.sh](https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install_ros2.sh).
@@ -136,7 +135,6 @@ You can then download and run the script:
 ```bash
 bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install_ros2.sh)
 ```
-=======
 ## Docker runtime environment
 
 A sample Docker project is provided to assist users who prefer to install and execute Supervisor within a controlled environment. The project is not designed to meet any production-grade requirements, but rather to provide a starting point for further development.
@@ -176,17 +174,15 @@ def generate_launch_description():
 
 ```
 
-<<<<<<< HEAD
+
 IMPORTANT: When running the container for the first time, the Supervisor node will fail as no configuration file exists yet. Configure Supervisor through the Control Panel and restart the container.
->>>>>>> 30ee0c7 (Sample project for creating humble/jazzy supervisor runtime dockers)
-=======
+
 When running the provided container, a `rosbridge_websocket` node and 3Laws Control Panel are started by the `entrypoint.sh` in the background inside dedicated `screen` sessions. At this point, you can follow the configuration steps described in the [Official Documentation](https://docs.3laws.io/en/latest/).
 
 Once the Supervisor configuration is complete, you can start the Supervisor from within the container via
 ```bash
 ros2 launch lll_supervisor supervisor.launch.py
 ```
->>>>>>> 9104773 (Adjusted docker instructions on README)
 
 ## Repo maintainer
 
