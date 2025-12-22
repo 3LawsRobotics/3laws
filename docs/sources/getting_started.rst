@@ -8,6 +8,7 @@ The current version of **3Laws Supervisor** supports ground-based mobile platfor
 
  * Differential-drive
  * Omni-directional
+ * Omni-directional mobile manipulator
 
 For perception, **3Laws Supervisor** currently supports:
 
@@ -48,8 +49,6 @@ This will run a script to auto-detect the system architecture, install any missi
 
   The ROS packages are installed into the global ROS installation directory. You will need to source the ROS setup script to make the new components available in the current terminal: ``source /opt/ros/<DISTRO>/setup.sh``.
 
-  As with most ROS setups, adding a line to the startup file (ex. .bashrc) that sources the ROS environment is recommended.
-
 
 2. Start the Control Panel
 **************************
@@ -57,7 +56,7 @@ Before the Supervisor can be started, it must be configured. In order to configu
 
 An existing (or backup) version of this file can be used if it is placed in the proper location; however, older versions might no be compatible with new software.  If this file is copied from another device, the license key have to be changed.
 
-To enable the Control Panel backend service, open a terminal and run the following command:
+To enable the Control Panel service, open a terminal and run the following command:
 
 .. code-block:: bash
 
@@ -69,7 +68,7 @@ To enable the Control Panel backend service, open a terminal and run the followi
 3. Configure Supervisor
 ************************
 
-Now that the Control Panel backend is running, access the control panel from any machine on the same network as the robot by opening a web browser and navigating to the following URL: ``http://<IP_ADDRESS_OF_THE_ROBOT>:8000/``.
+Now that the Control Panel service is running, access the control panel from any machine on the same network as the robot by opening a web browser and navigating to the following URL: ``http://<IP_ADDRESS_OF_THE_ROBOT>:8000``.
 
 The initial view of the Control Panel is the "Configuration" page, which consists of sections (tabs) listed as:
 :doc:`General <configuration/general>`
@@ -100,7 +99,7 @@ In order to perform collision avoidance maneuvers, the Supervisor must be able t
 
 Your low-level controller therefore needs to subscribe to this topic and apply the commands to your robot:
 
-.. image:: data/ram_interfacing.png
+.. image:: data/supervisor_interfacing.png
   :align: center
   :width: 600px
   :alt: Operations page showing a configured robot that does not yet have sensor or planning data.
