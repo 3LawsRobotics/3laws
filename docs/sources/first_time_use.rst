@@ -70,4 +70,3 @@ A section is also divided into sub-sections, which are accessed by clicking on t
 
 All configurable fields are available through a series of pages in the Control Panel. The following sections will describe each tab in the Control Panel in detail.
 
-.. For in-depth guides on how to optimize the Supervisor for your application, refer to the :doc:`Application Guides<application_guides>` section.

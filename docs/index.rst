@@ -32,7 +32,6 @@ Other relevant resources:
 
   sources/getting_started
   sources/first_time_use
-  sources/application_guides
   sources/core_components
   sources/troubleshooting
   sources/faq
