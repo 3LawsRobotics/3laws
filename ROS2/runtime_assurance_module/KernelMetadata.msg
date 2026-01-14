@@ -15,5 +15,3 @@ bool has_predicted
 
 # Failsafe trajectories data
 FailsafeTrajectories failsafe_trajectories
-
-ZoneWeights[] adaptive_zone_weights
