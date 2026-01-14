@@ -2,6 +2,54 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.6.0 (15th January 2026)
+
+### Highlight
+
+- Improved Control Panel (CP) robustness and SSE performance
+
+- Brand-new geometry and kinematic backend refactor, resulting in better overall performance
+
+### Fixed
+
+- Update configuration handling after geometry refactor
+
+- Do not send points to CP when sensors are timed out or not initialized
+
+- Fix supervisor_cp_port parameter being overwritten to 9000 regardless of configuration
+
+- Fix supervisor CP server mutex handling
+
+### Added
+
+- Selection of universe joint type for mobile manipulator model
+
+- Default buffer size for CP SSE channels
+
+- Support for perception parameters for LiDARs:
+
+  - wrong_size
+
+  - NaN
+
+  - floor_max_z
+
+  - downsampling
+
+- Option to use ROS clock
+
+- Supervisor detection and logging when CP disconnects
+
+### Changed
+
+- Improved YAML dump generation from JSON
+
+- Added rate limiter to SSE writer for better performance when CP is connected
+
+### Removed
+
+- N/A
+
 ## 1.5.1 (15th September 2025)
 
 ### Highlight
@@ -24,7 +72,6 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## Removed
 
 - N/A
-
 
 ## 1.5.0 (9th September 2025)
 
@@ -87,7 +134,6 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 - N/A
 
-
 ## 1.3.0 (13th January 2025)
 
 ### Highlight
@@ -116,7 +162,6 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Improved carousel UI
 - New 3Laws Theme
 
-
 ### Removed
 
 - Front Wheel steering robot model support
@@ -140,7 +185,6 @@ N/A
 ### Removed
 
 N/A
-
 
 ## 1.2.1 (2nd September 2024)
 
@@ -167,7 +211,6 @@ Diagnostic and Visualization tools added!
 
 N/A
 
-
 ## 1.2.0 (19th August 2024)
 
 Diagnostic and Visualization tools added!
@@ -186,24 +229,29 @@ Diagnostic and Visualization tools added!
 - Can now load mesh for all the formats supported by [assimp](https://github.com/assimp/assimp/blob/master/doc/Fileformats.md) library
 
 #### Control Panel:
+
 Configuration:
+
 - License expiration and detail available
 - Odometry consistency
 - Dynamic consistency
 - System heath (CPU load, RAM load and Read/Write rate)
 
 Operation:
+
 - Generic Logs journal with level selection
 - Filter compute time
 - Minimap with safety margin visualization
 - RAM enable/disable button
 
 Diagnostic:
+
 - Odometry consistency plots and status timeline
 - System health plots
 - Dynamic consistency plots
 
 Misc:
+
 - Stop button on plots to stop the moving time frame
 
 #### Robot Diagnostic Module
@@ -224,13 +272,11 @@ Misc:
 
 N/A
 
-
 ## 1.1.1 (20th May 2024)
 
 New supported ROS topic types and various bug fix
 
 ### Fixed
-
 
 ### Added
 
@@ -241,7 +287,6 @@ New supported ROS topic types and various bug fix
 ### Removed
 
 N/A
-
 
 ## 1.1.0 (20th May 2024)
 
@@ -257,7 +302,8 @@ New supported ROS topic types and various bug fix
 ### Added
 
 - Support for new subscription topic types:
-  - Ackerman Steering [Stamped]  [see doc here](https://wiki.ros.org/ackermann_msgs)
+
+  - Ackerman Steering [Stamped] [see doc here](https://wiki.ros.org/ackermann_msgs)
   - Accel [Stamped/withCovariance/withCovarianceStamped]
   - Pose [Stamped/withCovariance/withCovarianceStamped]
   - Twist [Stamped/withCovariance/withCovarianceStamped]
@@ -275,7 +321,6 @@ New supported ROS topic types and various bug fix
 ### Removed
 
 N/A
-
 
 ## 1.0.3 (7th May 2024)
 
@@ -297,7 +342,6 @@ N/A
 
 N/A
 
-
 ## 1.0.2 (4th May 2024)
 
 Improve and fix objects map perception modality.
@@ -317,7 +361,6 @@ N/A
 ### Removed
 
 N/A
-
 
 ## 1.0.1 (1st May 2024)
 
@@ -339,7 +382,6 @@ N/A
 ### Removed
 
 N/A
-
 
 ## 1.0.0 (1st May 2024)
 
