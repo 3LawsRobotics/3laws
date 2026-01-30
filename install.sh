@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-SCRIPT_VERSION="2.0.0"
+SCRIPT_VERSION="2.1.0"
 
 # Exit on errors
 set -e
@@ -126,6 +126,8 @@ promptChoiceArch() {
   echo "$REPLY"
 }
 
+ALL_ARCH=("amd64" "arm64")
+
 ALL_OS=("ubuntu24.04" "ubuntu22.04" "ubuntu20.04" "debian12")
 promptChoiceOSVersion() {
   if [[ $ALWAYS_YES == 1 ]]; then
@@ -231,8 +233,34 @@ checkOSAndRosMatch() {
 
 valid_tag_release() {
   MATCHED_TAG=$(printf "%s\n" "${VALID_TAGS[@]}" | grep -x "$WANTED_RELEASE_TAG")
-
   if [[ -n "$MATCHED_TAG" ]]; then
+    return 0
+  fi
+  return 1
+}
+
+valid_ros() {
+  local MATCHED_ROS
+  MATCHED_ROS=$(printf "%s\n" "${ALL_ROS[@]}" | grep -x "$QUERY_ROS_DISTRO")
+  if [[ -n "$MATCHED_ROS" ]]; then
+    return 0
+  fi
+  return 1
+}
+
+valid_os() {
+  local MATCHED_OS
+  MATCHED_OS=$(printf "%s\n" "${ALL_OS[@]}" | grep -x "$OS_VERSION")
+  if [[ -n "$MATCHED_OS" ]]; then
+    return 0
+  fi
+  return 1
+}
+
+valid_arch() {
+  local MATCHED_ARCH
+  MATCHED_ARCH=$(printf "%s\n" "${ALL_ARCH[@]}" | grep -x "$ARCH")
+  if [[ -n "$MATCHED_ARCH" ]]; then
     return 0
   fi
   return 1
@@ -270,6 +298,21 @@ check_values() {
   if [[ -z $WANTED_RELEASE_TAG ]]; then
     cerr "Release tag not found, specify a valid tag"
     WANTED_RELEASE_TAG=$(promptChoiceTagRelease)
+  fi
+
+  if ! valid_arch; then
+    cerr "Invalid ARCH argument. Please use one of: ${ALL_ARCH[*]}"
+    exit 1
+  fi
+
+  if ! valid_os; then
+    cerr "Invalid OS argument. Please use one of: ${ALL_OS[*]}"
+    exit 1
+  fi
+
+  if ! valid_ros; then
+    cerr "Invalid ROS argument. Please use one of: ${ALL_ROS[*]}"
+    exit 1
   fi
 
   # Check if the specified ROS distribution is compatible with the selected OS version
@@ -317,10 +360,10 @@ curl -o /dev/null -s $GH_REPO || {
 }
 
 # Create a list of valid tags
-VALID_TAGS=()
 mapfile -t VALID_TAGS < <(curl -s "$GH_REPO/tags" |
-  jq -r '.[].name' |
+  sed -n 's/.*"name": "\(.*\)".*/\1/p' |
   sed 's/^supervisor_//')
+
 VALID_TAGS=("latest" "${VALID_TAGS[@]}")
 
 if [ "${#VALID_TAGS[@]}" -eq 0 ]; then
@@ -462,7 +505,7 @@ PACKAGE_NAME="lll-supervisor-full-${QUERY_ROS_DISTRO}"
 REGEX_QUERY="${PACKAGE_NAME}_[0-9]\+\.[0-9]\+\.[0-9]\+-[0-9]\+_${ARCH}_${OS_VERSION}"
 
 # Read asset tags.
-RESPONSE=$(curl -s -H "application/vnd.github+json" $GH_TAGS)
+RESPONSE=$(curl -s -H "application/vnd.github+json" "$GH_TAGS")
 ASSET_NAME=$(echo "$RESPONSE" | grep -o "name.:.\+${REGEX_QUERY}.deb" | cut -d ":" -f2- | cut -d "\"" -f2-)
 ASSET_ID=$(echo "$RESPONSE" | grep -C3 "name.:.\+$REGEX_QUERY" | grep -w id | tr : = | tr -cd '[[:alnum:]]=' | cut -d'=' -f2-)
 
