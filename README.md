@@ -46,8 +46,8 @@ bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install
 You can add arguments after the command to specify the wanted ros and ubuntu version, the desired CPU architecture and non interactive arguments like Always Yes and Force.
 
 - `-a <ARCH [amd64, arm64]>`
-- `-v <UBUNTU_DISTRO [18.04, 20.04, 22.04]>`
-- `-r <ROS_DISTRO [iron, humble, galactic, foxy, noetic]>`
+- `-v <UBUNTU_DISTRO [ubuntu18.04, ubuntu20.04, ubuntu22.04, debian12]>`
+- `-r <ROS_DISTRO [jazzy, iron, humble, kilted]>`
 - `-f <Force even if versions doesn't match>`
 - `-y <Always yes>`
 
@@ -96,6 +96,7 @@ bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/uninsta
 For distributions without available ROS2 packages (like debian), you can use the following scrip to build and install ROS2 in a way that is compatible with 3Laws Supervisor: [install_ros2.sh](https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install_ros2.sh).
 
 To use it, you must first install a couple of dependencies:
+
 ```bash
 sudo apt-get update && sudo apt-get install -y --no-install-recommends \
   apt-transport-https \
@@ -132,6 +133,7 @@ rosdep update
 ```
 
 You can then download and run the script:
+
 ```bash
 bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install_ros2.sh)
 ```
