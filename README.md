@@ -137,6 +137,54 @@ You can then download and run the script:
 ```bash
 bash <(curl https://raw.githubusercontent.com/3LawsRobotics/3laws/master/install_ros2.sh)
 ```
+## Docker runtime environment
+
+A sample Docker project is provided to assist users who prefer to install and execute Supervisor within a controlled environment. The project is not designed to meet any production-grade requirements, but rather to provide a starting point for further development.
+
+From the root directory of this project, run `./docker/build_docker.bash <ROS_DISTRO>` to create the runtime Docker image. Replace `<ROS_DISTRO>` with either `humble` or `jazzy`. When building is complete, run `./docker/run_docker.bash <ROS_DISTRO>` to start the container.
+
+The start script creates a docker managed volume mounted at `~/.3laws`. The volume is used to store Supervisor configurations so that all savings and progresses persists across restarts of the container.
+
+In alternative to manually starting the container via the provided script, it is possible to call the script directly from a ROS 2 launch file:
+
+```python
+import os
+
+from ament_index_python.packages import get_package_share_directory
+from launch import LaunchDescription
+from launch.actions import ExecuteProcess
+
+
+def generate_launch_description():
+    DOCKER_RUN_SCRIPT = os.path.join(
+        <path/to/3laws/docker>,
+        "run_docker.bash",
+    )
+
+    launchdesc = LaunchDescription(
+        [
+            ExecuteProcess(
+                cmd=[DOCKER_RUN_SCRIPT],
+                shell=True,
+                output="screen",
+                name="lll_supervisor_docker",
+            )
+        ]
+    )
+
+    return launchdesc
+
+```
+
+
+IMPORTANT: When running the container for the first time, the Supervisor node will fail as no configuration file exists yet. Configure Supervisor through the Control Panel and restart the container.
+
+When running the provided container, a `rosbridge_websocket` node and 3Laws Control Panel are started by the `entrypoint.sh` in the background inside dedicated `screen` sessions. At this point, you can follow the configuration steps described in the [Official Documentation](https://docs.3laws.io/en/latest/).
+
+Once the Supervisor configuration is complete, you can start the Supervisor from within the container via
+```bash
+ros2 launch lll_supervisor supervisor.launch.py
+```
 
 ## Repo maintainer
 
